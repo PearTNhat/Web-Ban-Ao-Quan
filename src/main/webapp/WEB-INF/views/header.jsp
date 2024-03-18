@@ -17,7 +17,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous" defer></script>
-<title>Web ban</title>
 <title>Web ban hang</title>
 <style>
 section {
@@ -33,7 +32,6 @@ section {
 				src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
 				height="60" class="d-inline-block align-text-top">
 			</a>
-
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"

@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img alt="" src="">
+	<img alt="" src="resources/images/anime.jpg">
 </body>
 </html>
