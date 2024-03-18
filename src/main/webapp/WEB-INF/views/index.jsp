@@ -1,8 +1,7 @@
 	<%@ include file="header.jsp" %>
-	<section>
+	<section class="container-xl">
 		<div class="container-lg">
 			${connStatus}
-			thanhcong roi
 		</div>
 	</section>
 </body>
