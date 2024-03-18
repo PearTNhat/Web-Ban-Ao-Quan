@@ -27,11 +27,11 @@ section {
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light my-3 container-xl">
+	<nav class="navbar navbar-expand-lg navbar-light container-xl">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"> <img
-				src="https://4menshop.com/logo.png?v=1" alt="Logo" width="70"
-				height="40" class="d-inline-block align-text-top">
+				src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
+				height="60" class="d-inline-block align-text-top">
 			</a>
 
 			<button class="navbar-toggler" type="button"
@@ -41,7 +41,7 @@ section {
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			<div class="collapse navbar-collapse justify-content-end"
+			<div class="collapse navbar-collapse justify-content-end me-5"
 				id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN
