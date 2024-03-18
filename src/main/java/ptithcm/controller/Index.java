@@ -35,5 +35,9 @@ public class Index {
 		}
 		return "index";
 	}
+	@RequestMapping("/footer")
+	public String Footer  () {
+		return "com/footer";
+	}
 
 }
