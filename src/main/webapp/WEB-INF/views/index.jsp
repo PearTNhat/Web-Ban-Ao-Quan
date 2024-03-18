@@ -1,6 +1,6 @@
-<%@ include file="header.jsp"%>
-<section class="container-xl">
-	<div class="container-lg">${connStatus}</div>
-</section>
+	<%@ include file="header.jsp" %>
+	<section class="container-xl">
+		${connStatus}
+	</section>
 </body>
 </html>
