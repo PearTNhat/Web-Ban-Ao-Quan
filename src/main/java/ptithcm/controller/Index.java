@@ -18,7 +18,7 @@ public class Index {
 //		String serverName = "PHUONG-HPLAP";
 		String serverName = "NHAT-PC\\SERVER01";
         String portNumber = "1433";
-        String databaseName = "QLVT";
+        String databaseName = "QLSV";
         String username = "sa";
 //        String password = "kc";
         String password = "12";
