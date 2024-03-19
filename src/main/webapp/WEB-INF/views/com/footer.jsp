@@ -28,10 +28,10 @@
           <li><a href="#">Tin tức</a></li>
         </ul>
         <ul class="list-footer-contact">
-          <li><i class="pe-1 bi bi-envelope"></i><a href="mailto:letuannhat@gmail.com" rel="nofollow"
-              title="NHAT EMAIL">letuannhat@gmail.com</a></li>
-          <li><i class="pe-1 bi bi-telephone-fill"></i><a href="tel:0944477357" rel="nofollow"
-              title="NHAT HOTLINE">0944.477.357</a></li>
+          <li><i class="pe-1 bi bi-envelope"></i><a href="mailto:meomeo@gmail.com" rel="nofollow"
+              title="NHAT EMAIL">meomeo@gmail.com</a></li>
+          <li><i class="pe-1 bi bi-telephone-fill"></i><a href="tel:0123456789" rel="nofollow"
+              title="NHAT HOTLINE">0123.456.789</a></li>
         </ul>
       </div>
       <div class="col-lg-3 col-sm-6 widget-footer">
