@@ -106,7 +106,7 @@
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
                             alt="" class="img-fluid">
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-                            alt="" class="my-1" width=28%>
+                            alt="" class="my-1" width=20%>
                     </a>
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
@@ -121,7 +121,7 @@
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
                             alt="" class="img-fluid">
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-                            alt="" class="my-1" width=28%>
+                            alt="" class="my-1" width=20%>
                     </a>
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
@@ -136,7 +136,7 @@
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
                             alt="" class="img-fluid">
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-                            alt="" class="my-1" width=28%>
+                            alt="" class="my-1" width=20%>
                     </a>
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
@@ -151,7 +151,7 @@
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
                             alt="" class="img-fluid">
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-                            alt="" class="my-1" width=28%>
+                            alt="" class="my-1" width=20%>
                     </a>
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
