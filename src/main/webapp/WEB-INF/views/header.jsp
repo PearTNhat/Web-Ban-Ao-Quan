@@ -1,28 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous" defer></script>
-<title>Web ban hang</title>
-<style>
-section {
-	padding: 60px 0;
-}
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+		crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous" defer></script>
+		
+	<!-- Owl carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Web ban hang</title>
+	
+	<style>
+		section {
+			padding: 60px 0;
+		}
+		#owl-demo .item img{
+		  display: block;
+		  width: 100%;
+		  height: auto;
+		  text-align:center;
+		}
+		
+		.slide-progress {
+		  width: 0;
+		  max-width: 100%;
+		  height: 4px;
+		  background: rgba(0, 0, 0, .2);
+		}
+	</style>
 </head>
 
 <body>
@@ -54,8 +78,20 @@ section {
 
 	<div class="page-info bg-light">
 		<div class="container-xl text-muted py-3">
-			<a href="#" class="text-decoration-none text-secondary">4MEN</a> <span>
+			<a href="#" class="text-decoration-none text-secondary">4MENS</a> <span>
 				/ </span> <a href="#" class="text-decoration-none text-secondary">Áo
 				nam</a>
 		</div>
+	</div>
+	
+	<div class="container-fuild">
+		<div class="slide-progress"></div>
+		<div id="owl-demo" class="owl-carousel owl-theme">
+	        <div class="item" style="width:100%">
+	            <img src="resources/images/banners/banner-top-trang-chu-1-slide-19.jpg" alt="banner1">
+	        </div>
+	        <div class="item" style="width:100%">
+	            <img src="resources/images/banners/banner-top-trang-chu-2-slide-20.jpg" alt="banner2">
+	        </div>
+	    </div>
 	</div>
