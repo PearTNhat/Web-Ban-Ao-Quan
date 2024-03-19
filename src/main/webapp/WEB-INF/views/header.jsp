@@ -46,6 +46,19 @@
 		  height: 4px;
 		  background: rgba(0, 0, 0, .2);
 		}
+		
+		.img-container {
+            overflow: hidden;
+        }
+
+        .img-container img {
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out, opacity 0.3s linear;
+        }
+
+        .img-container img:hover {
+            transform: scale(1.1);
+            opacity: .8;
+        }
 	</style>
 </head>
 
@@ -111,7 +124,7 @@
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
                         da bò</a>
-                    <p class="price text-danger fw-medium small">675.000
+                    <p class="price text-danger fw-semibold small">675.000
                         <span class="text-decoration-line-through small text-secondary">1.350.000</span>
                     </p>
 
@@ -126,7 +139,7 @@
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
                         da bò</a>
-                    <p class="price text-danger fw-medium small">675.000
+                    <p class="price text-danger fw-semibold small">675.000
                         <span class="text-decoration-line-through small text-secondary">1.350.000</span>
                     </p>
 
@@ -141,7 +154,7 @@
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
                         da bò</a>
-                    <p class="price text-danger fw-medium small">675.000
+                    <p class="price text-danger fw-semibold small">675.000
                         <span class="text-decoration-line-through small text-secondary">1.350.000</span>
                     </p>
 
@@ -156,10 +169,27 @@
                     <a href="" class="link-underline link-underline-opacity-0 link-dark d-block small">Áo Vest NAZAFU
                         Màu xám
                         da bò</a>
-                    <p class="price text-danger fw-medium small">675.000
+                    <p class="price text-danger fw-semibold small">675.000
                         <span class="text-decoration-line-through small text-secondary">1.350.000</span>
                     </p>
 
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Image slide -->
+    <section class="slides bg-light">
+        <div class="container-lg d-none d-md-block">
+            <div class="row justify-content-center">
+                <div class="col-3 img-container">
+                    <img src="resources/images/slides/slide-1-trang-chu-slide-1.jpg" alt="" class="img-fluid">
+                </div>
+                <div class="col-6 img-container">
+                    <img src="resources/images/slides/slide-2-trang-chu-slide-2.jpg" alt="" class="img-fluid">
+                </div>
+                <div class="col-3 img-container">
+                    <img src="resources/images/slides/slide-4-trang-chu-slide-3.jpg" alt="" class="img-fluid">
                 </div>
             </div>
         </div>
