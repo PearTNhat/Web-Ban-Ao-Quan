@@ -61,9 +61,9 @@
         </div>
         <div class="d-flex flex-wrap align-items-center gap-2">
           <ul class="f-social">
-            <li><a href="" class="facebook" target="_blank" title="facebook page" rel="noreferrer"></a></li>
-            <li><a href="" class="instagram" target="_blank" title="instagram page" rel="noreferrer"></a></li>
-            <li><a href="" class="youtube" target="_blank" title="youtube page" rel="noreferrer"></a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=100011350584082" class="facebook" target="_blank" title="facebook page" rel="noreferrer"></a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=100011350584082" class="instagram" target="_blank" title="instagram page" rel="noreferrer"></a></li>
+            <li><a href="https://www.youtube.com/watch?v=D_99MX9SpSw&list=PLqBZuthgOGwi0vwchrU2ltaS2DK66X5cY&ab_channel=THCHANNEL" class="youtube" target="_blank" title="youtube page" rel="noreferrer"></a></li>
           </ul>
           <div class="d-flex justify-content-center align-items-center gap-1">
             <div class="f-social-detail px-2">
