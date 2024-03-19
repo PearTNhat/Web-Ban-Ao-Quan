@@ -48,6 +48,7 @@
 		}
 		
 		.img-container {
+            height: fit-content;
             overflow: hidden;
         }
 
@@ -180,16 +181,22 @@
     
     <!-- Image slide -->
     <section class="slides bg-light">
-        <div class="container-lg d-none d-md-block">
+        <div class="container-xl d-none d-md-block">
             <div class="row justify-content-center">
-                <div class="col-3 img-container">
-                    <img src="resources/images/slides/slide-1-trang-chu-slide-1.jpg" alt="" class="img-fluid">
+                <div class="col-3">
+                    <div class="img-container">
+                        <img src="resources/images/slides/slide-1-trang-chu-slide-1.jpg" alt="" class="img-fluid">
+                    </div>
                 </div>
-                <div class="col-6 img-container">
-                    <img src="resources/images/slides/slide-2-trang-chu-slide-2.jpg" alt="" class="img-fluid">
+                <div class="col-6">
+                    <div class="img-container">
+                        <img src="resources/images/slides/slide-2-trang-chu-slide-2.jpg" alt="" class="img-fluid">
+                    </div>
                 </div>
-                <div class="col-3 img-container">
-                    <img src="resources/images/slides/slide-4-trang-chu-slide-3.jpg" alt="" class="img-fluid">
+                <div class="col-3">
+                    <div class="img-container">
+                        <img src="resources/images/slides/slide-4-trang-chu-slide-3.jpg" alt="" class="img-fluid">
+                    </div>
                 </div>
             </div>
         </div>
