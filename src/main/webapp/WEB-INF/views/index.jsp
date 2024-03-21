@@ -35,7 +35,7 @@
 		#owl-demo .item img{
 		  display: block;
 		  width: 100%;
-		  height: auto;
+		  heig ht: auto;
 		  text-align:center;
 		}
 		

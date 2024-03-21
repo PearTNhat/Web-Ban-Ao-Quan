@@ -33,7 +33,7 @@ public class Index {
 			model.addAttribute("connStatus", "Cannot connect to SQL Server =((");
 			e.printStackTrace();
 		}
-		return "index";
+		return "page/home";
 	}
 	@RequestMapping("/footer")
 	public String Footer  () {
