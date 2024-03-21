@@ -2,13 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp" %>
 
-
-<body>
 <%@ include file="../component/topbar.jsp" %>
 <%@ include file="../component/navbar.jsp" %>
+
+<body>
+
 <%@ include file="../component/banner.jsp" %>
 
-<!-- Hot items -->
+	<!-- Hot items -->
     <section class="hot-items">
         <div class="container-xl text-center">
             <div class="lead fw-bold">THỜI TRANG HOT NHẤT</div>
@@ -107,7 +108,7 @@
 	  <i class="bi bi-chevron-double-up"></i>
 	</button>
     <section class="container-xl">${connStatus}</section> 
-    
+    <%@ include file="../common/footer.jsp" %>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"

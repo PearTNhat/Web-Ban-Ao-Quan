@@ -78,5 +78,15 @@
 		  right: 20px;
 		  display: none;
 		}
+		
+		table.cart-table a.cart-link {
+            text-decoration: none;
+            color: #b31f2a;
+            transition: all .2s;
+        }
+
+        table.cart-table a.cart-link:hover {
+            color: #444444;
+        }
     </style>
 </head>

@@ -44,4 +44,9 @@ public class Index {
 		return "page/forgotPassword/sentMail";
 	}
 	
+	@RequestMapping("/cart-checkout")
+	public String cartCheckout() {
+		return "page/cart-checkout";
+	}
+	
 }
