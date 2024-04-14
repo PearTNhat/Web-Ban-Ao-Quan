@@ -88,25 +88,8 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-  <script src="resources/js/handleProduct.js"></script>
-  <script>
-    ClassicEditor
-      .create(document.querySelector('#editor'), {
-        toolbar: {
-          items: [
-            'bold', 'italic', 'underline',
-            'link', 'bulletedList', 'numberedList'
-          ]
-        }
-      })
-      .then(editor => {
-        console.log('CKEditor 5 initialized', editor);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  <script src="resources/js/commonJS.js"></script>
 
-  </script>
 </body>
 
 </html>

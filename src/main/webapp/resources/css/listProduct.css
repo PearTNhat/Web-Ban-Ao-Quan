@@ -1,0 +1,116 @@
+.page-title p {
+  position: relative;
+  background: rgb(250, 250, 250);
+  padding-left: 10px;
+}
+
+.page-title p:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: rgb(204, 204, 204);
+  z-index: 10;
+}
+
+.side-widget h5 {
+  margin: 0;
+  position: relative;
+  font-weight: bold;
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.side-widget h5::after {
+  position: absolute;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #666;
+  z-index: -1;
+}
+
+.side-widget h5 span {
+  background: #fff;
+  padding: 0 10px 0 0;
+}
+
+.text-secondary {
+  color: #666;
+  font-size: 13px;
+}
+
+.price-widget {
+  font-size: 14px;
+  padding-left: 8px;
+}
+
+.side-pic {
+  padding: 3px;
+  background: #eee;
+  max-width: 76px;
+}
+
+.slash::after {
+  content: '/';
+  padding: 0 5px;
+  color: #666;
+}
+
+.router {
+  background: rgb(248, 248, 248);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.router ul {
+
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.router a {
+  text-decoration: none;
+  color: #333;
+}
+
+.pagination {
+  gap: 10px;
+}
+
+.pagination li a {
+  color: #333;
+}
+
+.pagination li:hover a {
+  color: #23527c;
+  background-color: #eee;
+  border-bottom: 1px solid #666;
+}
+
+.page-link:focus {
+  background-color: rgb(179, 31, 42);
+  color: #fff;
+  box-shadow: none;
+}
+
+.page-item:first-child .page-link {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.page-item:last-child .page-link {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
