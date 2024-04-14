@@ -107,6 +107,33 @@
         >
 	  <i class="bi bi-chevron-double-up"></i>
 	</button>
+	
+	<section id="banchay" class="container-fluid">
+        <div class="container-xl">
+            <div class="lead fw-bold text-center mb-4">THỜI TRANG BÁN CHẠY</div>
+            <div id="owl-demo-2" class="owl-carousel owl-theme">
+                <div class="item">
+                    <div class="slide-item" style="width: 100%; height: 100%">
+                        <a href="" class="text-decoration-none d-flex flex-column align-items-center">
+                            <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
+                                alt="" class="img-fluid">
+                            <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
+                                alt="" class="my-1" style="width: 20%">
+                        </a>
+                        <a href=""
+                            class="link-underline link-underline-opacity-0 link-dark d-block small text-center">Áo Vest
+                            NAZAFU
+                            Màu xám
+                            da bò</a>
+                        <p class="price text-danger fw-medium small text-center">675.000
+                            <span class="text-decoration-line-through small text-secondary">1.350.000</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
     <section class="container-xl">${connStatus}</section> 
     <%@ include file="../common/footer.jsp" %>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -115,19 +142,42 @@
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        $('.owl-carousel').owlCarousel({
-            items: 1,
-            lazyLoad: true,
-            loop: true,
-            margin: 0,
-            dots: false,
-            autoplay: true, // Enable autoplay
-            autoplayTimeout: 10000, // Time between slide transitions (in milliseconds)
-            animateOut: 'fadeOut',
-            onInitialized: startProgressBar,
-            onTranslate: resetProgressBar,
-            onTranslated: startProgressBar
-        });
+    $('#owl-demo-1').owlCarousel({
+        items: 1,
+        lazyLoad: true,
+        loop: true,
+        margin: 0,
+        dots: false,
+        autoplay: true, // Enable autoplay
+        autoplayTimeout: 10000, // Time between slide transitions (in milliseconds)
+        animateOut: 'fadeOut',
+        onInitialized: startProgressBar,
+        onTranslate: resetProgressBar,
+        onTranslated: startProgressBar
+    });
+
+
+    $('#owl-demo-2').owlCarousel({
+        rtl: true,
+        loop: true,
+        margin: 10,
+        responsiveClass: true,
+        nav: true,
+        responsive: {
+            0: {
+                items: 2, // For small screens, show 2 items
+                nav: true
+            },
+            768: {
+                items: 3, // For medium screens and above (e.g., tablets), show 3 items
+                nav: true
+            },
+            1200: { // Assuming 1200px is the breakpoint for XL screens and above
+                items: 4, // For XL screens, show 4 items
+                nav: true
+            }
+        }
+    })
 
         function startProgressBar() {
             // apply keyframe animation

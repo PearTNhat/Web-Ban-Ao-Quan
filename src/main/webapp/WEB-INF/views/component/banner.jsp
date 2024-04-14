@@ -4,7 +4,7 @@
 <!-- Sliding banners -->
     <div class="container-fuild">
         <div class="slide-progress"></div>
-        <div id="owl-demo" class="owl-carousel owl-theme">
+        <div id="owl-demo-1" class="owl-carousel owl-theme">
             <div class="item" style="width:100%">
                 <img src="resources/images/banners/banner-top-trang-chu-1-slide-19.jpg" alt="banner1">
             </div>
