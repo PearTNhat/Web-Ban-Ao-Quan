@@ -35,9 +35,13 @@ public class Index {
 		}
 		return "page/home";
 	}
-	@RequestMapping("/footer")
+	@RequestMapping("/handleProduct")
+	public String handleProduct  () {
+		return "page/admin/handleProduct";
+	}
+	@RequestMapping("/listProduct")
 	public String Footer  () {
-		return "com/footer";
+		return "page/listProduct";
 	}
 	@RequestMapping("/forgot-password")
 	public String forgotPassword() {

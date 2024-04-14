@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp" %>
 
+<body>
 <%@ include file="../component/topbar.jsp" %>
 <%@ include file="../component/navbar.jsp" %>
-
-<body>
 
 <%@ include file="../component/banner.jsp" %>
 
@@ -226,7 +225,7 @@
 	       document.documentElement.scrollTop = 0;
 	     }
     </script>
+	
     
 	</body>
-	<%@ include file="../common/footer.jsp" %>
 </html>
