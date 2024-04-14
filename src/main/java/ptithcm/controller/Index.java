@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Index {
 	@RequestMapping("/")
 	public String index(ModelMap model) {
-//		String serverName = "PHUONG-HPLAP";
-		String serverName = "NHAT-PC\\SERVER01";
+		String serverName = "PHUONG-HPLAP";
+//		String serverName = "NHAT-PC\\SERVER01";
         String portNumber = "1433";
         String databaseName = "QLSV";
         String username = "sa";
@@ -24,7 +24,6 @@ public class Index {
         String password = "12";
         String connectionUrl = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";" + "databaseName="
                 + databaseName + ";username=" + username + ";password=" + password + ";";
-
         try {
         	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         	Connection con = DriverManager.getConnection(connectionUrl);
