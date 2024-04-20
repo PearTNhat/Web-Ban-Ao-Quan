@@ -47,7 +47,19 @@ public class Index {
 		}
 		return "page/home";	
 	}
-	@RequestMapping("/handleProduct")
+	@RequestMapping("/dash-board")
+	public String dashBoard() {
+		return "page/admin/dashBoard";
+	}
+	@RequestMapping("/admin-account")
+	public String accountAdmin  () {
+		return "page/admin/adminAccount";
+	}
+	@RequestMapping("/manage-product")
+	public String manageProduct  () {
+		return "page/admin/manageProducts";
+	}
+	@RequestMapping("/handle-product")
 	public String handleProduct  () {
 		return "page/admin/handleProduct";
 	}
