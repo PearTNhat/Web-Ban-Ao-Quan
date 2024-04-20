@@ -1,3 +1,19 @@
+// Carousel
+$('#owl-demo-1').owlCarousel({
+	items: 1,
+	lazyLoad: true,
+	loop: true,
+	margin: 0,
+	dots: false,
+	autoplay: true, // Enable autoplay
+	autoplayTimeout: 10000, // Time between slide transitions (in milliseconds)
+	animateOut: 'fadeOut',
+	onInitialized: startProgressBar,
+	onTranslate: resetProgressBar,
+	onTranslated: startProgressBar
+});
+
+
 // image product
 $(".imgAdd").click(function() {
 	$(this)
@@ -61,22 +77,6 @@ ClassicEditor
 	.catch(error => {
 		console.error(error);
 	});
-
-// Carousel
-$('#owl-demo-1').owlCarousel({
-	items: 1,
-	lazyLoad: true,
-	loop: true,
-	margin: 0,
-	dots: false,
-	autoplay: true, // Enable autoplay
-	autoplayTimeout: 10000, // Time between slide transitions (in milliseconds)
-	animateOut: 'fadeOut',
-	onInitialized: startProgressBar,
-	onTranslate: resetProgressBar,
-	onTranslated: startProgressBar
-});
-
 
 $('#owl-demo-2').owlCarousel({
 	rtl: true,

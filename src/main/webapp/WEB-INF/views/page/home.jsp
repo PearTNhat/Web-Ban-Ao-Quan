@@ -7,7 +7,7 @@
 <%@ include file="../component/navbar.jsp" %>
 
 <%@ include file="../component/banner.jsp" %>
-
+    
 	<!-- Hot items -->
     <section class="hot-items">
         <div class="container-xl text-center">
@@ -143,7 +143,6 @@
      <script src="resources/js/commonJS.js"></script>
     <%@ include file="../common/footer.jsp" %>
    
-	
-    
+   	${accounts[0].email}
 	</body>
 </html>

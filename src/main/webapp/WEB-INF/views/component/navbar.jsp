@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <nav class="navbar navbar-expand-lg navbar-light my-3 container-fluid sticky-top bg-white">
         <div class="container-xl">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href=".htm">
                 <img src="https://4menshop.com/logo.png?v=1" alt="Logo" width="70" height="40"
                     class="d-inline-block align-text-top">
             </a>
