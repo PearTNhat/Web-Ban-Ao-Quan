@@ -17,34 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ptithcm.entity.Account;
 
-@Transactional
+
 @Controller
 public class Index {
-	@Autowired
-	SessionFactory factory;
-	
+
 	@RequestMapping("/")
 	public String index(ModelMap model) {
-		List<Account> list = getListAccounts();
-		model.addAttribute("accounts", list);
-		String serverName = "PHUONG-HPLAP";
-//		String serverName = "NHAT-PC\\SERVER01";
-        String portNumber = "1433";
-        String databaseName = "QLSV";
-        String username = "sa";
-        String password = "kc";
-//        String password = "12";
-        String connectionUrl = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";" + "databaseName="
-                + databaseName + ";username=" + username + ";password=" + password + ";";
-
-        try {
-        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        	Connection con = DriverManager.getConnection(connectionUrl);
-        	model.addAttribute("connStatus", "Connected to database!");
-        } catch (SQLException | ClassNotFoundException e) {
-			model.addAttribute("connStatus", "Cannot connect to SQL Server =((");
-			e.printStackTrace();
-		}
 		return "page/home";	
 	}
 	@RequestMapping("/dash-board")
@@ -86,12 +64,5 @@ public class Index {
 	public String signup() {
 		return "page/signup";
 	}
-	
-	public List<Account> getListAccounts() {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Account";
-		Query query = session.createQuery(hql);
-		List<Account> list = query.list();
-		return list;
-	}
+
 }

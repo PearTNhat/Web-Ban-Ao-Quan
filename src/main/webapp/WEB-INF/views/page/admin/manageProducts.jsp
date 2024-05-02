@@ -8,7 +8,7 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="resources/css/admin/mangageProducts.css">
-
+<%-- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="container-xl">
@@ -46,6 +46,9 @@
 				</tr>
 			</thead>
 			<tbody>
+			<%-- <c:forEach var="p" items="${products }">
+			{p.name}
+			</c:forEach> --%>
 				<tr>
 					<td>1</td>
 					<td><a href="#"><img

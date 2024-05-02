@@ -123,7 +123,8 @@
                             class="link-underline link-underline-opacity-0 link-dark d-block small text-center">Áo Vest
                             NAZAFU
                             Màu xám
-                            da bò</a>
+                            da bò
+                         </a>
                         <p class="price text-danger fw-medium small text-center">675.000
                             <span class="text-decoration-line-through small text-secondary">1.350.000</span>
                         </p>
