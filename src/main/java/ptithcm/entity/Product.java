@@ -3,37 +3,36 @@ package ptithcm.entity;
 import java.sql.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
-
+@Entity
 public class Product {
 	@Id
-	@Column(name = "ProductId")
+	@Column(name = "productId")
 	private String productId;
-	
 
-
-	@Column
+	@Column(name = "name")
 	private String name;
 	
-	@Column
+	@Column(name = "quantity")
 	private int quantity;
 	
-	@Column
+	@Column(name = "description")
 	private String description;
 
-	@Column
-	private int Money;
+	@Column(name = "price")
+	private float price=0;
 	
-	@Column
+	@Column(name = "type")
 	private String type;
 	
-	@Column
-	private float discount;
+	@Column(name = "discount")
+	private float discount=0;
 	
-	@Column
+	@Column(name = "soldQuantity")
 	private int soldQuantity;
 	
-	@Column
+	@Column(name = "createdAt")
 	private Date createdAt;
 	
 
@@ -70,12 +69,13 @@ public class Product {
 		this.description = description;
 	}
 
-	public int getMoney() {
-		return Money;
+	
+	public float getPrice() {
+		return price;
 	}
 
-	public void setMoney(int money) {
-		Money = money;
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
 	public String getType() {

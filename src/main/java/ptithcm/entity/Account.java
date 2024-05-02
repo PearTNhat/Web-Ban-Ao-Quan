@@ -35,14 +35,14 @@ public class Account {
 	@Column(name = "addressId")
 	private String addressId;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
-	private Collection<Orders>  orderss;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
-	private Collection<Address> addresss;
-	
-	@OneToOne(fetch = FetchType.LAZY,mappedBy = "Account")
-	private Collection<Cart> carts;
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
+//	private Collection<Orders>  orderss;
+//	
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
+//	private Collection<Address> addresss;
+//	
+//	@OneToOne(fetch = FetchType.LAZY,mappedBy = "Account")
+//	private Collection<Cart> carts;
 
 	public String getAccountId() {
 		return accountId;
@@ -100,29 +100,29 @@ public class Account {
 		this.addressId = addressId;
 	}
 
-	public Collection<Orders> getOrderss() {
-		return orderss;
-	}
-
-	public void setOrderss(Collection<Orders> orderss) {
-		this.orderss = orderss;
-	}
-
-	public Collection<Address> getAddresss() {
-		return addresss;
-	}
-
-	public void setAddresss(Collection<Address> addresss) {
-		this.addresss = addresss;
-	}
-
-	public Collection<Cart> getCarts() {
-		return carts;
-	}
-
-	public void setCarts(Collection<Cart> carts) {
-		this.carts = carts;
-	}
-	
+//	public Collection<Orders> getOrderss() {
+//		return orderss;
+//	}
+//
+//	public void setOrderss(Collection<Orders> orderss) {
+//		this.orderss = orderss;
+//	}
+//
+//	public Collection<Address> getAddresss() {
+//		return addresss;
+//	}
+//
+//	public void setAddresss(Collection<Address> addresss) {
+//		this.addresss = addresss;
+//	}
+//
+//	public Collection<Cart> getCarts() {
+//		return carts;
+//	}
+//
+//	public void setCarts(Collection<Cart> carts) {
+//		this.carts = carts;
+//	}
+//	
 	
 }
