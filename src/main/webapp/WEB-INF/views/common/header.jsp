@@ -81,7 +81,8 @@ section {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
-	display: none;
+	opacity: 0;
+	transition: all .2s;
 }
 
 /*  product */

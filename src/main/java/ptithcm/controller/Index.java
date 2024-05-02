@@ -47,7 +47,7 @@ public class Index {
 		}
 		return "page/home";	
 	}
-	@RequestMapping("/dash-board")
+	@RequestMapping("/dashboard")
 	public String dashBoard() {
 		return "page/admin/dashBoard";
 	}
