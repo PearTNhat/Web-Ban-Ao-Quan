@@ -3,31 +3,19 @@ package ptithcm.entity;
 import java.util.Collection;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+@Entity
 public class Status {
 	@Id
 	@Column(name = "statusId")
 	private String statusId;
-	
-	
-	public Collection<Status> getStatuss() {
-		return statuss;
-	}
-
-
-	public void setStatuss(Collection<Status> statuss) {
-		this.statuss = statuss;
-	}
 
 
 	@Column(name = "name")
 	private String name;
-
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Status")
-	private Collection<Status>  statuss;
 
 	public String getStatusId() {
 		return statusId;

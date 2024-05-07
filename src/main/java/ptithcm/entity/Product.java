@@ -1,10 +1,14 @@
 package ptithcm.entity;
 
 import java.sql.Date;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 @Entity
 public class Product {
 	@Id
@@ -13,29 +17,39 @@ public class Product {
 
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "quantity")
 	private int quantity;
-	
+
 	@Column(name = "description")
 	private String description;
 
 	@Column(name = "price")
-	private float price=0;
-	
+	private float price = 0;
+
 	@Column(name = "type")
 	private String type;
-	
+
 	@Column(name = "discount")
-	private float discount=0;
-	
+	private float discount = 0;
+
 	@Column(name = "soldQuantity")
 	private int soldQuantity;
-	
+
 	@Column(name = "createdAt")
 	private Date createdAt;
-	
 
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	private Collection<ProductSizeColor> productSizeColor;
+
+
+	public Collection<ProductSizeColor> getProductSizeColor() {
+		return productSizeColor;
+	}
+
+	public void setProductSizeColor(Collection<ProductSizeColor> productSizeColor) {
+		this.productSizeColor = productSizeColor;
+	}
 
 	public String getProductId() {
 		return productId;
@@ -69,7 +83,6 @@ public class Product {
 		this.description = description;
 	}
 
-	
 	public float getPrice() {
 		return price;
 	}
@@ -109,4 +122,5 @@ public class Product {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
 }

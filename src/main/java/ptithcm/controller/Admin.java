@@ -14,21 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ptithcm.entity.Product;
 
-
 @Transactional
 @Controller
-@RequestMapping("/")
-public class ProductController {
+@RequestMapping("/admin")
+public class Admin {
+
 	@Autowired
 	SessionFactory factory;
-	@RequestMapping("get-all-product")
-	public String getAllProuct (ModelMap model) {
-//		Session session = factory.getCurrentSession();
-//		String hql = "FROM Product";
-//		Query query = session.createQuery(hql);
-//		List<Product> list = query.list();
-//		model.addAttribute("products", list);
-//		System.out.println(list);
+
+	@RequestMapping("manage-product")
+	public String getAllProuct(ModelMap model) {
+
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Product";
+		Query query = session.createQuery(hql);
+		List<Product> list = query.list();
+		model.addAttribute("products", list);
+		System.out.println(list);
+
 		return "page/admin/manageProducts";
 	}
 }

@@ -5,7 +5,7 @@
 
 <head>
 <meta charset="UTF-8">
-<%-- <base href="${pageContext.servletContext.contextPath}/"> --%>
+<base href="${pageContext.servletContext.contextPath}/">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin</title>
@@ -23,5 +23,5 @@
 	integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 	crossorigin="anonymous"></script>
 <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-<link rel="stylesheet" href="/resources/css/admin/adminLayout.css">
+<link rel="stylesheet" href="resources/css/admin/adminLayout.css">
 <script src="resources/js/adminLayout.js" async></script>

@@ -3,10 +3,11 @@ package ptithcm.entity;
 import java.util.Collection;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+@Entity
 public class Address {
 	@Id
 	@Column(name = "addressId")
@@ -24,8 +25,6 @@ public class Address {
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Address")
-	private Collection<OrderDetail>  orderDetails;
 
 	public String getAddressid() {
 		return addressid;
@@ -67,13 +66,6 @@ public class Address {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Collection<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
-
-	public void setOrderDetails(Collection<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
 	
 	
 }
