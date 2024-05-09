@@ -25,15 +25,6 @@ public class Index {
 	public String index(ModelMap model) {
 		return "page/home";	
 	}
-<<<<<<< HEAD
-	@RequestMapping("/dashboard")
-=======
-	@RequestMapping("/order")
-	public String dashBoard1() {
-		return "page/order";
-	}
-	@RequestMapping("/dash-board")
->>>>>>> 9b92fac908d6cf34cd60e34f35142d1127e92e09
 	public String dashBoard() {
 		return "page/admin/dashBoard";
 	}
