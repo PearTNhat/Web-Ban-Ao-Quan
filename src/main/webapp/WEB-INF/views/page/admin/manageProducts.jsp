@@ -8,7 +8,8 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="resources/css/admin/mangageProducts.css">
-<%-- <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="container-xl">
@@ -38,7 +39,6 @@
 				<tr>
 					<th>#</th>
 					<th>Name</th>
-					<th>Size</th>
 					<th>Quantity</th>
 					<th>Price</th>
 					<th>Giảm giá</th>
@@ -46,18 +46,17 @@
 				</tr>
 			</thead>
 			<tbody>
-			<%-- <c:forEach var="p" items="${products }">
-			{p.name}
-			</c:forEach> --%>
+			<c:forEach var="p" items="${products }" varStatus="s" >
 				<tr>
-					<td>1</td>
+					<td>${s.index}</td>
 					<td><a href="#"><img
 							src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
-							class="avatar" alt="Avatar">Túi xách siêu đẹp</a></td>
-					<td>XL</td>
-					<td>10</td>
-					<td>300.000</td>
-					<td>70%</td>
+							class="avatar" alt="Avatar">${p.name}</a></td>
+					
+					<td>${p.quantity }</td>
+					<td><fmt:formatNumber value="${p.price }" type="currency" /></td>
+					
+					<td><fmt:formatNumber value="${ p.discount}" type="percent" /></td>
 					<td>
 						<div class="d-flex">
 							<a href="./addProduct/addProduct.html" class="edit"><i
@@ -74,6 +73,7 @@
 						</div>
 					</td>
 				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 		<!-- pagination -->

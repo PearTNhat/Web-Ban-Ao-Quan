@@ -4,10 +4,11 @@ import java.sql.Date;
 import java.util.Collection;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+@Entity
 public class Orders {
 	@Id
 	@Column(name = "orderId")

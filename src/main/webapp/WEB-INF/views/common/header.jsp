@@ -4,12 +4,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 <!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
+<<<<<<< HEAD
+=======
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+>>>>>>> 9b92fac908d6cf34cd60e34f35142d1127e92e09
 
 <!-- Jquery -->
 
@@ -23,8 +34,10 @@
 	integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<link rel="stylesheet" href="resources/css/home/home.css">
 <link rel="stylesheet" href="resources/css/listProduct.css">
 <link rel="stylesheet" href="resources/css/footer/footer.css">
+  
 <title>Web ban hang</title>
 
 <style>
@@ -83,6 +96,7 @@ section {
 	transition: all .2s;
 }
 
+
 /*  product */
 table.cart-table a.cart-link {
 	text-decoration: none;
@@ -94,4 +108,44 @@ table.cart-table a.cart-link:hover {
 	color: #444444;
 }
 </style>
+
+<script>
+    function open_ao(){
+        var js_ao = document.querySelector('.nav-ao');
+        if (js_ao.classList.contains("open-max-1000")){
+            js_ao.classList.remove("open-max-1000");
+        } else{
+            js_ao.classList.add("open-max-1000")
+        }
+    }
+    function open_quan(){
+        var js_quan = document.querySelector('.nav-quan');
+        if (js_quan.classList.contains("open-max-1000")){
+            js_quan.classList.remove("open-max-1000");
+        } else{
+            js_quan.classList.add("open-max-1000")
+        }
+    }
+    function open_search(){
+        var js_search = document.querySelector('.act-search');
+        if (js_search.classList.contains("open")){
+            js_search.classList.remove("open");
+        } else{
+            setTimeout(() => {
+                js_search.classList.add("open");
+            }, 10);
+        }
+        
+    }
+    window.addEventListener('click', function(event){
+        if (event.target.className === 'act-search open') return;
+        var js_search = document.querySelector('.act-search');
+
+        if (js_search.classList.contains("open")){
+            js_search.classList.remove("open");
+        }
+    });
+    </script>
+
+
 </head>

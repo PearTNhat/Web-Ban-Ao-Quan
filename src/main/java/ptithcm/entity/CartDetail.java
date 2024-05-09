@@ -3,11 +3,12 @@ package ptithcm.entity;
 import java.util.Collection;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
+@Entity
 public class CartDetail {
 	
 	@Id
@@ -18,14 +19,9 @@ public class CartDetail {
 	@JoinColumn(name = "ProductSizeColor")
 	private String productSizeColorID;
 	
-	@Column
+	@Column(name="quantity")
 	private int quantity;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cartDetail")
-	private Collection<Cart>  carts;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "cartDetail")
-	private Collection<ProductSizeColor>  productSizeColors;
 
 	public String getCartID() {
 		return CartID;
@@ -51,21 +47,7 @@ public class CartDetail {
 		this.quantity = quantity;
 	}
 
-	public Collection<Cart> getCarts() {
-		return carts;
-	}
 
-	public void setCarts(Collection<Cart> carts) {
-		this.carts = carts;
-	}
-
-	public Collection<ProductSizeColor> getProductSizeColors() {
-		return productSizeColors;
-	}
-
-	public void setProductSizeColors(Collection<ProductSizeColor> productSizeColors) {
-		this.productSizeColors = productSizeColors;
-	}
 
 
 }

@@ -1,70 +1,41 @@
 package ptithcm.entity;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
-import javax.persistence.FetchType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class ProductSizeColor {
 	@Id
-	@Column(name = "ProductID")
-	private String productID;
-	
-	@Id
-	@Column(name = "IdSize")
-	private String idSize;
-	
-	
-	@Column(unique = true, name = "ProductSizeColorId")
+	@Column(unique = true, name = "productSizeColorId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productSizeColorId;
+
+	@ManyToOne
+	@JoinColumn(name = "productId")
+	private Product product;
+
+	@ManyToOne
+	@JoinColumn(name = "colorId")
+	private Color color;
+
+	@ManyToOne
+	@JoinColumn(name = "sizeId")
+	private Size size;
 	
-	
-	@Column
+	@Column(name="quantity")
 	private int quantity;
 	
-	
-	public String getImage() {
-		return image;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	@Column(name = "Image")
-	private String image;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productSizeColor")
-	private Collection<Product>  products;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productSizeColor")
-	private Collection<Color>  colors;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productSizeColor")
-	private Collection<Image>  images;
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "productSizeColor")
-	private Collection<Size>  sizes;
-
-	public String getProductID() {
-		return productID;
-	}
-
-	public void setProductID(String productID) {
-		this.productID = productID;
-	}
-
-	public String getIdSize() {
-		return idSize;
-	}
-
-	public void setIdSize(String idSize) {
-		this.idSize = idSize;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public int getProductSizeColorId() {
@@ -75,40 +46,28 @@ public class ProductSizeColor {
 		this.productSizeColorId = productSizeColorId;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-
-	public Collection<Color> getColors() {
-		return colors;
+	public Color getColor() {
+		return color;
 	}
 
-	public void setColors(Collection<Color> colors) {
-		this.colors = colors;
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
-	public Collection<Product> getProducts() {
-		return products;
+	public Size getSize() {
+		return size;
 	}
 
-	public void setProducts(Collection<Product> products) {
-		this.products = products;
+	public void setSize(Size size) {
+		this.size = size;
 	}
 
-	public Collection<Size> getSizes() {
-		return sizes;
-	}
-
-	public void setSizes(Collection<Size> sizes) {
-		this.sizes = sizes;
-	}
-
-
-	
-	
 }
