@@ -24,8 +24,8 @@ public class Address {
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Address")
-	private Collection<OrderDetail>  orderDetails;
+//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Address")
+//	private Collection<OrderDetail>  orderDetails;
 
 	public String getAddressid() {
 		return addressid;
@@ -67,13 +67,13 @@ public class Address {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Collection<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
-
-	public void setOrderDetails(Collection<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
+//	public Collection<OrderDetail> getOrderDetails() {
+//		return orderDetails;
+//	}
+//
+//	public void setOrderDetails(Collection<OrderDetail> orderDetails) {
+//		this.orderDetails = orderDetails;
+//	}
 	
 	
 }
