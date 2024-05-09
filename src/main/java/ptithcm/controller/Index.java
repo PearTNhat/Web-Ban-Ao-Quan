@@ -2,42 +2,52 @@ package ptithcm.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ptithcm.entity.Account;
+
+
 @Controller
 public class Index {
+
 	@RequestMapping("/")
 	public String index(ModelMap model) {
-//		String serverName = "PHUONG-HPLAP";
-		String serverName = "NHAT-PC\\SERVER01";
-        String portNumber = "1433";
-        String databaseName = "QLSV";
-        String username = "sa";
-//        String password = "kc";
-        String password = "12";
-        String connectionUrl = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";" + "databaseName="
-                + databaseName + ";username=" + username + ";password=" + password + ";";
-
-        try {
-        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        	Connection con = DriverManager.getConnection(connectionUrl);
-        	model.addAttribute("connStatus", "Connected to database!");
-        } catch (SQLException | ClassNotFoundException e) {
-			model.addAttribute("connStatus", "Cannot connect to SQL Server =((");
-			e.printStackTrace();
-		}
-		return "page/home";
+		return "page/home";	
 	}
-	@RequestMapping("/footer")
+	@RequestMapping("/order")
+	public String dashBoard1() {
+		return "page/order";
+	}
+	@RequestMapping("/dash-board")
+	public String dashBoard() {
+		return "page/admin/dashBoard";
+	}
+	@RequestMapping("/admin-account")
+	public String accountAdmin  () {
+		return "page/admin/adminAccount";
+	}
+	@RequestMapping("/manage-product")
+	public String manageProduct  () {
+		return "page/admin/manageProducts";
+	}
+	@RequestMapping("/handle-product")
+	public String handleProduct  () {
+		return "page/admin/handleProduct";
+	}
+	@RequestMapping("/listProduct")
 	public String Footer  () {
-		return "com/footer";
+		return "page/listProduct";
 	}
 	@RequestMapping("/forgot-password")
 	public String forgotPassword() {
@@ -49,4 +59,14 @@ public class Index {
 		return "page/cart-checkout";
 	}
 	
+	@RequestMapping("/login")
+	public String login() {
+		return "page/login";
+	}
+	
+	@RequestMapping("/signup")
+	public String signup() {
+		return "page/signup";
+	}
+
 }
