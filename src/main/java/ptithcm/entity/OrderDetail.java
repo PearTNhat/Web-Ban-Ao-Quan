@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
 public class OrderDetail {
@@ -21,6 +23,14 @@ public class OrderDetail {
 
 	@Column(name = "price")
 	private int price;
+	
+	@ManyToOne
+	@JoinColumn(name = "productSizeColorId")
+	private ProductSizeColor productSizeColor;
+	
+	@ManyToOne
+	@JoinColumn(name = "orderId")
+	private Orders orders;
 
 	public String getOrderId() {
 		return orderId;
@@ -53,6 +63,24 @@ public class OrderDetail {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	public ProductSizeColor getProductSizeColor() {
+		return productSizeColor;
+	}
+
+	public void setProductSizeColor(ProductSizeColor productSizeColor) {
+		this.productSizeColor = productSizeColor;
+	}
+
+	public Orders getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
+
+	
 
 	
 	

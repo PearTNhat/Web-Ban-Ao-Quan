@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -35,15 +37,14 @@ public class Account {
 	@Column(name = "addressId")
 	private String addressId;
 	
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
-//	private Collection<Orders>  orderss;
-//	
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
-//	private Collection<Address> addresss;
-//	
-//	@OneToOne(fetch = FetchType.LAZY,mappedBy = "Account")
-//	private Collection<Cart> carts;
-
+	@ManyToOne
+	@JoinColumn(name = "accountId")
+	private Address address;
+	
+	@ManyToOne
+	@JoinColumn(name = "accountId")
+	private Cart cart;
+	
 	public String getAccountId() {
 		return accountId;
 	}

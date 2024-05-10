@@ -29,14 +29,6 @@ public class ProductSizeColor {
 	
 	@Column(name="quantity")
 	private int quantity;
-	
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 
 	public int getProductSizeColorId() {
 		return productSizeColorId;
@@ -69,5 +61,15 @@ public class ProductSizeColor {
 	public void setSize(Size size) {
 		this.size = size;
 	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
+
 
 }
