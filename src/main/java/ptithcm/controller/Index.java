@@ -1,22 +1,9 @@
 package ptithcm.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import ptithcm.entity.Account;
-
 
 @Controller
 public class Index {
@@ -25,11 +12,6 @@ public class Index {
 	public String index(ModelMap model) {
 		return "page/home";	
 	}
-	@RequestMapping("/order")
-	public String dashBoard1() {
-		return "page/order";
-	}
-	@RequestMapping("/dash-board")
 	public String dashBoard() {
 		return "page/admin/dashBoard";
 	}

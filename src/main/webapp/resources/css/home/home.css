@@ -61,11 +61,11 @@
         }
         .navbar-search .act-search{
             display: none;
-            position: fixed;
+            position: absolute;
             margin-left: -260px;
             margin-top: 0px;
             width: 300px;;
-            padding:5px 15px;
+            padding:10px 15px;
             border: rgb(104, 5, 5) solid 1px;
             animation: appear 0.3 ease;
         }

@@ -26,6 +26,7 @@ public class ProductSizeColor {
 	@ManyToOne
 	@JoinColumn(name = "sizeId")
 	private Size size;
+
 	
 	@Column(name="quantity")
 	private int quantity;
@@ -69,7 +70,7 @@ public class ProductSizeColor {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+
 	
-
-
 }

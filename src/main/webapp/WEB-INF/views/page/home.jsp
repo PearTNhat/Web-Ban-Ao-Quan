@@ -155,8 +155,8 @@
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         
-     <script src="resources/js/commonJS.js"></script>
     <%@ include file="../common/footer.jsp" %>
+     <script src="resources/js/commonJS.js"></script>
    
    	${accounts[0].email}
 	</body>
