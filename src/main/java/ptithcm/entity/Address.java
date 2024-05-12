@@ -24,7 +24,6 @@ public class Address {
 	
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
-	
 
 	public String getAddressid() {
 		return addressid;
@@ -64,8 +63,6 @@ public class Address {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	
+	}	
 	
 }
