@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="resources/css/admin/handleProduct.css">
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<div class="f-container mt-4">
+<div class="f-container mt-4 ">
 	<form>
 		<div class="container">
 			<div class="row">
