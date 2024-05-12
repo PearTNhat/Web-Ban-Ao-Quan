@@ -5,16 +5,18 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Account")
 public class Account {
 	@Id
-	@Column(name = "accountId")
+	@Column(unique = true, name = "accountId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String accountId;
 	
 	@Column(name = "firstName")
@@ -31,18 +33,6 @@ public class Account {
 	
 	@Column(name = "password")
 	private String password;
-	
-	@Column(name = "addressId")
-	private String addressId;
-	
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
-//	private Collection<Orders>  orderss;
-//	
-//	@OneToMany(fetch = FetchType.LAZY,mappedBy = "Account")
-//	private Collection<Address> addresss;
-//	
-//	@OneToOne(fetch = FetchType.LAZY,mappedBy = "Account")
-//	private Collection<Cart> carts;
 
 	public String getAccountId() {
 		return accountId;
@@ -68,11 +58,13 @@ public class Account {
 		this.lastName = lastName;
 	}
 
-	public boolean isAdmin() {
+
+
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 
@@ -91,38 +83,5 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(String addressId) {
-		this.addressId = addressId;
-	}
-
-//	public Collection<Orders> getOrderss() {
-//		return orderss;
-//	}
-//
-//	public void setOrderss(Collection<Orders> orderss) {
-//		this.orderss = orderss;
-//	}
-//
-//	public Collection<Address> getAddresss() {
-//		return addresss;
-//	}
-//
-//	public void setAddresss(Collection<Address> addresss) {
-//		this.addresss = addresss;
-//	}
-//
-//	public Collection<Cart> getCarts() {
-//		return carts;
-//	}
-//
-//	public void setCarts(Collection<Cart> carts) {
-//		this.carts = carts;
-//	}
-//	
-	
 }
+

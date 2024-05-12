@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 public class Product {
@@ -41,8 +44,7 @@ public class Product {
 
 	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
 	private Collection<ProductSizeColor> productSizeColor;
-
-
+	
 	public Collection<ProductSizeColor> getProductSizeColor() {
 		return productSizeColor;
 	}

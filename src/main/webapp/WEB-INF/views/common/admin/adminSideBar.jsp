@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8"%>
 
 <body>
-	<div class="wrapper">
+	<div class="wrapper vh-100">
 		<aside id="sidebar" class="expand">
 			<div class="d-flex">
 				<button class="toggle-btn" type="button">
 					<i class="lni lni-grid-alt"></i>
 				</button>
 				<div class="sidebar-logo">
-					<a href="#">4Mens</a>
+					<a href=".htm">4Mens</a>
 				</div>
 			</div>
 			<ul class="sidebar-nav">
@@ -24,9 +24,9 @@
 				</a>
 					<ul id="acc" class="sidebar-dropdown list-unstyled collapse"
 						data-bs-parent="#sidebar">
-						<li class="sidebar-item"><a href="admin-account.htm"
+						<li class="sidebar-item"><a href="admin/accounts.htm"
 							class="sidebar-link ps-5"> <i class="bi bi-person-check-fill"></i>
-								Admin
+								Users
 						</a></li>
 					</ul></li>
 				<li class="sidebar-item"><a href="#"
@@ -37,7 +37,7 @@
 				</a>
 					<ul id="product" class="sidebar-dropdown list-unstyled collapse"
 						data-bs-parent="#sidebar">
-						<li class="sidebar-item"><a href="manage-product.htm"
+						<li class="sidebar-item"><a href="admin/products.htm"
 							class="sidebar-link ps-5"> <i class="bi bi-cart4"></i>
 								Product
 						</a></li>

@@ -12,7 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<div class="container-xl">
+<div class="container-xl overflow-auto">
 	<div class="table-responsive">
 		<div class="table-wrapper position-md-relative">
 			<div class="table-title">
