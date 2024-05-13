@@ -26,17 +26,10 @@ public class ProductSizeColor {
 	@ManyToOne
 	@JoinColumn(name = "sizeId")
 	private Size size;
+
 	
 	@Column(name="quantity")
 	private int quantity;
-	
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 
 	public int getProductSizeColorId() {
 		return productSizeColorId;
@@ -70,4 +63,14 @@ public class ProductSizeColor {
 		this.size = size;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
+	
 }
