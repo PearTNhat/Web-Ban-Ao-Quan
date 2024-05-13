@@ -61,7 +61,7 @@
         }
         .navbar-search .act-search{
             display: none;
-            position: fixed;
+            position: absolute;
             margin-left: -260px;
             margin-top: 0px;
             width: 300px;;
