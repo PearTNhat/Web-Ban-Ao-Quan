@@ -15,13 +15,16 @@
 	rel="stylesheet"
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
-        defer></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous" defer></script>
 
 <!-- Thư viện ClassicEditor  -->
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 
 
 <!-- Owl carousel -->
@@ -34,10 +37,14 @@
 	integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<!--  jquery-->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resources/css/home/home.css">
 <link rel="stylesheet" href="resources/css/listProduct.css">
 <link rel="stylesheet" href="resources/css/footer/footer.css">
-  
+
 <title>Web ban hang</title>
 
 <style>
@@ -96,7 +103,6 @@ section {
 	transition: all .2s;
 }
 
-
 /*  product */
 table.cart-table a.cart-link {
 	text-decoration: none;
@@ -106,6 +112,44 @@ table.cart-table a.cart-link {
 
 table.cart-table a.cart-link:hover {
 	color: #444444;
+}
+
+.img-wrapper {
+	margin: auto;
+	width: 100px;
+}
+
+.imagePreview {
+	position: relative;
+	margin: auto;
+	width: 100px;
+	height: 100px;
+	background-image:
+		url("https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg");
+	border: 1px solid #ccc;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 50%;
+}
+
+.btn-upload {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.delete-img {
+	margin: auto;
+	cursor: pointer;
+	background-color: red;
+	text-align: center;
+	color: white;
+	margin-top: 6px;
+	width: 60px;
+	height: 27px;
+	border-radius: 4px;
 }
 </style>
 
@@ -145,6 +189,39 @@ table.cart-table a.cart-link:hover {
             js_search.classList.remove("open");
         }
     });
+    
+    //review anh
+
+        $(document).on("change", ".uploadFile", function () {
+            var uploadFile = $(this);
+            var files = !!this.files ? this.files : [];
+
+            if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+            if (/^image/.test(files[0].type)) {
+                const type = files[0].type.split("/")[1];
+                if (type != "jpeg" && type != "png" && type != "jpg") {
+                    return alert("Only jpeg, jpg, png files are allowed");
+                }
+                // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+                reader.onloadend = function () {
+                    // set image data as background of div
+                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                    uploadFile
+                        .closest(".img-wrapper")
+                        .find(".imagePreview")
+                        .css("background-image", "url(" + this.result + ")");
+                };
+            }
+        });
+    //xoa preview anh
+     $(".delete-img ").click(function () {
+            $(".uploadFile").val(null);
+            console.log($(".uploadFile"))
+            $(this).closest(".img-wrapper").find(".imagePreview").css("background-image", "url('https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg')");
+        });
+   
     </script>
 
 
