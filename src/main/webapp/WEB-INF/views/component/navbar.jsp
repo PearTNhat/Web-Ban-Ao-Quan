@@ -3,7 +3,7 @@
 <nav
 	class="navbar navbar-expand-lg navbar-light my-3 container-fluid sticky-top bg-white">
 	<div class="container-xl">
-		<a class="navbar-brand" href="#"> <img
+		<a class="navbar-brand" href=".htm"> <img
 			src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
 			height="60" class="d-inline-block align-text-top">
 		</a>

@@ -6,9 +6,9 @@
                 <i class="bi bi-telephone-fill fst-normal"> Hotline: 0944.735.903</i>
             </div>
             <div class="link-group">
-                <a href="#" class="link-underline link-underline-opacity-0 px-2">Cách chọn size</a>
-                <a href="#" class="link-underline link-underline-opacity-0 px-2">Chính sách khách vip</a>
-                <a href="#" class="link-underline link-underline-opacity-0 px-2">Cách chọn size</a>
+                <a href="choose-size.htm" class="link-underline link-underline-opacity-0 px-2">Cách chọn size</a>
+                <a href="for-vip-user.htm" class="link-underline link-underline-opacity-0 px-2">Chính sách khách vip</a>
+                <a href="introduce.htm" class="link-underline link-underline-opacity-0 px-2">Giới thiệu</a>
             </div>
         </div>
     </div>
