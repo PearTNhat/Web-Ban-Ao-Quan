@@ -37,7 +37,7 @@ public class Product {
 	private float discount = 0;
 
 	@Column(name = "soldQuantity")
-	private int soldQuantity;
+	private int soldQuantity=0;
 
 	@Column(name = "createdAt")
 	private Date createdAt;

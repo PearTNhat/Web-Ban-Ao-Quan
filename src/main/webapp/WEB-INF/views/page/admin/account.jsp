@@ -7,7 +7,7 @@
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <style>
 body {
 	color: #566787;
@@ -174,6 +174,15 @@ table.table .avatar {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
+/*  not foubd */
+.not-found {
+	font-size: 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-basis: 100%;
+}
 /*  */
 .search-box {
 	position: relative;
@@ -199,15 +208,7 @@ table.table .avatar {
 	top: 8px;
 	left: 10px;
 }
-/*  not foubd */
-.not-found {
-	font-size: 30px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-basis: 100%;
-}
+
 </style>
 
 </head>
