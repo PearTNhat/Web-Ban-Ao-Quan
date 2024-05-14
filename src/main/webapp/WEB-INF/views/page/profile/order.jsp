@@ -1,35 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../common/header.jsp" %>
-<%@ include file="../component/topbar.jsp" %>
-<%@ include file="../component/navbar.jsp" %>
+<%@ include file="../../common/header.jsp" %>
+
 <body>
+<%@ include file="../../component/topbar.jsp" %>
+<%@ include file="../../component/navbar.jsp" %>
+
     <div class="page-info bg-light">
         <div class="container-xl text-muted py-3">
-            <a href="#" class="text-decoration-none text-secondary">4MEN</a>
+            <a href=".htm" class="text-decoration-none text-secondary">4MEN</a>
             <span> / </span>
-            <a href="#" class="text-decoration-none text-secondary">Profile</a>
+            <a href="profile/info.htm" class="text-decoration-none text-secondary">Profile</a>
+            <span> / </span>
+            <a href="profile/order.htm" class="text-decoration-none text-secondary">Order</a>
         </div>
     </div>
 
-    <div class="container-lg my-4">
+    <div class="container-lg my-5">
         <div class="row">
             <div class="col-md-3 d-none d-md-block">
                 <div class="d-flex flex-column gap-3">
                     <div class="d-flex align-items-center gap-3">
                         <img class="rounded-circle" style="width:60px" alt="avatar1"
                             src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" />
-                        <div class="user-name fw-bold fs-5">Lưu Nguyễn Kỳ Thư</div>
+                        <div class="user-name fw-bold fs-5">Dương Triệu Phi</div>
                     </div>
                     <ul class="list-group border-top border-bottom pt-3 pb-3">
-                        <a href="" class="link-underline link-underline-opacity-0">
+                        <a href="profile/info.htm" class="link-underline link-underline-opacity-0">
                             <li class="list-group-item border-0">
                                 <i class="bi bi-info-circle"></i>
                                 Thông tin tài khoản
                             </li>
                         </a>
 
-                        <a href="" class="link-underline link-underline-opacity-0">
+                        <a href="profile/address.htm" class="link-underline link-underline-opacity-0">
                             <li class="list-group-item border-0">
                                 <i class="bi bi-geo-alt-fill"></i>
                                 Địa chỉ hiện tại
@@ -43,7 +47,7 @@
                             </li>
                         </a>
 
-                        <a href="" class="link-underline link-underline-opacity-0">
+                        <a href="profile/order.htm" class="link-underline link-underline-opacity-0">
                             <li class="list-group-item border-0">
                                 <i class="bi bi-cart4"></i>
                                 Đơn hàng
@@ -64,8 +68,8 @@
 
             </div>
             <div class="col-12 col-md-9">
-                <div class="fs-2 border-bottom pb-2">
-                    ĐƠN HÀNG
+                <div class="fs-3 border-bottom pb-2">
+                    Đơn hàng đã đặt
                 </div>
                 <div class="table-responsive">
                     <table class="table">
@@ -150,6 +154,4 @@
             </div>
         </div>
     </div>
-        <%@ include file="../common/footer.jsp" %>
- </body>
- </html>
+    <%@ include file="../../common/footer.jsp" %>

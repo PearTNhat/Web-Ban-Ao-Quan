@@ -137,6 +137,15 @@
         .text-decoration-none:hover img:nth-child(3){
             display: inline-block;
         }
+        table.cart-table a.cart-link {
+            text-decoration: none;
+            color: #b31f2a;
+            transition: all .2s;
+        }
+
+        table.cart-table a.cart-link:hover {
+            color: #444444;
+        }
         div:hover > .text-decoration-none .fa-shopping-cart{
             display: block;
             animation: appear .3s ease-out 1;

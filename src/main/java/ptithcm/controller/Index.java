@@ -50,5 +50,20 @@ public class Index {
 	public String signup() {
 		return "page/signup";
 	}
-
+	
+	@RequestMapping("/choose-size") 
+	public String chooseSize() {
+		return "page/topbar/chooseSize";
+	}
+	
+	@RequestMapping("/for-vip-user")
+	public String vipUser() {
+		return "page/topbar/vipUser";
+	}
+	
+	@RequestMapping("/introduce")
+	public String introduce() {
+		return "page/topbar/introduce";
+	}
+	
 }
