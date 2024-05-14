@@ -22,37 +22,26 @@ import ptithcm.entity.Product;
 @Transactional
 @Controller
 @RequestMapping("/admin/")
-public class AdminController {
+public class AdminAccountsController {
 
 	@Autowired
 	SessionFactory factory;
-
-	// product
-	@RequestMapping("products")
-	public String getAllProucts(ModelMap model) {
-
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Product";
-		Query query = session.createQuery(hql);
-		List<Product> list = query.list();
-		model.addAttribute("products", list);
-
-		return "page/admin/manageProducts";
-	}
-
+	private int page;
+	private int sizeItems;
+	private String search;
 	// account
 	@RequestMapping("accounts")
 	public String getAllAccounts(ModelMap model, HttpServletRequest request) {
-		String search =request.getParameter("search") == null ? "":request.getParameter("search") ;
-		int page =request.getParameter("page")== null ? 1 :Integer.parseInt(request.getParameter("page"));
-		int limit =2;
+		int limit = 2;
+		search =request.getParameter("search") == null ? "":request.getParameter("search") ;
+		page =request.getParameter("page")== null ? 1 :Integer.parseInt(request.getParameter("page"));
 		Session session = factory.getCurrentSession();
 		//total pages
 		String hqlTotal = "SELECT count(firstName) FROM Account a WHERE LOWER(REPLACE(CONCAT(firstName, ' ', lastName), ' ', '')) LIKE LOWER(REPLACE('%'+:search+'%', ' ', ''))";
 		Query queryTotal = session.createQuery(hqlTotal); 
 		queryTotal.setParameter("search", search);
 		Long total = (Long) queryTotal.uniqueResult();
-		int pages =(int) Math.ceil((float)total/limit);
+		 int pages =(int) Math.ceil((float)total/limit);
 		int skip = (page - 1 ) * limit;
 		// lấy ra kết quả cuối cùng sau khi tính toán phân trang
 		String hql = "FROM Account a WHERE LOWER(REPLACE(CONCAT(firstName, ' ', lastName), ' ', '')) LIKE LOWER(REPLACE('%'+:search+'%', ' ', ''))";
@@ -61,28 +50,33 @@ public class AdminController {
 		query.setMaxResults(limit); // Fetch the next 5 rows after skipping
 		query.setParameter("search", search);
 		//
-	
 		List<Account> list = query.list();
+		sizeItems = list.size();
 		model.addAttribute("accounts", list);
 		model.addAttribute("pages",pages);
 		model.addAttribute("page",page);
+		model.addAttribute("limit",limit);
 		return "page/admin/account";
 	}
 
 	@RequestMapping(value = "delete/{accountId}", params = "btnDelete")
 	public String deletAccount(RedirectAttributes redirectAttributes, @PathVariable("accountId") String accountId) {
-		System.out.println(accountId);
-		Integer result = this.deleteAccountById(this.getAccountById(accountId));
+		// tính năng xoá xong vẫn ở trang hiện tại
+		Integer result = this.deleteAccount(this.getAccountById(accountId));
 		if (result == 1) {
 			redirectAttributes.addFlashAttribute("message", "Xoá tài khoản thành công");
+			if (page > 1 && sizeItems == 1) {
+				page = page - 1;
+			}
+
 		} else {
 			redirectAttributes.addFlashAttribute("message", "Xoá tài khoản thất bại");
 		}
-		return "redirect:/admin/accounts.htm";
+		return "redirect:/admin/accounts.htm?page=" + page + "&search=" + search;
 
 	}
 
-	public Integer deleteAccountById(Account account) {
+	public Integer deleteAccount(Account account) {
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 

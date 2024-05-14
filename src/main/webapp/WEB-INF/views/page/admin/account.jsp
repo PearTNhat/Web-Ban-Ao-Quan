@@ -17,8 +17,11 @@ body {
 }
 
 .table-responsive {
-	margin: 30px 0;
+	padding-top: 10px;
 	min-width: 900px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .table-wrapper {
@@ -152,10 +155,9 @@ table.table .avatar {
 	border-bottom: 1px solid #666;
 }
 
-.page-link:focus{
-box-shadow: none;
+.page-link:focus {
+	box-shadow: none;
 }
-
 
 .page-active {
 	background-color: rgb(179, 31, 42);
@@ -197,12 +199,17 @@ box-shadow: none;
 	top: 8px;
 	left: 10px;
 }
+/*  not foubd */
+.not-found {
+	font-size: 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-basis: 100%;
+}
 </style>
-<script>
-	$(document).ready(function() {
-		$('[data-toggle="tooltip"]').tooltip();
-	});
-</script>
+
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="container-xl overflow-auto">
@@ -229,55 +236,66 @@ box-shadow: none;
 			</div>
 		</div>
 		<div>${message}</div>
-		<table class="table table-striped table-hover">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Admin</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="a" items="${accounts }" varStatus="s">
-					<tr>
-						<td>${(s.index+1)*page}</td>
-						<td><a href="#"><img
-								src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg"
-								class="avatar" alt="Avatar"> ${a.firstName} ${a.lastName }</a>
-						</td>
-						<td>${a.email }</td>
-						<td><c:choose>
-								<c:when test="${a.isAdmin ==true }">
+		<c:choose>
+			<c:when test="${accounts.size() == 0}">
+				<div class="not-found">Không tồn tại tài khoản nào</div>
+			</c:when>
 
-									<i class="bi bi-check-circle text-success"></i>
-								</c:when>
-								<c:otherwise>
-									<i class="bi bi-x-circle text-danger"></i>
-								</c:otherwise>
-							</c:choose></td>
+			<c:otherwise>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Index</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Admin</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="a" items="${accounts }" varStatus="s">
+							<tr>
+								<td>${(page-1)*limit + s.index+1}</td>
+								<td><a href="#"><img
+										src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg"
+										class="avatar" alt="Avatar"> ${a.firstName} ${a.lastName }</a>
+								</td>
+								<td>${a.email }</td>
+								<td><c:choose>
+										<c:when test="${a.isAdmin ==true }">
 
-						<td><a href="admin/delete/${a.accountId}.htm?btnDelete"
-							class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		<!-- pagination -->
-		<nav class="d-flex justify-content-center border-top py-4"
-			aria-label="Page navigation">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span> &laquo; </span>
-				</a></li>
-				<c:forEach begin="1" end="${pages}" varStatus="s">
-					<li class="page-item"><a
-						class="page-link ${s.index == page ? 'page-active' : ''}" href="#">${s.index}</a></li>
-				</c:forEach>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> &raquo; </a></li>
-			</ul>
-		</nav>
+											<i class="bi bi-check-circle text-success"></i>
+										</c:when>
+										<c:otherwise>
+											<i class="bi bi-x-circle text-danger"></i>
+										</c:otherwise>
+									</c:choose></td>
+
+								<td><a href="admin/delete/${a.accountId}.htm?btnDelete"
+									class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<!-- pagination -->
+				<nav class="d-flex justify-content-center border-top py-4"
+					aria-label="Page navigation">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span> &laquo; </span>
+						</a></li>
+						<c:forEach begin="1" end="${pages}" varStatus="s">
+							<li class="page-item"><a
+								class="page-link ${s.index == page ? 'page-active' : ''}"
+								href="#">${s.index}</a></li>
+						</c:forEach>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> &raquo; </a></li>
+					</ul>
+				</nav>
+			</c:otherwise>
+		</c:choose>
+
+
 
 	</div>
 </div>

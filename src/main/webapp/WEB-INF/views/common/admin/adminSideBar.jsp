@@ -4,7 +4,7 @@
 <body>
 	<div class="wrapper vh-100">
 		<aside id="sidebar" class="expand">
-			<div class="d-flex">
+			<div class="d-flex" style="margin-top: 12px;">
 				<button class="toggle-btn" type="button">
 					<i class="lni lni-grid-alt"></i>
 				</button>
@@ -13,8 +13,8 @@
 				</div>
 			</div>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item"><a href="dash-board.htm" class="sidebar-link">
-						<i class="bi bi-speedometer2"></i> <span>Dashboard</span>
+				<li class="sidebar-item"><a href="dash-board.htm"
+					class="sidebar-link"> <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
 				</a></li>
 				<li class="sidebar-item"><a href="#"
 					class="sidebar-link collapsed has-dropdown"
