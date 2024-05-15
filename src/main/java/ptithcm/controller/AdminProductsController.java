@@ -94,6 +94,12 @@ public class AdminProductsController {
 	    }
 	    return 1;
 	}
+	
+	@RequestMapping("/handle-product")
+	public String handleProduct() {
+		return "page/admin/handleProduct";
+	}
+	
 
 /*	public Product getProductById(String id) {
 		Session session = factory.getCurrentSession();
