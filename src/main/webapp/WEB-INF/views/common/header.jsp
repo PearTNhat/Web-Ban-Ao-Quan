@@ -142,43 +142,7 @@ table.cart-table a.cart-link:hover {
 
 </style>
 
-<script>
-    function open_ao(){
-        var js_ao = document.querySelector('.nav-ao');
-        if (js_ao.classList.contains("open-max-1000")){
-            js_ao.classList.remove("open-max-1000");
-        } else{
-            js_ao.classList.add("open-max-1000")
-        }
-    }
-    function open_quan(){
-        var js_quan = document.querySelector('.nav-quan');
-        if (js_quan.classList.contains("open-max-1000")){
-            js_quan.classList.remove("open-max-1000");
-        } else{
-            js_quan.classList.add("open-max-1000")
-        }
-    }
-    function open_search(){
-        var js_search = document.querySelector('.act-search');
-        if (js_search.classList.contains("open")){
-            js_search.classList.remove("open");
-        } else{
-            setTimeout(() => {
-                js_search.classList.add("open");
-            }, 10);
-        }
-        
-    }
-    window.addEventListener('click', function(event){
-        if (event.target.className === 'act-search open') return;
-        var js_search = document.querySelector('.act-search');
-
-        if (js_search.classList.contains("open")){
-            js_search.classList.remove("open");
-        }
-    });
-    
+<script>    
     //review anh
 
         $(document).on("change", ".uploadFile", function () {

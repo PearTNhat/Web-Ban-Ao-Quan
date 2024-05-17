@@ -12,10 +12,15 @@ import ptithcm.dao.ProductDao;
 import ptithcm.entity.Product;
 
 @Controller
+<<<<<<< HEAD
 @RequestMapping("/admin")
+=======
+@RequestMapping("/admin/products/")
+>>>>>>> 5f22a41db42750422c1c1ac2a21a5ae94437b308
 public class AdminProductsController {
 	
 	@Autowired
+<<<<<<< HEAD
 	private ProductDao productDao;
 	
 	@RequestMapping("/products")
@@ -33,11 +38,48 @@ public class AdminProductsController {
 		model.addAttribute("search", search);
 		model.addAttribute("totalPage", totalPage);
 		
+=======
+	SessionFactory factory;
+	private int page;
+	private int sizeItems;
+	private String search;
+	@RequestMapping("")
+	public String getAllAccounts(ModelMap model, HttpServletRequest request) {
+		int limit = 10;
+		search =request.getParameter("search") == null ? "":request.getParameter("search") ;
+		page =request.getParameter("page")== null ? 1 :Integer.parseInt(request.getParameter("page"));
+		Session session = factory.getCurrentSession();
+		//total pages
+		String hqlTotal = "SELECT count(name) FROM Product a WHERE LOWER(REPLACE(name, ' ', '')) LIKE LOWER(REPLACE('%'+:search+'%', ' ', ''))";
+		Query queryTotal = session.createQuery(hqlTotal); 
+		queryTotal.setParameter("search", search);
+		Long total = (Long) queryTotal.uniqueResult();
+		 int pages =(int) Math.ceil((float)total/limit);
+		int skip = (page - 1 ) * limit;
+		// lấy ra kết quả cuối cùng sau khi tính toán phân trang
+		String hql = "FROM Product WHERE LOWER(REPLACE(name, ' ', '')) LIKE LOWER(REPLACE('%'+:search+'%', ' ', ''))";
+		Query query = session.createQuery(hql);
+		query.setFirstResult(skip); 
+		query.setMaxResults(limit); // Fetch the next 5 rows after skipping
+		query.setParameter("search", search);
+		//
+		List<Product> list = query.list();
+		sizeItems = list.size();
+		model.addAttribute("products", list);
+		model.addAttribute("pages",pages);
+		model.addAttribute("page",page);
+		model.addAttribute("limit",limit);
+>>>>>>> 5f22a41db42750422c1c1ac2a21a5ae94437b308
 		return "page/admin/products";
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping("/handle-product")
 	public String productForm() {
+=======
+	@RequestMapping("handle-product")
+	public String handleProduct() {
+>>>>>>> 5f22a41db42750422c1c1ac2a21a5ae94437b308
 		return "page/admin/handleProduct";
 	}
 }

@@ -34,7 +34,11 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+<<<<<<< HEAD
 		p:url="jdbc:sqlserver://26.62.123.21; Database=DBWEB"
+=======
+		p:url="jdbc:sqlserver://26.62.123.121:1433; Database=DBWEB"
+>>>>>>> 5f22a41db42750422c1c1ac2a21a5ae94437b308
 		p:username="sa" p:password="12">
 	</bean>
 
@@ -57,6 +61,11 @@
 		p:sessionFactory-ref="sessionFactory" />
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
+		
+	<!-- DAO -->
+	<bean id="AccountDao" class="ptithcm.dao.impl.AccountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
