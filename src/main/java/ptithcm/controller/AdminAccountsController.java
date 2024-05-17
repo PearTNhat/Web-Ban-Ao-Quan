@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ptithcm.dao.AccountDao;
+import ptithcm.dao.impl.AccountDaoImpl;
 import ptithcm.entity.Account;
 import ptithcm.entity.Product;
 
@@ -26,6 +28,8 @@ public class AdminAccountsController {
 
 	@Autowired
 	SessionFactory factory;
+	@Autowired
+	private AccountDao accountDao;
 	private int page;
 	private int sizeItems;
 	private String search;
@@ -59,10 +63,11 @@ public class AdminAccountsController {
 		return "page/admin/account";
 	}
 
-	@RequestMapping(value = "delete/{accountId}", params = "btnDelete")
-	public String deletAccount(RedirectAttributes redirectAttributes, @PathVariable("accountId") String accountId) {
+	@RequestMapping(value = "accounts/delete/{accountId}", params = "btnDelete")
+	public String deletAccount(RedirectAttributes redirectAttributes, @PathVariable("accountId") Integer accountId) {
+		System.out.println( accountId);
 		// tính năng xoá xong vẫn ở trang hiện tại
-		Integer result = this.deleteAccount(this.getAccountById(accountId));
+		Integer result = accountDao.deleteAccount(accountDao.getAccountById(accountId));
 		if (result == 1) {
 			redirectAttributes.addFlashAttribute("message", "Xoá tài khoản thành công");
 			if (page > 1 && sizeItems == 1) {
@@ -76,29 +81,4 @@ public class AdminAccountsController {
 
 	}
 
-	public Integer deleteAccount(Account account) {
-		Session session = factory.openSession();
-		Transaction t = session.beginTransaction();
-
-		try {
-			session.delete(account);
-			t.commit();
-		} catch (Exception e) {
-			t.rollback();
-			System.out.println("Error delete " + e.getMessage());
-			return 0;
-		} finally {
-			session.close();
-		}
-		return 1;
-	}
-
-	public Account getAccountById(String id) {
-		Session session = factory.getCurrentSession();
-		String hql = "FROM Account where accountId = :id";
-		Query query = session.createQuery(hql);
-		query.setParameter("id", id);
-		Account list = (Account) query.list().get(0);
-		return list;
-	}
 }

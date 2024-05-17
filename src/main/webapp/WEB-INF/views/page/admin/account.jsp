@@ -271,7 +271,7 @@ table.table .avatar {
 										</c:otherwise>
 									</c:choose></td>
 
-								<td><a href="admin/delete/${a.accountId}.htm?btnDelete"
+								<td><a href="admin/accounts/delete/${a.accountId}.htm?btnDelete"
 									class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a></td>
 							</tr>
 						</c:forEach>

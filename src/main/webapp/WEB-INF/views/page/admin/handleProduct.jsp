@@ -6,12 +6,12 @@
 <link rel="stylesheet" href="resources/css/admin/handleProduct.css">
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<div class="f-container mt-4 ">
+<div class="f-container" style="flex: 1; overflow:auto">
 	<form>
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-sm-6 col-md-4 col-xl-3 imgUp ">
-					<div class="img-wrapper ">
+					<div class="img-wrapper">
 						<div class="imagePreview"></div>
 						<label class="btn btn-primary"> <i class="bi bi-upload"></i>
 							<input type="file" class="uploadFile img" value="Upload Photo"
@@ -24,11 +24,19 @@
 			</div>
 			<!-- row -->
 		</div>
-		<div class="mb-3">
-			<label for="name" class="form-label">Tên</label> <input type="name"
-				class="form-control" id="name" aria-describedby="emailHelp">
+		<div class="mb-3 d-flex gap-4">
+			<div class="">
+				<label for="name" class="form-label">Tên</label> <input type="text"
+					class="form-control" id="name">
+			</div>
+			<div class="">
+				<label for="price" class="form-label">Price</label> <input
+					type="text" class="form-control" id="name">
+			</div>
 		</div>
-		<textarea id="editor" name="content"></textarea>
+		<div class="mb-3">
+			<textarea id="editor" name="content"></textarea>
+		</div>
 		<div class="mb-3 d-flex gap-4">
 			<div class="form-group">
 				<label for="quantity" class="form-label">Số lượng</label> <input
@@ -44,16 +52,14 @@
 
 			</div>
 		</div>
-		<!-- Loai sản phẩm -->
-		<div class="">
+		<div class="mb-3 ">
 			<label class="form-label">Chọn loại sản phẩm</label> <select
 				class="form-select" aria-label="select-type">
 				<option value="ao" selected>Áo</option>
 				<option value="quan">Quần</option>
 			</select>
 		</div>
-		<!-- size -->
-		<div class="">
+		<div class="mb-3 ">
 			<label class=" form-label">Chọn size</label>
 			<div class="d-flex gap-4 flex-wrap">
 				<div class="form-check form-switch">
@@ -75,14 +81,14 @@
 			</div>
 		</div>
 
-
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary rounded-1"
+			style="width: 195px; margin: auto;">Lưu</button>
 	</form>
 </div>
 </div>
 <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-<script src="resources/js/commonJS.js"></script>
+<script src="resources/js/handleProduct.js"></script>
 </body>
 </html>

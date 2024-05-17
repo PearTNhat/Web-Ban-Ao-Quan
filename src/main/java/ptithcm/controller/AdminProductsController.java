@@ -21,7 +21,7 @@ import ptithcm.entity.Product;
 
 @Transactional
 @Controller
-@RequestMapping("/admin/")
+@RequestMapping("/admin/products/")
 public class AdminProductsController {
 
 	@Autowired
@@ -29,7 +29,7 @@ public class AdminProductsController {
 	private int page;
 	private int sizeItems;
 	private String search;
-	@RequestMapping("products")
+	@RequestMapping("")
 	public String getAllAccounts(ModelMap model, HttpServletRequest request) {
 		int limit = 10;
 		search =request.getParameter("search") == null ? "":request.getParameter("search") ;
@@ -95,7 +95,7 @@ public class AdminProductsController {
 	    return 1;
 	}
 	
-	@RequestMapping("/handle-product")
+	@RequestMapping("handle-product")
 	public String handleProduct() {
 		return "page/admin/handleProduct";
 	}
