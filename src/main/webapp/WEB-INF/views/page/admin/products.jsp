@@ -12,7 +12,21 @@
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<div class="container-xl overflow-auto">
+<div class="main">
+	<nav class="navbar bg-white">
+	  <div class="container-fluid">
+	    <div class="navbar-brand ms-4">
+	      <div class="fs-5">
+	      	<span class="text-secondary">
+	      		<i class="bi bi-box"></i>
+	      		Products /
+	      	</span>
+	      	<a href="admin/products.htm">Products view</a>
+	      </div>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container-xl overflow-auto">
 	<div class="table-responsive">
 		<div class="table-wrapper position-md-relative">
 			<div class="table-title">
@@ -22,12 +36,14 @@
 					</div>
 					<div class="col-7">
 						<div class="d-flex align-items-center justify-content-end ">
-							<div class="search-box d-flex align-items-center">
-								<i class="material-icons">&#xE8B6;</i> <input type="text"
-									class="form-control" id="search-input" placeholder="Tìm kiếm tên sản phẩm&hellip; ">
-							</div>
-							<a href="#" class="btn btn-success" id="search"><i
-								class="material-icons">&#xE147;</i> <span>Search</span></a>
+							
+							<form action="admin/products.htm">
+								<div class="search-box d-flex align-items-center">
+									<i class="material-icons">&#xE8B6;</i> <input name="search" value="${search}" type="text"
+										class="form-control" id="search-input" placeholder="Tìm kiếm tên sản phẩm&hellip; ">
+								</div>
+								<button type="submit" class="btn btn-success" id="search">Search</button>
+							</form>
 						</div>
 					</div>
 
@@ -85,16 +101,42 @@
 					<nav class="d-flex justify-content-center border-top py-4"
 					aria-label="Page navigation">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span> &laquo; </span>
-						</a></li>
-						<c:forEach begin="1" end="${pages}" varStatus="s">
-							<li class="page-item"><a
-								class="page-link ${s.index == page ? 'page-active' : ''}"
-								href="#">${s.index}</a></li>
+						<c:choose>
+							<c:when test="${empty search}">
+								<li class="page-item"><a class="page-link ${page eq 1 ? 'disabled' : ''}" href="admin/products.htm?page=${page - 1}"
+									aria-label="Previous"> <span> &laquo; </span>
+								</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link ${page eq 1 ? 'disabled' : ''}" href="admin/products.htm?page=${page - 1}&search=${search}"
+									aria-label="Previous"> <span> &laquo; </span>
+								</a></li>
+							</c:otherwise>
+						</c:choose>
+						<c:forEach begin="1" end="${totalPage}" varStatus="s">
+							<c:choose>
+								<c:when test="${empty search}">
+									<li class="page-item"><a
+										class="page-link ${s.index == page ? 'page-active' : ''}"
+										href="admin/products.htm?page=${s.index}">${s.index}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a
+										class="page-link ${s.index == page ? 'page-active' : ''}"
+										href="admin/products.htm?page=${s.index}&search=${search}">${s.index}</a></li>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> &raquo; </a></li>
+						<c:choose>
+							<c:when test="${empty search}">
+								<li class="page-item"><a class="page-link ${page eq totalPage ? 'disabled' : ''}" href="admin/products.htm?page=${page + 1}"
+									aria-label="Next"> &raquo; </a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item"><a class="page-link ${page eq totalPage ? 'disabled' : ''}" href="admin/products.htm?page=${page + 1}&search=${search}"
+									aria-label="Next"> &raquo; </a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</nav>
 			</c:otherwise>
@@ -102,50 +144,6 @@
 	</div>
 </div>
 </div>
-<script>
-const search = document.querySelector('#search');
-const searchInput = document.querySelector('#search-input');
-const pageElement = document.querySelectorAll('a.page-link');
-
-search.addEventListener('click', handleSubmit);
-function handleSubmit(e) {
-	search.href = "admin/products.htm?page=1&search=" + searchInput.value;
-}
-var url = new URL(window.location.href);
-// Get the search parameter value
-var searchValue = url.searchParams.get("search") || "";
-searchInput.value = searchValue
-/* pagination */
-pageElement.forEach((element, index) => {
-	element.addEventListener("click", (e) => {
-    const url = new URL(window.location.href);
-    const searchValue = url.searchParams.get("search") || "";
-    const pageValue = url.searchParams.get("page") || 1;
-    //prev
-    if (index === 0) {
-      if (pageValue <= 1) {
-	   	e.preventDefault();
-        return;
-      }
-      element.href ="admin/products.htm?page="+${page-1}+"&search="+searchValue;
-    }
-    // next
-    else if (index === pageElement.length - 1) {
-      if(pageValue >= ${pages}){
-    	 e.preventDefault();
-        return;
-      }
-      element.href = "admin/products.htm?page="+${page+1}+"&search="+searchValue;
- 
-    }
-    else  {
-	    const clickPage = element.textContent;
-	    element.href = "admin/products.htm?page="+clickPage+"&search="+searchValue;
-    	
-    }
-
-	});
-});
-</script>
+</div>
 </body>
 </html>

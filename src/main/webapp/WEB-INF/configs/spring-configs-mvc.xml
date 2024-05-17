@@ -34,7 +34,7 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://192.168.1.103:1433; Database=DBWEB"
+		p:url="jdbc:sqlserver://26.62.123.21; Database=DBWEB"
 		p:username="sa" p:password="12">
 	</bean>
 
@@ -74,4 +74,9 @@
 			</util:map>
 		</constructor-arg>
 	</bean>
+
+	<bean id="productDao" class="ptithcm.dao.impl.ProductDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
 </beans>

@@ -95,7 +95,7 @@
 									style="width: 0px; height: 0px; overflow: hidden;" />
 								</label>
 							</div>
-							 <div class="delete-img">Xoá</div>
+							 <div class="btn btn-sm btn-danger mx-4 my-3 rounded-pill">Xoá</div>
 						</div>
 					</div>
 				</form>

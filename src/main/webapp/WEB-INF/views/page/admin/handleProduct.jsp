@@ -6,7 +6,23 @@
 <link rel="stylesheet" href="resources/css/admin/handleProduct.css">
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<div class="f-container mt-4 ">
+<div class="main">
+	<nav class="navbar bg-white">
+	  <div class="container-fluid">
+	    <div class="navbar-brand ms-4">
+	      <div class="fs-5">
+	      	<span>
+	      		<a href="admin/products.htm" class="link-secondary">
+	      			<i class="bi bi-box"></i>
+	      			Products /
+	      		</a>
+	      	</span>
+	      	<a href="admin/handle-product.htm">Add product</a>
+	      </div>
+	    </div>
+	  </div>
+	</nav>
+	<div class="f-container mt-4 ">
 	<form>
 		<div class="container">
 			<div class="row">
@@ -78,6 +94,7 @@
 
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
+</div>
 </div>
 </div>
 <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
