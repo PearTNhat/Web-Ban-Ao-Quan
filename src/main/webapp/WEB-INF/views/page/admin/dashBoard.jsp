@@ -5,9 +5,19 @@
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="main">
+	<nav class="navbar bg-white">
+	  <div class="container-fluid">
+	    <div class="navbar-brand ms-4">
+	      <div class="fs-5">
+	      	<a href="admin/dashboard.htm">
+		      	<i class="bi bi-speedometer2"></i> Dashboard	      	
+	      	</a>
+	      </div>
+	    </div>
+	  </div>
+	</nav>
 	<div class="dashboard p-3">
-		<div class="fs-4">Dashboard</div>
-		<div class="lead fw-bold text-success my-2 fs-6 border-bottom pb-2">Doanh thu tháng
+		<div class="lead fw-bold text-success my-2 ms-3 fs-6 border-bottom pb-2">Doanh thu tháng
 			hiện tại</div>
 		<div class="row justify-content-center gap-4 my-5">
 			<div class="col-sm-12 col-md-3 border rounded p-2">

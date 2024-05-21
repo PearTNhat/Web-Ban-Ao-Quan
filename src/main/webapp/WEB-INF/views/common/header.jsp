@@ -140,17 +140,6 @@ table.cart-table a.cart-link:hover {
 	border-radius: 50%;
 }
 
-.delete-img {
-	margin: auto;
-	cursor: pointer;
-	background-color: red;
-	text-align: center;
-	color: white;
-	margin-top: 6px;
-	width: 60px;
-	height: 27px;
-	border-radius: 4px;
-}
 </style>
 
 <script>    
