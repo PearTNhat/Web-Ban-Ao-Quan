@@ -63,7 +63,7 @@ public class AdminAccountsController {
 		return "page/admin/account";
 	}
 
-	@RequestMapping(value = "accounts/delete/{accountId}", params = "btnDelete")
+	@RequestMapping(value = "accounts/{accountId}", params = "btnDelete")
 	public String deletAccount(RedirectAttributes redirectAttributes, @PathVariable("accountId") Integer accountId) {
 		System.out.println( accountId);
 		// tính năng xoá xong vẫn ở trang hiện tại
