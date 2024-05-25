@@ -48,7 +48,8 @@ public class AdminProductsController {
 				System.out.println(file.getOriginalFilename());
 			}
 		}
-
 		return "page/admin/handleProduct";
+
 	}
+	
 }

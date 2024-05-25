@@ -373,6 +373,24 @@
         .user-feature li:hover {
             background-color: #ededed;
         }
+         .thumbnails {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .thumbnails a {
+            flex: 1 1 calc(20% - 10px);
+            max-width: calc(20% - 10px);
+            margin-bottom: 10px;
+        }
+
+        .thumbnails img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         @media (min-width: 995px) {
 

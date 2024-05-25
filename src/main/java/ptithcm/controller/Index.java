@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class Index {
-
+//https://localhost:8080/DemoSpingMVC/
 	@RequestMapping("/")
 	public String index(ModelMap model) {
 		return "page/home";	
 	}
+	
 	public String dashBoard() {
 		return "page/admin/dashBoard";
 	}
@@ -59,4 +60,8 @@ public class Index {
 		return "page/topbar/introduce";
 	}
 	
+	@RequestMapping("/product/id")
+	public String productDetail() {
+		return "page/product/product-detail";
+	}
 }

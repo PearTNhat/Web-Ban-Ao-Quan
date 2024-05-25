@@ -84,9 +84,9 @@
                     <div class="user-container">
                         <ul class="user-feature">
                             <li class="">
-                                <a href="">Thông tin tài khoản</a>
+                                <a href="profile/info.htm">Thông tin tài khoản</a>
                             </li>
-                            <li class=""><a href="">Quản lí</a></li>
+                            <li class=""><a href="profile/info.htm">Quản lí</a></li>
                             <li class="border border-t-1 d-flex align-items-center gap-2">
                                 <a href="" class="d-block">
                                     Đăng xuất

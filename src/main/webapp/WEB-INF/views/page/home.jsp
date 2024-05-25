@@ -14,7 +14,7 @@
             <div class="lead fw-bold">THỜI TRANG HOT NHẤT</div>
             <div class="row">
                 <div class="col-6 col-md-4 col-lg-3 my-2">
-                    <a href="" class="text-decoration-none">
+                    <a href="product/id.htm" class="text-decoration-none">
                         <i class="fas fa-shopping-cart"></i>
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_small-10932.JPG" alt="" class="img-fluid">
                         <img src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
