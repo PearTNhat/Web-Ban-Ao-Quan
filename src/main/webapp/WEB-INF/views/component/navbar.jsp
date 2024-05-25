@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
  <nav class="navbar sticky-top navbar-expand-lg navbar-light container-fluid bg-white">
         <div class="container-xl ">
-            <a class="navbar-brand" href="#"> <img src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
+            <a class="navbar-brand" href=".htm"> <img src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
                     height="60" class="d-inline-block align-text-top">
             </a>
             <div class="d-flex align-items-center gap-4 order-lg-3">
@@ -102,7 +102,12 @@
                     <li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN CHẠY</a></li>
                     <li class="nav-item"><a onclick="open_ao()" class="nav-link" href="#">ÁO NAM</a>
                         <ul class="nav-ao">
-                            <li>Áo sơ mi</li>
+                            <li>
+                            <a href="">
+                            
+                            Áo sơ mi
+                            </a>
+                            </li>
                             <li>Áo thun</li>
                             <li>Áo polo</li>
                             <li>Áo Khoác</li>

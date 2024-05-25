@@ -144,7 +144,6 @@ table.cart-table a.cart-link:hover {
 
 <script>    
     //review anh
-
         $(document).on("change", ".uploadFile", function () {
             var uploadFile = $(this);
             var files = !!this.files ? this.files : [];

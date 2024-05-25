@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../common/header.jsp" %>
+<%@ include file="../common/header.jsp"%>
 <body>
 	<%@ include file="../component/topbar.jsp"%>
 	<%@ include file="../component/navbar.jsp"%>
@@ -25,64 +25,21 @@
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-lg-4 col-6 ">
-						<a href="" class="text-decoration-none"> <img
+						<a href="" class="text-decoration-none"> <i
+							class="fas fa-shopping-cart"></i> <img
+							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_small-10932.JPG"
+							alt="" class="img-fluid"> <img
 							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
 							alt="" class="img-fluid"> <img
 							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
 							alt="" class="my-1" width=20%>
 						</a> <a href=""
 							class="link-underline link-underline-opacity-0 link-dark d-block small">Áo
-							Vest NAZAFU Màu xám da bò </a>
-						<p class="price text-danger fw-medium small">
+							Vest NAZAFU Màu xám da bò</a>
+						<p class="price text-danger fw-semibold small">
 							675.000 <span
 								class="text-decoration-line-through small text-secondary">1.350.000</span>
 						</p>
-
-					</div>
-					<div class="col-lg-4 col-6 ">
-						<a href="" class="text-decoration-none"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="img-fluid"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="my-1" width=20%>
-						</a> <a href=""
-							class="link-underline link-underline-opacity-0 link-dark d-block small">Áo
-							Vest NAZAFU Màu xám da bò </a>
-						<p class="price text-danger fw-medium small">
-							675.000 <span
-								class="text-decoration-line-through small text-secondary">1.350.000</span>
-						</p>
-
-					</div>
-					<div class="col-lg-4 col-6 ">
-						<a href="" class="text-decoration-none"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="img-fluid"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="my-1" width=20%>
-						</a> <a href=""
-							class="link-underline link-underline-opacity-0 link-dark d-block small">Áo
-							Vest NAZAFU Màu xám da bò </a>
-						<p class="price text-danger fw-medium small">
-							675.000 <span
-								class="text-decoration-line-through small text-secondary">1.350.000</span>
-						</p>
-
-					</div>
-					<div class="col-lg-4 col-6 ">
-						<a href="" class="text-decoration-none"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="img-fluid"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="my-1" width=20%>
-						</a> <a href=""
-							class="link-underline link-underline-opacity-0 link-dark d-block small">Áo
-							Vest NAZAFU Màu xám da bò </a>
-						<p class="price text-danger fw-medium small">
-							675.000 <span
-								class="text-decoration-line-through small text-secondary">1.350.000</span>
-						</p>
-
 					</div>
 					<nav class="d-flex justify-content-center border-top py-4"
 						aria-label="Page navigation">

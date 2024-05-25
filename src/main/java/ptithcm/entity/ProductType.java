@@ -7,18 +7,26 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 @Entity
-public class Color {
+public class ProductType {
 	@Id
-	@Column(name = "colorId")
-	private String colorId;
+	@Column(name = "typeId")
+	private int typeId;
+	
+	
+	
 	@Column(name="name")
 	private String name;
-	public String getColorId() {
-		return colorId;
+	
+	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+	private Collection<TypeDetail> types;
+	
+	public int getTypeId() {
+		return typeId;
 	}
-	public void setColorId(String colorId) {
-		this.colorId = colorId;
+	public void setTypeId(int typeId) {
+		this.typeId = typeId;
 	}
 	public String getName() {
 		return name;
@@ -26,6 +34,4 @@ public class Color {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-
 }

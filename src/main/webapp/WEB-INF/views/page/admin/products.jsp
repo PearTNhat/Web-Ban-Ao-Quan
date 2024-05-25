@@ -75,8 +75,8 @@
 										src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
 										class="avatar" alt="Avatar">${p.name}</a></td>
 
-								<td>${p.quantity }</td>
-								<td><fmt:formatNumber value="${p.price }" type="currency" /></td>
+								<td>123</td>
+								<td><fmt:formatNumber value="999" type="currency" /></td>
 
 								<td><fmt:formatNumber value="${ p.discount}" type="percent" /></td>
 								<td>

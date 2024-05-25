@@ -9,7 +9,7 @@ $(".imgAdd").click(function() {
         <div class="imagePreview"></div>
         <label class="btn btn-primary">
           <i class="bi bi-upload"></i>
-          <input type="file" class="uploadFile img" value="Upload Photo"
+          <input type="file" class="uploadFile img" name="files" value="Upload Photo"
             style="width: 0px;height: 0px;overflow: hidden;" />
         </label>
         <i class="bi bi-x del"></i>

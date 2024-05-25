@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="resources/css/admin/handleProduct.css">
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<<<<<<< HEAD
-<div class="main">
+
+<div class="">
 	<nav class="navbar bg-white">
 	  <div class="container-fluid">
 	    <div class="navbar-brand ms-4">
@@ -24,17 +24,16 @@
 	  </div>
 	</nav>
 	<div class="f-container mt-4 ">
-=======
+
 <div class="f-container" style="flex: 1; overflow:auto">
->>>>>>> 5f22a41db42750422c1c1ac2a21a5ae94437b308
-	<form>
+	<form action="admin/products/add-product.htm" method="post" enctype="multipart/form-data" >
 		<div class="container">
 			<div class="row">
 				<div class="col-12 col-sm-6 col-md-4 col-xl-3 imgUp ">
 					<div class="img-wrapper">
 						<div class="imagePreview"></div>
 						<label class="btn btn-primary"> <i class="bi bi-upload"></i>
-							<input type="file" class="uploadFile img" value="Upload Photo"
+							<input type="file" class="uploadFile img" name="files" value="Upload Photo"
 							style="width: 0px; height: 0px; overflow: hidden;" />
 						</label>
 					</div>
