@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
  <nav class="navbar sticky-top navbar-expand-lg navbar-light container-fluid bg-white">
         <div class="container-xl ">
-            <a class="navbar-brand" href="#"> <img src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
+            <a class="navbar-brand" href=".htm"> <img src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
                     height="60" class="d-inline-block align-text-top">
             </a>
             <div class="d-flex align-items-center gap-4 order-lg-3">
@@ -84,9 +84,9 @@
                     <div class="user-container">
                         <ul class="user-feature">
                             <li class="">
-                                <a href="">Thông tin tài khoản</a>
+                                <a href="profile/info.htm">Thông tin tài khoản</a>
                             </li>
-                            <li class=""><a href="">Quản lí</a></li>
+                            <li class=""><a href="profile/info.htm">Quản lí</a></li>
                             <li class="border border-t-1 d-flex align-items-center gap-2">
                                 <a href="" class="d-block">
                                     Đăng xuất
