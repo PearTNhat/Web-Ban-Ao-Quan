@@ -39,22 +39,16 @@ public class AdminProductsController {
 		return "page/admin/products";
 	}
 
-	@RequestMapping(value ="/products/add-product", method = RequestMethod.GET)
+	@RequestMapping(value = "/products/add-product", method = RequestMethod.GET)
 	public String productForm(Model model) {
-		try {
-			model.addAttribute("image", new Image());
-//			cloudinary.uploader().destroy("WebAoQuan/Products/anime.jpg", ObjectUtils.emptyMap()); // xoá ảnh
-			return "page/upload-image";
-			
-		} catch (Exception e) {
-			System.out.println("Xoa that baij");
-			// TODO: handle exception
-		}
+
+		model.addAttribute("product-detail", new ProductDetail());
 		return "page/admin/handleProductDetail";
 	}
 
-	@RequestMapping(value ="/products/add-product",method = RequestMethod.POST)
-	public String addProduct(@ModelAttribute("product-detail") ProductDetail pd,@RequestParam("files") List<MultipartFile> files) {
+	@RequestMapping(value = "/products/add-product", method = RequestMethod.POST)
+	public String addProduct(@ModelAttribute("product-detail") ProductDetail pd,
+			@RequestParam("files") List<MultipartFile> files) {
 
 		for (MultipartFile file : files) {
 			if (!file.isEmpty()) {
@@ -64,5 +58,5 @@ public class AdminProductsController {
 		return "page/admin/handleProductDetail";
 
 	}
-	
+
 }

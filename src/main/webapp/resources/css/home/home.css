@@ -449,25 +449,9 @@
             }
 
             .nav-ao ul {
-                /* width: 200px; */
                 width: 100%;
             }
 
-            .navbar-shopping {
-                /* position: absolute;
-                right: 0;
-                margin-right: calc(7% + 80px);
-                top: 20px;
-                zoom: 1.2; */
-            }
-
-            .navbar-search {
-                /* position: absolute;
-                right: 0;
-                top: 20px;
-                margin-right: calc(7% + 130px);
-                zoom: 1.2; */
-            }
 
             .navbar-nav li:nth-child(2):hover a,
             .navbar-nav li:nth-child(3):hover a {
@@ -489,3 +473,4 @@
                 width: 100%;
             }
         }
+        

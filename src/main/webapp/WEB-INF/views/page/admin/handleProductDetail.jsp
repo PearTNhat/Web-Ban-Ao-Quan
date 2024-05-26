@@ -27,7 +27,7 @@ form {
 	</nav>
 	<div class="f-container mt-4 ">
 		<div class="f-container" style="flex: 1; overflow: auto">
-			<form>
+			<form method="post" action="admin/products/add-product.htm">
 				<div class="container">
 					<div class="row justify-content-center">
 						<div class="col-12 col-sm-6 col-md-4 col-xl-3 imgUp ">
@@ -45,27 +45,34 @@ form {
 					<!-- row -->
 				</div>
 
-				<div class="mb-3 text-center">
-					<span>Tên: </span> <span>Some thing</span>
+				<div class="mb-3 d-flex gap-4">
+					<div>
+						<span>ID: </span> <span value="123"
+							path="productId">123</span>
+					</div>
+					<div>
+						<span>Tên: </span> <span>Some thing</span>
+					</div>
+
 				</div>
 				<div class="mb-3  d-flex gap-4 justify-content-center">
 					<div>
 						<label for="quantity" class="form-label">Số lượng</label> <input
-							type="quantity" class="form-control" id="quantity">
+							type="number" class="form-control" id="quantity" path="quantity">
 					</div>
 					<div>
 						<label for="price" class="form-label">Price</label> <input
-							type="number" class="form-control" id="name">
+							type="number" class="form-control" id="name" path="price">
 					</div>
 				</div>
 				<div class="mb-3 d-flex gap-4 justify-content-center">
 					<div class="">
 						<label for="color" class="form-label">Màu sắc</label> <input
-							type="text" class="form-control" id="color">
+							type="text" class="form-control" id="color" path="color">
 					</div>
 					<div class="">
-						<label for="size" class="form-label">Size</label> <input
-							type="text" class="form-control" id="size">
+						<label for="size" class="form-label">Kích cở</label> <input
+							type="text" class="form-control" id="size" path="size">
 
 					</div>
 				</div>
