@@ -65,5 +65,4 @@ public class Index {
 	public String introduce() {
 		return "page/topbar/introduce";
 	}
-	
 }
