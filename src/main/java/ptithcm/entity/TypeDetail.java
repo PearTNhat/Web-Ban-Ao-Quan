@@ -23,6 +23,8 @@ public class TypeDetail {
 	@JoinColumn(name="typeId")
 	private ProductType type;
 	
+	
+
 	//product
 	@OneToMany(mappedBy="type", fetch=FetchType.EAGER) // mappedBy = ten bien ben product  (1 - n)
 	private Collection<Product> product;
@@ -35,7 +37,13 @@ public class TypeDetail {
 		this.product = product;
 	}
 
-	
+	public ProductType getType() {
+		return type;
+	}
+
+	public void setType(ProductType type) {
+		this.type = type;
+	}
 
 	public String getTypeDeatilId() {
 		return typeDeatilId;
