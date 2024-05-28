@@ -7,10 +7,12 @@ import javax.transaction.Transactional;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ptithcm.dao.ProductDao;
 import ptithcm.entity.Product;
+import ptithcm.entity.ProductDetail;
 
 public class ProductDaoImpl implements ProductDao {
 	private SessionFactory sessionFactory;
@@ -34,6 +36,7 @@ public class ProductDaoImpl implements ProductDao {
 		return productList;
 	}
 
+	
 	@Transactional
 	public Long countProducts(String search) {
 		Session session = sessionFactory.getCurrentSession();
@@ -43,5 +46,22 @@ public class ProductDaoImpl implements ProductDao {
 		query.setParameter("search", search);
 
 		return (Long) query.uniqueResult();
+	}
+
+	@Override
+	public Boolean addProductDetail(ProductDetail pd) {
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(pd);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
 	}
 }

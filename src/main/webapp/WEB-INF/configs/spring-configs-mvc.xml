@@ -59,8 +59,14 @@
 		transaction-manager="transactionManager" />
 		
 	<!-- DAO -->
-	<bean id="AccountDao" class="ptithcm.dao.impl.AccountDaoImpl">
+	<bean id="accountDao" class="ptithcm.dao.impl.AccountDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productDao" class="ptithcm.dao.impl.ProductDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
@@ -78,10 +84,6 @@
 				<entry key="secure" value="true" />
 			</util:map>
 		</constructor-arg>
-	</bean>
-
-	<bean id="productDao" class="ptithcm.dao.impl.ProductDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
 </beans>

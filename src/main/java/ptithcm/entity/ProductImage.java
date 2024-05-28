@@ -3,25 +3,32 @@ package ptithcm.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
 @Entity
-public class Image {
+public class ProductImage {
 	@Id
-	@Column(unique = true, name = "ProductSizeColorId")
-	private int productSizeColorId;
-	
-	
-	@Column(name = "Image")
+	@Column(name = "image")
 	private String image;
-	
-	@Column(name = "Priority")
+
+	@Column(name = "productId")
+	private int productId;
+
+	@Column(name = "priority")
 	private int priority;
-	
-	public int getProductSizeColorId() {
-		return productSizeColorId;
+
+	public ProductImage(String image, int productId, int priority) {
+		super();
+		this.image = image;
+		this.productId = productId;
+		this.priority = priority;
 	}
 
-	public void setProductSizeColorId(int productSizeColorId) {
-		this.productSizeColorId = productSizeColorId;
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public String getImage() {
@@ -39,6 +46,5 @@ public class Image {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-
 
 }

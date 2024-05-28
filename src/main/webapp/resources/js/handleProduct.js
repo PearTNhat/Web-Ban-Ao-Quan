@@ -46,7 +46,7 @@ $(function() {
 	});
 });
 // CK editor
-ClassicEditor
+/*ClassicEditor
 	.create(document.querySelector('#editor'), {
 		toolbar: {
 			items: [
@@ -60,4 +60,4 @@ ClassicEditor
 	})
 	.catch(error => {
 		console.error(error);
-	});
+	});*/
