@@ -41,41 +41,6 @@ $('#owl-demo-1').owlCarousel({
 });
 
 
-
-
-$('#owl-demo-2').owlCarousel({
-	rtl: true,
-	loop: true,
-	margin: 10,
-	responsiveClass: true,
-	nav: true,
-	responsive: {
-		0: {
-			items: 2, // For small screens, show 2 items
-			nav: true
-		},
-		768: {
-			items: 3, // For medium screens and above (e.g., tablets), show 3 items
-			nav: true
-		},
-		1200: { // Assuming 1200px is the breakpoint for XL screens and above
-			items: 4, // For XL screens, show 4 items
-			nav: true
-		}
-	}
-})
-
-$('#owl-product').owlCarousel({
-	items: 1,
-	lazyLoad: true,
-	loop: false,
-	dots: false,
-	margin: 0,
-	URLhashListener: true,
-	autoplayHoverPause: true,
-	startPosition: 'URLHash'
-});
-
 function startProgressBar() {
 	// apply keyframe animation
 	$(".slide-progress").css({

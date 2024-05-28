@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ include file="../common/header.jsp" %>
 
 <body>
@@ -21,47 +22,47 @@
                 </div>
                 <div class="lead text-muted my-1 fs-6">Đăng kí để tận hưởng trải nghiệm mua sắm trọn vẹn tại 4 MENS
                 </div>
-                <form action="" class="mt-4">
+                <form:form class="mt-4" modelAttribute="userbean">
                     <div class="row g-2 my-3">
                         <div class="col-5">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="firstName" placeholder="firstname">
+                                <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="firstname" />
                                 <label for="firstName">Họ</label>
                             </div>
                         </div>
                         <div class="col-7">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="lastName" placeholder="lastname">
+                                <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="lastname" />
                                 <label for="lastName">Tên</label>
                             </div>
                         </div>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Địa chỉ</span>
-                        <input type="text" class="form-control" placeholder="52 Man Thiện. Phường Tăng Nhơn Phú A"
-                            aria-label="Username" aria-describedby="basic-addon1">
+                        <form:input path="address" type="text" class="form-control" placeholder="52 Man Thiện. Phường Tăng Nhơn Phú A"
+                            aria-label="Username" aria-describedby="basic-addon1" />
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1">Email</span>
-                        <input type="text" class="form-control" placeholder="4mens@example.com" aria-label="Username"
-                            aria-describedby="basic-addon1">
+                        <form:input path="email" type="text" class="form-control" placeholder="4mens@example.com" aria-label="Username"
+                            aria-describedby="basic-addon1" />
                     </div>
                     <div class="form-floating col-12 my-3">
-                        <input type="password" class="form-control" id="password" placeholder="password">
+                        <form:input path="password" type="password" class="form-control" id="password" placeholder="password" />
                         <label for="password">Mật khẩu</label>
                     </div>
                     <div class="form-floating col-12 my-3">
-                        <input type="password" class="form-control is-invalid" id="checkpassword"
-                            placeholder="password">
+                        <form:input path="password" type="password" class="form-control is-invalid" id="checkpassword"
+                            placeholder="password" />
                         <label for="checkpassword">Nhập lại mật khẩu</label>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">Tải ảnh avatar:</label>
-                        <input class="form-control" type="file" id="formFile">
+                        <form:input path="avatar" class="form-control" type="file" id="formFile" />
                       </div>
                       
                     <button type="submit" class="btn btn-danger col-12">Đăng ký</button>
-                </form>
+                </form:form>
                 <div class="have-account my-3">
                     Bạn đã có tài khoản?
                     <a href="login.htm" class="link link-primary">Đăng nhập</a>

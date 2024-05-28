@@ -41,7 +41,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="resources/css/home/home.css">
 <link rel="stylesheet" href="resources/css/listProduct.css">
 <link rel="stylesheet" href="resources/css/footer/footer.css">
 
@@ -175,6 +174,3 @@ table.cart-table a.cart-link:hover {
         });
    
     </script>
-
-
-</head>
