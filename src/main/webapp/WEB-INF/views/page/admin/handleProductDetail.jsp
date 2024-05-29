@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="../../common/admin/adminHeader.jsp"%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Toastr CSS -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+	rel="stylesheet">
+<!-- Toastr JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <link rel="stylesheet" href="resources/css/admin/handleProduct.css">
-<style>
-form {
-	width: 80%;
-}
-</style>
+<link rel="stylesheet" href="resources/css/toast.css">
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 
@@ -28,7 +31,7 @@ form {
 	<div class="f-container mt-4 ">
 		<div class="f-container" style="flex: 1; overflow: auto">
 			<p>${message }</p>
-			<form:form method="post" action="admin/products/add-product.htm"
+			<form:form method="post" action="admin/products/add-product/${productId}.htm"
 				enctype="multipart/form-data" modelAttribute="pd">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -92,11 +95,8 @@ form {
 		</div>
 	</div>
 </div>
-
-<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script src="resources/js/handleProduct.js"></script>
 <script src="resources/js/adminLayout.js"></script>
+<%@ include file="../../js/toast.jsp"%>
 </body>
 </html>
