@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp" %>
+<link rel="stylesheet" href="resources/css/home/home.css">
+</head>
 
 <body>
 <%@ include file="../component/topbar.jsp" %>

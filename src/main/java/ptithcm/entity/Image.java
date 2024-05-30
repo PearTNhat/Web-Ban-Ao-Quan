@@ -8,8 +8,7 @@ public class Image {
 	@Id
 	@Column(unique = true, name = "ProductSizeColorId")
 	private int productSizeColorId;
-	
-	
+
 	@Column(name = "Image")
 	private String image;
 	

@@ -22,6 +22,12 @@ public class ProductType {
 	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
 	private Collection<TypeDetail> types;
 	
+	public Collection<TypeDetail> getTypes() {
+		return types;
+	}
+	public void setTypes(Collection<TypeDetail> types) {
+		this.types = types;
+	}
 	public int getTypeId() {
 		return typeId;
 	}

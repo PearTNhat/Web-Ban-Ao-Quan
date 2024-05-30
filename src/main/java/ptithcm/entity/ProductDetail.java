@@ -8,12 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * 
+ */
 @Entity
-public class ProductSizeColor {
+public class ProductDetail {
 	@Id
-	@Column(unique = true, name = "productSizeColorId")
+	@Column(unique = true, name = "productDetailId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int productSizeColorId;
+	private int productDetailId;
 	
 	@ManyToOne
 	@JoinColumn(name = "productId")
@@ -48,13 +51,20 @@ public class ProductSizeColor {
 		this.soldQuantity = soldQuantity;
 	}
 
-
-	public int getProductSizeColorId() {
-		return productSizeColorId;
+	public String getSize() {
+		return size;
 	}
 
-	public void setProductSizeColorId(int productSizeColorId) {
-		this.productSizeColorId = productSizeColorId;
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public int getProductDetailId() {
+		return productDetailId;
+	}
+
+	public void setProductDetailId(int productDetailId) {
+		this.productDetailId = productDetailId;
 	}
 
 	public Product getProduct() {

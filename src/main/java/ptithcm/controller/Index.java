@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ptithcm.entity.Account;
+
 @Controller
 public class Index {
 //https://localhost:8080/DemoSpingMVC/
@@ -33,16 +35,6 @@ public class Index {
 	@RequestMapping("/cart-checkout")
 	public String cartCheckout() {
 		return "page/cart-checkout";
-	}
-	
-	@RequestMapping("/login")
-	public String login() {
-		return "page/login";
-	}
-	
-	@RequestMapping("/signup")
-	public String signup() {
-		return "page/signup";
 	}
 	
 	@RequestMapping("/choose-size") 

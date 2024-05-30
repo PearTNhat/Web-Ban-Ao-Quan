@@ -40,7 +40,7 @@
                       <button type="submit" class="btn btn-danger col-12">Đăng nhập</button>
                       <div class="signup-option my-3">
                         Hoặc
-                        <a href="signup.htm" class="link link-primary">Tạo tài khoản</a>
+                        <a href="user/signup.htm" class="link link-primary">Tạo tài khoản</a>
                       </div>
                 </form>
             </div>

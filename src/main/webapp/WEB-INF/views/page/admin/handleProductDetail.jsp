@@ -4,13 +4,18 @@
 <%@ include file="../../common/admin/adminHeader.jsp"%>
 
 <link rel="stylesheet" href="resources/css/admin/handleProduct.css">
+<style>
+form {
+	width: 80%;
+}
+</style>
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 
 <div class="main" style="overflow: auto !important">
 	<nav class="navbar sticky-top bg-white">
 		<div class="container-fluid">
-			<div class="navbar-brand ms-4">
+			<div class="navbar-brand ms-4 ">
 				<div class="fs-5">
 					<span> <a href="admin/products.htm" class="link-secondary">
 							<i class="bi bi-box"></i> Products /
@@ -22,9 +27,9 @@
 	</nav>
 	<div class="f-container mt-4 ">
 		<div class="f-container" style="flex: 1; overflow: auto">
-			<form>
+			<form method="post" action="admin/products/add-product.htm">
 				<div class="container">
-					<div class="row">
+					<div class="row justify-content-center">
 						<div class="col-12 col-sm-6 col-md-4 col-xl-3 imgUp ">
 							<div class="img-wrapper">
 								<div class="imagePreview"></div>
@@ -39,69 +44,45 @@
 					</div>
 					<!-- row -->
 				</div>
+
 				<div class="mb-3 d-flex gap-4">
-					<div class="">
-						<label for="name" class="form-label">Tên</label> <input
-							type="text" class="form-control" id="name">
+					<div>
+						<span>ID: </span> <span value="123"
+							path="productId">123</span>
 					</div>
-					<div class="">
-						<label for="price" class="form-label">Price</label> <input
-							type="text" class="form-control" id="name">
+					<div>
+						<span>Tên: </span> <span>Some thing</span>
 					</div>
+
 				</div>
-				<div class="mb-3">
-					<textarea id="editor" name="content"></textarea>
-				</div>
-				<div class="mb-3 d-flex gap-4">
-					<div class="form-group">
+				<div class="mb-3  d-flex gap-4 justify-content-center">
+					<div>
 						<label for="quantity" class="form-label">Số lượng</label> <input
-							type="quantity" class="form-control" id="quantity">
+							type="number" class="form-control" id="quantity" path="quantity">
 					</div>
+					<div>
+						<label for="price" class="form-label">Price</label> <input
+							type="number" class="form-control" id="name" path="price">
+					</div>
+				</div>
+				<div class="mb-3 d-flex gap-4 justify-content-center">
 					<div class="">
 						<label for="color" class="form-label">Màu sắc</label> <input
-							type="input" class="form-control" id="color">
+							type="text" class="form-control" id="color" path="color">
 					</div>
 					<div class="">
-						<label for="quantity" class="form-label">Giảm giá</label> <input
-							type="quantity" class="form-control" id="quantity">
+						<label for="size" class="form-label">Kích cở</label> <input
+							type="text" class="form-control" id="size" path="size">
 
 					</div>
 				</div>
-				<div class="mb-3 ">
-					<label class="form-label">Chọn loại sản phẩm</label> <select
-						class="form-select" aria-label="select-type">
-						<option value="ao" selected>Áo</option>
-						<option value="quan">Quần</option>
-					</select>
-				</div>
-				<div class="mb-3 ">
-					<label class=" form-label">Chọn size</label>
-					<div class="d-flex gap-4 flex-wrap">
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" role="switch"
-								id="xl"> <label class="form-check-label" for="xl">XL</label>
-						</div>
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" role="switch"
-								id="XXl"> <label class="form-check-label" for="XXl">XXL</label>
-						</div>
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" role="switch"
-								id="L"> <label class="form-check-label" for="L">L</label>
-						</div>
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" role="switch"
-								id="M"> <label class="form-check-label" for="M">M</label>
-						</div>
-					</div>
-				</div>
-
 				<button type="submit" class="btn btn-primary rounded-1"
 					style="width: 195px; margin: auto;">Lưu</button>
 			</form>
 		</div>
 	</div>
-</div>s
+</div>
+
 <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
 <script
 	src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>

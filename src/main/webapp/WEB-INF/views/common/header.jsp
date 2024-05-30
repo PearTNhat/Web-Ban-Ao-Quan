@@ -41,43 +41,84 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="resources/css/listProduct.css">
 <link rel="stylesheet" href="resources/css/footer/footer.css">
 
 <title>Web ban hang</title>
 
 <style>
-section {
-	padding: 40px 0;
+html {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-#owl-demo .item img {
-	display: block;
+.thumbnails {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.thumbnails a {
+	flex: 1 1 calc(20% - 10px);
+	max-width: calc(20% - 10px);
+	margin-bottom: 10px;
+}
+
+.thumbnails img {
 	width: 100%;
 	height: auto;
-	text-align: center;
+	display: block;
 }
 
-.slide-progress {
-	width: 0;
-	max-width: 100%;
-	height: 4px;
-	background: rgba(0, 0, 0, .2);
+@media ( max-width : 600px) {
+	.cart-container {
+		width: 100%;
+		position: fixed;
+		top: 80px;
+		left: 0;
+	}
+	.cart-container::after {
+		width: 100%;
+	}
 }
 
-.img-container {
-	height: fit-content;
-	overflow: hidden;
+html {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
-.img-container img {
-	transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out, opacity
-		0.3s linear;
+.thumbnails {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 5px;
 }
 
-.img-container img:hover {
-	transform: scale(1.1);
-	opacity: .8;
+.thumbnails a {
+	flex: 1 1 calc(20% - 10px);
+	max-width: calc(20% - 10px);
+	margin-bottom: 10px;
+}
+
+.thumbnails img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+@media ( max-width : 600px) {
+	.cart-container {
+		width: 100%;
+		position: fixed;
+		top: 80px;
+		left: 0;
+	}
+	.cart-container::after {
+		width: 100%;
+	}
+}
+
+.navbar-toggler-icon {
+	width: 1.1em;
+	height: 1.1em;
 }
 
 .top-bar {
@@ -89,88 +130,276 @@ section {
 	border-right: 1.5px solid #3a3a3a;
 }
 
-.top-bar a, i {
+.top-bar a, i:not(.cart-icon) {
 	color: #ccc !important;
 	font-weight: 600;
 }
 
-#btn-back-to-top {
-	position: fixed;
-	bottom: 20px;
-	right: 20px;
-	opacity: 0;
-	transition: all .2s;
+i.logout {
+	color: black !important;
 }
 
-/*  product */
-table.cart-table a.cart-link {
-	text-decoration: none;
-	color: #b31f2a;
-	transition: all .2s;
+section {
+	padding: 60px 0;
 }
 
-table.cart-table a.cart-link:hover {
-	color: #444444;
-}
-
-.img-wrapper {
-	margin: auto;
-	width: 100px;
-}
-
-.imagePreview {
-	position: relative;
-	margin: auto;
-	width: 100px;
-	height: 100px;
-	background-image:
-		url("https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg");
-	border: 1px solid #ccc;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	border-radius: 50%;
-}
-
-.btn-upload {
+.nav-ao, .nav-quan {
+	display: none;
+	list-style: none;
 	position: absolute;
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
+	/* padding: 0 8px; */
+	padding: 0;
+	background-color: #fff;
+	/* box-shadow: 0 0 5px rgba(0,0,0,0.3); */
 }
 
+.nav-ao li, .nav-quan li {
+	padding: 8px;
+	font-size: small;
+	border-bottom: 1px solid #ededed;
+	border-top: 1px solid #ededed;
+	cursor: pointer;
+}
+
+.navbar-search {
+	position: relative;
+}
+
+.navbar-search .act-search {
+	display: none;
+	position: absolute;
+	margin-left: -260px;
+	margin-top: 0px;
+	width: 300px;;
+	padding: 10px 15px;
+	border: rgb(104, 5, 5) solid 1px;
+	animation: appear 0.3 ease;
+}
+
+.navbar-search i, .navbar-shopping i {
+	background-color: #ededed;
+	padding: 8px;
+	border: 1px solid #ededed;
+	color: rgb(104, 5, 5);
+	margin-left: 7px;
+	border-radius: 2px;
+}
+
+.navbar-search i:hover, .navbar-shopping i:hover {
+	border: 1px solid rgb(104, 5, 5);
+	cursor: pointer;
+	transition: 0.5s all;
+}
+
+.navbar-search .bi-x {
+	font-size: larger;
+	padding: 2px 2px;
+}
+
+.navbar-search form {
+	right: -100%;
+	top: 52px;
+}
+
+.search-sub {
+	padding: 8px;
+	transform: translateY(5px);
+	border: none;
+	color: #502a2a;
+}
+
+.cart-container {
+	display: none;
+}
+
+.cart:hover .cart-container {
+	display: block;
+}
+
+.cart-container::after {
+	content: "";
+	position: absolute;
+	width: 59px;
+	height: 30px;
+	top: -23px;
+	right: 0;
+	display: block;
+	background-color: transparent;
+}
+
+.cart-container {
+	position: absolute;
+	width: 400px;
+	background: #fff;
+	border: 1px solid #ccc;
+	color: #000;
+	border-radius: 5px;
+	top: 53px;
+	right: -12px;
+	font-size: 15px;
+	z-index: 100;
+}
+
+.cart-container small {
+	display: block;
+	font-size: 13px;
+	color: #444;
+	padding: 10px;
+	border-bottom: 1px solid rgb(232, 232, 232);
+}
+
+.cart-container small span {
+	color: #b31f2a;
+}
+
+.cart-items {
+	font-size: 14px;
+	padding: 0 0 10px 0;
+	max-height: 350px;
+	overflow-y: auto;
+}
+
+.cart-item {
+	list-style: none;
+	display: flex;
+	padding-left: 0;
+	padding: 10px;
+	border-bottom: 1px solid rgb(232, 232, 232);
+	margin-bottom: 10px;
+}
+
+.cart-item:hover {
+	background-color: #e5e4e4;
+}
+
+.cart-items .cart-detail {
+	padding-left: 10px;
+}
+
+.cart-detail p {
+	line-height: 14px;
+	margin-bottom: 10px;
+}
+
+.cart-detail i {
+	font-size: 16px;
+}
+
+.cart-detail i:hover {
+	color: red;
+}
+
+.cart-container button {
+	display: block;
+	margin-top: 10px;
+	font-size: 11px;
+	font-weight: 500;
+	outline: none;
+	border: none;
+	color: #fff;
+	background: #333333;
+	border-radius: 4px;
+	padding: 8px;
+}
+
+.cart-container button:hover {
+	background: #b31f2a;
+}
+
+.user {
+	position: relative;
+	cursor: pointer;
+}
+
+.user:hover .user-feature {
+	display: block;
+}
+
+.user-feature {
+	position: absolute;
+	display: none;
+	border: 1px solid #ccc;
+	width: 200px;
+	background: #fff;
+	color: #000;
+	border-radius: 5px;
+	top: 108%;
+	right: 0;
+	font-size: 15px;
+	padding: 0;
+	transition: all .4s;
+}
+
+.user-feature::before {
+	content: "";
+	position: absolute;
+	width: 50px;
+	height: 10px;
+	background-color: transparent;
+	top: -10px;
+	right: 0;
+}
+
+.user-feature li {
+	cursor: pointer;
+	padding: 10px;
+}
+
+.user-feature li a {
+	text-decoration: none;
+	color: #000;
+}
+
+.user-feature li:hover {
+	background-color: #ededed;
+}
+
+@media ( min-width : 995px) {
+	.nav-ao, .nav-quan {
+		width: 200px;
+	}
+	.navbar-nav li:nth-child(2):hover a, .navbar-nav li:nth-child(3):hover a
+		{
+		color: #b31f2a
+	}
+	.navbar-nav li:nth-child(2):hover ul, .navbar-nav li:nth-child(3):hover ul
+		{
+		display: block;
+	}
+	.nav-ao li:hover, .nav-quan li:hover {
+		opacity: 0.8;
+		color: #b31f2a;
+		background-color: #eeeeee;
+	}
+	.nav-ao, .nav-quan {
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	}
+	.navbar-shopping {
+		position: relative;
+	}
+}
+
+@media ( max-width : 995px) {
+	.open-max-1000 {
+		display: block;
+	}
+	.display-none {
+		display: none !important;
+	}
+	.nav-ao li:hover, .nav-quan li:hover {
+		opacity: 0.8;
+		color: #b31f2a;
+		background-color: #eeeeee;
+	}
+	.nav-ao, .nav-quan {
+		position: relative;
+	}
+	.nav-ao ul {
+		width: 100%;
+	}
+	.navbar-nav li:nth-child(2):hover a, .navbar-nav li:nth-child(3):hover a
+		{
+		background-color: #eeeeee;
+	}
+}
 </style>
-
-<script>    
-    //review anh
-        $(document).on("change", ".uploadFile", function () {
-            var uploadFile = $(this);
-            var files = !!this.files ? this.files : [];
-
-            if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-            if (/^image/.test(files[0].type)) {
-                const type = files[0].type.split("/")[1];
-                if (type != "jpeg" && type != "png" && type != "jpg") {
-                    return alert("Only jpeg, jpg, png files are allowed");
-                }
-                // only image file
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[0]); // read the local file
-                reader.onloadend = function () {
-                    // set image data as background of div
-                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-                    uploadFile
-                        .closest(".img-wrapper")
-                        .find(".imagePreview")
-                        .css("background-image", "url(" + this.result + ")");
-                };
-            }
-        });
-    //xoa preview anh
-     $(".delete-img ").click(function () {
-            $(".uploadFile").val(null);
-            console.log($(".uploadFile"))
-            $(this).closest(".img-wrapper").find(".imagePreview").css("background-image", "url('https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg')");
-        });
-   
-    </script>
