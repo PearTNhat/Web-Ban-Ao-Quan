@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ include file="../common/header.jsp"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="../common/header.jsp" %>
 <link rel="stylesheet" href="resources/css/home/home.css">
 </head>
 
@@ -124,7 +124,6 @@
 	</button>
 	
 	<section id="banchay" class="container-fluid">
-<<<<<<< HEAD
         <div class="container-xl">
             <div class="lead fw-bold text-center mb-4">THỜI TRANG BÁN CHẠY</div>
             <div id="owl-demo-2" class="owl-carousel owl-theme">
@@ -220,37 +219,4 @@
 	  	}
   	</script>
 	</body>
-		<div class="container-xl">
-			<div class="lead fw-bold text-center mb-4">THỜI TRANG BÁN CHẠY</div>
-			<div id="owl-demo-2" class="owl-carousel owl-theme">
-				<div class="item">
-					<div class="slide-item" style="width: 100%; height: 100%">
-						<a href=""
-							class="text-decoration-none d-flex flex-column align-items-center">
-							<img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="img-fluid"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="my-1" style="width: 20%">
-						</a> <a href=""
-							class="link-underline link-underline-opacity-0 link-dark d-block small text-center">Áo
-							Vest NAZAFU Màu xám da bò </a>
-						<p class="price text-danger fw-medium small text-center">
-							675.000 <span
-								class="text-decoration-line-through small text-secondary">1.350.000</span>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<%@ include file="../common/footer.jsp"%>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-		integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="resources/js/commonJS.js"></script>
-		<script src="resources/js/home/home.js"></script>
-</body>
 </html>
