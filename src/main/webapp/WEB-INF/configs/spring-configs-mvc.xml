@@ -88,5 +88,8 @@
 	<bean id="AddressDao" class="ptithcm.dao.impl.AddressDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
+	
+	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

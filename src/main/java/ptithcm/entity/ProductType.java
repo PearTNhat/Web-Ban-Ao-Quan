@@ -14,8 +14,7 @@ public class ProductType {
 	@Column(name = "typeId")
 	private int typeId;
 	
-	
-	
+
 	@Column(name="name")
 	private String name;
 	
