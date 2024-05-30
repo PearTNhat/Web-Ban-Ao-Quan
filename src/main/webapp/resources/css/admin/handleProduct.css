@@ -71,4 +71,5 @@ body {
 form {
  	padding:15px 10px;
  	overflow:auto;
+ 		width: 80%;
 }

@@ -1,23 +1,32 @@
 package ptithcm.controller;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import ptithcm.entity.Account;
+import ptithcm.dao.ProductDao;
+import ptithcm.dao.ProductTypeDao;
+import ptithcm.entity.ProductType;
 
 @Controller
-public class Index {
+public class HomeController {
 //https://localhost:8080/DemoSpingMVC/
+
+	@Autowired
+	private ProductTypeDao productTypeDao;
+	
 	@RequestMapping("/")
 	public String index(ModelMap model) {
+		
+		  List<ProductType> productTypes= productTypeDao.getAllProductType();
+		  model.addAttribute("pts", productTypes);
+		 
 		return "page/home";	
 	}
 	
-	public String dashBoard() {
-		return "page/admin/dashBoard";
-	}
 	@RequestMapping("/admin-account")
 	public String accountAdmin  () {
 		return "page/admin/adminAccount";

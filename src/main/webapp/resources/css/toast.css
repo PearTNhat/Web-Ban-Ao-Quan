@@ -1,0 +1,11 @@
+.toast-success {
+	background-color: #08CE08; /* Green background */
+	border-color: #28a745; /* Green border color */
+	color: #fff; /* White text color */
+	opacity: 1 !important; /* Remove opacity effect */
+}
+
+.toast-error {
+	background-color: rgb(254, 8, 10);
+	opacity: 1 !important; 
+}

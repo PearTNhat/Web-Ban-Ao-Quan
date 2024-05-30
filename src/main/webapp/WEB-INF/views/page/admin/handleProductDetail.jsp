@@ -97,6 +97,6 @@
 </div>
 <script src="resources/js/handleProduct.js"></script>
 <script src="resources/js/adminLayout.js"></script>
-<%@ include file="../../js/toast.jsp"%>
+<%@ include file="../../utils/toast.jsp"%>
 </body>
 </html>

@@ -58,6 +58,23 @@
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
 		
+	<!-- DAO -->
+	<bean id="accountDao" class="ptithcm.dao.impl.AccountDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="productDao" class="ptithcm.dao.impl.ProductDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="AddressDao" class="ptithcm.dao.impl.AddressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="productTypeDao" class="ptithcm.dao.impl.ProductTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -74,22 +91,5 @@
 				<entry key="secure" value="true" />
 			</util:map>
 		</constructor-arg>
-	</bean>
-
-	<!-- DAO -->
-	<bean id="AccountDao" class="ptithcm.dao.impl.AccountDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-
-	<bean id="productDao" class="ptithcm.dao.impl.ProductDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	
-	<bean id="AddressDao" class="ptithcm.dao.impl.AddressDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	
-	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
-		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 </beans>
