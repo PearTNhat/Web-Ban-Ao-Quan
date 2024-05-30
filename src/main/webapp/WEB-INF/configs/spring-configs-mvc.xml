@@ -68,6 +68,9 @@
 	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="productTypeDao" class="ptithcm.dao.impl.ProductTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

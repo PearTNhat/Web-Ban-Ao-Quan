@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet" href="resources/css/home/home.css">
 <style>
 #btn-back-to-top {
@@ -158,6 +159,11 @@
 	</section>
 
 	<%@ include file="../common/footer.jsp"%>
-	 <script src="resources/js/commonJS.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+		integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="resources/js/commonJS.js"></script>
+		<script src="resources/js/home/home.js"></script>
 </body>
 </html>
