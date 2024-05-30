@@ -163,5 +163,5 @@
 </div>
 </div>
 <script src="resources/js/adminLayout.js"></script>
-<%@ include file="../../js/toast.jsp"%></body>
+<%@ include file="../../utils/toast.jsp"%></body>
 </html>
