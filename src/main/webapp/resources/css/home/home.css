@@ -87,14 +87,6 @@ div:hover>.text-decoration-none .fa-shopping-cart {
 	animation: appear .3s ease-out 1;
 }
 
-/* .order { */
-/* 	background-color: aqua; */
-/* 	width: 80%; */
-/* 	height: 500px; */
-/* 	position: fixed; */
-/* 	top: 150px; */
-/* 	z-index: 1; */
-/* } */
 
 .thumbnails {
 	display: flex;
