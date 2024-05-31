@@ -1,16 +1,10 @@
 package ptithcm.entity;
 
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
 public class Account {
@@ -33,8 +27,24 @@ public class Account {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "avatar")
+	private String avatar;
 
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	public Account(String firstName, String lastName, boolean isAdmin, String email, String password, String avatar) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isAdmin = isAdmin;
+		this.email = email;
+		this.password = password;
+		this.avatar = avatar;
+	}
 
 	public Integer getAccountId() {
 		return accountId;
@@ -64,8 +74,6 @@ public class Account {
 		this.lastName = lastName;
 	}
 
-
-
 	public boolean getIsAdmin() {
 		return isAdmin;
 	}
@@ -89,4 +97,14 @@ public class Account {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	
+	
 }

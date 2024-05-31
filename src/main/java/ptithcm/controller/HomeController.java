@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductTypeDao;
 import ptithcm.entity.ProductType;
@@ -45,16 +44,6 @@ public class HomeController {
 	@RequestMapping("/cart-checkout")
 	public String cartCheckout() {
 		return "page/cart-checkout";
-	}
-	
-	@RequestMapping("/login")
-	public String login() {
-		return "page/login";
-	}
-	
-	@RequestMapping("/signup")
-	public String signup() {
-		return "page/signup";
 	}
 	
 	@RequestMapping("/choose-size") 

@@ -25,8 +25,8 @@ public class AccountDaoImpl implements AccountDao {
 		String hql = "FROM Account where accountId = :id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
-		Account list = (Account) query.list().get(0);
-		return list;
+		Account acc = (Account) query.list().get(0);
+		return acc;
 	}
 
 	@Override
@@ -45,6 +45,33 @@ public class AccountDaoImpl implements AccountDao {
 			session.close();
 		}
 		return 1;
+	}
+	
+	@Override
+	public Account createAccount(Account account) {
+		Session session = factory.openSession();
+		Transaction t  = session.beginTransaction();
+		
+		try {
+			session.save(account);
+			t.commit();
+			return account;
+		} catch(Exception e) {
+			t.rollback();
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	@Override
+	public Account findAccountByEmail(String email) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM Account where email = :email";
+		Query query = session.createQuery(hql);
+		query.setParameter("email", email);
+		Account acc = (Account) query.uniqueResult();
+		return acc;
 	}
 	
 }

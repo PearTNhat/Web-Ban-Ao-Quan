@@ -85,8 +85,7 @@
 
 									<td>123</td>
 									<td><fmt:formatNumber value="999" type="currency" /></td>
-
-									<td><fmt:formatNumber value="${ p.discount}"
+<td><fmt:formatNumber value="${ p.discount}"
 											type="percent" /></td>
 									<td>
 										<div class="d-flex">

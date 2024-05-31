@@ -125,3 +125,17 @@
 	</div>
 
 	<%@ include file="../../common/footer.jsp"%>
+	<script>
+		$('#owl-product').owlCarousel({
+			items: 1,
+			lazyLoad: true,
+			loop: false,
+			dots: false,
+			margin: 0,
+			URLhashListener: true,
+			autoplayHoverPause: true,
+			startPosition: 'URLHash'
+		});
+	</script>
+	</body>
+</html>

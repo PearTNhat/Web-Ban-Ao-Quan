@@ -28,13 +28,13 @@
 
 	<!-- Cấu hình package chứa các controller -->
 	<context:component-scan
-		base-package="ptithcm.controller" />
+		base-package="ptithcm.controller, ptithcm.controller.user" />
 
 	<!-- Kết nối CSDL -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://localhost:1433; Database=DBWEB"
+		p:url="jdbc:sqlserver://26.62.123.121:1433; Database=DBWEB"
 		p:username="sa" p:password="12">
 	</bean>
 
@@ -65,12 +65,16 @@
 	<bean id="productDao" class="ptithcm.dao.impl.ProductDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="AddressDao" class="ptithcm.dao.impl.AddressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="productTypeDao" class="ptithcm.dao.impl.ProductTypeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -88,5 +92,4 @@
 			</util:map>
 		</constructor-arg>
 	</bean>
-
 </beans>
