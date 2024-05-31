@@ -1,7 +1,8 @@
 package ptithcm.controller;
 
-
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductTypeDao;
+import ptithcm.entity.Account;
 import ptithcm.entity.ProductType;
 
 @Controller
@@ -17,52 +19,76 @@ public class HomeController {
 
 	@Autowired
 	private ProductTypeDao productTypeDao;
-	
+
 	@RequestMapping("/")
-	public String index(ModelMap model) {
-		
-		  List<ProductType> productTypes= productTypeDao.getAllProductType();
-		  model.addAttribute("pts", productTypes);
-		 
-		return "page/home";	
+	public String index(ModelMap model, HttpServletRequest request) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
+		List<ProductType> productTypes = productTypeDao.getAllProductType();
+		model.addAttribute("pts", productTypes);
+
+		return "page/home";
 	}
-	
+
 	@RequestMapping("/admin-account")
-	public String accountAdmin  () {
+	public String accountAdmin() {
 		return "page/admin/adminAccount";
 	}
 
 	@RequestMapping("/listProduct")
-	public String Footer  () {
+	public String Footer() {
 		return "page/listProduct";
 	}
+
 	@RequestMapping("/forgot-password")
 	public String forgotPassword() {
 		return "page/forgotPassword/sentMail";
 	}
-	
+
 	@RequestMapping("/cart-checkout")
-	public String cartCheckout() {
+	public String cartCheckout(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
 		return "page/cart-checkout";
 	}
-	
-	@RequestMapping("/choose-size") 
-	public String chooseSize() {
+
+	@RequestMapping("/choose-size")
+	public String chooseSize(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
 		return "page/topbar/chooseSize";
 	}
-	
+
 	@RequestMapping("/for-vip-user")
-	public String vipUser() {
+	public String vipUser(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
 		return "page/topbar/vipUser";
 	}
-	
+
 	@RequestMapping("/introduce")
-	public String introduce() {
+	public String introduce(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
 		return "page/topbar/introduce";
 	}
-	
+
 	@RequestMapping("/product/id")
-	public String productDetail() {
+	public String productDetail(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("user", user);
+		}
 		return "page/product/product-detail";
 	}
 }
