@@ -100,7 +100,7 @@
                 style="margin-left: auto;">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end me-5 order-lg-2" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end order-lg-2" id="navbarNav">
                 <ul class="navbar-nav me-2">
                     <li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN CHẠY</a></li>
                     <li class="nav-item"><a onclick="open_ao()" class="nav-link" href="#">ÁO NAM</a>
@@ -134,6 +134,10 @@
                         <i class="bi bi-search"></i>
                     </button>
                 </form>
+                <c:if test="${empty sessionScope.user}">
+                	<a class="mx-2" href="user/login.htm">Đăng nhập</a>
+                	<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>
+                </c:if>
             </div>
         </div>
     </nav>
