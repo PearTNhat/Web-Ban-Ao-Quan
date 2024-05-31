@@ -10,7 +10,8 @@
 			height="60" class="d-inline-block align-text-top">
 		</a>
 		<c:if test="${not empty sessionScope.user}">
-			<div class="d-flex align-items-center gap-4 order-lg-3">
+			<div class="cart-avar d-flex align-items-center gap-4 order-lg-3"
+				style="margin-left: auto;">
 				<!--                 cart -->
 				<div class="cart navbar-shopping d-md-block position-relative">
 					<i class="fas fa-shopping-cart cart-icon"></i>
@@ -98,7 +99,7 @@
 									khoản</a></li>
 							<li class=""><a href="profile/info.htm">Quản lí</a></li>
 							<li class="border border-t-1 d-flex align-items-center gap-2">
-								<a href="" class="d-block"> Đăng xuất </a> <i
+								<a href="user/logout.htm" class="d-block"> Đăng xuất </a> <i
 								class="bi bi-box-arrow-left logout"></i>
 							</li>
 						</ul>
@@ -109,16 +110,15 @@
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNav" aria-controls="navbarNav"
 			aria-expanded="false" aria-label="Toggle navigation"
-			style="margin-left: auto;">
+			>
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div
-			class="collapse navbar-collapse justify-content-end order-lg-2"
+		<div class="collapse navbar-collapse justify-content-end order-lg-2"
 			id="navbarNav">
 			<ul class="navbar-nav me-2">
 				<li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN
 						CHẠY</a></li>
-				<c:forEach var="pt" items="${pts}">
+				<c:forEach var="pt" items="${sessionScope.pts}">
 					<li class="nav-item"><span
 						class="nav-link text-uppercase p-type">${pt.name}</span>
 
