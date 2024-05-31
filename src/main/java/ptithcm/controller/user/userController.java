@@ -8,16 +8,22 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
+import java.util.Base64;
 import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 import ptithcm.bean.Image;
+import ptithcm.bean.LoginBean;
 import ptithcm.bean.UserBean;
 import ptithcm.dao.AccountDao;
 import ptithcm.dao.AddressDao;
@@ -38,13 +44,89 @@ public class userController {
 	@Autowired
 	private Cloudinary cloudinary;
 	
+	public Cookie readCookies(HttpServletRequest request, String name) {
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equalsIgnoreCase(name)) {
+					String decodedvalue = new String(Base64.getDecoder().decode(cookie.getValue()));
+					cookie.setValue(decodedvalue);
+					return cookie;
+				}
+			}
+		}
+		return null;
+	}
+
+	public Cookie createCookies(String name, String value, int days) {
+		String encodedValue = Base64.getEncoder().encodeToString(value.getBytes());
+		Cookie cookie = new Cookie(name, encodedValue);
+		cookie.setMaxAge(days * 24 * 60 * 60);
+		cookie.setPath("/");
+		return cookie;
+
+	}
+	
+	public void deleteCookies(String name) {
+		this.createCookies(name, "", 0);
+	}
+	
 	@RequestMapping("/login")
-	public String login() {
+	public String loginForm(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		LoginBean newLogin = new LoginBean();
+		Cookie cookieEmail = this.readCookies(request, "email");
+		Cookie cookiePass = this.readCookies(request, "pass");
+		
+		if (cookieEmail != null) {
+			newLogin.setEmail(cookieEmail.getValue());
+			newLogin.setPassword(cookiePass.getValue());
+		}
+		model.addAttribute("user", newLogin);
+		return "page/login";
+	}
+	
+	@RequestMapping(value="login", method=RequestMethod.POST)
+	public String login(ModelMap model, @Validated @ModelAttribute("user") LoginBean user, BindingResult errors,
+						RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response,
+						HttpServletRequest request) {
+		System.out.println(user);
+
+		// has validation error
+		if (errors.hasErrors()) {
+			model.addAttribute("user", user);
+			return "page/login";
+		}
+		
+		Account loginUser = accountDao.findAccountByEmail(user.getEmail());
+		
+		if (loginUser != null && BCrypt.checkpw(user.getPassword(), loginUser.getPassword())) {
+			// remember account using cookies
+			if (user.getRememberMe()) {
+				Cookie ckemail = this.createCookies("email", user.getEmail(), 30);
+				Cookie ckpass = this.createCookies("pass", user.getPassword(), 30);
+
+				response.addCookie(ckemail);
+				response.addCookie(ckpass);
+
+			} else {
+				this.deleteCookies("email");
+				this.deleteCookies("pass");
+			}
+			
+			System.out.println("login successfully");
+			
+			// set user to Session
+			session.setAttribute("user", loginUser);
+			return "redirect:/.htm";
+		}
+		
+		model.addAttribute("user", user);
+		model.addAttribute("loginError", true);
 		return "page/login";
 	}
 	
 	@RequestMapping(value="signup", method=RequestMethod.GET)
-	public String singup(ModelMap model) {
+	public String signupForm(ModelMap model) {
 		UserBean user = new UserBean();
 		model.addAttribute("user", user);
 		model.addAttribute("submit", false);
@@ -52,7 +134,7 @@ public class userController {
 	}
 	
 	@RequestMapping(value="signup", method=RequestMethod.POST)
-	public String signup(ModelMap model, @Validated @ModelAttribute("user") UserBean user, BindingResult errors, RedirectAttributes redirectAttributes) {
+	public String signup(ModelMap model, @Validated @ModelAttribute("user") UserBean user, BindingResult errors, RedirectAttributes redirectAttributes, HttpSession session) {
 		// Remove redundant spaces
 		user.setFirstName(user.getFirstName().trim().replaceAll("\\s+", " "));
         user.setLastName(user.getLastName().trim().replaceAll("\\s+", " "));
@@ -130,9 +212,16 @@ public class userController {
 				}
 			}
 			System.out.println("succesfully created account");
+			session.setAttribute("user", createdAccount);
 			redirectAttributes.addFlashAttribute("successMessage", "Account created successfully!");
 			return "redirect:/.htm";
 		}
 		return "page/singup";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+        return "redirect:/user/login.htm";
 	}
 }

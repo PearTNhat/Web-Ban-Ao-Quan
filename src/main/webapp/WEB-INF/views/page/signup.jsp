@@ -13,7 +13,7 @@
     </div>
 
     <div class="login-form container-xl">
-        <div class="row justify-content-center my-5">
+        <div class="row justify-content-center my-4">
             <div class="col-7 d-none d-lg-block">
                 <img src="https://cdn.dribbble.com/users/988448/screenshots/5240042/icon_cadastro_v5.gif"
                     alt="" class="img-fluid">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="address">Địa chỉ</span>
-                        <form:input path="address" type="text" class="form-control ${submit && addressErr ? 'is-invalid' : '' } ${submit && !addressErr ? 'is-valid' : ''}" placeholder="52 Man Thiện. Phường Tăng Nhơn Phú A"
+                        <form:input path="address" type="text" class="form-control ${submit && addressErr ? 'is-invalid' : '' }" placeholder="52 Man Thiện. Phường Tăng Nhơn Phú A"
                             aria-label="adress" aria-describedby="address" />
                         <form:errors path="address" cssClass="invalid-feedback d-block"/>
                     </div>
@@ -87,8 +87,7 @@
             </div>
         </div>
     </div>
-	
-    <section class="container-xl">${connStatus}</section> 
+	 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
@@ -101,3 +100,5 @@
     
 	</body>
 </html>
+
+<%@ include file="../common/footer.jsp" %>
