@@ -105,6 +105,9 @@ public class Account {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Account " + firstName + " " + lastName + " - ID: " + accountId;
+	}
 }

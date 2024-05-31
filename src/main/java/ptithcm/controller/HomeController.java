@@ -26,16 +26,6 @@ public class HomeController {
 		 
 		return "page/home";	
 	}
-	
-	@RequestMapping("/admin-account")
-	public String accountAdmin  () {
-		return "page/admin/adminAccount";
-	}
-
-	@RequestMapping("/listProduct")
-	public String Footer  () {
-		return "page/listProduct";
-	}
 	@RequestMapping("/forgot-password")
 	public String forgotPassword() {
 		return "page/forgotPassword/sentMail";
