@@ -47,8 +47,7 @@ public class ProductDetail {
 	@Column(name = "quantity")
 	private int quantity;
 
-	@Column(name = "price")
-	private float price;
+
 
 	@Transient
 	private List<MultipartFile> files;
@@ -59,14 +58,6 @@ public class ProductDetail {
 
 	public void setFiles(List<MultipartFile> files) {
 		this.files = files;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
 	}
 
 	public int getSoldQuantity() {
