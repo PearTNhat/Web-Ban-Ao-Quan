@@ -7,7 +7,7 @@ public class ProductController {
 	
 	@RequestMapping("/product")
 	public String getProduct() {
-		return "listProduct";
+		return "page/listProduct";
 	}
 	
 }

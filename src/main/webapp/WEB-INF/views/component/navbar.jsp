@@ -136,7 +136,12 @@
 					<i class="bi bi-search"></i>
 				</button>
 			</form>
+			<c:if test="${empty sessionScope.user}">
+				<a class="mx-2" href="user/login.htm">Đăng nhập</a>
+				<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>
+			</c:if>
 		</div>
 	</div>
 </nav>
+
 
