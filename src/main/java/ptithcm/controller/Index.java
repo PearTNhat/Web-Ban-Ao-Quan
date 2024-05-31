@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class Index {
-
+//https://localhost:8080/DemoSpingMVC/
 	@RequestMapping("/")
 	public String index(ModelMap model) {
 		return "page/home";	
 	}
+	
 	public String dashBoard() {
 		return "page/admin/dashBoard";
 	}
@@ -19,14 +20,7 @@ public class Index {
 	public String accountAdmin  () {
 		return "page/admin/adminAccount";
 	}
-	@RequestMapping("/manage-product")
-	public String manageProduct  () {
-		return "page/admin/manageProducts";
-	}
-	@RequestMapping("/handle-product")
-	public String handleProduct  () {
-		return "page/admin/handleProduct";
-	}
+
 	@RequestMapping("/listProduct")
 	public String Footer  () {
 		return "page/listProduct";
@@ -65,4 +59,10 @@ public class Index {
 	public String introduce() {
 		return "page/topbar/introduce";
 	}
+
+	@RequestMapping("/product/id")
+	public String productDetail() {
+		return "page/product/product-detail";
+	}
+
 }

@@ -13,7 +13,7 @@
 				</div>
 			</div>
 			<ul class="sidebar-nav">
-				<li class="sidebar-item"><a href="dash-board.htm"
+				<li class="sidebar-item"><a href="admin/dashboard.htm"
 					class="sidebar-link"> <i class="bi bi-speedometer2"></i> <span>Dashboard</span>
 				</a></li>
 				<li class="sidebar-item"><a href="#"
@@ -41,9 +41,9 @@
 							class="sidebar-link ps-5"> <i class="bi bi-cart4"></i>
 								Product
 						</a></li>
-						<li class="sidebar-item"><a href="#"
+						<li class="sidebar-item"><a href="admin/handle-product.htm"
 							class="sidebar-link ps-5"> <i class="bi bi-bag-fill"></i>
-								Register
+								Add product
 						</a></li>
 					</ul></li>
 			</ul>

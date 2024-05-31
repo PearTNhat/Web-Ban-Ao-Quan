@@ -1,38 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- <%@ include file="../../common/admin/adminHeader.jsp"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../../common/admin/adminHeader.jsp"%>
+</head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="main">
-	<nav
-		class="navbar navbar-expand-sm container-fluid bg-white border border-3 border-light mb-3">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarNav"
-				aria-controls="navbarNav" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navbarNav">
-				<ul class="navbar-nav text-end">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+	<nav class="navbar bg-white">
+	  <div class="container-fluid">
+	    <div class="navbar-brand ms-4">
+	      <div class="fs-5">
+	      	<a href="admin/dashboard.htm">
+		      	<i class="bi bi-speedometer2"></i> Dashboard	      	
+	      	</a>
+	      </div>
+	    </div>
+	  </div>
 	</nav>
 	<div class="dashboard p-3">
-		<div class="display-6">Dashboard</div>
-		<div class="lead fw-bold text-success my-2 fs-6">Doanh thu tháng
+		<div class="lead fw-bold text-success my-2 ms-3 fs-6 border-bottom pb-2">Doanh thu tháng
 			hiện tại</div>
-		<div class="row justify-content-center gap-4 my-4">
-			<div class="col-3 border p-2">
+		<div class="row justify-content-center gap-4 my-5">
+			<div class="col-sm-12 col-md-3 border rounded p-2">
 				<div class="row">
 					<div
 						class="col-4 d-flex justify-content-center align-items-center fs-1">
@@ -44,7 +32,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3 border p-2">
+			<div class="col-sm-12 col-md-3 border rounded p-2">
 				<div class="row">
 					<div
 						class="col-4 d-flex justify-content-center align-items-center fs-1">
@@ -56,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-3 border p-2">
+			<div class="col-sm-12 col-md-3 border rounded p-2">
 				<div class="row">
 					<div
 						class="col-4 d-flex justify-content-center align-items-center fs-1">

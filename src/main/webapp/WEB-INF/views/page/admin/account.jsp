@@ -213,7 +213,21 @@ table.table .avatar {
 
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-<div class="container-xl overflow-auto">
+<div class="main">
+	<nav class="navbar bg-white">
+	  <div class="container-fluid">
+	    <div class="navbar-brand ms-4">
+	      <div class="fs-5">
+	      	<span class="text-secondary">
+	      		<i class="bi bi-people"></i>
+	      		Accounts /
+	      	</span>
+	      	<a href="admin/accounts.htm">Users</a>
+	      </div>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container-xl overflow-auto">
 	<div class="table-responsive">
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -271,7 +285,7 @@ table.table .avatar {
 										</c:otherwise>
 									</c:choose></td>
 
-								<td><a href="admin/delete/${a.accountId}.htm?btnDelete"
+								<td><a href="admin/accounts/delete/${a.accountId}.htm?btnDelete"
 									class="delete"><i class="material-icons" title="Delete">&#xE872;</i></a></td>
 							</tr>
 						</c:forEach>
@@ -299,6 +313,7 @@ table.table .avatar {
 
 
 	</div>
+</div>
 </div>
 </div>
 <script>

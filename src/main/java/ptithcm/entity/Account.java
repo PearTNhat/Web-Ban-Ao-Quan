@@ -17,7 +17,7 @@ public class Account {
 	@Id
 	@Column(unique = true, name = "accountId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String accountId;
+	private Integer accountId;
 	
 	@Column(name = "firstName")
 	private String firstName;
@@ -34,12 +34,18 @@ public class Account {
 	@Column(name = "password")
 	private String password;
 
-	public String getAccountId() {
+
+
+	public Integer getAccountId() {
 		return accountId;
 	}
 
-	public void setAccountId(String accountId) {
+	public void setAccountId(Integer accountId) {
 		this.accountId = accountId;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public String getFirstName() {

@@ -69,5 +69,6 @@ body {
 }
 
 form {
-  width: 80%;
+ 	padding:15px 10px;
+ 	overflow:auto;
 }

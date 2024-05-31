@@ -8,9 +8,8 @@
 
 <div class="page-info bg-light">
         <div class="container-xl text-muted py-3">
-            <a href="#" class="text-decoration-none text-secondary">4MENS</a> <span>
-                / </span> <a href="#" class="text-decoration-none text-secondary">Áo
-                nam</a>
+            <a href=".htm" class="text-decoration-none text-secondary">4MENS</a> <span>
+                / </span> <a href="introduce.htm" class="text-decoration-none text-secondary">Giới thiệu</a>
         </div>
     </div>
 

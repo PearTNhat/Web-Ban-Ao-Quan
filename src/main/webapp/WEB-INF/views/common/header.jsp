@@ -42,7 +42,7 @@
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resources/css/home/home.css">
-<link rel="stylesheet" href="resources/css/listProduct.css">
+<!-- <link rel="stylesheet" href="resources/css/listProduct.css"> -->
 <link rel="stylesheet" href="resources/css/footer/footer.css">
 
 <title>Web ban hang</title>
@@ -140,58 +140,10 @@ table.cart-table a.cart-link:hover {
 	border-radius: 50%;
 }
 
-.delete-img {
-	margin: auto;
-	cursor: pointer;
-	background-color: red;
-	text-align: center;
-	color: white;
-	margin-top: 6px;
-	width: 60px;
-	height: 27px;
-	border-radius: 4px;
-}
 </style>
 
-<script>
-    function open_ao(){
-        var js_ao = document.querySelector('.nav-ao');
-        if (js_ao.classList.contains("open-max-1000")){
-            js_ao.classList.remove("open-max-1000");
-        } else{
-            js_ao.classList.add("open-max-1000")
-        }
-    }
-    function open_quan(){
-        var js_quan = document.querySelector('.nav-quan');
-        if (js_quan.classList.contains("open-max-1000")){
-            js_quan.classList.remove("open-max-1000");
-        } else{
-            js_quan.classList.add("open-max-1000")
-        }
-    }
-    function open_search(){
-        var js_search = document.querySelector('.act-search');
-        if (js_search.classList.contains("open")){
-            js_search.classList.remove("open");
-        } else{
-            setTimeout(() => {
-                js_search.classList.add("open");
-            }, 10);
-        }
-        
-    }
-    window.addEventListener('click', function(event){
-        if (event.target.className === 'act-search open') return;
-        var js_search = document.querySelector('.act-search');
-
-        if (js_search.classList.contains("open")){
-            js_search.classList.remove("open");
-        }
-    });
-    
+<script>    
     //review anh
-
         $(document).on("change", ".uploadFile", function () {
             var uploadFile = $(this);
             var files = !!this.files ? this.files : [];

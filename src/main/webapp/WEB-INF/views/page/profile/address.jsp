@@ -70,7 +70,7 @@
                 <div class="fs-2 border-bottom pb-2">
                     Địa chỉ
                     <button type="button" class="btn btn-success" style="float: right;" data-bs-toggle="modal"
-                        data-bs-target="#addAddressModal">Tạo mới</button>
+                        data-bs-target="#addAddressModal"><i class="bi bi-pencil"></i> Tạo mới</button>
                 </div>
                 <div class="row">
                     <div class="col-12">
