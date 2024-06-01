@@ -89,10 +89,18 @@
 				</div>
 				<!-- user -->
 				<div class="user">
-					<img
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVlCnyLYgXFNF7pdPhUodXuPIzZPLEHBb_1A&s"
-						alt="" class="rounded-circle d-md-block"
-						style="width: 40px; margin-right: 5px;">
+					<c:choose>
+						<c:when test="${not empty user.avatar}">
+							<img src="${user.avatar}"
+								 alt="" class="rounded-circle d-md-block"
+								 style="width: 40px; height: 35px; margin-right: 5px;">
+						</c:when>
+						<c:otherwise>
+							<img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
+								 alt="" class="rounded-circle d-md-block"
+								 style="width: 40px; margin-right: 5px;">
+						</c:otherwise>
+					</c:choose>
 					<div class="user-container">
 						<ul class="user-feature">
 							<li class=""><a href="profile/info.htm">Thông tin tài
