@@ -25,4 +25,3 @@
 	crossorigin="anonymous"></script>
 <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
 <link rel="stylesheet" href="resources/css/admin/adminLayout.css">
-<script src="resources/js/adminLayout.js" async></script>

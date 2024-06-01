@@ -14,12 +14,11 @@ public class ProductType {
 	@Column(name = "typeId")
 	private int typeId;
 	
-	
-	
+
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "type", fetch = FetchType.EAGER)
 	private Collection<TypeDetail> types;
 	
 	public Collection<TypeDetail> getTypes() {

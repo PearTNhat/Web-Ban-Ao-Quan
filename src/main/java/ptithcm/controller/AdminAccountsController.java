@@ -66,7 +66,6 @@ public class AdminAccountsController {
 	@RequestMapping(value = "accounts/{accountId}", params = "btnDelete")
 	public String deletAccount(RedirectAttributes redirectAttributes, @PathVariable("accountId") Integer accountId) {
 		System.out.println( accountId);
-		// tính năng xoá xong vẫn ở trang hiện tại
 		Integer result = accountDao.deleteAccount(accountDao.getAccountById(accountId));
 		if (result == 1) {
 			redirectAttributes.addFlashAttribute("message", "Xoá tài khoản thành công");
@@ -78,7 +77,6 @@ public class AdminAccountsController {
 			redirectAttributes.addFlashAttribute("message", "Xoá tài khoản thất bại");
 		}
 		return "redirect:/admin/accounts.htm?page=" + page + "&search=" + search;
-
 	}
 
 }

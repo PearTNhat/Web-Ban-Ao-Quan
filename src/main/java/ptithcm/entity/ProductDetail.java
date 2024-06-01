@@ -1,62 +1,87 @@
 package ptithcm.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
-/**
- * 
- */
+import org.springframework.web.multipart.MultipartFile;
+
+import ptithcm.entity.composite.ProductDetailId;
+
 @Entity
 public class ProductDetail {
-	@Id
-	@Column(unique = true, name = "productDetailId")
+	@EmbeddedId
+	private ProductDetailId compositeKey;
+
+	@ManyToOne
+	@JoinColumn(name = "productId", insertable = false, updatable = false)
+	private Product product;
+	@Column(name = "color", insertable = false, updatable = false)
+	private int color;
+	@Column(name = "size", insertable = false, updatable = false)
+	private int size;
+
+	@Column(unique = true, name = "productDetailId", insertable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productDetailId;
-	
-	@ManyToOne
-	@JoinColumn(name = "productId")
-	private Product product;
-	
-	@Column(name="size")
-	private String size;
-	
-	@Column(name="soldQuantity")
-	private int soldQuantity;
-	
-	@Column(name="quantity")
-	private int quantity;
-	
-	@Column(name="price")
-	private float price;
-	
-	
-	public float getPrice() {
-		return price;
+
+	public int getSize() {
+		return size;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	@Column(name = "soldQuantity")
+	private int soldQuantity;
+
+	@Column(name = "quantity")
+	private int quantity;
+
+
+
+	@Transient
+	private List<MultipartFile> files;
+
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
 	}
 
 	public int getSoldQuantity() {
 		return soldQuantity;
 	}
 
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+
 	public void setSoldQuantity(int soldQuantity) {
 		this.soldQuantity = soldQuantity;
 	}
 
-	public String getSize() {
-		return size;
+	public ProductDetailId getCompositeKey() {
+		return compositeKey;
 	}
 
-	public void setSize(String size) {
-		this.size = size;
+	public void setCompositeKey(ProductDetailId compositeKey) {
+		this.compositeKey = compositeKey;
 	}
 
 	public int getProductDetailId() {
@@ -75,7 +100,6 @@ public class ProductDetail {
 		this.product = product;
 	}
 
-
 	public int getQuantity() {
 		return quantity;
 	}
@@ -84,6 +108,4 @@ public class ProductDetail {
 		this.quantity = quantity;
 	}
 
-
-	
 }
