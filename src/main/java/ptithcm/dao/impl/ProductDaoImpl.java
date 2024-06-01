@@ -64,4 +64,16 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return true;
 	}
+
+	@Override
+	public List<Product> getProductByType(String type) {
+		Session session = sessionFactory.getCurrentSession();
+
+		String hql = "FROM Product WHERE typeDetailId=:type";
+		Query query = session.createQuery(hql);
+		query.setParameter("type", type);
+		@SuppressWarnings("unchecked")
+		List<Product> productList = query.list();
+		return productList;
+	}
 }

@@ -1,0 +1,82 @@
+
+/* cart hover animation */
+.cart-product {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.cart-product::before {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+
+.main-image .cart-product{
+  position: absolute;
+  top: calc(50% - 22.5px);
+  left: calc(50% - 22.5px);
+  color: #fff;
+  background-color: rgb(104, 5, 5);
+  z-index: 1;
+  animation: rotate 0.2s ease-out;
+}
+
+.main-image .fa-shopping-cart:hover {
+  background-color: rgb(212, 10, 10);
+}
+
+/* hover show hide image */
+.main-image {
+  position: relative;
+  padding-bottom: calc(100% * 4 / 3);
+}
+
+.sub-image {
+  margin: 4px auto;
+  position: relative;
+  width: 20%;
+  padding-bottom: calc(20% * 4 / 3);
+}
+
+.sub-image img,
+.main-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main-image .cart-product {
+  display: none;
+}
+
+.main-image .img-1 {
+  display: block;
+}
+
+.main-image .img-2 {
+  display: none;
+}
+
+.main-image:hover .img-1 {
+  display: none;
+}
+
+.main-image:hover .cart-product,
+.main-image:hover .img-2 {
+  display: block;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(-90deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}

@@ -99,8 +99,9 @@
 									khoản</a></li>
 							<li class=""><a href="profile/info.htm">Quản lí</a></li>
 							<li class="border border-t-1 d-flex align-items-center gap-2">
-								<a href="user/logout.htm" class="d-block"> Đăng xuất </a> <i
-								class="bi bi-box-arrow-left logout"></i>
+								<a href="user/logout.htm" class="d-block"> <span>
+										Đăng xuất </span> <i class="bi bi-box-arrow-left logout ml-1"></i>
+							</a>
 							</li>
 						</ul>
 					</div>
@@ -109,8 +110,7 @@
 		</c:if>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation"
-			>
+			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse justify-content-end order-lg-2"
