@@ -13,13 +13,13 @@ public class Address {
 	@Id
 	@Column(name = "addressId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer addressid;
+	private Integer addressId;
 	
 	@Column(name = "addressName")
 	private String addressName;
 	
 	@Column(name = "recipientName")
-	private String recipientname;
+	private String recipientName;
 	
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
@@ -37,20 +37,28 @@ public class Address {
 	public Address(String addressName, String recipientname, String phoneNumber, Account account) {
 		super();
 		this.addressName = addressName;
-		this.recipientname = recipientname;
+		this.recipientName = recipientname;
+		this.phoneNumber = phoneNumber;
+		this.account = account;
+	}
+
+	public Address(Integer addressId, String addressName, String recipientName, String phoneNumber, Account account) {
+		super();
+		this.addressId = addressId;
+		this.addressName = addressName;
+		this.recipientName = recipientName;
 		this.phoneNumber = phoneNumber;
 		this.account = account;
 	}
 
 
-
-	public Integer getAddressid() {
-		return addressid;
+	public Integer getAddressId() {
+		return addressId;
 	}
 
 
-	public void setAddressid(Integer addressid) {
-		this.addressid = addressid;
+	public void setAddressid(Integer addressId) {
+		this.addressId = addressId;
 	}
 
 	public String getAddressName() {
@@ -61,12 +69,12 @@ public class Address {
 		this.addressName = addressName;
 	}
 
-	public String getRecipientname() {
-		return recipientname;
+	public String getRecipientName() {
+		return recipientName;
 	}
 
-	public void setRecipientname(String recipientname) {
-		this.recipientname = recipientname;
+	public void setRecipientname(String recipientName) {
+		this.recipientName = recipientName;
 	}
 
 	public String getPhoneNumber() {
