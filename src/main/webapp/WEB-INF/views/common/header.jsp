@@ -41,11 +41,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
 	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
-<<<<<<< HEAD
-<link rel="stylesheet" href="resources/css/home/home.css">
-<!-- <link rel="stylesheet" href="resources/css/listProduct.css"> -->
-=======
->>>>>>> e34c6e210cdb276b1662aa8ac2fc7ccac0bb4094
 <link rel="stylesheet" href="resources/css/footer/footer.css">
 <link rel="stylesheet" href="resources/css/home/nav-top-bar.css">
 <title>Web ban hang</title>

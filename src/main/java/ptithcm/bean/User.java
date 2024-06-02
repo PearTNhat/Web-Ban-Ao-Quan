@@ -4,14 +4,14 @@ public class User {
 	private String firstname;
 	private String lastname;
 	private String email;
-	private String numberphone;
+	private String image;
 	public User() {
 	}
-	public User(String firstname,String lastname,String email, String numberphone) {
+	public User(String firstname,String lastname,String email, String image) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
-		this.numberphone = numberphone;
+		this.image = image;
 	}
 	public String getFirstname() {
 		return firstname;
@@ -31,11 +31,11 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getNumberphone() {
-		return numberphone;
+	public String getImage() {
+		return image;
 	}
-	public void setNumberphone(String numberphone) {
-		this.numberphone = numberphone;
-	}
+	public void setImage(String image) {
+		this.image = image;
+	}	
 	
 }

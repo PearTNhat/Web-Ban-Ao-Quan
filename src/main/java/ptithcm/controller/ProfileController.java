@@ -19,7 +19,7 @@ public class ProfileController {
 		}
 		return "page/profile/info";
 	}
-	
+	//session
 	@RequestMapping("/order")
 	public String profileOrder(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");

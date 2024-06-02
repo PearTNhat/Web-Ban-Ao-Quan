@@ -10,7 +10,8 @@
 			height="60" class="d-inline-block align-text-top">
 		</a>
 		<c:if test="${not empty sessionScope.user}">
-			<div class="d-flex align-items-center gap-4 order-lg-3">
+			<div class="cart-avar d-flex align-items-center gap-4 order-lg-3"
+				style="margin-left: auto;">
 				<!--                 cart -->
 				<div class="cart navbar-shopping d-md-block position-relative">
 					<i class="fas fa-shopping-cart cart-icon"></i>
@@ -88,18 +89,27 @@
 				</div>
 				<!-- user -->
 				<div class="user">
-					<img
-						src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVlCnyLYgXFNF7pdPhUodXuPIzZPLEHBb_1A&s"
-						alt="" class="rounded-circle d-md-block"
-						style="width: 40px; margin-right: 5px;">
+					<c:choose>
+						<c:when test="${not empty user.avatar}">
+							<img src="${user.avatar}"
+								 alt="" class="rounded-circle d-md-block"
+								 style="width: 40px; height: 35px; margin-right: 5px;">
+						</c:when>
+						<c:otherwise>
+							<img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
+								 alt="" class="rounded-circle d-md-block"
+								 style="width: 40px; margin-right: 5px;">
+						</c:otherwise>
+					</c:choose>
 					<div class="user-container">
 						<ul class="user-feature">
 							<li class=""><a href="profile/info.htm">Thông tin tài
 									khoản</a></li>
 							<li class=""><a href="profile/info.htm">Quản lí</a></li>
 							<li class="border border-t-1 d-flex align-items-center gap-2">
-								<a href="" class="d-block"> Đăng xuất </a> <i
-								class="bi bi-box-arrow-left logout"></i>
+								<a href="user/logout.htm" class="d-block"> <span>
+										Đăng xuất </span> <i class="bi bi-box-arrow-left logout ml-1"></i>
+							</a>
 							</li>
 						</ul>
 					</div>
@@ -108,17 +118,15 @@
 		</c:if>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarNav" aria-controls="navbarNav"
-			aria-expanded="false" aria-label="Toggle navigation"
-			style="margin-left: auto;">
+			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div
-			class="collapse navbar-collapse justify-content-end order-lg-2"
+		<div class="collapse navbar-collapse justify-content-end order-lg-2"
 			id="navbarNav">
 			<ul class="navbar-nav me-2">
 				<li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN
 						CHẠY</a></li>
-				<c:forEach var="pt" items="${pts}">
+				<c:forEach var="pt" items="${sessionScope.pts}">
 					<li class="nav-item"><span
 						class="nav-link text-uppercase p-type">${pt.name}</span>
 

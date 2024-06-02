@@ -35,7 +35,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		
 		// Add product type list to session
 		List<ProductType> listProductType = productTypeDao.getAllProductType();
-		session.setAttribute("listProductType", listProductType);
+		session.setAttribute("pts", listProductType);
 		return true;
 	}
 }

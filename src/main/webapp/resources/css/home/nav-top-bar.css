@@ -33,6 +33,7 @@ section {
 html {
 	font-family: Arial, Helvetica, sans-serif;
 }
+
 .p-type {
 	cursor: pointer;
 }
@@ -55,8 +56,7 @@ html {
 }
 
 .dd-type-block {
-	
- 	display: block; 
+	display: block;
 }
 
 .dd-type li {
@@ -107,78 +107,11 @@ ul.user-feature {
 	list-style: none;
 }
 
-.text-decoration-none {
-	position: relative;
-}
-
-.text-decoration-none .fa-shopping-cart {
-	/* display: none; */
-	position: absolute;
-	top: -15%;
-	left: calc(80% - 29px);
-	padding: 20px;
-	color: #fff;
-	font-size: larger;
-	border-radius: 50%;
-	background-color: rgb(104, 5, 5);
-	animation: disappear .3s ease-out 1;
-	z-index: 1;
-}
-
-.text-decoration-none .fa-shopping-cart::before {
-	margin-left: -2px;
-}
-
-.text-decoration-none .fa-shopping-cart:hover {
-	background-color: rgb(212, 10, 10);
-}
-
-.text-decoration-none img:nth-child(2) {
-	/* position: absolute; */
-	display: inline-block;
-	/* zoom: 1.5; */
-	top: -69%;
-	left: 4%;
-	z-index: 2;
-}
-
-.text-decoration-none img:nth-child(3) {
-	display: none;
-	z-index: 2;
-	width: 100%;
-	transition: all 1s ease-in-out;
-}
-
-.text-decoration-none:hover img:nth-child(2) {
-	z-index: -1;
-	display: none;
-	transition: 0.5s;
-}
-
-.text-decoration-none:hover img:nth-child(3) {
-	display: inline-block;
-}
-
-div:hover>.text-decoration-none .fa-shopping-cart {
-	display: block;
-	animation: appear .3s ease-out 1;
-}
-
 .search-sub {
 	padding: 8px;
 	transform: translateY(5px);
 	border: none;
 	color: #502a2a;
-}
-
-@keyframes appear {from { transform:rotate(-45deg)
-	
-}
-
-to {
-	transform: translateX(0deg);
-}
-
 }
 .order {
 	background-color: aqua;
@@ -323,12 +256,14 @@ to {
 
 .user-feature li {
 	cursor: pointer;
-	padding: 10px;
 }
 
 .user-feature li a {
 	text-decoration: none;
 	color: #000;
+	padding: 10px;
+	display:block;
+	flex:1;
 }
 
 .user-feature li:hover {
@@ -379,6 +314,9 @@ to {
 }
 
 @media ( max-width : 995px) {
+	.cart-avar {
+		margin-right: 10px;
+	}
 	.open-max-1000 {
 		display: block;
 	}
@@ -406,9 +344,7 @@ to {
 	}
 }
 
-@keyframes slideDown {
-	from 
-	{ max-height:0px;
+@keyframes slideDown {from { max-height:0px;
 	
 }
 

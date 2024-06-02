@@ -32,7 +32,7 @@ public class userAccount {
 	}
 	@RequestMapping("user")
 	public String info(ModelMap model) {
-		User user = new User("Duong", "Phi","phi@gmail.com","0123456789");
+		User user = new User("Duong", "Phi","phi@gmail.com","");
 		model.addAttribute("user", user);;
 		return "page/profile/info";
 	}
