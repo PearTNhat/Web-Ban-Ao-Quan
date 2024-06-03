@@ -13,7 +13,6 @@ public class ProductType {
 	@Id
 	@Column(name = "typeId")
 	private int typeId;
-	
 
 	@Column(name="name")
 	private String name;

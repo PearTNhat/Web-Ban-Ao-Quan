@@ -21,6 +21,7 @@
 			"showMethod" : "fadeIn",
 			"hideMethod" : "fadeOut"
 		};
+		console.log("zo",  "${error}");
 		if (error) {
 			toastr.error(error, 'Lỗi');
 		}

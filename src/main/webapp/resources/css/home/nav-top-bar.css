@@ -59,7 +59,8 @@ html {
 	display: block;
 }
 
-.dd-type li {
+.dd-type li a{
+	display:block;
 	padding: 8px;
 }
 
@@ -300,13 +301,8 @@ ul.user-feature {
 		width: 200px;
 		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 	}
-	.navbar-nav li:nth-child(2):hover a, .navbar-nav li:nth-child(3):hover a
-		{
-		color: #b31f2a
-	}
-	.navbar-nav li:nth-child(2):hover ul, .navbar-nav li:nth-child(3):hover ul
-		{
-		display: block;
+	.navbar-nav .nav-item:hover .dd-type{
+	display:block;
 	}
 	.navbar-shopping {
 		position: relative;
@@ -326,9 +322,8 @@ ul.user-feature {
 	.dd-type ul {
 		width: 100%;
 	}
-	.navbar-nav li:nth-child(2):hover a, .navbar-nav li:nth-child(3):hover a
-		{
-		background-color: #eeeeee;
+	.navbar-nav input:checked ~.dd-type{
+		display:block;
 	}
 }
 

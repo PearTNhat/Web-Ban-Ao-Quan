@@ -1,5 +1,7 @@
 package ptithcm.dao.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -8,46 +10,42 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import ptithcm.dao.ProductImageDao;
+import ptithcm.bean.ProductDetailBean;
+import ptithcm.dao.ProductDetailDao;
+import ptithcm.entity.ProductDetail;
 import ptithcm.entity.ProductImage;
 
-public class ProductImageImpl implements ProductImageDao {
-	
+public class ProductDetailDaoImpl implements ProductDetailDao {
 	private SessionFactory sessionFactory;
 
-	@Autowired 
+	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	@Override
-	public Boolean addProductImage(ProductImage pi) {
+	@Transactional
+	public List<ProductDetail> getAllProductDetails() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM ProductDetail";
+		Query query= session.createQuery(hql);
+		List<ProductDetail> productDetails = query.list();
+		return productDetails;
+	}
+	@Override
+	public Integer addProductDetail(ProductDetail pd) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.save(pi);
+			session.save(pd);
 			t.commit();
 		} catch (Exception e) {
 			t.rollback();
 			e.printStackTrace();
-			return false;
+			return -1;
 		} finally {
 			session.close();
 		}
-		return true;
+		return pd.getProductDetailId();
 	}
-
-	
-	@Override
-	@Transactional
-	public Integer countImageById(Integer productDetailId) {
-		Session session = sessionFactory.getCurrentSession();
-
-		Query query = session.createQuery(
-				"FROM ProductImage a WHERE productDetailId=:productDetailId");
-		query.setParameter("productDetailId", productDetailId);
-		
-		return (Integer) query.uniqueResult();
-	}
-	
 }

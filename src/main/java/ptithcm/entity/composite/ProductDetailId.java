@@ -1,25 +1,34 @@
 package ptithcm.entity.composite;
 
 import java.io.Serializable;
-
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ProductDetailId implements Serializable  {
+public class ProductDetailId implements Serializable {
 	private static final long serialVersionUID = 1L;
+
+	@Column(name = "productId", nullable = false)
 	private Integer productId;
-    private String size;
-    private String color;
 
-    // Default constructor
-    public ProductDetailId() {}
+	@Column(name = "size", nullable = false)
+	private String size;
 
-    // Constructor
-    public ProductDetailId(Integer productId, String size, String color) {
-        this.productId = productId;
-        this.size = size;
-        this.color = color;
-    }
+	@Column(name = "color", nullable = false)
+	private String color123;
+
+	// Default constructor
+	public ProductDetailId() {
+	}
+
+	// Constructor
+	public ProductDetailId(Integer productId,  String color123,String size) {
+		this.productId = productId;
+		this.color123 = color123;
+		this.size = size;
+	}
+
+	// Getters and setters...
 
 	public Integer getProductId() {
 		return productId;
@@ -37,19 +46,12 @@ public class ProductDetailId implements Serializable  {
 		this.size = size;
 	}
 
-	public String getColor() {
-		return color;
+	public String getColor123() {
+		return color123;
 	}
 
-	public void setColor(String color) {
-		this.color = color;
+	public void setColor123(String color123) {
+		this.color123 = color123;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-
-
-   
 }

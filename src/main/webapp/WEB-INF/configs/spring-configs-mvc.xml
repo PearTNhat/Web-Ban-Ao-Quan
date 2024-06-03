@@ -17,7 +17,7 @@
 			http://www.springframework.org/schema/util
 			https://www.springframework.org/schema/util/spring-util.xsd
 			">
-			
+
 	<!-- Spring MVC Annotation -->
 	<context:annotation-config />
 	<mvc:annotation-driven />
@@ -34,10 +34,10 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-		p:url="jdbc:sqlserver://26.62.123.121:1433; Database=DBWEB"
+	 p:url="jdbc:sqlserver://localhost:1433; Database=DBWEB" 
 		p:username="sa" p:password="12">
-<!-- 		p:url="jdbc:sqlserver://localhost:1433; Database=DBWEB" -->
-<!-- 		p:username="sa" p:password="kc"> -->
+	<!-- p:url="jdbc:sqlserver://26.62.123.121:1433; Database=DBWEB" -->
+		<!-- p:username="sa" p:password="kc"> -->
 	</bean>
 
 	<!-- Cấu hình Hibernate -->
@@ -59,7 +59,7 @@
 		p:sessionFactory-ref="sessionFactory" />
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
-		
+
 	<!-- DAO -->
 	<bean id="accountDao" class="ptithcm.dao.impl.AccountDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -73,10 +73,21 @@
 	<bean id="imageDao" class="ptithcm.dao.impl.ProductImageImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<bean id="productTypeDao" class="ptithcm.dao.impl.ProductTypeDaoImpl">
+	<bean id="productTypeDao"
+		class="ptithcm.dao.impl.ProductTypeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+	<bean id="productDetailDao"
+		class="ptithcm.dao.impl.ProductDetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="colorDao" class="ptithcm.dao.impl.ColorDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="sizeDao" class="ptithcm.dao.impl.SizeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
