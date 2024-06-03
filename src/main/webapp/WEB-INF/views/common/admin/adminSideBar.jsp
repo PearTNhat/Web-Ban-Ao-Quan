@@ -28,6 +28,10 @@
 							class="sidebar-link ps-5"> <i class="bi bi-person-check-fill"></i>
 								Users
 						</a></li>
+						<li class="sidebar-item"><a href="admin/accounts/admin-register.htm"
+							class="sidebar-link ps-5"> <i class="bi bi-person-plus-fill"></i>
+								Add user
+						</a></li>
 					</ul></li>
 				<li class="sidebar-item"><a href="#"
 					class="sidebar-link collapsed has-dropdown"
@@ -48,7 +52,8 @@
 					</ul></li>
 			</ul>
 			<div class="sidebar-footer">
-				<a href="#" class="sidebar-link"> <i class="lni lni-exit"></i> <span>Logout</span>
+				<a href="user/logout.htm" class="sidebar-link"> <i class="lni lni-exit"></i> <span>Logout</span>
 				</a>
 			</div>
-		</aside>
+		</aside
+		>

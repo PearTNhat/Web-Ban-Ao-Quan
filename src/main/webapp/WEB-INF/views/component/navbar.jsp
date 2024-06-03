@@ -9,7 +9,7 @@
 			src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
 			height="60" class="d-inline-block align-text-top">
 		</a>
-		<c:if test="${not empty sessionScope.user}">
+		<c:if test="${not empty sessionScope.user && sessionScope.user.isAdmin == false}">
 			<div class="cart-avar d-flex align-items-center gap-4 order-lg-3"
 				style="margin-left: auto;">
 				<!--                 cart -->
@@ -149,6 +149,9 @@
 			<c:if test="${empty sessionScope.user}">
 				<a class="mx-2" href="user/login.htm">Đăng nhập</a>
 				<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>
+			</c:if>
+			<c:if test="${not empty sessionScope.user && user.isAdmin == true}">
+				<a href="admin.htm" class="btn btn-outline btn-outline-secondary">Admin <i class="bi bi-arrow-bar-right fw-bold"></i></a>
 			</c:if>
 		</div>
 	</div>

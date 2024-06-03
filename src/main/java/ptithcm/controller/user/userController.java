@@ -117,6 +117,7 @@ public class userController {
 			
 			// set user to Session
 			session.setAttribute("user", loginUser);
+			if (loginUser.getIsAdmin()) return "redirect:/admin/dashboard.htm";
 			return "redirect:/.htm";
 		}
 		
@@ -204,7 +205,7 @@ public class userController {
 		
 		Account createdAccount = accountDao.createAccount(account);
 		if (createdAccount != null) {
-			if (user.getAddress() != null) {
+			if (user.getAddress() != null && !user.getAddress().trim().isEmpty()) {
 				Address address = new Address(user.getAddress(), createdAccount.getFirstName() + ' ' + createdAccount.getLastName(), null, createdAccount);
 				if (!addressDao.addAddress(createdAccount.getAccountId(), address)) {
 					System.out.println("Error adding new address");
