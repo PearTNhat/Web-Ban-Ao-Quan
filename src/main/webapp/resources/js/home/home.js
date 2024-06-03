@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	function toggleDropdown() {
 		if (window.matchMedia("(max-width: 955px)").matches) {
 			$(".p-type").on("click", function() {
@@ -24,4 +24,4 @@ $(document).ready(function() {
 	$(window).resize(function() {
 		toggleDropdown();
 	});
-});
+});*/

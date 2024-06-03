@@ -36,17 +36,21 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "typeDetailId")
 	private TypeDetail type;
-
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-	private Collection<ProductDetail> productDeatil;
 	
-	public Collection<ProductDetail> getProductDeatil() {
-		return productDeatil;
-	}
 
-	public void setProductDeatil(Collection<ProductDetail> productDeatil) {
-		this.productDeatil = productDeatil;
-	}
+	
+	/*
+	 * @OneToMany(mappedBy = "product", fetch = FetchType.LAZY) private
+	 * Collection<ProductDetail> productDeatil;
+	 */
+
+	
+	/*
+	 * public Collection<ProductDetail> getProductDeatil() { return productDeatil; }
+	 * 
+	 * public void setProductDeatil(Collection<ProductDetail> productDeatil) {
+	 * this.productDeatil = productDeatil; }
+	 */
 
 	public TypeDetail getType() {
 		return type;

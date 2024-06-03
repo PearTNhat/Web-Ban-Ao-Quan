@@ -3,6 +3,10 @@ package ptithcm.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Entity
 public class ProductImage {
@@ -10,25 +14,31 @@ public class ProductImage {
 	@Column(name = "image")
 	private String image;
 
-	@Column(name = "productId")
-	private int productId;
+	@Column(name = "productDetailId")
+	private int pdId;
 
 	@Column(name = "priority")
 	private int priority;
 
-	public ProductImage(String image, int productId, int priority) {
-		super();
+	@ManyToOne
+	@JoinColumn(name = "productDetailId", insertable = false, updatable = false)
+	private ProductDetail productImage;
+
+	public ProductImage() {
+	}
+
+	public ProductImage(String image, int pdId, int priority) {
 		this.image = image;
-		this.productId = productId;
+		this.pdId = pdId;
 		this.priority = priority;
 	}
 
-	public int getProductId() {
-		return productId;
+	public int getPdId() {
+		return pdId;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setPdId(int pdId) {
+		this.pdId = pdId;
 	}
 
 	public String getImage() {

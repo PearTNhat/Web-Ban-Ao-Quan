@@ -1,45 +1,53 @@
 package ptithcm.entity;
 
+import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import ptithcm.entity.composite.ProductDetailId;
 
 @Entity
+@Table(name = "ProductDetail", uniqueConstraints = @UniqueConstraint(columnNames = { "productId", "sizeId",
+		"colorId" }))
 public class ProductDetail {
-	@EmbeddedId
-	private ProductDetailId compositeKey;
-
-	@ManyToOne
-	@JoinColumn(name = "productId", insertable = false, updatable = false)
-	private Product product;
-	@Column(name = "color", insertable = false, updatable = false)
-	private int color;
-	@Column(name = "size", insertable = false, updatable = false)
-	private int size;
-
-	@Column(unique = true, name = "productDetailId", insertable = false, updatable = false)
+	@Id
+	@Column(name = "productDetailId", insertable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int productDetailId;
+	private Integer productDetailId;
 
-	public int getSize() {
-		return size;
-	}
+	@Column(name = "productId", nullable = false)
+	private Integer productId;
+	@Column(name = "colorId", nullable = false)
+	private Integer colorId;
+	@Column(name = "sizeId", nullable = false)
+	private Integer sizeId;
 
-	public void setSize(int size) {
-		this.size = size;
-	}
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "sizeId", insertable = false, updatable = false)
+	private Size size;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "colorId", insertable = false, updatable = false)
+	private Color color;
+
+	@OneToMany(mappedBy = "productImage", fetch = FetchType.EAGER)
+	private Collection<ProductImage> image;
 
 	@Column(name = "soldQuantity")
 	private int soldQuantity;
@@ -47,57 +55,48 @@ public class ProductDetail {
 	@Column(name = "quantity")
 	private int quantity;
 
-
-
-	@Transient
-	private List<MultipartFile> files;
-
-	public List<MultipartFile> getFiles() {
-		return files;
+	public ProductDetail() {
 	}
 
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
+	// Getters and setters...
+
+	public Integer getProductDetailId() {
+		return productDetailId;
+	}
+	public void setProductDetailId(Integer productDetailId) {
+		this.productDetailId = productDetailId;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Integer getColorId() {
+		return colorId;
+	}
+
+	public void setColorId(Integer colorId) {
+		this.colorId = colorId;
+	}
+
+	public Integer getSizeId() {
+		return sizeId;
+	}
+
+	public void setSizeId(Integer sizeId) {
+		this.sizeId = sizeId;
 	}
 
 	public int getSoldQuantity() {
 		return soldQuantity;
 	}
 
-	public int getColor() {
-		return color;
-	}
-
-	public void setColor(int color) {
-		this.color = color;
-	}
-
 	public void setSoldQuantity(int soldQuantity) {
 		this.soldQuantity = soldQuantity;
-	}
-
-	public ProductDetailId getCompositeKey() {
-		return compositeKey;
-	}
-
-	public void setCompositeKey(ProductDetailId compositeKey) {
-		this.compositeKey = compositeKey;
-	}
-
-	public int getProductDetailId() {
-		return productDetailId;
-	}
-
-	public void setProductDetailId(int productDetailId) {
-		this.productDetailId = productDetailId;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 	public int getQuantity() {
@@ -107,5 +106,4 @@ public class ProductDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
 }

@@ -17,6 +17,11 @@ public class TypeDetail {
 
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "description")
+	private String desc;
+	
+	
 
 	//typeProduct
 	@ManyToOne
@@ -37,6 +42,13 @@ public class TypeDetail {
 		this.product = product;
 	}
 
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 	public ProductType getType() {
 		return type;
 	}

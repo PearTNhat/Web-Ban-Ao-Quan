@@ -6,13 +6,16 @@
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="main">
 	<nav class="navbar bg-white">
-	  <div class="container-fluid">
+	  <div class="container-fluid d-flex justify-content-between">
 	    <div class="navbar-brand ms-4">
 	      <div class="fs-5">
 	      	<a href="admin/dashboard.htm">
 		      	<i class="bi bi-speedometer2"></i> Dashboard	      	
 	      	</a>
 	      </div>
+	    </div>
+	    <div class="me-3">
+	    	Xin chào, <span class="fw-bold">${user.lastName}</span>
 	    </div>
 	  </div>
 	</nav>

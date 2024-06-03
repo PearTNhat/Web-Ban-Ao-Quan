@@ -26,5 +26,16 @@
 			<mvc:mapping path="/profile/**"/>
 			<bean class="ptithcm.interceptor.ProfileInterceptor" />
 		</mvc:interceptor>
+		<!-- Prehandle cho User -->
+		<mvc:interceptor>
+			<mvc:mapping path="/user/**"/>
+			<mvc:exclude-mapping path="/user/logout.htm" />
+			<bean class="ptithcm.interceptor.UserInterceptor" />
+		</mvc:interceptor>
+		<!-- Prehandle cho Admin -->
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<bean class="ptithcm.interceptor.AdminInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

@@ -9,7 +9,7 @@
 			src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
 			height="60" class="d-inline-block align-text-top">
 		</a>
-		<c:if test="${not empty sessionScope.user}">
+		<c:if test="${not empty sessionScope.user && sessionScope.user.isAdmin == false}">
 			<div class="cart-avar d-flex align-items-center gap-4 order-lg-3"
 				style="margin-left: auto;">
 				<!--                 cart -->
@@ -91,14 +91,15 @@
 				<div class="user">
 					<c:choose>
 						<c:when test="${not empty user.avatar}">
-							<img src="${user.avatar}"
-								 alt="" class="rounded-circle d-md-block"
-								 style="width: 40px; height: 35px; margin-right: 5px;">
+							<img src="${user.avatar}" alt=""
+								class="rounded-circle d-md-block"
+								style="width: 40px; height: 35px; margin-right: 5px;">
 						</c:when>
 						<c:otherwise>
-							<img src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
-								 alt="" class="rounded-circle d-md-block"
-								 style="width: 40px; margin-right: 5px;">
+							<img
+								src="https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"
+								alt="" class="rounded-circle d-md-block"
+								style="width: 40px; margin-right: 5px;">
 						</c:otherwise>
 					</c:choose>
 					<div class="user-container">
@@ -127,15 +128,15 @@
 				<li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN
 						CHẠY</a></li>
 				<c:forEach var="pt" items="${sessionScope.pts}">
-					<li class="nav-item"><span
-						class="nav-link text-uppercase p-type">${pt.name}</span>
-
+					<li class="nav-item"><label for="click-type${pt.typeId}" style="display:block;"> <span
+							class="nav-link text-uppercase p-type">${pt.name} </span>
+					</label> <input type="checkbox" id="click-type${pt.typeId}" style="width:0;height:0;display:none" />
 						<ul class="dd-type dd-type-none">
 							<c:forEach var="typeDetail" items="${pt.types}">
-								<li>${typeDetail.name}</li>
+								<li><a href="products/${typeDetail.typeDeatilId}.htm"
+									class="text-decoration-none"> ${typeDetail.name} </a></li>
 							</c:forEach>
 						</ul></li>
-
 				</c:forEach>
 			</ul>
 			<form class="d-flex my-2 me-5" role="search">
@@ -148,6 +149,9 @@
 			<c:if test="${empty sessionScope.user}">
 				<a class="mx-2" href="user/login.htm">Đăng nhập</a>
 				<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>
+			</c:if>
+			<c:if test="${not empty sessionScope.user && user.isAdmin == true}">
+				<a href="admin.htm" class="btn btn-outline btn-outline-secondary">Admin <i class="bi bi-arrow-bar-right fw-bold"></i></a>
 			</c:if>
 		</div>
 	</div>

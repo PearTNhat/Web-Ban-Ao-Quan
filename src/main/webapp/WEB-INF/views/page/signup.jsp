@@ -19,7 +19,7 @@
                     alt="" class="img-fluid">
             </div>
             <div class="col-10 col-md-5">
-                <div class="display-6 fw-bold text-danger">Đăng ký ${passwordNotMatch}
+                <div class="display-6 fw-bold text-danger">Đăng ký
                 </div>
                 <div class="lead text-muted my-1 fs-6">Đăng kí để tận hưởng trải nghiệm mua sắm trọn vẹn tại 4 MENS
                 </div>
@@ -28,14 +28,14 @@
                         <div class="col-5">
                             <div class="form-floating">
                                 <form:input path="firstName" type="text" class="form-control ${submit && firstNameErr ? 'is-invalid' : '' } ${submit && !firstNameErr ? 'is-valid' : ''}" id="firstName" placeholder="firstname"/>
-                                <form:label path="firstName" for="firstName">Họ</form:label>
+                                <form:label path="firstName" for="firstName">* Họ</form:label>
                             </div>
 	                        <form:errors path="firstName" cssClass="invalid-feedback d-block"/>
                         </div>
                         <div class="col-7">
                             <div class="form-floating">
                                 <form:input path="lastName" type="text" class="form-control ${submit && lastNameErr ? 'is-invalid' : '' } ${submit && !lastNameErr ? 'is-valid' : ''}" id="lastName" placeholder="lastname" />
-                                <form:label path="lastName" for="lastName">Tên</form:label>
+                                <form:label path="lastName" for="lastName">* Tên</form:label>
                                 <form:errors path="lastName" cssClass="invalid-feedback d-block"/>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <form:errors path="address" cssClass="invalid-feedback d-block"/>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="email">Email</span>
+                        <span class="input-group-text" id="email">* Email</span>
                         <form:input path="email" type="text" class="form-control ${submit && emailErr ? 'is-invalid' : '' } ${submit && !emailErr ? 'is-valid' : ''} ${submit && accountError ? 'is-invalid' : '' }" placeholder="4mens@example.com" aria-label="address"
                             aria-describedby="email" />
                         <form:errors path="email" cssClass="invalid-feedback d-block"/>
@@ -57,13 +57,13 @@
                     </div>
                     <div class="form-floating col-12 my-3">
                         <form:input path="password" type="password" class="form-control ${submit && passwordErr ? 'is-invalid' : '' } ${submit && !passwordErr ? 'is-valid' : ''}" id="password" placeholder="password" />
-                        <label for="password">Mật khẩu</label>
+                        <label for="password">* Mật khẩu</label>
                         <form:errors path="password" cssClass="invalid-feedback d-block"/>
                     </div>
                     <div class="form-floating col-12 my-3">
                         <form:input path="confirmPassword" type="password" class="form-control ${submit && confirmPasswordErr ? 'is-invalid' : '' } ${submit && !confirmPasswordErr ? 'is-valid' : ''} ${submit && passwordNotMatch ? 'is-invalid' : '' }" id="checkpassword"
                             placeholder="password" />
-                        <label for="checkpassword">Nhập lại mật khẩu</label>
+                        <label for="checkpassword">* Nhập lại mật khẩu</label>
                         <form:errors path="confirmPassword" cssClass="invalid-feedback d-block"/>
                         <c:if test="${passwordNotMatch == true}">
 							<div class="invalid-feedback d-block">Nhập lại mật khẩu không trùng khớp</div>

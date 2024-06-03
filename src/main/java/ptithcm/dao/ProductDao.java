@@ -9,5 +9,5 @@ public interface ProductDao {
 	public List<Product> getProducts(int page, int pageSize, String search);
 	public Boolean addProductDetail(ProductDetail pd);
 	public Long countProducts(String search);
-	public List<Product> getProductByType(String type);
+	public List<Product> getProductByType(String typeId);
 }

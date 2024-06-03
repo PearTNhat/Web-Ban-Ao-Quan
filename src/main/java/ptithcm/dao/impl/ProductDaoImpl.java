@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ptithcm.bean.ProductDetailBean;
 import ptithcm.dao.ProductDao;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductDetail;
@@ -17,11 +18,11 @@ import ptithcm.entity.ProductDetail;
 public class ProductDaoImpl implements ProductDao {
 	private SessionFactory sessionFactory;
 
-	@Autowired 
+	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Product> getProducts(int page, int pageSize, String search) {
@@ -36,7 +37,6 @@ public class ProductDaoImpl implements ProductDao {
 		return productList;
 	}
 
-	
 	@Transactional
 	public Long countProducts(String search) {
 		Session session = sessionFactory.getCurrentSession();
@@ -50,30 +50,21 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public Boolean addProductDetail(ProductDetail pd) {
-		Session session = sessionFactory.openSession();
-		Transaction t = session.beginTransaction();
-		try {
-			session.save(pd);
-			t.commit();
-		} catch (Exception e) {
-			t.rollback();
-			e.printStackTrace();
-			return false;
-		} finally {
-			session.close();
-		}
 		return true;
 	}
 
 	@Override
-	public List<Product> getProductByType(String type) {
+	@Transactional
+	public List<Product> getProductByType(String typeId) {
 		Session session = sessionFactory.getCurrentSession();
 
-		String hql = "FROM Product WHERE typeDetailId=:type";
+		String hql = "FROM Product WHERE typeDetailId=:typeId";
 		Query query = session.createQuery(hql);
-		query.setParameter("type", type);
+		query.setParameter("typeId", typeId);
 		@SuppressWarnings("unchecked")
 		List<Product> productList = query.list();
 		return productList;
 	}
+
+	
 }

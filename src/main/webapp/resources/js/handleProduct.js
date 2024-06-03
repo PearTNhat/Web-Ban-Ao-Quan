@@ -1,4 +1,6 @@
+//color
 // image product
+let previewImgs = [];
 $(".imgAdd").click(function() {
 	$(this)
 		.closest(".row")
@@ -37,6 +39,7 @@ $(function() {
 			reader.onloadend = function() {
 				// set image data as background of div
 				//alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+				previewImgs.push(this.result);
 				uploadFile
 					.closest(".imgUp")
 					.find(".imagePreview")
@@ -45,19 +48,16 @@ $(function() {
 		}
 	});
 });
-// CK editor
-/*ClassicEditor
-	.create(document.querySelector('#editor'), {
-		toolbar: {
-			items: [
-				'bold', 'italic', 'underline',
-				'link', 'bulletedList', 'numberedList'
-			]
-		}
-	})
-	.then(editor => {
-		console.log('CKEditor 5 initialized', editor);
-	})
-	.catch(error => {
-		console.error(error);
-	});*/
+ $('#form-p').on('submit', function(event) {
+        const container = $('#hiddenInputsContainer');
+        container.empty(); // Clear any existing hidden inputs
+        previewImgs.forEach(function(img, index) {
+            // Create a new hidden input for each image preview
+            const input = $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'templImg[' + index + ']')
+                .val(img);
+            container.append(input);
+        });
+    });
+    
