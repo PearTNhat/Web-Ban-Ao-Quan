@@ -122,7 +122,13 @@ public class AdminProductsController {
 			newPd.setSizeId(pd.getSizeId());
 			Integer pdId = productDetailDao.addProductDetail(newPd);
 			if (pdId == -1) {
-				redirectAttributes.addFlashAttribute("error", "Xảy ra lỗi khi lấy id chi tiết sản phẩm");
+				List<Color> colors = colorDao.getAllColors();
+				List<Size> sizes = sizeDao.getAllSizes();
+				model.addAttribute("colors", colors);
+				model.addAttribute("sizes", sizes);
+				model.addAttribute("pd", pd);
+				model.addAttribute("productId", productId);
+				redirectAttributes.addFlashAttribute("error", "Sản phẩm đã tồn tại");
 				return "redirect:/admin/products/add-product/" + productId + ".htm";
 			}
 			// thêm ảnh
