@@ -9,13 +9,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ptithcm.bean.User;
 import ptithcm.dao.AccountDao;
 import ptithcm.entity.Account;
 
 @Transactional
 public class AccountDaoImpl implements AccountDao {
 	private SessionFactory factory;
-
+	
+	
+	  @Autowired 
+	  private AccountDao accountDao;
+	 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.factory = sessionFactory;
 	}
@@ -72,6 +77,28 @@ public class AccountDaoImpl implements AccountDao {
 		query.setParameter("email", email);
 		Account acc = (Account) query.uniqueResult();
 		return acc;
+	}
+	@Override
+	public Account updateAccount(User user) {
+		Session session = factory.getCurrentSession();
+        Transaction transaction = null;
+        
+        try {
+            transaction = session.beginTransaction();
+            
+            session.update(user);
+            
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

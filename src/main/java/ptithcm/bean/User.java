@@ -1,29 +1,32 @@
 package ptithcm.bean;
 
 public class User {
-	private String firstname;
-	private String lastname;
+	private String firstName;
+	private String lastName;
 	private String email;
 	private String image;
 	public User() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	public User(String firstname,String lastname,String email, String image) {
-		this.firstname = firstname;
-		this.lastname = lastname;
+	public User(String firstName, String lastName, String email, String image) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.image = image;
 	}
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	public String getEmail() {
 		return email;
@@ -36,6 +39,7 @@ public class User {
 	}
 	public void setImage(String image) {
 		this.image = image;
-	}	
+	}
+		
 	
 }

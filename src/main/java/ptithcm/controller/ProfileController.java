@@ -13,17 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ptithcm.bean.AddressBean;
+import ptithcm.bean.User;
+import ptithcm.dao.AccountDao;
 import ptithcm.dao.AddressDao;
+import ptithcm.dao.impl.AccountDaoImpl;
 import ptithcm.entity.Account;
 import ptithcm.entity.Address;
 
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
-	
+
 	@Autowired
 	private AddressDao addressDao;
-	
+	@Autowired
+	private AccountDao accountDao;
+
 	@RequestMapping("/info")
 	public String userInfo(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
@@ -32,7 +37,27 @@ public class ProfileController {
 		}
 		return "page/profile/info";
 	}
-	//session
+
+	@RequestMapping(value = "/info/update-user", method = RequestMethod.POST)
+	public String updateUser(@ModelAttribute("user") User formUser, HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+
+		if (user != null) {
+			User user1 = new User(formUser.getFirstName(), formUser.getLastName(), formUser.getEmail(),
+					formUser.getImage());
+
+			accountDao.updateAccount(user1);
+			model.addAttribute("user", user1);
+		}
+
+		System.out.println(formUser.getFirstName());
+		System.out.println(formUser.getLastName());
+		System.out.println(formUser.getEmail());
+
+		return "page/profile/info";
+	}
+
+	// session
 	@RequestMapping("/order")
 	public String profileOrder(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
@@ -41,39 +66,42 @@ public class ProfileController {
 		}
 		return "page/profile/order";
 	}
-	
+
 	@RequestMapping("/address")
 	public String profileAddress(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
 			List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
 			model.addAttribute("user", user);
-			model.addAttribute("userAddress", userAddress);			
+			model.addAttribute("userAddress", userAddress);
 		}
 		return "page/profile/address";
 	}
-	
-	@RequestMapping(value="/address/edit/{addressId}", method=RequestMethod.POST)
-	public String editAddress(@PathVariable("addressId") Integer addressId, AddressBean addressForm, ModelMap model, HttpServletRequest request) {
+
+	@RequestMapping(value = "/address/edit/{addressId}", method = RequestMethod.POST)
+	public String editAddress(@PathVariable("addressId") Integer addressId, AddressBean addressForm, ModelMap model,
+			HttpServletRequest request) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
-			Address address = new Address(addressId, addressForm.getAddressName(), addressForm.getRecipientName(), addressForm.getPhoneNumber(), user); 
-			if (addressDao.editAddress(address) ) {
+			Address address = new Address(addressId, addressForm.getAddressName(), addressForm.getRecipientName(),
+					addressForm.getPhoneNumber(), user);
+			if (addressDao.editAddress(address)) {
 				List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
 				model.addAttribute("user", user);
 				model.addAttribute("userAddress", userAddress);
 				return "page/profile/address";
-			}			
+			}
 		}
 		model.addAttribute("editError", true);
 		return "page/profile/address";
 	}
-	
-	@RequestMapping(value="/address/add-address")
+
+	@RequestMapping(value = "/address/add-address")
 	public String addAddress(AddressBean addressForm, ModelMap model, HttpServletRequest request) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
-			Address address = new Address(addressForm.getAddressName(), addressForm.getRecipientName(), addressForm.getPhoneNumber(), user);
+			Address address = new Address(addressForm.getAddressName(), addressForm.getRecipientName(),
+					addressForm.getPhoneNumber(), user);
 			if (addressDao.addAddress(user.getAccountId(), address)) {
 				List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
 				model.addAttribute("user", user);
@@ -84,9 +112,10 @@ public class ProfileController {
 		model.addAttribute("addError", true);
 		return "page/profile/address";
 	}
-	
+
 	@RequestMapping("/address/delete/{addressId}")
-	public String deleteAddress(@PathVariable("addressId") Integer addressId, ModelMap model, HttpServletRequest request) {
+	public String deleteAddress(@PathVariable("addressId") Integer addressId, ModelMap model,
+			HttpServletRequest request) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
 			Address address = addressDao.getAddress(addressId);

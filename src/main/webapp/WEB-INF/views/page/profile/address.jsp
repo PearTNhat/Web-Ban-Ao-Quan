@@ -21,60 +21,13 @@
         </div>
     </div>
 
-    <div class="container-lg my-5">
-        <div class="row">
-            <div class="col-md-3 d-none d-md-block">
-                <div class="d-flex flex-column gap-3">
-                    <div class="d-flex align-items-center gap-3">
-                        <img class="rounded-circle" style="width:60px" alt="avatar1"
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/9.webp" />
-                        <div class="user-name fw-bold fs-5">Dương Triệu Phi</div>
-                    </div>
-                    <ul class="list-group border-top border-bottom pt-3 pb-3">
-                        <a class="btn-info-user" href="profile/info.htm" class="link-underline link-underline-opacity-0">
-                            <li class="list-group-item border-0">
-                                <i class="bi bi-info-circle"></i>
-                                Thông tin tài khoản
-                            </li>
-                        </a>
-
-                        <a href="profile/address.htm" class="link-underline link-underline-opacity-0">
-                            <li class="list-group-item border-0">
-                                <i class="bi bi-geo-alt-fill"></i>
-                                Địa chỉ hiện tại
-                            </li>
-                        </a>
-
-                        <a href="" class="link-underline link-underline-opacity-0">
-                            <li class="list-group-item border-0">
-                                <i class="bi bi-key-fill"></i>
-                                Đổi mật khẩu
-                            </li>
-                        </a>
-
-                        <a href="profile/order.htm" class="link-underline link-underline-opacity-0" onclick="open_order()">
-                            <li class="list-group-item border-0">
-                                <i class="bi bi-cart4"></i>
-                                Đơn hàng
-                            </li>
-                        </a>
-
-                    </ul>
-                    <ul class="list-group">
-                        <a href="" class="link-underline link-underline-opacity-0">
-                            <li class="list-group-item border-0">
-                                <i class="bi bi-box-arrow-left"></i>
-                                Đăng xuất
-                            </li>
-                        </a>
-
-                    </ul>
-                </div>
-
-            </div>
-
+    <div class="container-lg my-4 pb-5">
+        <div class="row pb-5">
+            <!-- Sidebar -->
+			<%@ include file="../profile/component/sidebar.jsp"%>
+			
             <div class="col-12 col-md-9" class="address-user">
-                <div class="fs-2 border-bottom pb-2">
+                <div class="fs-3 border-bottom pb-2">
                     Địa chỉ
                     <button type="button" class="btn btn-success" style="float: right;" data-bs-toggle="modal"
                         data-bs-target="#addAddressModal"><i class="bi bi-pencil"></i> Tạo mới</button>
@@ -148,7 +101,7 @@
                             <div class="modal-body">
                                  <div class="mb-3">
                                      <label for="name" class="col-form-label">Tên người nhận:</label>
-                                     <input name="recipientName" type="text" class="form-control" id="name" required oninvalid="setCustomValidity('Vui lòng điền người nhận')">
+                                     <input name="recipientName" type="text" class="form-control" id="name" required>
                                  </div>
                                  <div class="mb-3">
                                      <label for="phone" class="col-form-label">Số điện thoại:</label>
@@ -156,7 +109,7 @@
                                  </div>
                                  <div class="mb-3">
                                      <label for="address" class="col-form-label">Địa chỉ:</label>
-                                     <textarea name="addressName" class="form-control" id="address" required oninvalid="setCustomValidity('Vui lòng điền địa chỉ')"></textarea>
+                                     <textarea name="addressName" class="form-control" id="address" required></textarea>
                                  </div>
                             </div>
                             <div class="modal-footer">
@@ -178,7 +131,7 @@
 			                <div class="modal-body">
 		                        <div class="mb-3">
 		                            <label for="edit-name" class="col-form-label">Tên người nhận:</label>
-		                            <input name="recipientName" type="text" class="form-control" id="edit-name">
+		                            <input name="recipientName" type="text" class="form-control" id="edit-name" required>
 		                        </div>
 		                        <div class="mb-3">
 		                            <label for="edit-phone" class="col-form-label">Số điện thoại:</label>
@@ -186,7 +139,7 @@
 		                        </div>
 		                        <div class="mb-3">
 		                            <label for="edit-address" class="col-form-label">Địa chỉ:</label>
-		                            <textarea name="addressName" class="form-control" id="edit-address"></textarea>
+		                            <textarea name="addressName" class="form-control" id="edit-address" required></textarea>
 		                        </div>
 			                </div>
 			                <div class="modal-footer">
