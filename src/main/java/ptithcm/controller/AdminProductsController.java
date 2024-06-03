@@ -110,12 +110,12 @@ public class AdminProductsController {
 			ProductDetail newPd = new ProductDetail();
 			// Tim color
 			Color color = colorDao.getColorByName(pd.getColor());
-
 			if (color == null) {
 				// K có thì thêm color
 				color = new Color(pd.getColor());
 				pd.setColorId(colorDao.insertColor(color));
 			}
+			pd.setColorId(color.getColorId());
 			newPd.setProductId(productId);
 			newPd.setColorId(pd.getColorId());
 			newPd.setQuantity(pd.getQuantity());
@@ -128,8 +128,8 @@ public class AdminProductsController {
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
 				model.addAttribute("productId", productId);
-				redirectAttributes.addFlashAttribute("error", "Sản phẩm đã tồn tại");
-				return "redirect:/admin/products/add-product/" + productId + ".htm";
+				model.addAttribute("error", "Sản phẩm đã tồn tại");
+				return "page/admin/handleProductDetail";
 			}
 			// thêm ảnh
 			Integer piority = productImage.countImageById(pdId);
