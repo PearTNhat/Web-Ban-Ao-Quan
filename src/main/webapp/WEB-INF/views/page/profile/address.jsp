@@ -101,7 +101,7 @@
                             <div class="modal-body">
                                  <div class="mb-3">
                                      <label for="name" class="col-form-label">Tên người nhận:</label>
-                                     <input name="recipientName" type="text" class="form-control" id="name" required oninvalid="setCustomValidity('Vui lòng điền người nhận')">
+                                     <input name="recipientName" type="text" class="form-control" id="name" required>
                                  </div>
                                  <div class="mb-3">
                                      <label for="phone" class="col-form-label">Số điện thoại:</label>
@@ -109,7 +109,7 @@
                                  </div>
                                  <div class="mb-3">
                                      <label for="address" class="col-form-label">Địa chỉ:</label>
-                                     <textarea name="addressName" class="form-control" id="address" required oninvalid="setCustomValidity('Vui lòng điền địa chỉ')"></textarea>
+                                     <textarea name="addressName" class="form-control" id="address" required></textarea>
                                  </div>
                             </div>
                             <div class="modal-footer">
@@ -131,7 +131,7 @@
 			                <div class="modal-body">
 		                        <div class="mb-3">
 		                            <label for="edit-name" class="col-form-label">Tên người nhận:</label>
-		                            <input name="recipientName" type="text" class="form-control" id="edit-name">
+		                            <input name="recipientName" type="text" class="form-control" id="edit-name" required>
 		                        </div>
 		                        <div class="mb-3">
 		                            <label for="edit-phone" class="col-form-label">Số điện thoại:</label>
@@ -139,7 +139,7 @@
 		                        </div>
 		                        <div class="mb-3">
 		                            <label for="edit-address" class="col-form-label">Địa chỉ:</label>
-		                            <textarea name="addressName" class="form-control" id="edit-address"></textarea>
+		                            <textarea name="addressName" class="form-control" id="edit-address" required></textarea>
 		                        </div>
 			                </div>
 			                <div class="modal-footer">

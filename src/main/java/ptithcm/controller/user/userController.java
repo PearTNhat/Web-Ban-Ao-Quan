@@ -117,6 +117,7 @@ public class userController {
 			
 			// set user to Session
 			session.setAttribute("user", loginUser);
+			if (loginUser.getIsAdmin()) return "redirect:/admin/dashboard.htm";
 			return "redirect:/.htm";
 		}
 		

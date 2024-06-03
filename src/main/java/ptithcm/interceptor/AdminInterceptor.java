@@ -8,23 +8,22 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import ptithcm.entity.Account;
 
-public class ProfileInterceptor extends HandlerInterceptorAdapter {
+public class AdminInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
 		Account acc = (Account) session.getAttribute("user");
-		System.out.println("[profile] account: " + acc);
+		System.out.println("[/admin] account: " + acc);
 		if (acc == null) {
 			response.sendRedirect(request.getContextPath() + "/.htm");
 			return false;
 		} else {
-			if (acc.getIsAdmin() == true) {
+			if (acc.getIsAdmin() == false) {
 				response.sendRedirect(request.getContextPath() + "/.htm");
 				return false;
 			}
 		}
-
 		return true;
 	}
 }
