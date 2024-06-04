@@ -20,16 +20,12 @@ public class TypeDetail {
 	
 	@Column(name = "description")
 	private String desc;
-	
-	
 
 	//typeProduct
 	@ManyToOne
 	@JoinColumn(name="typeId")
 	private ProductType type;
 	
-	
-
 	//product
 	@OneToMany(mappedBy="type", fetch=FetchType.EAGER) // mappedBy = ten bien ben product  (1 - n)
 	private Collection<Product> product;

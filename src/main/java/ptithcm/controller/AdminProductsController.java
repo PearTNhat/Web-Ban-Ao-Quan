@@ -29,7 +29,6 @@ import ptithcm.dao.ProductImageDao;
 import ptithcm.dao.SizeDao;
 
 import ptithcm.entity.Size;
-import ptithcm.entity.composite.ProductDetailId;
 import ptithcm.entity.Color;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductDetail;
@@ -38,8 +37,6 @@ import ptithcm.entity.ProductImage;
 @Controller
 @RequestMapping("/admin")
 public class AdminProductsController {
-	@Autowired
-	private SessionFactory sessionFactory;
 	@Autowired
 	private ProductDao productDao;
 	@Autowired

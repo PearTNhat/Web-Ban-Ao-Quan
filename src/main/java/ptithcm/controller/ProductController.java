@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ptithcm.dao.ProductDao;
 import ptithcm.entity.Product;
+
 @Controller
 public class ProductController {
 	@Autowired
 	ProductDao productDao;
+
 	@RequestMapping("/products/{typeId}")
-	public String getProduct(@PathVariable("typeId") String typeId,ModelMap model) {
-		/*
-		 * List<Product> listProduct = productDao.getProductByType(typeId);
-		 * model.addAttribute("pst",listProduct);
-		 */
+	public String getProduct(@PathVariable("typeId") String typeId, ModelMap model) {
+//		pst : products type
+		List<Product> listProduct = productDao.getProductByType(typeId);
+		model.addAttribute("pst", listProduct);
+
 		return "page/listProduct";
 	}
-	
+
 }
