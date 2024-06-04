@@ -49,21 +49,32 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Boolean addProductDetail(ProductDetail pd) {
-		return true;
-	}
-
-	@Override
 	@Transactional
 	public List<Product> getProductByType(String typeId) {
 		Session session = sessionFactory.getCurrentSession();
-
 		String hql = "FROM Product WHERE typeDetailId=:typeId";
 		Query query = session.createQuery(hql);
 		query.setParameter("typeId", typeId);
 		@SuppressWarnings("unchecked")
 		List<Product> productList = query.list();
 		return productList;
+	}
+
+	@Override
+	public Boolean addProduct(Product product) {
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.save(product);
+			t.commit();
+			return true;
+		} catch (Exception e) {
+			t.rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			session.close();
+		}
 	}
 
 	
