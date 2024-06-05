@@ -27,7 +27,7 @@
 				<div class="fs-5">
 					<span class="text-secondary"> <i class="bi bi-box"></i>
 						Products /
-					</span> <a href="admin/products.htm">Products view</a>
+					</span> <a href="admin/products.htm">Product variants</a>
 				</div>
 			</div>
 			<div class="me-3">
@@ -82,7 +82,7 @@
 							<c:forEach var="p" items="${products }" varStatus="s">
 								<tr>
 									<td>${(page-1)*limit + s.index+1}</td>
-									<td><a href="admin/products/${p.productId}"><img
+									<td><a href="#"><img
 											src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
 											class="avatar" alt="Avatar">${p.name}</a></td>
 

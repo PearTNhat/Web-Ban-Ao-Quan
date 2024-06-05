@@ -66,5 +66,16 @@ public class ProductDaoImpl implements ProductDao {
 		return productList;
 	}
 
+	@Override
+	public List<ProductDetail> getProductDetails(int productId, int page, int pageSize) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "From ProductDetail Where productId =: productId";
+		Query query = session.createQuery(hql);
+		query.setParameter("productId", productId).setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
+		@SuppressWarnings("unchecked")
+		List<ProductDetail> listProductDetail = query.list();
+		return listProductDetail;
+	}
+
 	
 }

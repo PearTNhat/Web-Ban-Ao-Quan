@@ -29,7 +29,7 @@ public class Product {
 	@Column(name = "price")
 	private float price;
 	@Column(name = "soldQuantity")
-	private float soldQuantity;
+	private int soldQuantity;
 	@Column(name = "createdAt")
 	private Date createdAt;
 
@@ -53,7 +53,7 @@ public class Product {
 		return soldQuantity;
 	}
 
-	public void setSoldQuantity(float soldQuantity) {
+	public void setSoldQuantity(int soldQuantity) {
 		this.soldQuantity = soldQuantity;
 	}
 

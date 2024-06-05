@@ -10,4 +10,5 @@ public interface ProductDao {
 	public Boolean addProductDetail(ProductDetail pd);
 	public Long countProducts(String search);
 	public List<Product> getProductByType(String typeId);
+	public List<ProductDetail> getProductDetails(int productId, int page, int pageSize);
 }

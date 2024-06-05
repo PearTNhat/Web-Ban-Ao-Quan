@@ -63,6 +63,19 @@ public class AdminProductsController {
 		model.addAttribute("totalPage", totalPage);
 		return "page/admin/products";
 	}
+	
+	@RequestMapping("products/{productId}")
+	public String getProductDetail(@PathVariable Integer productId, ModelMap model,
+			@RequestParam(value="page", defaultValue="1", required=false) Integer page) {
+		Integer recordPerPage = 2;
+		List<ProductDetail> productDetails = productDao.getProductDetails(productId, page, recordPerPage);
+		Long totalProductDetail = (long) productDetails.size();
+		Integer totalPage = (int) Math.ceil((float) totalProductDetail / recordPerPage);
+		model.addAttribute("productDetails", productDetails);
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		return "page/admin/productDetail";
+	}
 
 	@RequestMapping(value = "/products/add-product/{productId}", method = RequestMethod.GET)
 	public String productForm(@PathVariable Integer productId, Model model) {
