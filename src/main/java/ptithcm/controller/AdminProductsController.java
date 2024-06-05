@@ -21,14 +21,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
+import ptithcm.bean.ProductBean;
 import ptithcm.bean.ProductDetailBean;
 import ptithcm.dao.ColorDao;
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductDetailDao;
 import ptithcm.dao.ProductImageDao;
 import ptithcm.dao.SizeDao;
-
+import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Size;
+import ptithcm.entity.TypeDetail;
 import ptithcm.entity.Color;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductDetail;
@@ -47,6 +49,8 @@ public class AdminProductsController {
 	private ColorDao colorDao;
 	@Autowired
 	private SizeDao sizeDao;
+	@Autowired
+	private TypeDetailDao typeDetailDao;
 	@Autowired
 	private Cloudinary cloudinary;
 
@@ -77,8 +81,57 @@ public class AdminProductsController {
 		return "page/admin/productDetail";
 	}
 
-	@RequestMapping(value = "/products/add-product/{productId}", method = RequestMethod.GET)
-	public String productForm(@PathVariable Integer productId, Model model) {
+	// product
+	@RequestMapping(value = "/products/add-product", method = RequestMethod.GET)
+	public String productForm(Model model) {
+//		pd : product detail
+		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
+		model.addAttribute("tsd", typesDetail);
+		model.addAttribute("product", new ProductBean());
+		return "page/admin/handleProduct";
+	}
+
+	@RequestMapping(value = "/products/add-product", method = RequestMethod.POST)
+	public String addProduct(RedirectAttributes redirectAttributes, ModelMap model,
+			@Validated @ModelAttribute("product") ProductBean p, BindingResult errors) {
+		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
+		try {
+			model.addAttribute("nameErr", errors.hasFieldErrors("name"));
+			model.addAttribute("priceErr", errors.hasFieldErrors("price"));
+			model.addAttribute("discountErr", errors.hasFieldErrors("discount"));
+			model.addAttribute("descriptionErr", errors.hasFieldErrors("description"));
+			if(errors.hasErrors()) {
+				model.addAttribute("tsd", typesDetail);
+				model.addAttribute("product",p);
+				return "page/admin/handleProduct";
+			}
+			Product newP = new Product();
+			newP.setName(p.getName());
+			newP.setPrice(p.getPrice());
+			newP.setDiscount(p.getDiscount());
+			newP.setTypeDetailId(p.getTypeDetailId());
+			newP.setDescription(p.getDescription());
+			Boolean res = productDao.addProduct(newP);
+			if(!res) {
+				model.addAttribute("tsd", typesDetail);
+				model.addAttribute("product",p);
+				model.addAttribute("errpr","Sản phẩm đã tồn tại");
+				return "page/admin/handleProduct";
+			}
+			redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm thành công");
+			return "redirect:/admin/products.htm";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("tsd", typesDetail);
+			model.addAttribute("product",p);
+			model.addAttribute("error","Xảy ra lỗi khi thêm sản phẩm");
+			return "page/admin/handleProduct";
+		}
+	}
+
+	// prodcut detail
+	@RequestMapping(value = "/products/add-product-detail/{productId}", method = RequestMethod.GET)
+	public String productDetailForm(@PathVariable Integer productId, Model model) {
 //		pd : product detail
 		List<Color> colors = colorDao.getAllColors();
 		List<Size> sizes = sizeDao.getAllSizes();
@@ -89,9 +142,10 @@ public class AdminProductsController {
 		return "page/admin/handleProductDetail";
 	}
 
-	@RequestMapping(value = "/products/add-product/{productId}", method = RequestMethod.POST)
-	public String addProduct(@PathVariable Integer productId, ModelMap model, RedirectAttributes redirectAttributes,
-			@Validated @ModelAttribute("pd") ProductDetailBean pd, BindingResult errors) {
+	@RequestMapping(value = "/products/add-product-detail/{productId}", method = RequestMethod.POST)
+	public String addProductDetail(@PathVariable Integer productId, ModelMap model,
+			RedirectAttributes redirectAttributes, @Validated @ModelAttribute("pd") ProductDetailBean pd,
+			BindingResult errors) {
 		try {
 			// get error
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
@@ -163,15 +217,15 @@ public class AdminProductsController {
 
 					if (!productImage.addProductImage(pi)) {
 						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
-						return "redirect:/admin/products/add-product/" + productId + ".htm";
+						return "redirect:/admin/products/add-product-detail/" + productId + ".htm";
 					}
 				}
 			}
-			redirectAttributes.addFlashAttribute("success", "Thêm chi tiết hàng thành công");
+			redirectAttributes.addFlashAttribute("success", "Thêm chi tiết sản phẩm thành công");
 		} catch (Exception e) {
 			e.printStackTrace();
-			redirectAttributes.addFlashAttribute("error", "Xảy ra lỗi khi thêm sản phẩm");
-			return "redirect:/admin/products/add-product/" + productId + ".htm";
+			redirectAttributes.addFlashAttribute("error", "Xảy ra lỗi khi thêm chi tiết sản phẩm");
+			return "redirect:/admin/products/add-product-detail/" + productId + ".htm";
 		} finally {
 
 		}

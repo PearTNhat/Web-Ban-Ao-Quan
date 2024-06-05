@@ -43,11 +43,11 @@
 						data-bs-parent="#sidebar">
 						<li class="sidebar-item"><a href="admin/products.htm"
 							class="sidebar-link ps-5"> <i class="bi bi-cart4"></i>
-								Product
+								Sản phẩm
 						</a></li>
-						<li class="sidebar-item"><a href="admin/handle-product.htm"
+						<li class="sidebar-item"><a href="admin/products/add-product.htm"
 							class="sidebar-link ps-5"> <i class="bi bi-bag-fill"></i>
-								Add product
+								Thêm sản phẩm
 						</a></li>
 					</ul></li>
 			</ul>

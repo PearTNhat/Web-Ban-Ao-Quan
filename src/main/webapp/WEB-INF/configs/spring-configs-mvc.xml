@@ -87,6 +87,9 @@
 	<bean id="sizeDao" class="ptithcm.dao.impl.SizeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	<bean id="typeDetailDao" class="ptithcm.dao.impl.TypeDetailDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
