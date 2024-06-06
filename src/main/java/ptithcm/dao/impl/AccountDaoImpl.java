@@ -12,16 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ptithcm.bean.User;
 import ptithcm.dao.AccountDao;
 import ptithcm.entity.Account;
+import ptithcm.entity.Address;
 
 @Transactional
 public class AccountDaoImpl implements AccountDao {
 	private SessionFactory factory;
 	
 	
-	  @Autowired 
-	  private AccountDao accountDao;
-	 
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	  public void setSessionFactory(SessionFactory sessionFactory) {
 		this.factory = sessionFactory;
 	}
 	@Override
@@ -79,26 +77,23 @@ public class AccountDaoImpl implements AccountDao {
 		return acc;
 	}
 	@Override
-	public Account updateAccount(User user) {
-		Session session = factory.getCurrentSession();
-        Transaction transaction = null;
-        
-        try {
-            transaction = session.beginTransaction();
-            
-            session.update(user);
-            
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean updateAccount(Account user) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+
+			session.update(user);
+			t.commit();
+			return true;
+
+		} catch (Exception e) {
+			System.out.println(e);
+			t.rollback();
+		} finally {
+			session.close();
+
+		}
+		return false;
 	}
 	
 }

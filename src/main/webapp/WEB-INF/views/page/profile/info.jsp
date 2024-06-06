@@ -54,7 +54,7 @@
 			<%@ include file="../profile/component/sidebar.jsp"%>
 			<div class="col-12 col-md-9" class="user">
 				<div class="fs-4 border-bottom pb-2">Hồ sơ của tôi</div>
-				<form:form action="profile/info/update-user.htm" class="row my-3" modelAttribute="user">
+				<form:form action="profile/info/update-user.htm" class="row my-3" modelAttribute="userForm">
 					<div class="order-2 col-md-7 order-md-1 mb-4">
 						<div class="row mb-3">
 							<div class="col-4">

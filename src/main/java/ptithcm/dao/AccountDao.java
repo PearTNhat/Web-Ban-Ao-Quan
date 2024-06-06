@@ -1,6 +1,5 @@
 package ptithcm.dao;
 
-import ptithcm.bean.User;
 import ptithcm.entity.Account;
 
 public interface AccountDao {
@@ -8,5 +7,5 @@ public interface AccountDao {
 	public Integer deleteAccount(Account account);
 	public Account createAccount(Account account);
 	public Account findAccountByEmail(String email);
-	public Account updateAccount(User user);
+	public Boolean updateAccount(Account user);
 }

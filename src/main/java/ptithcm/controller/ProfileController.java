@@ -2,11 +2,14 @@ package ptithcm.controller;
 
 import java.util.List;
 
+import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,21 +36,26 @@ public class ProfileController {
 	public String userInfo(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
-			model.addAttribute("user", user);
+			model.addAttribute("userForm", user);
 		}
 		return "page/profile/info";
 	}
 
 	@RequestMapping(value = "/info/update-user", method = RequestMethod.POST)
-	public String updateUser(@ModelAttribute("user") User formUser, HttpServletRequest request, ModelMap model) {
+	public String updateUser(@Validated @ModelAttribute("userForm") User formUser, BindingResult errors, HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
-
 		if (user != null) {
-			User user1 = new User(formUser.getFirstName(), formUser.getLastName(), formUser.getEmail(),
-					formUser.getImage());
-
-			accountDao.updateAccount(user1);
-			model.addAttribute("user", user1);
+			if (errors.hasErrors()) {
+				model.addAttribute("message", "");
+				model.addAttribute("user", user);
+				model.addAttribute("userForm", formUser);
+				return "page/profile/info";
+			}
+			Account account = new Account(user.getAccountId(), formUser.getFirstName(), formUser.getLastName(), user.getIsAdmin(), formUser.getEmail(), user.getPassword(),
+					user.getAvatar());
+			accountDao.updateAccount(account);
+			model.addAttribute("user", account);
+			model.addAttribute("userForm", formUser);
 		}
 
 		System.out.println(formUser.getFirstName());

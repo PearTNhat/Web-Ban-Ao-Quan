@@ -45,6 +45,19 @@ public class Account {
 		this.password = password;
 		this.avatar = avatar;
 	}
+	
+
+	public Account(Integer accountId, String firstName, String lastName, boolean isAdmin, String email, String password,
+			String avatar) {
+		super();
+		this.accountId = accountId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isAdmin = isAdmin;
+		this.email = email;
+		this.password = password;
+		this.avatar = avatar;
+	}
 
 	public Integer getAccountId() {
 		return accountId;
