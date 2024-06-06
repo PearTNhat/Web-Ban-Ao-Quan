@@ -63,17 +63,26 @@ public class Product {
 		this.typeDetailId = typeDetailId;
 	}
 
+	
+
+	public Integer getPrice() {
+		return price;
+	}
+
+
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public void setSoldQuantity(Integer soldQuantity) {
-		this.soldQuantity = soldQuantity;
+
+	public Integer getSoldQuantity() {
+		return soldQuantity;
 	}
 
 
-
-
+	public void setSoldQuantity(Integer soldQuantity) {
+		this.soldQuantity = soldQuantity;
+	}
 
 	public List<ProductDetail> getProductDeatil() {
 		return productDeatil;

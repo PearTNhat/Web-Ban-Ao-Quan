@@ -1,5 +1,6 @@
 package ptithcm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,27 +70,28 @@ public class AdminProductsController {
 	}
 
 	// product
+
 	@RequestMapping(value = "/products/add-product", method = RequestMethod.GET)
 	public String productForm(Model model) {
-//		pd : product detail
 		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
 		model.addAttribute("tsd", typesDetail);
-		model.addAttribute("product", new ProductBean());
+		model.addAttribute("p", new ProductBean());
 		return "page/admin/handleProduct";
 	}
 
 	@RequestMapping(value = "/products/add-product", method = RequestMethod.POST)
 	public String addProduct(RedirectAttributes redirectAttributes, ModelMap model,
-			@Validated @ModelAttribute("product") ProductBean p, BindingResult errors) {
+
+			@Validated @ModelAttribute("p") ProductBean p, BindingResult errors) {
 		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
 		try {
 			model.addAttribute("nameErr", errors.hasFieldErrors("name"));
 			model.addAttribute("priceErr", errors.hasFieldErrors("price"));
 			model.addAttribute("discountErr", errors.hasFieldErrors("discount"));
 			model.addAttribute("descriptionErr", errors.hasFieldErrors("description"));
-			if(errors.hasErrors()) {
+			if (errors.hasErrors()) {
 				model.addAttribute("tsd", typesDetail);
-				model.addAttribute("product",p);
+				model.addAttribute("p", p);
 				return "page/admin/handleProduct";
 			}
 			Product newP = new Product();
@@ -99,10 +101,10 @@ public class AdminProductsController {
 			newP.setTypeDetailId(p.getTypeDetailId());
 			newP.setDescription(p.getDescription());
 			Boolean res = productDao.addProduct(newP);
-			if(!res) {
+			if (!res) {
 				model.addAttribute("tsd", typesDetail);
-				model.addAttribute("product",p);
-				model.addAttribute("errpr","Sản phẩm đã tồn tại");
+				model.addAttribute("p", p);
+				model.addAttribute("error", "Sản phẩm đã tồn tại");
 				return "page/admin/handleProduct";
 			}
 			redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm thành công");
@@ -110,9 +112,59 @@ public class AdminProductsController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("tsd", typesDetail);
-			model.addAttribute("product",p);
-			model.addAttribute("error","Xảy ra lỗi khi thêm sản phẩm");
+			model.addAttribute("p", p);
+			model.addAttribute("error", "Xảy ra lỗi khi thêm sản phẩm");
 			return "page/admin/handleProduct";
+		}
+	}
+
+	// edit-product
+	@RequestMapping(value = "/products/edit-product/{productId}", method = RequestMethod.GET)
+	public String productEditForm(Model model, @PathVariable String productId) {
+		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
+		Product currP = productDao.findProductById(productId);
+		System.out.println("id " + productId);
+		ProductBean p = new ProductBean();
+		p.setName(currP.getName());
+		p.setPrice(currP.getPrice());
+		p.setDescription(currP.getDescription());
+		p.setTypeDetailId(currP.getTypeDetailId());
+		p.setDiscount(currP.getDiscount());
+
+		model.addAttribute("tsd", typesDetail);
+		model.addAttribute("p", p);
+		model.addAttribute("productId", productId);
+		model.addAttribute("event", "update");
+		return "page/admin/handleProduct";
+	}
+
+	@RequestMapping(value = "/products/edit-product/{productId}", method = RequestMethod.POST)
+	public String editProduct(RedirectAttributes redirectAttributes, Model model, @PathVariable String productId,
+			@Validated @ModelAttribute("p") ProductBean p, BindingResult errors) {
+		try {
+			Product newP = new Product();
+			System.out.println("id " + productId);
+			newP.setProductId(productId);
+			newP.setName(p.getName());
+			newP.setPrice(p.getPrice());
+			newP.setDiscount(p.getDiscount());
+			newP.setTypeDetailId(p.getTypeDetailId());
+			newP.setDescription(p.getDescription());
+
+			Boolean res = productDao.updateProduct(newP);
+			if (!res) {
+				List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
+				model.addAttribute("tsd", typesDetail);
+				model.addAttribute("p", p);
+				model.addAttribute("error", "Cập nhật thất bại");
+				return "page/admin/handleProduct";
+			}
+			redirectAttributes.addFlashAttribute("success", "Cập nhật sản phẩm thành công");
+			return "redirect:/admin/products.htm";
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Xảy ra lỗi khi sửa đổi sản phẩm");
+			return "redirect:/admin/products/edit-product/" + productId + ".htm";
 		}
 	}
 
@@ -209,15 +261,48 @@ public class AdminProductsController {
 				}
 			}
 			redirectAttributes.addFlashAttribute("success", "Thêm chi tiết sản phẩm thành công");
+			return "redirect:/admin/products.htm";
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", "Xảy ra lỗi khi thêm chi tiết sản phẩm");
 			return "redirect:/admin/products/add-product-detail/" + productId + ".htm";
-		} finally {
-
 		}
-		return "redirect:/admin/products.htm";
 
+	}
+
+	@RequestMapping(value = "/products/edit-product-detail/{id}", method = RequestMethod.GET)
+	public String addProductDetail(@PathVariable String id, ModelMap model) {
+
+		List<Color> colors = colorDao.getAllColors();
+	
+		List<Size> sizes = sizeDao.getAllSizes();
+	
+		List<ProductImage> pi = productImage.findImageByPD(id);
+		
+		ArrayList<String> url = new ArrayList<String>();
+		if(pi!= null) {
+			for(int i=0;i<pi.size();i++) {
+				  url.add(pi.get(i).getImage());
+			}
+		}
+		ProductDetail currP = productDetailDao.findProductById(id);
+
+		Product p = productDao.findProductById(Integer.toString(currP.getProductId()));
+
+		ProductDetailBean pd = new ProductDetailBean();
+		pd.setProductId(currP.getProductId());
+		pd.setQuantity(currP.getQuantity());
+		pd.setColorId(currP.getColorId());
+		pd.setSizeId(currP.getSizeId());
+		pd.setTemplImg(url);
+		
+		model.addAttribute("colors", colors);
+		model.addAttribute("sizes", sizes);
+		model.addAttribute("pd", pd);
+		model.addAttribute("id", id);
+		model.addAttribute("product-name",p.getName());
+		model.addAttribute("event", "update");
+		return "page/admin/handleProductDetail";
 	}
 
 }

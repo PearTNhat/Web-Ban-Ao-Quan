@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ptithcm.bean.ProductDetailBean;
 import ptithcm.dao.ProductDetailDao;
+import ptithcm.entity.Product;
 import ptithcm.entity.ProductDetail;
 import ptithcm.entity.ProductImage;
 
@@ -47,5 +48,16 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 			session.close();
 		}
 		return pd.getProductDetailId();
+	}
+
+	@Override
+	@Transactional
+	public ProductDetail findProductById(String id) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Product WHERE productDetailId=:id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		ProductDetail productList =(ProductDetail) query.uniqueResult();
+		return productList;
 	}
 }

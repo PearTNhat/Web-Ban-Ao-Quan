@@ -77,5 +77,33 @@ public class ProductDaoImpl implements ProductDao {
 		}
 	}
 
+	@Override
+	@Transactional
+	public Product findProductById(String productId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Product WHERE productId=:productId";
+		Query query = session.createQuery(hql);
+		query.setParameter("productId", productId);
+		Product productList =(Product) query.uniqueResult();
+		return productList;
+	}
+	@Override
+	@Transactional
+	public Boolean updateProduct(Product product) {
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.update(product);
+			t.commit();
+			return true;
+		} catch (Exception e) {
+			t.rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+			session.close();
+		}
+	}
+
 	
 }
