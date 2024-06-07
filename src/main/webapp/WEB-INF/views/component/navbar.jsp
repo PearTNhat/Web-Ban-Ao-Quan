@@ -133,7 +133,7 @@
 					</label> <input type="checkbox" id="click-type${pt.typeId}" style="width:0;height:0;display:none" />
 						<ul class="dd-type dd-type-none">
 							<c:forEach var="typeDetail" items="${pt.types}">
-								<li><a href="products/${typeDetail.typeDeatilId}.htm"
+								<li><a href="products/${typeDetail.typeDetailId}.htm"
 									class="text-decoration-none"> ${typeDetail.name} </a></li>
 							</c:forEach>
 						</ul></li>

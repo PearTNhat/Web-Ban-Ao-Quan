@@ -117,4 +117,21 @@ public class ProductDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 }

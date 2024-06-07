@@ -3,7 +3,9 @@ package ptithcm.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +34,7 @@ import ptithcm.dao.SizeDao;
 import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Size;
 import ptithcm.entity.TypeDetail;
+import ptithcm.utils.UploadImage;
 import ptithcm.entity.Color;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductDetail;
@@ -139,11 +142,10 @@ public class AdminProductsController {
 	}
 
 	@RequestMapping(value = "/products/edit-product/{productId}", method = RequestMethod.POST)
-	public String editProduct(RedirectAttributes redirectAttributes, Model model, @PathVariable String productId,
+	public String editProduct(RedirectAttributes redirectAttributes, Model model, @PathVariable Integer productId,
 			@Validated @ModelAttribute("p") ProductBean p, BindingResult errors) {
 		try {
 			Product newP = new Product();
-			System.out.println("id " + productId);
 			newP.setProductId(productId);
 			newP.setName(p.getName());
 			newP.setPrice(p.getPrice());
@@ -177,7 +179,7 @@ public class AdminProductsController {
 		model.addAttribute("colors", colors);
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("pd", new ProductDetailBean());
-		model.addAttribute("productId", productId);
+		model.addAttribute("productId", Integer.toString(productId));
 		return "page/admin/handleProductDetail";
 	}
 
@@ -187,16 +189,17 @@ public class AdminProductsController {
 			BindingResult errors) {
 		try {
 			// get error
+			System.out.println("size " + pd.getTemplImg().size());
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
-			System.out.println(pd.getTemplImg().size());
 			if (errors.hasErrors()) {
 				List<Color> colors = colorDao.getAllColors();
 				List<Size> sizes = sizeDao.getAllSizes();
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
-				model.addAttribute("productId", productId);
+				model.addAttribute("tempImage", pd.getTemplImg());
+				model.addAttribute("productId", Integer.toString(productId));
 				return "page/admin/handleProductDetail";
 			}
 			List<MultipartFile> files = pd.getFiles();
@@ -206,7 +209,7 @@ public class AdminProductsController {
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
-				model.addAttribute("productId", productId);
+				model.addAttribute("productId", Integer.toString(productId));
 				model.addAttribute("error", "Ảnh không được rỗng");
 				return "page/admin/handleProductDetail";
 			}
@@ -230,30 +233,16 @@ public class AdminProductsController {
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
-				model.addAttribute("productId", productId);
+				model.addAttribute("productId", Integer.toString(productId));
 				model.addAttribute("error", "Sản phẩm đã tồn tại");
 				return "page/admin/handleProductDetail";
 			}
 			// thêm ảnh
-			Integer piority = productImage.countImageById(pdId);
-			if (piority == null) {
-				piority = 1;
-			}
 			for (int i = 0; i < files.size(); i++) {
 				MultipartFile file = files.get(i);
 				if (!file.isEmpty()) {
-					piority += i;
-					long currentTimeMillis = System.currentTimeMillis() + i;
-					String fileName = file.getOriginalFilename().substring(0,
-							file.getOriginalFilename().lastIndexOf('.'));
-					Map<String, String> m = cloudinary.uploader().upload(file.getBytes(),
-							ObjectUtils.asMap("resource_type", "auto", "folder", "WebAoQuan/Products", "public_id",
-									fileName + currentTimeMillis));
-
-					String url = (String) m.get("secure_url");
-
-					ProductImage pi = new ProductImage(url, pdId, piority);
-
+					String url = UploadImage.addToProduct(file, i);
+					ProductImage pi = new ProductImage(url, pdId, i);
 					if (!productImage.addProductImage(pi)) {
 						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
 						return "redirect:/admin/products/add-product-detail/" + productId + ".htm";
@@ -271,38 +260,124 @@ public class AdminProductsController {
 	}
 
 	@RequestMapping(value = "/products/edit-product-detail/{id}", method = RequestMethod.GET)
-	public String addProductDetail(@PathVariable String id, ModelMap model) {
-
+	public String editProductDetailForm(@PathVariable Integer id, ModelMap model) {
 		List<Color> colors = colorDao.getAllColors();
-	
+
 		List<Size> sizes = sizeDao.getAllSizes();
-	
+
 		List<ProductImage> pi = productImage.findImageByPD(id);
-		
-		ArrayList<String> url = new ArrayList<String>();
-		if(pi!= null) {
-			for(int i=0;i<pi.size();i++) {
-				  url.add(pi.get(i).getImage());
+		List<String> url = new ArrayList<String>();
+		if (pi != null) {
+			for (int i = 0; i < pi.size(); i++) {
+				url.add(pi.get(i).getImage());
 			}
 		}
-		ProductDetail currP = productDetailDao.findProductById(id);
-
-		Product p = productDao.findProductById(Integer.toString(currP.getProductId()));
-
+		ProductDetail currP = productDetailDao.findProductDetailById(id);
 		ProductDetailBean pd = new ProductDetailBean();
 		pd.setProductId(currP.getProductId());
 		pd.setQuantity(currP.getQuantity());
-		pd.setColorId(currP.getColorId());
+		pd.setColor(currP.getColor().getName());
 		pd.setSizeId(currP.getSizeId());
 		pd.setTemplImg(url);
-		
 		model.addAttribute("colors", colors);
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("pd", pd);
-		model.addAttribute("id", id);
-		model.addAttribute("product-name",p.getName());
+		model.addAttribute("pdId", Integer.toString(id));
+		model.addAttribute("productName", currP.getProduct().getName());
+		model.addAttribute("productId", Integer.toString(currP.getProduct().getProductId()));
 		model.addAttribute("event", "update");
 		return "page/admin/handleProductDetail";
 	}
 
+	@RequestMapping(value = "/products/edit-product-detail/{pdId}", method = RequestMethod.POST)
+	public String editProductDetail(@PathVariable Integer pdId, ModelMap model, RedirectAttributes redirectAttributes,
+			@Validated @ModelAttribute("pd") ProductDetailBean pd, BindingResult errors) {
+		try {
+			List<MultipartFile> files = pd.getFiles();
+			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
+			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
+			ProductDetail currP = productDetailDao.findProductDetailById(pdId);
+			String productId = Integer.toString(currP.getProduct().getProductId());
+
+			ProductDetail newPd = new ProductDetail();
+			// Tim color
+			Color color = colorDao.getColorByName(pd.getColor());
+			if (color == null) {
+				// K có thì thêm color
+				color = new Color(pd.getColor());
+				pd.setColorId(colorDao.insertColor(color));
+			}
+			pd.setColorId(color.getColorId());
+			newPd.setProductId(Integer.valueOf(productId));
+			newPd.setColorId(pd.getColorId());
+			newPd.setQuantity(pd.getQuantity());
+			newPd.setSizeId(pd.getSizeId());
+
+			Boolean upPd = productDetailDao.updateProductDetail(newPd);
+
+			List<ProductImage> pi = productImage.findImageByPD(pdId);
+			List<String> imgToDelete = new ArrayList<String>();
+			if (pi != null) {
+				for (int i = 0; i < pi.size(); i++) {
+					String img = pi.get(i).getImage();
+					if (!pd.getTemplImg().contains(img)) {
+						imgToDelete.add(img);
+					}
+
+				}
+			}
+			Boolean isFileEmpty =true;
+			for (MultipartFile file : files) {
+				if(!file.isEmpty()) {
+					isFileEmpty=false;
+				}
+			}
+			Boolean errImg = imgToDelete.size() == pi.size() && isFileEmpty;
+			if (upPd == false || errImg) {
+				List<Color> colors = colorDao.getAllColors();
+				List<Size> sizes = sizeDao.getAllSizes();
+				model.addAttribute("colors", colors);
+				model.addAttribute("sizes", sizes);
+				model.addAttribute("pd", pd);
+				model.addAttribute("pdId", Integer.toString(pdId));
+				model.addAttribute("productId", productId);
+				model.addAttribute("event", "update");
+				if (errImg) {
+					model.addAttribute("error", "Ảnh không được rỗng");
+				} else {
+					model.addAttribute("error", "Sản phẩm đã tồn tại");
+				}
+				return "page/admin/handleProductDetail";
+			}
+
+			// xoa những ảnh đã bị xoá bỏ trong giao diện
+			for (String s : imgToDelete) {
+				productImage.deleteImage(s);
+			}
+			ProductImage lastImage = productImage.getLastProductImageByProductDetailId(pdId);
+
+			// uploadImage
+			for (int i = 0; i < files.size(); i++) {
+				MultipartFile file = files.get(i);
+				Integer index = lastImage.getPriority() + i + 1;
+				if (!file.isEmpty()) {
+					System.out.println("zo");
+					String url = UploadImage.addToProduct(file, index);
+					ProductImage newPi = new ProductImage(url, pdId, index);
+					if (!productImage.addProductImage(newPi)) {
+						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
+						return "page/admin/handleProductDetail";
+					}
+				}
+			}
+
+			redirectAttributes.addFlashAttribute("success", "Thêm chi tiết sản phẩm thành công");
+			return "redirect:/admin/products.htm";
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("event", "update");
+			model.addAttribute("error", "Xảy ra lỗi chưa xác định khi chỉnh sửa sản phẩm");
+			return "page/admin/handleProductDetail";
+		}
+	}
 }

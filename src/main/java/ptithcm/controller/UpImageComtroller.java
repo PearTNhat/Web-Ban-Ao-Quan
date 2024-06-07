@@ -25,7 +25,7 @@ public class UpImageComtroller {
 	public String list(Model model){
 		try {
 			model.addAttribute("image", new Image());
-//			cloudinary.uploader().destroy("WebAoQuan/Products/anime.jpg", ObjectUtils.emptyMap()); // xoá ảnh
+			 // xoá ảnh
 			return "page/upload-image";
 			
 		} catch (Exception e) {
