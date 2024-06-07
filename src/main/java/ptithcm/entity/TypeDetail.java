@@ -12,24 +12,20 @@ import javax.persistence.OneToMany;
 @Entity
 public class TypeDetail {
 	@Id
-	@Column(name = "typeDeatilId")
-	private String typeDeatilId;
+	@Column(name = "typeDetailId")
+	private String typeDetailId;
 
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "description")
 	private String desc;
-	
-	
 
 	//typeProduct
 	@ManyToOne
 	@JoinColumn(name="typeId")
 	private ProductType type;
 	
-	
-
 	//product
 	@OneToMany(mappedBy="type", fetch=FetchType.EAGER) // mappedBy = ten bien ben product  (1 - n)
 	private Collection<Product> product;
@@ -57,12 +53,13 @@ public class TypeDetail {
 		this.type = type;
 	}
 
-	public String getTypeDeatilId() {
-		return typeDeatilId;
+
+	public String getTypeDetailId() {
+		return typeDetailId;
 	}
 
-	public void setTypeDeatilId(String typeDeatilId) {
-		this.typeDeatilId = typeDeatilId;
+	public void setTypeDetailId(String typeDetailId) {
+		this.typeDetailId = typeDetailId;
 	}
 
 	public String getName() {

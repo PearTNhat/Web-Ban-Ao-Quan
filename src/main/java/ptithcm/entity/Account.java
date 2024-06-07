@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Account {
 	@Id
@@ -14,6 +16,7 @@ public class Account {
 	private Integer accountId;
 	
 	@Column(name = "firstName")
+	@NotBlank(message = "Không được để trống!")
 	private String firstName;
 	
 	@Column(name = "lastName")

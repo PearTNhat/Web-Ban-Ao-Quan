@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,8 +20,6 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.web.multipart.MultipartFile;
-
-import ptithcm.entity.composite.ProductDetailId;
 
 @Entity
 @Table(name = "ProductDetail", uniqueConstraints = @UniqueConstraint(columnNames = { "productId", "sizeId",
@@ -38,6 +37,12 @@ public class ProductDetail {
 	@Column(name = "sizeId", nullable = false)
 	private Integer sizeId;
 
+	@Column(name = "soldQuantity")
+	private int soldQuantity;
+
+	@Column(name = "quantity")
+	private int quantity;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sizeId", insertable = false, updatable = false)
 	private Size size;
@@ -47,22 +52,28 @@ public class ProductDetail {
 	private Color color;
 
 	@OneToMany(mappedBy = "productImage", fetch = FetchType.EAGER)
-	private Collection<ProductImage> image;
-
-	@Column(name = "soldQuantity")
-	private int soldQuantity;
-
-	@Column(name = "quantity")
-	private int quantity;
+	private List<ProductImage> image;
+	@ManyToOne
+	@JoinColumn(name = "productId",insertable = false, updatable = false)
+	private Product product;
 
 	public ProductDetail() {
 	}
 
 	// Getters and setters...
-
+	
 	public Integer getProductDetailId() {
 		return productDetailId;
 	}
+
+	public List<ProductImage> getImage() {
+		return image;
+	}
+
+	public void setImage(List<ProductImage> image) {
+		this.image = image;
+	}
+
 	public void setProductDetailId(Integer productDetailId) {
 		this.productDetailId = productDetailId;
 	}
@@ -106,4 +117,5 @@ public class ProductDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
 }

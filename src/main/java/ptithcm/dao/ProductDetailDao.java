@@ -7,4 +7,5 @@ import ptithcm.entity.ProductDetail;
 public interface ProductDetailDao {
 	public List<ProductDetail> getAllProductDetails();
 	public Integer addProductDetail(ProductDetail pd);
+	public ProductDetail findProductById(String id);
 }

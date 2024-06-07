@@ -54,23 +54,40 @@
 			<%@ include file="../profile/component/sidebar.jsp"%>
 			<div class="col-12 col-md-9" class="user">
 				<div class="fs-4 border-bottom pb-2">Hồ sơ của tôi</div>
-				<form:form action="profile/info/update-user.htm" class="row my-3" modelAttribute="userForm">
+				${message}
+				<form:form action="profile/info/update-user.htm" class="row my-3"
+					modelAttribute="user">
 					<div class="order-2 col-md-7 order-md-1 mb-4">
 						<div class="row mb-3">
 							<div class="col-4">
 								<form:label path="firstName" for="firstname" class="form-label">Họ</form:label>
-								<form:input path="firstName" type="text" class="form-control" id="firstname"></form:input>
+								<form:input path="firstName" type="text" class="form-control"
+									id="firstname"></form:input>
+								<c:if test="${fnameError}">
+									<p style="color: red; font-size: 13px;">Không được để trống họ!</p>
+								</c:if>
 							</div>
 							<div class="col-8">
 								<form:label path="lastName" for="lastname" class="form-label">Tên</form:label>
-								<form:input path="lastName" type="text" class="form-control" id="lastname"></form:input>
+								<form:input path="lastName" type="text" class="form-control"
+									id="lastname"></form:input>
+								<c:if test="${flastError}">
+									<p style="color: red; font-size: 13px;">Không được để trống tên!</p>
+								</c:if>
 							</div>
 						</div>
 						<div class="mb-3">
 							<form:label path="email" for="email" class="form-label">Email</form:label>
-							<form:input path="email" type="email" class="form-control" id="email"></form:input>
+							<form:input path="email" type="email" class="form-control"
+								id="email"></form:input>
+							<c:if test="${emailError}">
+									<p style="color: red; font-size: 13px;">Không được để trống email!</p>
+							</c:if>
 						</div>
-
+						
+						<c:if test="${updateSuccess}">
+									<p style="color: rgb(55, 255, 131); font-size: 13px;">Cập nhật thông tin thành công!</p>
+						</c:if>
 						<button type="submit" class="btn btn-danger rounded-3">Cập
 							nhật</button>
 					</div>
@@ -82,7 +99,8 @@
 									style="width: 0px; height: 0px; overflow: hidden;" />
 								</label>
 							</div>
-							<div class="btn btn-sm btn-danger mx-4 my-3 rounded-pill delete-img" >Xoá</div>
+							<div
+								class="btn btn-sm btn-danger mx-4 my-3 rounded-pill delete-img">Xoá</div>
 						</div>
 					</div>
 				</form:form>
@@ -93,7 +111,7 @@
 	<script src="resources/js/uploadImage.js"></script>
 	<script>
 		const imagePreview = document.querySelector(".imagePreview");
-		if (user.avatar != null){
+		if (user.avatar != null) {
 			imagePreview.style.backgroundImage = `url('${user.avatar}')`;
 		}
 		//xoa preview anh

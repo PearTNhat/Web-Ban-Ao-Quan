@@ -30,14 +30,9 @@ public class ProductDetailBean {
 
 	}
 
-	
-
 	public ArrayList<String> getTemplImg() {
 		return templImg;
 	}
-
-
-
 	public void setTemplImg(ArrayList<String> templImg) {
 		this.templImg = templImg;
 	}

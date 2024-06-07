@@ -4,6 +4,8 @@
 <link rel="stylesheet" href="resources/css/imge-cart.css">
 <link rel="stylesheet" href="resources/css/listProduct.css">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 </head>
 <body>
 	<%@ include file="../component/topbar.jsp"%>
@@ -26,29 +28,36 @@
 			</div>
 			<div class="col-md-8">
 				<div class="row">
-					<c:forEach var="p" items="${pst}">
-						<div class="col-lg-4 col-6 ">
-							<a href="" class="text-decoration-none">
-								<div class="main-image">
-									<i class="fas fa-shopping-cart cart-product"></i> <img
-										src="${p.productImage.get(0).image }"
-										alt="${p.name}" class="img-fluid img-1" /> <img
-										src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-										alt="${p.productImage.get(0).image }" class="img-fluid img-2" />
-								</div>
-								<div class="sub-image">
-									<img
-										src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-										alt="" />
-								</div>
-							</a>
-							<p href="" class="mb-0 d-block small text-center">Áo Vest
-								NAZAFU Màu xám da bò</p>
-							<p class="price text-danger fw-semibold small text-center">
-								675.000 <span
-									class="text-decoration-line-through small text-secondary">1.350.000</span>
-							</p>
-						</div>
+					<c:forEach var="p" items="${pst}" varStatus="status">
+						<c:if test="${not empty p.productDeatil}">
+							<div class="col-lg-4 col-6 ">
+								<c:set var="pd" value="${p.productDeatil}" />
+								<a href="" class="text-decoration-none">
+									<div class="main-image">
+										<i class="fas fa-shopping-cart cart-product"></i> <img
+											src="${pd[0].image[0].image}" alt="${p.name}"
+											class="img-fluid img-1" /> <img
+											src="${pd[0].image[1] == null ? pd[0].image[0].image:pd[0].image[1].image}"
+											alt="${p.name}" class="img-fluid img-2" />
+
+									</div>
+								</a>
+								<p class="mb-0 d-block large text-center" style="font-size: 20px;" >${p.name}</p>
+								<c:set var="pPrice" value="${p.price/1000.0}" />
+								<p class="price text-danger fw-semibold small text-center"
+									>
+
+									<fmt:formatNumber value="${pPrice-(pPrice * p.discount)}" type="number"
+										pattern="#,##0.000" />
+									<span
+										class="text-decoration-line-through small text-secondary price-second">
+										<fmt:formatNumber value="${pPrice}" type="number"
+											pattern="#,##0.000" />
+									</span> <span class="discount">-<fmt:formatNumber
+											value="${p.discount}" type="percent" /></span>
+								</p>
+							</div>
+						</c:if>
 					</c:forEach>
 					<nav class="d-flex justify-content-center border-top py-4"
 						aria-label="Page navigation">

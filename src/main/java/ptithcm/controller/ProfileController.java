@@ -42,26 +42,42 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/info/update-user", method = RequestMethod.POST)
-	public String updateUser(@Validated @ModelAttribute("userForm") User formUser, BindingResult errors, HttpServletRequest request, ModelMap model) {
+	public String updateUser(@Validated @ModelAttribute("user") User formUser, BindingResult errors,
+			HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
+		model.addAttribute("fnameError", false);
+		model.addAttribute("flastError", false);
+		model.addAttribute("emailError", false);
+		model.addAttribute("updateSuccess",false);
 		if (user != null) {
+			Account account = new Account(user.getAccountId(), formUser.getFirstName(), formUser.getLastName(),
+					user.getIsAdmin(), formUser.getEmail(), user.getPassword(), user.getAvatar());
 			if (errors.hasErrors()) {
+				if (account.getFirstName() == "") {
+					model.addAttribute("fnameError", true);
+				}
+				if (account.getLastName() == "") {
+					model.addAttribute("flastError", true);
+				}
+				if (account.getEmail() == "") {
+					model.addAttribute("emailError", true);
+				}
 				model.addAttribute("message", "");
-				model.addAttribute("user", user);
-				model.addAttribute("userForm", formUser);
+				model.addAttribute("user", account);
+				System.out.println(formUser.getFirstName());
+				System.out.println(formUser.getLastName());
+				System.out.println(formUser.getEmail());
 				return "page/profile/info";
 			}
-			Account account = new Account(user.getAccountId(), formUser.getFirstName(), formUser.getLastName(), user.getIsAdmin(), formUser.getEmail(), user.getPassword(),
-					user.getAvatar());
 			accountDao.updateAccount(account);
 			model.addAttribute("user", account);
-			model.addAttribute("userForm", formUser);
+			model.addAttribute("updateSuccess",true);
 		}
 
 		System.out.println(formUser.getFirstName());
 		System.out.println(formUser.getLastName());
 		System.out.println(formUser.getEmail());
-
+		
 		return "page/profile/info";
 	}
 

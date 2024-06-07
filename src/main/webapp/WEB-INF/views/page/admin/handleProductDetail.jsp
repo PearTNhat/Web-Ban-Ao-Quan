@@ -29,9 +29,8 @@
 			</div>
 		</div>
 	</nav>
-	<div class="f-container mt-4 ">
+	<div class="f-container mt-4 flex-column">
 		<div class="f-container" style="flex: 1; overflow: auto">
-			<p>${message }</p>
 			<form:form method="post"
 				action="admin/products/add-product/${productId}.htm"
 				enctype="multipart/form-data" modelAttribute="pd" id="form-p">

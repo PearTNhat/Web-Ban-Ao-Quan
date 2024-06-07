@@ -6,12 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminDashBoardController {
-	@RequestMapping("")
-	public String adminIndex() {
-		return "page/admin/dashBoard";
-	}
-	
-	@RequestMapping("/dashboard")
+
+	@RequestMapping("/")
 	public String dashBoard() {
 		return "page/admin/dashBoard";
 	}
