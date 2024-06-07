@@ -53,7 +53,6 @@ public class TypeDetail {
 		this.type = type;
 	}
 
-
 	public String getTypeDetailId() {
 		return typeDetailId;
 	}

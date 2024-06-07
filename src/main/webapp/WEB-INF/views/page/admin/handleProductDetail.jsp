@@ -15,7 +15,20 @@
 <link rel="stylesheet" href="resources/css/toast.css">
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
-
+<%
+String event = (String) request.getAttribute("event");
+String productId = (String) request.getAttribute("productId");
+String actionUrl;
+if (event == null) {
+	event = request.getParameter("event");
+}
+if ("update".equals(event)) {
+	String pdId = (String) request.getAttribute("pdId");
+	actionUrl = "admin/products/edit-product-detail/" + pdId + ".htm";
+} else {
+	actionUrl = "admin/products/add-product-detail/" + productId + ".htm";
+}
+%>
 <div class="main" style="overflow: auto !important">
 	<nav class="navbar sticky-top bg-white">
 		<div class="container-fluid">
@@ -23,7 +36,7 @@
 				<div class="fs-5">
 					<span> <a href="admin/products.htm" class="link-secondary">
 							<i class="bi bi-box"></i> Products /
-					</a> Add product
+					</a> ${event == 'update' ? 'Chỉnh sửa chi tiết sản phẩm' : 'Thêm chi tiết sản phẩm' }
 					</span>
 				</div>
 			</div>
@@ -31,27 +44,30 @@
 	</nav>
 	<div class="f-container mt-4 flex-column">
 		<div class="f-container" style="flex: 1; overflow: auto">
-			<form:form method="post"
-				action="admin/products/add-product/${productId}.htm"
+			<form:form method="post" action="<%=actionUrl%>"
 				enctype="multipart/form-data" modelAttribute="pd" id="form-p">
 				<div class="container">
 					<div class="row justify-content-center">
 						<!--  -->
 						<div id="hiddenInputsContainer"></div>
+						<div id="inputRemoveImageContainer"></div>
 						<c:if test="${pd.templImg !=null}">
 							<c:forEach var="url" items="${pd.templImg}" varStatus="status">
-								<div class="col-12 col-sm-6 col-md-4 col-xl-3 imgUp ">
+
+								<div class="col-12 col-sm-6 col-md-4 col-xl-3 imgUp">
 									<div class="img-wrapper">
 										<div class="imagePreview"
 											style="background-image: url(${url});"></div>
-										<form:label class="btn btn-primary" path="files">
-											<i class="bi bi-upload"></i>
-											<form:input type="file" class="uploadFile img" path="files"
-												value="Upload Photo"
-												style="width: 0px; height: 0px; overflow: hidden;" />
-										</form:label>
+										<label class="btn btn-primary"> <i
+											class="bi bi-upload"></i> <input type="file"
+											class="uploadFile img"
+											value="${pd.files[status.index]}"
+											style="width: 0px; height: 0px; overflow: hidden;"
+											name="files" />
+										</label> <input type="hidden" value="${pd.templImg[status.index]}"
+											class="templImg" name="templImg[${status.index}]" />
 									</div>
-									<c:if test="${status.index >0}">
+									<c:if test="${status.index > 0}">
 										<i class="bi bi-x del"></i>
 									</c:if>
 								</div>
@@ -67,6 +83,7 @@
 											value="Upload Photo"
 											style="width: 0px; height: 0px; overflow: hidden;" />
 									</form:label>
+									<input type="hidden" class="templImg" name="templImg[0]" />
 								</div>
 							</div>
 						</c:if>
@@ -84,7 +101,7 @@
 						<form:input type="hidden" path="productId" value="${productId }" />
 					</div>
 					<div>
-						<span>Tên: </span> <span>Some thing</span>
+						<span>Tên: </span> <span>${productName}</span>
 					</div>
 
 				</div>
@@ -130,7 +147,7 @@
 		</div>
 	</div>
 </div>
-<script src="resources/js/handleProduct.js"></script>
+<script src="resources/js/handleProductDetail.js"></script>
 <script src="resources/js/adminLayout.js"></script>
 <%@ include file="../../utils/toast.jsp"%>
 </body>

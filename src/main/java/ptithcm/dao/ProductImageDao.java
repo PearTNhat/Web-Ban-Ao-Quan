@@ -9,5 +9,8 @@ import ptithcm.entity.ProductImage;
 public interface ProductImageDao {
 	public Boolean addProductImage(ProductImage pi);
 	public Integer countImageById(Integer productDetailId);
-	public List<ProductImage> findImageByPD(String productDetailId);
+	public List<ProductImage> findImageByPD(Integer productDetailId);
+	public Boolean deleteImgByPDID(Integer pId);
+	public ProductImage getLastProductImageByProductDetailId(Integer productDetailId);
+	public Boolean deleteImage(String image);
 }

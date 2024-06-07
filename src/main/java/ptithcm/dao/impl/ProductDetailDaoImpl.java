@@ -52,12 +52,33 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 
 	@Override
 	@Transactional
-	public ProductDetail findProductById(String id) {
+	public ProductDetail findProductDetailById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "FROM Product WHERE productDetailId=:id";
+		String hql = "FROM ProductDetail WHERE productDetailId=:id";
 		Query query = session.createQuery(hql);
 		query.setParameter("id", id);
 		ProductDetail productList =(ProductDetail) query.uniqueResult();
 		return productList;
+	}
+	
+	@Override
+	@Transactional
+	public boolean updateProductDetail(ProductDetail pd) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+			session.update(pd);
+			t.commit();
+			return true;
+
+		} catch (Exception e) {
+			System.out.println(e);
+			t.rollback();
+		} finally {
+			session.close();
+
+		}
+		return false;
 	}
 }
