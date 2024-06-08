@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../../common/header.jsp"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!-- Toastr CSS -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+	rel="stylesheet">
+<!-- Toastr JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" href="resources/css/toast.css">
 <style>
 .img-wrapper {
 	display: flex;
@@ -31,7 +39,19 @@
 	height: 100%;
 	border-radius: 50%;
 }
+.toast-success {
+	background-color: #08CE08; /* Green background */
+	border-color: #28a745; /* Green border color */
+	color: #fff; /* White text color */
+	opacity: 1 !important; /* Remove opacity effect */
+}
+
+.toast-error {
+	background-color: rgb(254, 8, 10);
+	opacity: 1 !important; 
+}
 </style>
+
 </head>
 <body>
 	<%@ include file="../../component/topbar.jsp"%>
@@ -55,8 +75,8 @@
 			<div class="col-12 col-md-9" class="user">
 				<div class="fs-4 border-bottom pb-2">Hồ sơ của tôi</div>
 				${message}
-				<form:form action="profile/info/update-user.htm" class="row my-3"
-					modelAttribute="user">
+				<form:form action="profile/info.htm" class="row my-3"
+					enctype="multipart/form-data" modelAttribute="user">
 					<div class="order-2 col-md-7 order-md-1 mb-4">
 						<div class="row mb-3">
 							<div class="col-4">
@@ -64,7 +84,8 @@
 								<form:input path="firstName" type="text" class="form-control"
 									id="firstname"></form:input>
 								<c:if test="${fnameError}">
-									<p style="color: red; font-size: 13px;">Không được để trống họ!</p>
+									<p style="color: red; font-size: 13px;">Không được để trống
+										họ!</p>
 								</c:if>
 							</div>
 							<div class="col-8">
@@ -72,7 +93,8 @@
 								<form:input path="lastName" type="text" class="form-control"
 									id="lastname"></form:input>
 								<c:if test="${flastError}">
-									<p style="color: red; font-size: 13px;">Không được để trống tên!</p>
+									<p style="color: red; font-size: 13px;">Không được để trống
+										tên!</p>
 								</c:if>
 							</div>
 						</div>
@@ -81,13 +103,15 @@
 							<form:input path="email" type="email" class="form-control"
 								id="email"></form:input>
 							<c:if test="${emailError}">
-									<p style="color: red; font-size: 13px;">Không được để trống email!</p>
+								<p style="color: red; font-size: 13px;">Không được để trống
+									email!</p>
 							</c:if>
 						</div>
-						
-						<c:if test="${updateSuccess}">
-									<p style="color: rgb(55, 255, 131); font-size: 13px;">Cập nhật thông tin thành công!</p>
-						</c:if>
+
+<%-- 						<c:if test="${updateSuccess}">
+							<p style="color: rgb(55, 255, 131); font-size: 13px;">Cập
+								nhật thông tin thành công!</p>
+						</c:if> --%>
 						<button type="submit" class="btn btn-danger rounded-3">Cập
 							nhật</button>
 					</div>
@@ -95,7 +119,7 @@
 						<div class="img-wrapper">
 							<div class="imagePreview">
 								<label class="btn-upload"> <input type="file"
-									class="uploadFile img" value="Upload Photo"
+									name="file" class="uploadFile img" value="Upload Photo"
 									style="width: 0px; height: 0px; overflow: hidden;" />
 								</label>
 							</div>
@@ -110,10 +134,6 @@
 	<%@ include file="../../common/footer.jsp"%>
 	<script src="resources/js/uploadImage.js"></script>
 	<script>
-		const imagePreview = document.querySelector(".imagePreview");
-		if (user.avatar != null) {
-			imagePreview.style.backgroundImage = `url('${user.avatar}')`;
-		}
 		//xoa preview anh
 		$(".delete-img ")
 				.click(
@@ -128,5 +148,6 @@
 											"url('https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg')");
 						});
 	</script>
+	<%@ include file="../../utils/toast.jsp"%>
 </body>
 </html>
