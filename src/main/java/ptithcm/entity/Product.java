@@ -19,7 +19,7 @@ public class Product {
 	@Id
 	@Column(name = "productId",insertable = false,updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String productId;
+	private Integer productId;
 
 	@Column(name = "name")
 	private String name;
@@ -63,17 +63,15 @@ public class Product {
 		this.typeDetailId = typeDetailId;
 	}
 
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-
-	public void setSoldQuantity(Integer soldQuantity) {
-		this.soldQuantity = soldQuantity;
-	}
-
+	
 
 	public Integer getPrice() {
 		return price;
+	}
+
+
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 
@@ -98,11 +96,11 @@ public class Product {
 		this.type = type;
 	}
 
-	public String getProductId() {
+	public Integer getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(Integer productId) {
 		this.productId = productId;
 	}
 

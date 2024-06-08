@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 		"colorId" }))
 public class ProductDetail {
 	@Id
-	@Column(name = "productDetailId", insertable = false, updatable = false)
+	@Column(name = "productDetailId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productDetailId;
 
@@ -132,14 +132,6 @@ public class ProductDetail {
 
 	public void setColor(Color color) {
 		this.color = color;
-	}
-
-	public String getColorName() {
-	    return color.getName();
-	}
-
-	public String getSizeName() {
-	    return size.getName();
 	}
 
 	public Product getProduct() {

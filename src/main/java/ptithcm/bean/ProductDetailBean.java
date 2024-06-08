@@ -23,26 +23,20 @@ public class ProductDetailBean {
 	@Min(value = 1, message = "Số lượng phải lớn hơn 0")
 	@NotNull(message = "Vui lòng nhập số lượng")
 	private Integer quantity=0;
-	private ArrayList<String> templImg;
+	private List<String> templImg;
+	private List<String> imgInDb;
 	private List<MultipartFile> files;
 
 	public ProductDetailBean() {
 
 	}
-
 	
-
-	public ArrayList<String> getTemplImg() {
+	public List<String> getTemplImg() {
 		return templImg;
 	}
-
-
-
-	public void setTemplImg(ArrayList<String> templImg) {
+	public void setTemplImg(List<String> templImg) {
 		this.templImg = templImg;
 	}
-
-
 
 	public Integer getColorId() {
 		return colorId;
@@ -94,6 +88,15 @@ public class ProductDetailBean {
 
 	public List<MultipartFile> getFiles() {
 		return files;
+	}
+	
+
+	public List<String> getImgInDb() {
+		return imgInDb;
+	}
+
+	public void setImgInDb(List<String> imgInDb) {
+		this.imgInDb = imgInDb;
 	}
 
 	public void setFiles(List<MultipartFile> files) {

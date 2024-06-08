@@ -47,7 +47,7 @@
 								<p class="price text-danger fw-semibold small text-center"
 									>
 
-									<fmt:formatNumber value="${pPrice * p.discount}" type="number"
+									<fmt:formatNumber value="${pPrice-(pPrice * p.discount)}" type="number"
 										pattern="#,##0.000" />
 									<span
 										class="text-decoration-line-through small text-secondary price-second">
