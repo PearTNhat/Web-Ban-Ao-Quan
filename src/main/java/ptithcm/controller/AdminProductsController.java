@@ -126,7 +126,6 @@ public class AdminProductsController {
 	public String productEditForm(Model model, @PathVariable String productId) {
 		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
 		Product currP = productDao.findProductById(productId);
-		System.out.println("id " + productId);
 		ProductBean p = new ProductBean();
 		p.setName(currP.getName());
 		p.setPrice(currP.getPrice());
@@ -272,6 +271,7 @@ public class AdminProductsController {
 				url.add(pi.get(i).getImage());
 			}
 		}
+		removeProductImage("https://res.cloudinary.com/dqf9nmozd/image/upload/v1717755060/WebAoQuan/Products/ao-polo-to-ong-phoi-bo-det-kieu-form-slimfit-po124_small-184541717755061193.jpg");
 		ProductDetail currP = productDetailDao.findProductDetailById(id);
 		ProductDetailBean pd = new ProductDetailBean();
 		pd.setProductId(currP.getProductId());
@@ -312,7 +312,7 @@ public class AdminProductsController {
 			newPd.setColorId(pd.getColorId());
 			newPd.setQuantity(pd.getQuantity());
 			newPd.setSizeId(pd.getSizeId());
-
+			newPd.setProductDetailId(pdId);
 			Boolean upPd = productDetailDao.updateProductDetail(newPd);
 
 			List<ProductImage> pi = productImage.findImageByPD(pdId);
@@ -326,10 +326,10 @@ public class AdminProductsController {
 
 				}
 			}
-			Boolean isFileEmpty =true;
+			Boolean isFileEmpty = true;
 			for (MultipartFile file : files) {
-				if(!file.isEmpty()) {
-					isFileEmpty=false;
+				if (!file.isEmpty()) {
+					isFileEmpty = false;
 				}
 			}
 			Boolean errImg = imgToDelete.size() == pi.size() && isFileEmpty;
@@ -353,6 +353,7 @@ public class AdminProductsController {
 			// xoa những ảnh đã bị xoá bỏ trong giao diện
 			for (String s : imgToDelete) {
 				productImage.deleteImage(s);
+				removeProductImage(s);
 			}
 			ProductImage lastImage = productImage.getLastProductImageByProductDetailId(pdId);
 
@@ -362,7 +363,7 @@ public class AdminProductsController {
 				Integer index = lastImage.getPriority() + i + 1;
 				if (!file.isEmpty()) {
 					System.out.println("zo");
-					String url = UploadImage.addToProduct(file, index);
+					String url = this.addToProduct(file, index);
 					ProductImage newPi = new ProductImage(url, pdId, index);
 					if (!productImage.addProductImage(newPi)) {
 						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
@@ -380,4 +381,48 @@ public class AdminProductsController {
 			return "page/admin/handleProductDetail";
 		}
 	}
+
+	public String addToProduct(MultipartFile file, Integer index) {
+		try {
+			long currentTimeMillis = System.currentTimeMillis() + index;
+			String fileName = file.getOriginalFilename().substring(0, file.getOriginalFilename().lastIndexOf('.'));
+			Map<String, String> m = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.asMap("resource_type",
+					"auto", "folder", "WebAoQuan/Products", "public_id", fileName + currentTimeMillis));
+			String url = (String) m.get("secure_url");
+			return url;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public Boolean removeProductImage(String name) {
+		try {
+			// Extract public ID
+			String publicId = extractPublicId(name);
+			System.out.println("publicId "+publicId);
+			cloudinary.uploader().destroy("WebAoQuan/Products/" + publicId, ObjectUtils.emptyMap());
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private static String extractPublicId(String url) {
+		// Remove the base URL
+		String baseUrl = "https://res.cloudinary.com/dqf9nmozd/image/upload/";
+		String withoutBaseUrl = url.replace(baseUrl, "");
+
+		// Remove the version number and the file extension
+		int lastSlashIndex = withoutBaseUrl.lastIndexOf('/');
+		int dotIndex = withoutBaseUrl.lastIndexOf('.');
+		if (lastSlashIndex >= 0 && dotIndex > lastSlashIndex) {
+			return withoutBaseUrl.substring(lastSlashIndex + 1, dotIndex);
+		} else {
+			return withoutBaseUrl;
+		}
+	}
+
 }

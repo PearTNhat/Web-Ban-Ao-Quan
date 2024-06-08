@@ -98,7 +98,7 @@ if ("update".equals(event)) {
 				<form:select class="form-select" aria-label="select-type"
 					path="typeDetailId">
 					<c:forEach var="type" items="${tsd}" varStatus="status">
-						<option value="${type.typeDeatilId }" selected>${type.name}</option>
+						<option value="${type.typeDetailId }" selected>${type.name}</option>
 					</c:forEach>
 				</form:select>
 			</div>
