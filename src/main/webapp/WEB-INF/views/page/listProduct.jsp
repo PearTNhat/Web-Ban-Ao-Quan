@@ -32,7 +32,10 @@
 						<c:if test="${not empty p.productDetail}">
 							<div class="col-lg-4 col-6 ">
 								<c:set var="pds" value="${p.productDetail}" />
-								<a href="products/${typeId}/${pds[0].productDetailId}.htm" class="text-decoration-none">
+								
+								<a
+									href="products/${typeId}/${pds[0].productColorId}.htm"
+									class="text-decoration-none">
 									<div class="main-image">
 										<i class="fas fa-shopping-cart cart-product"></i> <img
 											src="${pds[0].image[0].image}" alt="${p.name}"
@@ -42,7 +45,8 @@
 									</div>
 									<div class="d-flex justify-content-center">
 										<c:forEach var="pd" items="${pds}" varStatus="i">
-											<c:if test="${pds[i.index].productDetailId != pds[i.index +1 ].productDetailId}">
+											<c:if
+												test="${pds[i.index].productColorId != pds[i.index +1 ].productColorId}">
 												<div class="sub-image">
 													<img src="${pd.image[0].image}" alt="" />
 												</div>

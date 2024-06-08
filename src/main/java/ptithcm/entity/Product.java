@@ -50,7 +50,7 @@ public class Product {
 	@JoinColumn(name = "typeDetailId",insertable = false, updatable = false)
 	private TypeDetail type;
 
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
 	private List<ProductColor> productDetail;
 
 	public Product () {};
