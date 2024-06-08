@@ -111,7 +111,7 @@ public class AdminProductsController {
 				return "page/admin/handleProduct";
 			}
 			redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm thành công");
-			return "redirect:/admin/products.htm";
+			return "redirect:/admin/products/add-product.htm";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("tsd", typesDetail);
@@ -271,7 +271,6 @@ public class AdminProductsController {
 				url.add(pi.get(i).getImage());
 			}
 		}
-		removeProductImage("https://res.cloudinary.com/dqf9nmozd/image/upload/v1717755060/WebAoQuan/Products/ao-polo-to-ong-phoi-bo-det-kieu-form-slimfit-po124_small-184541717755061193.jpg");
 		ProductDetail currP = productDetailDao.findProductDetailById(id);
 		ProductDetailBean pd = new ProductDetailBean();
 		pd.setProductId(currP.getProductId());
@@ -371,7 +370,6 @@ public class AdminProductsController {
 					}
 				}
 			}
-
 			redirectAttributes.addFlashAttribute("success", "Thêm chi tiết sản phẩm thành công");
 			return "redirect:/admin/products.htm";
 		} catch (Exception e) {

@@ -50,12 +50,15 @@ public class ProductDetail {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "colorId", insertable = false, updatable = false)
 	private Color color;
-
-	@OneToMany(mappedBy = "productImage", fetch = FetchType.EAGER)
-	private List<ProductImage> image;
+	
 	@ManyToOne
 	@JoinColumn(name = "productId",insertable = false, updatable = false)
 	private Product product;
+
+	
+	@OneToMany(mappedBy = "productImage", fetch = FetchType.EAGER)
+	private List<ProductImage> image;
+	
 
 	public ProductDetail() {
 	}

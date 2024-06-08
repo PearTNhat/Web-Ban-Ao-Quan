@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,7 +40,7 @@ public class Product {
 	@Column(name = "soldQuantity")
 	private Integer soldQuantity;
 	
-	@Column(name = "createdAt")
+	@Column(name = "createdAt",insertable = false,updatable = false)
 	private Date createdAt;
 
 //	bên nhiều join column để lấy 1 type
@@ -50,7 +51,7 @@ public class Product {
 	private TypeDetail type;
 
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-	private List<ProductDetail> productDeatil;
+	private List<ProductDetail> productDetail;
 
 	public Product () {};
 	
@@ -84,13 +85,17 @@ public class Product {
 		this.soldQuantity = soldQuantity;
 	}
 
-	public List<ProductDetail> getProductDeatil() {
-		return productDeatil;
+	
+
+	public List<ProductDetail> getProductDetail() {
+		return productDetail;
 	}
 
-	public void setProductDeatil(List<ProductDetail> productDeatil) {
-		this.productDeatil = productDeatil;
+
+	public void setProductDetail(List<ProductDetail> productDetail) {
+		this.productDetail = productDetail;
 	}
+
 
 	public TypeDetail getType() {
 		return type;
