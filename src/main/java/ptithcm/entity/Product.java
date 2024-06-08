@@ -81,16 +81,9 @@ public class Product {
 	}
 
 
-	public void setSoldQuantity(Integer soldQuantity) {
-		this.soldQuantity = soldQuantity;
-	}
-
-	
-
 	public List<ProductDetail> getProductDetail() {
 		return productDetail;
 	}
-
 
 	public void setProductDetail(List<ProductDetail> productDetail) {
 		this.productDetail = productDetail;

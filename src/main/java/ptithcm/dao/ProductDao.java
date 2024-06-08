@@ -16,5 +16,7 @@ public interface ProductDao {
 
 	public List<Product> getProductByType(String typeId);
 	
+	public Product getProductById(int productId);
+	
 	public Boolean updateProduct(Product product);
 }

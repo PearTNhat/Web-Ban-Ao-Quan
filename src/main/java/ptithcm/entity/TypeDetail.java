@@ -57,7 +57,7 @@ public class TypeDetail {
 		return typeDetailId;
 	}
 
-	public void setTypeDetailId(String typeDetailId) {
+	public void setTypeDeatilId(String typeDetailId) {
 		this.typeDetailId = typeDetailId;
 	}
 

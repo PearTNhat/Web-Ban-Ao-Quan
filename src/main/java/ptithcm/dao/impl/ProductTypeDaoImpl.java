@@ -28,5 +28,4 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 		List<ProductType> productTypes = query.list();
 		return productTypes;
 	}
-
 }

@@ -120,6 +120,14 @@ public class ProductDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public Size getSize() {
+		return size;
+	}
+
+	public void setSize(Size size) {
+		this.size = size;
+	}
 
 	public Color getColor() {
 		return color;

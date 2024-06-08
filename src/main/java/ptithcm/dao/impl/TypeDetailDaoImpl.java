@@ -30,4 +30,14 @@ public class TypeDetailDaoImpl implements TypeDetailDao{
 		return typesDetail;
 	}
 	
+	@Override
+    @Transactional
+    public TypeDetail getTypeDetail(String typeDetailId) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM TypeDetail td WHERE td.typeDetailId = :typeDetailId";
+        Query query = session.createQuery(hql);
+        query.setParameter("typeDetailId", typeDetailId);
+
+        return (TypeDetail) query.uniqueResult();
+    }
 }

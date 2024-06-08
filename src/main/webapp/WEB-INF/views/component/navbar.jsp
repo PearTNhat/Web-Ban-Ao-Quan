@@ -151,7 +151,7 @@
 				<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>
 			</c:if>
 			<c:if test="${not empty sessionScope.user && user.isAdmin == true}">
-				<a href="admin.htm" class="btn btn-outline btn-outline-secondary">Admin <i class="bi bi-arrow-bar-right fw-bold"></i></a>
+				<a href="admin/dashboard.htm" class="btn btn-outline btn-outline-secondary">Admin <i class="bi bi-arrow-bar-right fw-bold"></i></a>
 			</c:if>
 		</div>
 	</div>

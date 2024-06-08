@@ -59,8 +59,8 @@ public class ProductDaoImpl implements ProductDao {
 		List<Product> productList = query.list();
 		return productList;
 	}
-
-	@Override
+	
+    @Override
 	public Boolean addProduct(Product product) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
@@ -77,6 +77,18 @@ public class ProductDaoImpl implements ProductDao {
 		}
 	}
 
+	@Override
+	@Transactional
+	public Product getProductById(int productId) {
+		Session session = sessionFactory.getCurrentSession();
+	    String hql = "From Product WHERE productId= :productId";
+	    Query query = session.createQuery(hql);
+	    query.setParameter("productId", productId);
+	    
+	    Product product = (Product) query.uniqueResult();
+	    
+	    return product;
+	}	
 	@Override
 	@Transactional
 	public Product findProductById(String productId) {
@@ -105,6 +117,4 @@ public class ProductDaoImpl implements ProductDao {
 			session.close();
 		}
 	}
-
-	
 }

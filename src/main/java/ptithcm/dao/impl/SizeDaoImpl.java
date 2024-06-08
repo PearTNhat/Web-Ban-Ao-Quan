@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ptithcm.dao.SizeDao;
+import ptithcm.entity.Product;
 import ptithcm.entity.Size;
 
 public class SizeDaoImpl implements SizeDao {
@@ -32,5 +33,4 @@ public class SizeDaoImpl implements SizeDao {
 		return sizeList;
 
 	}
-
 }

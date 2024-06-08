@@ -61,7 +61,7 @@ public class AdminProductsController {
 	@RequestMapping("/products")
 	public String getProducts(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
 			@RequestParam(value = "search", defaultValue = "", required = false) String search, ModelMap model) {
-		Integer recordPerPage = 2;
+		Integer recordPerPage = 5;
 		List<Product> products = productDao.getProducts(page, recordPerPage, search);
 		Long totalProduct = productDao.countProducts(search);
 		Integer totalPage = (int) Math.ceil((float) totalProduct / recordPerPage);
@@ -70,6 +70,20 @@ public class AdminProductsController {
 		model.addAttribute("search", search);
 		model.addAttribute("totalPage", totalPage);
 		return "page/admin/products";
+	}
+	
+	@RequestMapping("products/{productId}")
+	public String getProductDetail(@PathVariable Integer productId, ModelMap model,
+			@RequestParam(value="page", defaultValue="1", required=false) Integer page,
+			@RequestParam(value="search", defaultValue="", required=false) String search) {
+		Integer recordPerPage = 5;
+		List<ProductDetail> productDetails = productDetailDao.getProductDetails(productId, page, recordPerPage);
+		Long totalProductDetail = (long) productDetails.size();
+		Integer totalPage = (int) Math.ceil((float) totalProductDetail / recordPerPage);
+		model.addAttribute("productDetails", productDetails);
+		model.addAttribute("page", page);
+		model.addAttribute("totalPage", totalPage);
+		return "page/admin/productDetail";
 	}
 
 	// product
@@ -202,6 +216,8 @@ public class AdminProductsController {
 				return "page/admin/handleProductDetail";
 			}
 			List<MultipartFile> files = pd.getFiles();
+			System.out.println("file " +files);
+			System.out.println("file 0 " +files.get(0).isEmpty());
 			if (files.get(0).isEmpty()) {
 				List<Color> colors = colorDao.getAllColors();
 				List<Size> sizes = sizeDao.getAllSizes();
@@ -240,7 +256,7 @@ public class AdminProductsController {
 			for (int i = 0; i < files.size(); i++) {
 				MultipartFile file = files.get(i);
 				if (!file.isEmpty()) {
-					String url = UploadImage.addToProduct(file, i);
+					String url = this.addToProduct(file, i);
 					ProductImage pi = new ProductImage(url, pdId, i);
 					if (!productImage.addProductImage(pi)) {
 						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
