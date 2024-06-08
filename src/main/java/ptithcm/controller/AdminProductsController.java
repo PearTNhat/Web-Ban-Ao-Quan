@@ -205,7 +205,9 @@ public class AdminProductsController {
 			System.out.println("size " + pd.getTemplImg().size());
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
-			if (errors.hasErrors()) {
+			errors.hasErrors();
+			if (true) {
+				System.out.println(pd.getSizeId());
 				List<Color> colors = colorDao.getAllColors();
 				List<Size> sizes = sizeDao.getAllSizes();
 				model.addAttribute("colors", colors);
@@ -237,10 +239,11 @@ public class AdminProductsController {
 				pd.setColorId(colorDao.insertColor(color));
 			}
 			pd.setColorId(color.getColorId());
-			newPd.setProductId(productId);
-			newPd.setColorId(pd.getColorId());
-			newPd.setQuantity(pd.getQuantity());
-			newPd.setSizeId(pd.getSizeId());
+			/*
+			 * newPd.setProductId(productId); newPd.setColorId(pd.getColorId());
+			 * newPd.setQuantity(pd.getQuantity());
+			 */
+			/* newPd.setSizeId(pd.getSizeId()); */
 			Integer pdId = productDetailDao.addProductDetail(newPd);
 			if (pdId == -1) {
 				List<Color> colors = colorDao.getAllColors();
@@ -289,17 +292,21 @@ public class AdminProductsController {
 		}
 		ProductDetail currP = productDetailDao.findProductDetailById(id);
 		ProductDetailBean pd = new ProductDetailBean();
-		pd.setProductId(currP.getProductId());
-		pd.setQuantity(currP.getQuantity());
-		pd.setColor(currP.getColor().getName());
-		pd.setSizeId(currP.getSizeId());
+		/*
+		 * pd.setProductId(currP.getProductId()); pd.setQuantity(currP.getQuantity());
+		 * pd.setColor(currP.getColor().getName());
+		 */
+		/* pd.setSizeId(currP.getSizeId()); */
 		pd.setTemplImg(url);
 		model.addAttribute("colors", colors);
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("pd", pd);
 		model.addAttribute("pdId", Integer.toString(id));
-		model.addAttribute("productName", currP.getProduct().getName());
-		model.addAttribute("productId", Integer.toString(currP.getProduct().getProductId()));
+		/*
+		 * model.addAttribute("productName", currP.getProduct().getName());
+		 * model.addAttribute("productId",
+		 * Integer.toString(currP.getProduct().getProductId()));
+		 */
 		model.addAttribute("event", "update");
 		return "page/admin/handleProductDetail";
 	}
@@ -312,7 +319,7 @@ public class AdminProductsController {
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
 			ProductDetail currP = productDetailDao.findProductDetailById(pdId);
-			String productId = Integer.toString(currP.getProduct().getProductId());
+			/* String productId = Integer.toString(currP.getProduct().getProductId()); */
 
 			ProductDetail newPd = new ProductDetail();
 			// Tim color
@@ -323,10 +330,11 @@ public class AdminProductsController {
 				pd.setColorId(colorDao.insertColor(color));
 			}
 			pd.setColorId(color.getColorId());
-			newPd.setProductId(Integer.valueOf(productId));
-			newPd.setColorId(pd.getColorId());
-			newPd.setQuantity(pd.getQuantity());
-			newPd.setSizeId(pd.getSizeId());
+			/*
+			 * newPd.setProductId(Integer.valueOf(productId));
+			 * newPd.setColorId(pd.getColorId()); newPd.setQuantity(pd.getQuantity());
+			 */
+			/* newPd.setSizeId(pd.getSizeId()); */
 			newPd.setProductDetailId(pdId);
 			Boolean upPd = productDetailDao.updateProductDetail(newPd);
 
@@ -355,7 +363,7 @@ public class AdminProductsController {
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
 				model.addAttribute("pdId", Integer.toString(pdId));
-				model.addAttribute("productId", productId);
+				/* model.addAttribute("productId", productId); */
 				model.addAttribute("event", "update");
 				if (errImg) {
 					model.addAttribute("error", "Ảnh không được rỗng");

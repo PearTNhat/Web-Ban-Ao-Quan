@@ -3,6 +3,7 @@
 <%@ include file="../common/header.jsp"%>
 <link rel="stylesheet" href="resources/css/home/home.css">
 <link rel="stylesheet" href="resources/css/imge-cart.css">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 
 <body>
@@ -14,30 +15,8 @@
 	<!-- Hot items -->
 	<section class="hot-items">
 		<div class="container-xl text-center">
-			<div class="lead fw-bold">THỜI TRANG HOT NHẤT</div>
+			<div class="lead fw-bold">THỜI TRANG BÁN CHẠY NHẤT</div>
 			<div class="row">
-				<div class="col-lg-3 col-4 ">
-					<a href="" class="text-decoration-none">
-						<div class="main-image">
-							<i class="fas fa-shopping-cart cart-product"></i> <img
-								src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_small-10932.JPG"
-								alt="" class="img-fluid img-1" /> <img
-								src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-								alt="" class="img-fluid img-2" />
-						</div>
-						<div class="sub-image">
-							<img
-								src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-								alt="" />
-						</div>
-					</a>
-					<p href="" class="mb-0 d-block small text-center">Áo Vest
-						NAZAFU Màu xám da bò</p>
-					<p class="price text-danger fw-semibold small text-center">
-						675.000 <span
-							class="text-decoration-line-through small text-secondary">1.350.000</span>
-					</p>
-				</div>
 
 			</div>
 		</div>
@@ -76,27 +55,10 @@
 
 	<section id="banchay" class="container-fluid">
 		<div class="container-xl">
-			<div class="lead fw-bold text-center mb-4">THỜI TRANG BÁN CHẠY</div>
-			<div id="owl-demo-2" class="owl-carousel owl-theme">
-				<div class="item">
-					<div class="slide-item" style="width: 100%; height: 100%">
-						<a href=""
-							class="text-decoration-none d-flex flex-column align-items-center">
-							<img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="img-fluid"> <img
-							src="https://4menshop.com/cache/image/300x400/images/thumbs/2019/08/ao-vest-nazafu-mau-xam-1139_2_small-10932.JPG"
-							alt="" class="my-1" style="width: 20%">
-						</a> <a href=""
-							class="link-underline link-underline-opacity-0 link-dark d-block small text-center">Áo
-							Vest NAZAFU Màu xám da bò </a>
-						<p class="price text-danger fw-medium small text-center">
-							675.000 <span
-								class="text-decoration-line-through small text-secondary">1.350.000</span>
-						</p>
-					</div>
-				</div>
+			<div class="lead fw-bold text-center mb-4">HÀNG MỚI VỀ</div>
+			<div class="row">
 			</div>
+		</div>
 		</div>
 	</section>
 

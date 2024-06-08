@@ -51,7 +51,7 @@ public class Product {
 	private TypeDetail type;
 
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-	private List<ProductDetail> productDetail;
+	private List<ProductColor> productDetail;
 
 	public Product () {};
 	
@@ -81,11 +81,11 @@ public class Product {
 	}
 
 
-	public List<ProductDetail> getProductDetail() {
+	public List<ProductColor> getProductDetail() {
 		return productDetail;
 	}
 
-	public void setProductDetail(List<ProductDetail> productDetail) {
+	public void setProductDetail(List<ProductColor> productDetail) {
 		this.productDetail = productDetail;
 	}
 

@@ -11,4 +11,5 @@ public interface ProductDetailDao {
 	public ProductDetail getProductDetail(int productDetailId);
 	public ProductDetail findProductDetailById(Integer id);
 	public boolean updateProductDetail(ProductDetail pd);
+	
 }

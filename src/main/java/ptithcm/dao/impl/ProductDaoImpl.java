@@ -117,4 +117,25 @@ public class ProductDaoImpl implements ProductDao {
 			session.close();
 		}
 	}
+
+	@Override
+	@Transactional
+	public List<Product> getBestSaleProduct() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Product p ORDER BY p.soldQuantity DESC";
+		Query query = session.createQuery(hql);
+		query.setMaxResults(6);
+		List<Product> productList =query.list();
+		return productList;
+	}
+	@Override
+	@Transactional
+	public List<Product> getNewProduct(){
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Product p ORDER BY p.createdAt DESC";
+		Query query = session.createQuery(hql);
+		query.setMaxResults(6);
+		List<Product> productList =query.list();
+		return productList;
+	}
 }

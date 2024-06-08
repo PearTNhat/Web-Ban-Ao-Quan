@@ -22,7 +22,7 @@ public class ProductImage {
 
 	@ManyToOne
 	@JoinColumn(name = "productDetailId", insertable = false, updatable = false)
-	private ProductDetail productImage;
+	private ProductColor productImage;
 
 	public ProductImage() {
 	}

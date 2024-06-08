@@ -13,7 +13,7 @@ public class ProductDetailBean {
 
 	private Integer productId;
 
-	private Integer sizeId;
+	private List<String> sizeId;
 
 	private String size;
 	@NotBlank(message = "Vui lòng thêm màu sắc")
@@ -54,11 +54,13 @@ public class ProductDetailBean {
 		this.productId = productId;
 	}
 
-	public Integer getSizeId() {
+	
+
+	public List<String> getSizeId() {
 		return sizeId;
 	}
 
-	public void setSizeId(Integer sizeId) {
+	public void setSizeId(List<String> sizeId) {
 		this.sizeId = sizeId;
 	}
 

@@ -106,7 +106,6 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			System.out.println(pd.getProductId());
 			session.update(pd);
 			t.commit();
 			return true;

@@ -46,10 +46,10 @@ public class ProductController {
 	    ProductDetail productDetail = productDetailDao.getProductDetail(productDetailId);
 	    TypeDetail typeDetail = typeDetailDao.getTypeDetail(typeDetailId);
 	    List<Size> listSize = new ArrayList<>();
-	    for (ProductDetail p : productDetail.getProduct().getProductDetail()) {
-	    	if (p.getProductDetailId().equals(productDetailId))
-	    		listSize.add(p.getSize());
-	    }
+		/*
+		 * for (ProductDetail p : productDetail.getProduct().getProductDetail()) { if
+		 * (p.getProductDetailId().equals(productDetailId)) listSize.add(p.getSize()); }
+		 */
 	    
 	    model.addAttribute("productDetail", productDetail);
 	    model.addAttribute("typeDetail", typeDetail);

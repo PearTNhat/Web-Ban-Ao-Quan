@@ -19,4 +19,8 @@ public interface ProductDao {
 	public Product getProductById(int productId);
 	
 	public Boolean updateProduct(Product product);
+	
+	public List<Product> getBestSaleProduct();
+	
+	public List<Product> getNewProduct();
 }

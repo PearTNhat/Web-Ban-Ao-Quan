@@ -132,8 +132,8 @@ if ("update".equals(event)) {
 					<div class="d-flex gap-4 flex-wrap">
 						<c:forEach var="s" items="${sizes}" varStatus="status">
 							<div class="form-check form-switch">
-								<form:radiobutton class="form-check-input" role="switch"
-									path="sizeId" value="${s.sizeId }" id="${s.sizeId }"
+								<form:checkbox class="form-check-input" role="switch"
+									path="sizeId" value="${s.sizeId }"  id="${s.sizeId}"
 									checked="${status.index == 0 ? 'checked' : ''}" />
 								<form:label class="form-check-label" for="${s.sizeId }"
 									path="sizeId">${s.name}</form:label>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductTypeDao;
 import ptithcm.entity.Account;
+import ptithcm.entity.Product;
 import ptithcm.entity.ProductType;
 
 @Controller
@@ -19,6 +20,9 @@ public class HomeController {
 
 	@Autowired
 	private ProductTypeDao productTypeDao;
+	
+	@Autowired
+	private ProductDao productDao;
 
 	@RequestMapping("/")
 	public String index(ModelMap model, HttpServletRequest request) {
@@ -27,8 +31,11 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		List<ProductType> productTypes = productTypeDao.getAllProductType();
+		List<Product> hotProdcut = productDao.getBestSaleProduct();
+		List<Product> newProduct = productDao.getNewProduct();
 		model.addAttribute("pts", productTypes);
-
+		model.addAttribute("hotProduct",hotProdcut);
+		model.addAttribute("newProduct",newProduct);
 		return "page/home";
 	}
 

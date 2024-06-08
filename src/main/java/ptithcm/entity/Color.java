@@ -17,7 +17,7 @@ public class Color {
 	private String name;
 
 	@OneToOne(mappedBy = "color")
-	private ProductDetail productDetail;
+	private ProductColor productDetail;
 
 	public Color() {};
 	public Color(String name) {
