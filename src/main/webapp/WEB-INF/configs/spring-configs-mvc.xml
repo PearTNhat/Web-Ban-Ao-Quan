@@ -32,12 +32,12 @@
 
 	<!-- Kết nối CSDL -->
 	<bean id="dataSource"
-	class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-	p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-	p:url="jdbc:sqlserver://26.62.123.121:1433; Database=DBWEB"
-	p:username="sa" p:password="kc">
-	<!-- 	p:username="sa" p:password="12"> -->
-	<!-- 	p:url="jdbc:sqlserver://localhost:1433; Database=DBWEB" -->
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+		p:url="jdbc:sqlserver://26.62.123.121:1433; Database=DBWEB"
+			p:username="sa" p:password="12">
+	<!--  p:url="jdbc:sqlserver://localhost:1433; Database=DBWEB" 
+		p:username="sa" p:password="12"> -->
 	</bean>
 
 	<!-- Cấu hình Hibernate -->

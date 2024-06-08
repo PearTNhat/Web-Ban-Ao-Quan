@@ -2,6 +2,7 @@ package ptithcm.bean;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 public class User {
 	@NotBlank(message = "Không được để trống họ!")
@@ -14,6 +15,7 @@ public class User {
 	private String email;
 	
 	private String image;
+	private MultipartFile file;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,10 +27,26 @@ public class User {
 		this.email = email;
 		this.image = image;
 	}
+	public User(String firstName, String lastName, String email, String image, MultipartFile mult) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.image = image;
+		this.file = mult;
+	}
+	
 	public User(String firstName, String lastName, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+	}
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
 	}
 	public String getFirstName() {
 		return firstName;

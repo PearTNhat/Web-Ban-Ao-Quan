@@ -1,97 +1,51 @@
 package ptithcm.entity;
 
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import org.springframework.web.multipart.MultipartFile;
-
 @Entity
-@Table(name = "ProductDetail", uniqueConstraints = @UniqueConstraint(columnNames = { "productId", "sizeId",
-		"colorId" }))
+@Table(name = "ProductColor", uniqueConstraints = @UniqueConstraint(columnNames = { "productId", "colorId" }))
 public class ProductDetail {
 	@Id
-	@Column(name = "productDetailId", insertable = false, updatable = false)
+	@Column(name = "productDetailId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productDetailId;
-
-	@Column(name = "productId", nullable = false)
-	private Integer productId;
-	@Column(name = "colorId", nullable = false)
-	private Integer colorId;
-	@Column(name = "sizeId", nullable = false)
+	
+	@Column(name="productColorId")
+	private Integer productColorId;
+	
+	@Column(name="sizeId")
 	private Integer sizeId;
-
-	@Column(name = "soldQuantity")
-	private int soldQuantity;
-
-	@Column(name = "quantity")
-	private int quantity;
-
-	@OneToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne
+	@JoinColumn(name = "productColorId", insertable = false, updatable = false)
+	private ProductColor productColor;
+	
+	@ManyToOne
 	@JoinColumn(name = "sizeId", insertable = false, updatable = false)
 	private Size size;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "colorId", insertable = false, updatable = false)
-	private Color color;
-
-	@OneToMany(mappedBy = "productImage", fetch = FetchType.EAGER)
-	private List<ProductImage> image;
-	@ManyToOne
-	@JoinColumn(name = "productId",insertable = false, updatable = false)
-	private Product product;
-
-	public ProductDetail() {
-	}
-
-	// Getters and setters...
-	
 	public Integer getProductDetailId() {
 		return productDetailId;
-	}
-
-	public List<ProductImage> getImage() {
-		return image;
-	}
-
-	public void setImage(List<ProductImage> image) {
-		this.image = image;
 	}
 
 	public void setProductDetailId(Integer productDetailId) {
 		this.productDetailId = productDetailId;
 	}
 
-	public Integer getProductId() {
-		return productId;
+	public Integer getProductColorId() {
+		return productColorId;
 	}
 
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
-
-	public Integer getColorId() {
-		return colorId;
-	}
-
-	public void setColorId(Integer colorId) {
-		this.colorId = colorId;
+	public void setProductColorId(Integer productColorId) {
+		this.productColorId = productColorId;
 	}
 
 	public Integer getSizeId() {
@@ -102,20 +56,23 @@ public class ProductDetail {
 		this.sizeId = sizeId;
 	}
 
-	public int getSoldQuantity() {
-		return soldQuantity;
+	public ProductColor getProductColor() {
+		return productColor;
 	}
 
-	public void setSoldQuantity(int soldQuantity) {
-		this.soldQuantity = soldQuantity;
+	public void setProductColor(ProductColor productColor) {
+		this.productColor = productColor;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public Size getSize() {
+		return size;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setSize(Size size) {
+		this.size = size;
 	}
+	
+	
+	
 	
 }
