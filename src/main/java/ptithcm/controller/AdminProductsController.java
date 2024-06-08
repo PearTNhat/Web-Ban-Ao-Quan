@@ -57,7 +57,7 @@ public class AdminProductsController {
 	@RequestMapping("/products")
 	public String getProducts(@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
 			@RequestParam(value = "search", defaultValue = "", required = false) String search, ModelMap model) {
-		Integer recordPerPage = 2;
+		Integer recordPerPage = 5;
 		List<Product> products = productDao.getProducts(page, recordPerPage, search);
 		Long totalProduct = productDao.countProducts(search);
 		Integer totalPage = (int) Math.ceil((float) totalProduct / recordPerPage);
@@ -70,9 +70,10 @@ public class AdminProductsController {
 	
 	@RequestMapping("products/{productId}")
 	public String getProductDetail(@PathVariable Integer productId, ModelMap model,
-			@RequestParam(value="page", defaultValue="1", required=false) Integer page) {
-		Integer recordPerPage = 2;
-		List<ProductDetail> productDetails = productDao.getProductDetails(productId, page, recordPerPage);
+			@RequestParam(value="page", defaultValue="1", required=false) Integer page,
+			@RequestParam(value="search", defaultValue="", required=false) String search) {
+		Integer recordPerPage = 5;
+		List<ProductDetail> productDetails = productDetailDao.getProductDetails(productId, page, recordPerPage);
 		Long totalProductDetail = (long) productDetails.size();
 		Integer totalPage = (int) Math.ceil((float) totalProductDetail / recordPerPage);
 		model.addAttribute("productDetails", productDetails);

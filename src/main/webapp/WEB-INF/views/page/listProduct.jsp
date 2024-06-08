@@ -29,10 +29,10 @@
 			<div class="col-md-8">
 				<div class="row">
 					<c:forEach var="p" items="${pst}" varStatus="status">
-						<c:if test="${not empty p.productDeatil}">
+						<c:if test="${not empty p.productDetail}">
 							<div class="col-lg-4 col-6 ">
-								<c:set var="pd" value="${p.productDeatil}" />
-								<a href="" class="text-decoration-none">
+								<c:set var="pd" value="${p.productDetail}" />
+								<a href="products/${typeId}/${pd[0].productDetailId}.htm" class="text-decoration-none">
 									<div class="main-image">
 										<i class="fas fa-shopping-cart cart-product"></i> <img
 											src="${pd[0].image[0].image}" alt="${p.name}"

@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class TypeDetail {
 	@Id
-	@Column(name = "typeDeatilId")
-	private String typeDeatilId;
+	@Column(name = "typeDetailId")
+	private String typeDetailId;
 
 	@Column(name = "name")
 	private String name;
@@ -53,12 +53,12 @@ public class TypeDetail {
 		this.type = type;
 	}
 
-	public String getTypeDeatilId() {
-		return typeDeatilId;
+	public String getTypeDetailId() {
+		return typeDetailId;
 	}
 
-	public void setTypeDeatilId(String typeDeatilId) {
-		this.typeDeatilId = typeDeatilId;
+	public void setTypeDeatilId(String typeDetailId) {
+		this.typeDetailId = typeDetailId;
 	}
 
 	public String getName() {

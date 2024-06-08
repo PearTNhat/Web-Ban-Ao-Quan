@@ -33,9 +33,9 @@
 			<bean class="ptithcm.interceptor.UserInterceptor" />
 		</mvc:interceptor>
 		<!-- Prehandle cho Admin -->
-		<!-- <mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/admin/**"/>
 			<bean class="ptithcm.interceptor.AdminInterceptor" />
-		</mvc:interceptor> -->
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
