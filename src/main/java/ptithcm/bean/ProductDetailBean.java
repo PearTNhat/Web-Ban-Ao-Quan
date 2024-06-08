@@ -9,11 +9,15 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
+import ptithcm.entity.ProductDetail;
+
 public class ProductDetailBean {
 
 	private Integer productId;
-
-	private List<String> sizeId;
+	private List<Integer> listSizeId;
+	private List<Integer> listSizeName;
+	private List<ProductDetail> listPd;
+	private Integer sizeId;
 
 	private String size;
 	@NotBlank(message = "Vui lòng thêm màu sắc")
@@ -56,11 +60,11 @@ public class ProductDetailBean {
 
 	
 
-	public List<String> getSizeId() {
+	public Integer getSizeId() {
 		return sizeId;
 	}
 
-	public void setSizeId(List<String> sizeId) {
+	public void setSizeId(Integer sizeId) {
 		this.sizeId = sizeId;
 	}
 
@@ -105,4 +109,28 @@ public class ProductDetailBean {
 		this.files = files;
 	}
 
+	public List<Integer> getListSizeId() {
+		return listSizeId;
+	}
+
+	public void setListSizeId(List<Integer> listSizeId) {
+		this.listSizeId = listSizeId;
+	}
+
+	public List<Integer> getListSizeName() {
+		return listSizeName;
+	}
+
+	public void setListSizeName(List<Integer> listSizeName) {
+		this.listSizeName = listSizeName;
+	}
+
+	public List<ProductDetail> getListPd() {
+		return listPd;
+	}
+
+	public void setListPd(List<ProductDetail> listPd) {
+		this.listPd = listPd;
+	}
+	
 }

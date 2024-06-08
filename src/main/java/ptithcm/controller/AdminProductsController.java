@@ -37,6 +37,7 @@ import ptithcm.entity.TypeDetail;
 import ptithcm.utils.UploadImage;
 import ptithcm.entity.Color;
 import ptithcm.entity.Product;
+import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductDetail;
 import ptithcm.entity.ProductImage;
 
@@ -71,11 +72,11 @@ public class AdminProductsController {
 		model.addAttribute("totalPage", totalPage);
 		return "page/admin/products";
 	}
-	
+
 	@RequestMapping("products/{productId}")
 	public String getProductDetail(@PathVariable Integer productId, ModelMap model,
-			@RequestParam(value="page", defaultValue="1", required=false) Integer page,
-			@RequestParam(value="search", defaultValue="", required=false) String search) {
+			@RequestParam(value = "page", defaultValue = "1", required = false) Integer page,
+			@RequestParam(value = "search", defaultValue = "", required = false) String search) {
 		Integer recordPerPage = 5;
 		List<ProductDetail> productDetails = productDetailDao.getProductDetails(productId, page, recordPerPage);
 		Long totalProductDetail = (long) productDetails.size();
@@ -98,7 +99,6 @@ public class AdminProductsController {
 
 	@RequestMapping(value = "/products/add-product", method = RequestMethod.POST)
 	public String addProduct(RedirectAttributes redirectAttributes, ModelMap model,
-
 			@Validated @ModelAttribute("p") ProductBean p, BindingResult errors) {
 		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
 		try {
@@ -118,7 +118,9 @@ public class AdminProductsController {
 			newP.setTypeDetailId(p.getTypeDetailId());
 			newP.setDescription(p.getDescription());
 			Boolean res = productDao.addProduct(newP);
+
 			if (!res) {
+
 				model.addAttribute("tsd", typesDetail);
 				model.addAttribute("p", p);
 				model.addAttribute("error", "Sản phẩm đã tồn tại");
@@ -137,7 +139,7 @@ public class AdminProductsController {
 
 	// edit-product
 	@RequestMapping(value = "/products/edit-product/{productId}", method = RequestMethod.GET)
-	public String productEditForm(Model model, @PathVariable String productId) {
+	public String productEditForm(Model model, @PathVariable Integer productId) {
 		List<TypeDetail> typesDetail = typeDetailDao.getAllTypeDetail();
 		Product currP = productDao.findProductById(productId);
 		ProductBean p = new ProductBean();
@@ -149,7 +151,7 @@ public class AdminProductsController {
 
 		model.addAttribute("tsd", typesDetail);
 		model.addAttribute("p", p);
-		model.addAttribute("productId", productId);
+		model.addAttribute("productId", Integer.toString(productId));
 		model.addAttribute("event", "update");
 		return "page/admin/handleProduct";
 	}
@@ -184,9 +186,9 @@ public class AdminProductsController {
 	}
 
 	// prodcut detail
+
 	@RequestMapping(value = "/products/add-product-detail/{productId}", method = RequestMethod.GET)
 	public String productDetailForm(@PathVariable Integer productId, Model model) {
-//		pd : product detail
 		List<Color> colors = colorDao.getAllColors();
 		List<Size> sizes = sizeDao.getAllSizes();
 		model.addAttribute("colors", colors);
@@ -200,16 +202,12 @@ public class AdminProductsController {
 	public String addProductDetail(@PathVariable Integer productId, ModelMap model,
 			RedirectAttributes redirectAttributes, @Validated @ModelAttribute("pd") ProductDetailBean pd,
 			BindingResult errors) {
+		List<Color> colors = colorDao.getAllColors();
+		List<Size> sizes = sizeDao.getAllSizes();
 		try {
-			// get error
-			System.out.println("size " + pd.getTemplImg().size());
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
-			errors.hasErrors();
-			if (true) {
-				System.out.println(pd.getSizeId());
-				List<Color> colors = colorDao.getAllColors();
-				List<Size> sizes = sizeDao.getAllSizes();
+			if (errors.hasErrors()) {
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
@@ -218,11 +216,7 @@ public class AdminProductsController {
 				return "page/admin/handleProductDetail";
 			}
 			List<MultipartFile> files = pd.getFiles();
-			System.out.println("file " +files);
-			System.out.println("file 0 " +files.get(0).isEmpty());
 			if (files.get(0).isEmpty()) {
-				List<Color> colors = colorDao.getAllColors();
-				List<Size> sizes = sizeDao.getAllSizes();
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
@@ -230,7 +224,7 @@ public class AdminProductsController {
 				model.addAttribute("error", "Ảnh không được rỗng");
 				return "page/admin/handleProductDetail";
 			}
-			ProductDetail newPd = new ProductDetail();
+			ProductColor newPC = new ProductColor();
 			// Tim color
 			Color color = colorDao.getColorByName(pd.getColor());
 			if (color == null) {
@@ -239,20 +233,25 @@ public class AdminProductsController {
 				pd.setColorId(colorDao.insertColor(color));
 			}
 			pd.setColorId(color.getColorId());
-			/*
-			 * newPd.setProductId(productId); newPd.setColorId(pd.getColorId());
-			 * newPd.setQuantity(pd.getQuantity());
-			 */
-			/* newPd.setSizeId(pd.getSizeId()); */
-			Integer pdId = productDetailDao.addProductDetail(newPd);
-			if (pdId == -1) {
-				List<Color> colors = colorDao.getAllColors();
-				List<Size> sizes = sizeDao.getAllSizes();
+			newPC.setProductId(productId);
+			newPC.setColorId(pd.getColorId());
+
+			ProductDetail newPd = new ProductDetail();
+
+			newPd.setQuantity(pd.getQuantity());
+			newPd.setSizeId(pd.getSizeId());
+			Integer pcId = productDetailDao.findProductColor(productId, pd.getColorId());
+			if (pcId == null) {
+				pcId = productDetailDao.addProductColor(newPC);
+			}
+			newPd.setProductColorId(pcId);
+			Integer res = productDetailDao.addProductDetail(newPd);
+			if (res == -1) {
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
 				model.addAttribute("productId", Integer.toString(productId));
-				model.addAttribute("error", "Sản phẩm đã tồn tại");
+				model.addAttribute("error", "Size đã tồn tại");
 				return "page/admin/handleProductDetail";
 			}
 			// thêm ảnh
@@ -260,7 +259,7 @@ public class AdminProductsController {
 				MultipartFile file = files.get(i);
 				if (!file.isEmpty()) {
 					String url = this.addToProduct(file, i);
-					ProductImage pi = new ProductImage(url, pdId, i);
+					ProductImage pi = new ProductImage(url, pcId, i);
 					if (!productImage.addProductImage(pi)) {
 						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
 						return "redirect:/admin/products/add-product-detail/" + productId + ".htm";
@@ -277,68 +276,54 @@ public class AdminProductsController {
 
 	}
 
-	@RequestMapping(value = "/products/edit-product-detail/{id}", method = RequestMethod.GET)
-	public String editProductDetailForm(@PathVariable Integer id, ModelMap model) {
+	@RequestMapping(value = "/products/edit-product-detail/{pcId}", method = RequestMethod.GET)
+	public String editProductDetailForm(@PathVariable Integer pcId, ModelMap model) {
 		List<Color> colors = colorDao.getAllColors();
 
 		List<Size> sizes = sizeDao.getAllSizes();
 
-		List<ProductImage> pi = productImage.findImageByPD(id);
+		List<ProductImage> pi = productImage.findImageByPC(pcId);
+
 		List<String> url = new ArrayList<String>();
 		if (pi != null) {
 			for (int i = 0; i < pi.size(); i++) {
 				url.add(pi.get(i).getImage());
 			}
 		}
-		ProductDetail currP = productDetailDao.findProductDetailById(id);
+		ProductColor currPc = productDetailDao.findProductColorById(pcId);
+		List<ProductDetail> currPd = productDetailDao.findProductDetailByPCId(currPc.getProductColorId());
 		ProductDetailBean pd = new ProductDetailBean();
-		/*
-		 * pd.setProductId(currP.getProductId()); pd.setQuantity(currP.getQuantity());
-		 * pd.setColor(currP.getColor().getName());
-		 */
-		/* pd.setSizeId(currP.getSizeId()); */
+		pd.setProductId(currPc.getProductId());
+		pd.setColor(currPc.getColor().getName());
+		pd.setListPd(currPd);
 		pd.setTemplImg(url);
 		model.addAttribute("colors", colors);
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("pd", pd);
-		model.addAttribute("pdId", Integer.toString(id));
-		/*
-		 * model.addAttribute("productName", currP.getProduct().getName());
-		 * model.addAttribute("productId",
-		 * Integer.toString(currP.getProduct().getProductId()));
-		 */
+		model.addAttribute("pdId", Integer.toString(pcId));
+
+		model.addAttribute("productName", currPc.getProduct().getName());
+		model.addAttribute("productId", Integer.toString(currPc.getProduct().getProductId()));
+
 		model.addAttribute("event", "update");
 		return "page/admin/handleProductDetail";
 	}
 
-	@RequestMapping(value = "/products/edit-product-detail/{pdId}", method = RequestMethod.POST)
-	public String editProductDetail(@PathVariable Integer pdId, ModelMap model, RedirectAttributes redirectAttributes,
+	@RequestMapping(value = "/products/edit-product-detail/{pcId}", method = RequestMethod.POST)
+	public String editProductDetail(@PathVariable Integer pcId, ModelMap model, RedirectAttributes redirectAttributes,
 			@Validated @ModelAttribute("pd") ProductDetailBean pd, BindingResult errors) {
+		List<Color> colors = colorDao.getAllColors();
+		List<Size> sizes = sizeDao.getAllSizes();
 		try {
 			List<MultipartFile> files = pd.getFiles();
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
-			ProductDetail currP = productDetailDao.findProductDetailById(pdId);
-			/* String productId = Integer.toString(currP.getProduct().getProductId()); */
+			ProductColor currPc = productDetailDao.findProductColorById(pcId);
+			String productId = Integer.toString(currPc.getProduct().getProductId());
 
-			ProductDetail newPd = new ProductDetail();
-			// Tim color
-			Color color = colorDao.getColorByName(pd.getColor());
-			if (color == null) {
-				// K có thì thêm color
-				color = new Color(pd.getColor());
-				pd.setColorId(colorDao.insertColor(color));
-			}
-			pd.setColorId(color.getColorId());
-			/*
-			 * newPd.setProductId(Integer.valueOf(productId));
-			 * newPd.setColorId(pd.getColorId()); newPd.setQuantity(pd.getQuantity());
-			 */
-			/* newPd.setSizeId(pd.getSizeId()); */
-			newPd.setProductDetailId(pdId);
-			Boolean upPd = productDetailDao.updateProductDetail(newPd);
+			productDetailDao.updateProductDetail(pd.getListPd());
 
-			List<ProductImage> pi = productImage.findImageByPD(pdId);
+			List<ProductImage> pi = productImage.findImageByPC(pcId);
 			List<String> imgToDelete = new ArrayList<String>();
 			if (pi != null) {
 				for (int i = 0; i < pi.size(); i++) {
@@ -356,20 +341,18 @@ public class AdminProductsController {
 				}
 			}
 			Boolean errImg = imgToDelete.size() == pi.size() && isFileEmpty;
-			if (upPd == false || errImg) {
-				List<Color> colors = colorDao.getAllColors();
-				List<Size> sizes = sizeDao.getAllSizes();
+			if (errImg) {
+
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
-				model.addAttribute("pdId", Integer.toString(pdId));
-				/* model.addAttribute("productId", productId); */
+				model.addAttribute("pdId", Integer.toString(pcId));
+				model.addAttribute("productId", productId);
+				model.addAttribute("productName", currPc.getProduct().getName());
 				model.addAttribute("event", "update");
-				if (errImg) {
-					model.addAttribute("error", "Ảnh không được rỗng");
-				} else {
-					model.addAttribute("error", "Sản phẩm đã tồn tại");
-				}
+
+				model.addAttribute("error", "Ảnh không được rỗng");
+
 				return "page/admin/handleProductDetail";
 			}
 
@@ -378,7 +361,7 @@ public class AdminProductsController {
 				productImage.deleteImage(s);
 				removeProductImage(s);
 			}
-			ProductImage lastImage = productImage.getLastProductImageByProductDetailId(pdId);
+			ProductImage lastImage = productImage.getLastProductImageByProductDetailId(pcId);
 
 			// uploadImage
 			for (int i = 0; i < files.size(); i++) {
@@ -387,7 +370,7 @@ public class AdminProductsController {
 				if (!file.isEmpty()) {
 					System.out.println("zo");
 					String url = this.addToProduct(file, index);
-					ProductImage newPi = new ProductImage(url, pdId, index);
+					ProductImage newPi = new ProductImage(url, pcId, index);
 					if (!productImage.addProductImage(newPi)) {
 						redirectAttributes.addFlashAttribute("error", "Thêm ảnh thất bại");
 						return "page/admin/handleProductDetail";
@@ -396,7 +379,9 @@ public class AdminProductsController {
 			}
 			redirectAttributes.addFlashAttribute("success", "Thêm chi tiết sản phẩm thành công");
 			return "redirect:/admin/products.htm";
-		} catch (Exception e) {
+		} catch (
+
+		Exception e) {
 			e.printStackTrace();
 			model.addAttribute("event", "update");
 			model.addAttribute("error", "Xảy ra lỗi chưa xác định khi chỉnh sửa sản phẩm");
@@ -420,10 +405,9 @@ public class AdminProductsController {
 	}
 
 	public Boolean removeProductImage(String name) {
-		try {
-			// Extract public ID
+		try { // Extract public ID
 			String publicId = extractPublicId(name);
-			System.out.println("publicId "+publicId);
+			System.out.println("publicId " + publicId);
 			cloudinary.uploader().destroy("WebAoQuan/Products/" + publicId, ObjectUtils.emptyMap());
 			return true;
 		} catch (Exception e) {
@@ -432,8 +416,7 @@ public class AdminProductsController {
 		}
 	}
 
-	private static String extractPublicId(String url) {
-		// Remove the base URL
+	private static String extractPublicId(String url) { // Remove the base URL
 		String baseUrl = "https://res.cloudinary.com/dqf9nmozd/image/upload/";
 		String withoutBaseUrl = url.replace(baseUrl, "");
 
