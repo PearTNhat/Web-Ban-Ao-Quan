@@ -41,9 +41,14 @@ public class ProductColor {
 	@JoinColumn(name = "productId", insertable = false, updatable = false)
 	private Product product;
 
+
 	@OneToMany(mappedBy = "productImage", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ProductImage> image;
-	
+
+
+	@OneToMany(mappedBy = "productColor", fetch = FetchType.EAGER)
+	private List<ProductDetail> productDetail;
+
 	public ProductColor() {
 	}
 
@@ -98,4 +103,11 @@ public class ProductColor {
 		this.product = product;
 	}
 
+	public List<ProductDetail> getProductDetail() {
+		return productDetail;
+	}
+
+	public void setProductDetail(List<ProductDetail> productDetail) {
+		this.productDetail = productDetail;
+	}
 }

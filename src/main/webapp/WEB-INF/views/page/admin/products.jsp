@@ -71,10 +71,10 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Name</th>
-								<th>Quantity</th>
-								<th>Price</th>
+								<th>Tên sản phẩm</th>
+								<th>Giá</th>
 								<th>Giảm giá</th>
+								<th>Số lượng đã bán</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -86,10 +86,10 @@
 											src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
 											class="avatar" alt="Avatar">${p.name}</a></td>
 
-									<td>123</td>
-									<td><fmt:formatNumber value="999" type="currency" /></td>
-<td><fmt:formatNumber value="${ p.discount}"
+									<td><fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" maxFractionDigits="0" minFractionDigits="0" />đ</td>
+									<td><fmt:formatNumber value="${p.discount}"
 											type="percent" /></td>
+									<td>${p.soldQuantity}</td>
 									<td>
 										<div class="d-flex">
 											<a href="./addProduct/addProduct.html" class="edit"><i

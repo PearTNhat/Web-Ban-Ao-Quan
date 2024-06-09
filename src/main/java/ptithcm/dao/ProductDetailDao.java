@@ -9,6 +9,7 @@ public interface ProductDetailDao {
 	public List<ProductDetail> getAllProductDetails();
 	public Integer addProductColor(ProductColor pc);
 	public List<ProductDetail> getProductDetails(int productId, int page, int pageSize);
+	public ProductDetail getProductDetail(int productDetailId);
 	public ProductColor findProductColorById(Integer id);
 	public boolean updateProductDetail(List<ProductDetail> list);
 	public Integer addProductDetail(ProductDetail pd);

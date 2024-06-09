@@ -25,13 +25,13 @@
 					class="fw-bold text-white text-uppercase text-decoration-underline">Hỗ
 					trợ khách hàng</h5>
 				<ul class="list-footer">
-					<li><a href="#">Hướng dẫn đặt hàng</a></li>
-					<li><a href="#">Hướng dẫn chọn size</a></li>
-					<li><a href="#">Câu hỏi thường gặp</a></li>
-					<li><a href="#">Chính sách khách VIP</a></li>
-					<li><a href="#">Thanh toán - Giao hàng </a></li>
-					<li><a href="#">Chính sách bảo mật </a></li>
-					<li><a href="#">Thanh toán - Giao hàng </a></li>
+					<li><a href=".htm">Hướng dẫn đặt hàng</a></li>
+					<li><a href="choose-size.htm">Hướng dẫn chọn size</a></li>
+					<li><a href=".htm">Câu hỏi thường gặp</a></li>
+					<li><a href="for-vip-user.htm">Chính sách khách VIP</a></li>
+					<li><a href=".htm">Thanh toán - Giao hàng </a></li>
+					<li><a href=".htm">Chính sách bảo mật </a></li>
+					<li><a href=".htm">Thanh toán - Giao hàng </a></li>
 				</ul>
 			</div>
 			<div class="col-lg-3 col-sm-6 widget-footer ">

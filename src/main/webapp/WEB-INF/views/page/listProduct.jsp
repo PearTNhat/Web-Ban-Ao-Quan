@@ -43,24 +43,22 @@
 							<c:if test="${not empty p.productDetail}">
 								<div class="col-lg-4 col-6 ">
 									<c:set var="pds" value="${p.productDetail}" />
-
-									<a href="products/${typeId}/${pds[0].productColorId}.htm"
+									<a
+										href="products/${typeId}/${pds.iterator().next().productColorId}.htm"
 										class="text-decoration-none">
 										<div class="main-image">
 											<i class="fas fa-shopping-cart cart-product"></i> <img
-												src="${pds[0].image[0].image}" alt="${p.name}"
-												class="img-fluid img-1" /> <img
-												src="${pds[0].image[1] == null ? pds[0].image[0].image:pds[0].image[1].image}"
+												src="${pds.iterator().next().image[0].image}"
+												alt="${p.name}" class="img-fluid img-1" /> <img
+												src="${pds.iterator().next().image[1] == null ? pds.iterator().next().image[0].image:pds.iterator().next().image[1].image}"
 												alt="${p.name}" class="img-fluid img-2" />
 										</div>
 										<div class="d-flex justify-content-center">
 											<c:forEach var="pd" items="${pds}" varStatus="i">
-												<c:if
-													test="${pds[i.index].productColorId != pds[i.index +1 ].productColorId}">
-													<div class="sub-image">
-														<img src="${pd.image[0].image}" alt="" />
-													</div>
-												</c:if>
+												<div class="sub-image">
+													<img src="${pd.image[0].image}" alt="" />
+												</div>
+
 											</c:forEach>
 										</div>
 									</a>
@@ -84,7 +82,8 @@
 						<nav class="d-flex justify-content-center border-top py-4"
 							aria-label="Page navigation">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="products/${typeId}.htm?page=${page-1}"
+								<li class="page-item"><a class="page-link"
+									href="products/${typeId}.htm?page=${page-1}"
 									aria-label="Previous"> <span> &laquo; </span>
 								</a></li>
 								<c:forEach begin="1" end="${pages}" varStatus="s">
@@ -92,8 +91,9 @@
 										class="page-link ${s.index == page ? 'page-active' : ''}"
 										href="products/${typeId}.htm?page=${s.index}">${s.index}</a></li>
 								</c:forEach>
-								<li class="page-item"><a class="page-link" href="products/${typeId}.htm?page=${page+1}"
-									aria-label="Next"> &raquo; </a></li>
+								<li class="page-item"><a class="page-link"
+									href="products/${typeId}.htm?page=${page+1}" aria-label="Next">
+										&raquo; </a></li>
 							</ul>
 						</nav>
 					</div>
@@ -116,7 +116,7 @@
 									<c:set var="pds" value="${p.productDetail}" />
 									<div class="col-4 side-pic">
 										<a href="#" class=""> <img class="w-100"
-											src="${pds[0].image[0].image}" alt="${p.name}" />
+											src="${pds.iterator().next().image[0].image}" alt="${p.name}" />
 										</a>
 									</div>
 									<div class="col-8 price-widget"

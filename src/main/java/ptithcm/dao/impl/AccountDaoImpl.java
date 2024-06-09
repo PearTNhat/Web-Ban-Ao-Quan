@@ -9,14 +9,17 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import ptithcm.bean.User;
 import ptithcm.dao.AccountDao;
 import ptithcm.entity.Account;
+import ptithcm.entity.Address;
 
 @Transactional
 public class AccountDaoImpl implements AccountDao {
 	private SessionFactory factory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	
+	
+	  public void setSessionFactory(SessionFactory sessionFactory) {
 		this.factory = sessionFactory;
 	}
 	@Override
@@ -72,6 +75,25 @@ public class AccountDaoImpl implements AccountDao {
 		query.setParameter("email", email);
 		Account acc = (Account) query.uniqueResult();
 		return acc;
+	}
+	@Override
+	public Boolean updateAccount(Account user) {
+		Session session = factory.openSession();
+		Transaction t = session.beginTransaction();
+		try {
+
+			session.update(user);
+			t.commit();
+			return true;
+
+		} catch (Exception e) {
+			System.out.println(e);
+			t.rollback();
+		} finally {
+			session.close();
+
+		}
+		return false;
 	}
 	
 }

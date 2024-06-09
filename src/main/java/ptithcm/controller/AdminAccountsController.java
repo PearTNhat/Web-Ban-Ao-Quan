@@ -100,7 +100,7 @@ public class AdminAccountsController {
 		}
 		return "redirect:/admin/accounts.htm?page=" + page + "&search=" + search;
 	}
-
+	
 	@RequestMapping("/admin-register")
 	public String register(ModelMap model) {
 		UserBean user = new UserBean();

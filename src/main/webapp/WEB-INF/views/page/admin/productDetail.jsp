@@ -25,9 +25,9 @@
         <div class="container-fluid d-flex justify-content-between">
             <div class="navbar-brand ms-4">
                 <div class="fs-5">
-                    <span class="text-secondary"> <i class="bi bi-box"></i>
-                        Products /
-                    </span> <a href="admin/products.htm">Product detail view</a>
+                    <span class="text-secondary"> <a href="admin/products.htm"><i class="bi bi-box"></i>
+                        Products / </a>
+                    </span> <a class="text-muted">Product detail view</a>
                 </div>
             </div>
             <div class="me-3">
@@ -41,7 +41,7 @@
                 <div class="table-title">
                     <div class="row">
                         <div class="col-5">
-                            <h2 class="text-left">Quản lí chi tiết sản phẩm</h2>
+                            <h2 class="text-left">${productDetails[0].productColor.product.name}</h2>
                         </div>
                         <div class="col-7">
                             <div class="d-flex align-items-center justify-content-end ">
@@ -71,12 +71,12 @@
                                 <tr>
                                     <td>${(page - 1) * 2 + s.index + 1}</td>
                                     <td>${p.size.name}</td>
-                                    <td>${p.color.name}</td>
+                                    <td>${p.productColor.color.name}</td>
                                     <td>${p.quantity}</td>
                                     <td>${p.soldQuantity}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="./addProduct/addProduct.html" class="edit"><i
+                                            <a href="admin/products/edit-product-detail/${p.productColor.productColorId}.htm" class="edit"><i
                                                 class="material-icons" title="Edit">&#xE254;</i></a> <a href="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                     height="16" fill="currentColor" class="bi bi-three-dots"

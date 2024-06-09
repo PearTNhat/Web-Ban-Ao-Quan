@@ -54,21 +54,6 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 
 	@Override
 	@Transactional
-	public List<ProductDetail> getProductDetails(int productId, int page, int pageSize) {
-		Session session = sessionFactory.getCurrentSession();
-		String hql = "SELECT pd " + "FROM ProductDetail pd " + "JOIN FETCH pd.color c " + "JOIN FETCH pd.size s "
-				+ "WHERE pd.productId = :productId " + "ORDER BY s.name";
-		Query query = session.createQuery(hql);
-		query.setParameter("productId", productId).setFirstResult((page - 1) * pageSize).setMaxResults(pageSize);
-
-		@SuppressWarnings("unchecked")
-		List<ProductDetail> productDetails = query.list();
-
-		return productDetails;
-	}
-
-	@Override
-	@Transactional
 	public ProductColor findProductColorById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "FROM ProductColor WHERE productColorId=:id";
@@ -117,6 +102,44 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 			session.close();
 		}
 		return pd.getProductDetailId();
+	}
+	
+	@Override
+	@Transactional
+	public List<ProductDetail> getProductDetails(int productId, int page, int pageSize) {
+		 Session session = sessionFactory.getCurrentSession();
+			 String hql = "SELECT pd " +
+	                 "FROM ProductDetail pd " +
+	                 "JOIN FETCH pd.productColor pc " +
+	                 "JOIN FETCH pc.color c " +
+	                 "JOIN FETCH pd.size s " +
+	                 "WHERE pc.product.productId = :productId " +
+	                 "ORDER BY s.name";
+		    Query query = session.createQuery(hql);
+		    query.setParameter("productId", productId)
+		         .setFirstResult((page - 1) * pageSize)
+		         .setMaxResults(pageSize);
+		    
+		    @SuppressWarnings("unchecked")
+		    List<ProductDetail> productDetails = query.list();
+		    
+		    return productDetails;
+	}
+	
+	@Override
+	@Transactional
+	public ProductDetail getProductDetail(int productDetailId) {
+	    Session session = sessionFactory.getCurrentSession();
+	    String hql = "SELECT pd "
+	               + "FROM ProductDetail pd "
+	               + "JOIN FETCH pd.product p "
+	               + "WHERE pd.productDetailId = :productDetailId";
+	    Query query = session.createQuery(hql);
+	    query.setParameter("productDetailId", productDetailId);
+	    
+	    ProductDetail productDetail = (ProductDetail) query.uniqueResult();
+	    
+	    return productDetail;
 	}
 
 	@Override
