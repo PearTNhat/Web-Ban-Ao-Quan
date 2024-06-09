@@ -31,10 +31,10 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		List<ProductType> productTypes = productTypeDao.getAllProductType();
-		List<Product> hotProdcut = productDao.getBestSaleProduct();
+		List<Product> hotProductt = productDao.getBestSaleProduct();
 		List<Product> newProduct = productDao.getNewProduct();
 		model.addAttribute("pts", productTypes);
-		model.addAttribute("hotProduct",hotProdcut);
+		model.addAttribute("hotProduct",hotProductt);
 		model.addAttribute("newProduct",newProduct);
 		return "page/home";
 	}

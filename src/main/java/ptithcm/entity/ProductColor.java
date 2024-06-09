@@ -43,6 +43,8 @@ public class ProductColor {
 
 	@OneToMany(mappedBy = "productImage", fetch = FetchType.EAGER)
 	private List<ProductImage> image;
+	
+
 
 	public ProductColor() {
 	}

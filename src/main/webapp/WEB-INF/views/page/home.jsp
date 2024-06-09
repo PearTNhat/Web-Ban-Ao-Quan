@@ -19,7 +19,7 @@
 			<div class="row">
 				<c:forEach var="p" items="${hotProduct}" varStatus="status">
 					<c:if test="${not empty p.productDetail}">
-						<div class="col-lg-4 col-md-3 col-6 ">
+						<div class="col-lg-3 col-md-4 col-6 ">
 							<c:set var="pds" value="${p.productDetail}" />
 							<a href="products/${typeId}/${pds[0].productColorId}.htm"
 								class="text-decoration-none">
