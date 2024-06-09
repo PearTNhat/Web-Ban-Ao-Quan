@@ -29,26 +29,34 @@
 			<div class="col-md-8">
 				<div class="row">
 					<c:forEach var="p" items="${pst}" varStatus="status">
-						<c:if test="${not empty p.productDeatil}">
+						<c:if test="${not empty p.productDetail}">
 							<div class="col-lg-4 col-6 ">
-								<c:set var="pd" value="${p.productDeatil}" />
-								<a href="" class="text-decoration-none">
+								<c:set var="pds" value="${p.productDetail}" />
+								<a href="products/${typeId}/${pds[0].productDetailId}.htm" class="text-decoration-none">
 									<div class="main-image">
 										<i class="fas fa-shopping-cart cart-product"></i> <img
-											src="${pd[0].image[0].image}" alt="${p.name}"
+											src="${pds[0].image[0].image}" alt="${p.name}"
 											class="img-fluid img-1" /> <img
-											src="${pd[0].image[1] == null ? pd[0].image[0].image:pd[0].image[1].image}"
+											src="${pds[0].image[1] == null ? pds[0].image[0].image:pds[0].image[1].image}"
 											alt="${p.name}" class="img-fluid img-2" />
-
+									</div>
+									<div class="d-flex justify-content-center">
+										<c:forEach var="pd" items="${pds}" varStatus="i">
+											<c:if test="${pds[i.index].productDetailId != pds[i.index +1 ].productDetailId}">
+												<div class="sub-image">
+													<img src="${pd.image[0].image}" alt="" />
+												</div>
+											</c:if>
+										</c:forEach>
 									</div>
 								</a>
-								<p class="mb-0 d-block large text-center" style="font-size: 20px;" >${p.name}</p>
+								<p class="mb-0 d-block large text-center"
+									style="font-size: 20px;">${p.name}</p>
 								<c:set var="pPrice" value="${p.price/1000.0}" />
-								<p class="price text-danger fw-semibold small text-center"
-									>
+								<p class="price text-danger fw-semibold small text-center">
 
-									<fmt:formatNumber value="${pPrice-(pPrice * p.discount)}" type="number"
-										pattern="#,##0.000" />
+									<fmt:formatNumber value="${pPrice-(pPrice * p.discount)}"
+										type="number" pattern="#,##0.000" />
 									<span
 										class="text-decoration-line-through small text-secondary price-second">
 										<fmt:formatNumber value="${pPrice}" type="number"

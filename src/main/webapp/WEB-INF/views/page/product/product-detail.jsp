@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../../common/header.jsp"%>
 <body>
 	<%@ include file="../../component/topbar.jsp"%>
@@ -7,11 +9,9 @@
 
 	<div class="page-info bg-light">
 		<div class="container-xl text-muted py-3">
-			<a href="#" class="text-decoration-none text-secondary">4MEN</a> <span>
-				/ </span> <a href="#" class="text-decoration-none text-secondary">Áo sơ
-				mi nam </a> <span> / </span> <a href="#"
-				class="text-decoration-none text-secondary">Áo Sơ Mi Oxford Tay
-				Sau Rã Phối Sọc Form Regular SM145 Màu Trắng Kem</a>
+			<a href=".htm" class="text-decoration-none text-secondary">4MEN</a> <span>
+				/ </span> <a href="products/${typeDetail.typeDetailId}.htm" class="text-decoration-none text-secondary">${typeDetail.name}</a> <span> / </span> <a href="products/${typeDetailId}/${productDetail.productDetailId}.htm"
+				class="text-decoration-none text-secondary">${productDetail.product.name}</a>
 		</div>
 	</div>
 
@@ -19,51 +19,35 @@
 		<div class="row">
 			<div class="col-5">
 				<div id="owl-product" class="owl-carousel owl-theme">
-					<div class="item" data-hash="zero" style="width: 100%">
+					<c:forEach var="image" items="${productDetail.image}">
+                		<div class="item" data-hash="zero" style="width: 100%">
 						<img
-							src="https://4menshop.com/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-662637086467e.jpg"
-							alt="anh1">
-					</div>
-					<div class="item" data-hash="one" style="width: 100%">
-						<img
-							src="https://4menshop.com/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-6626370871748.jpg"
-							alt="anh2">
-					</div>
-					<div class="item" data-hash="three" style="width: 100%">
-						<img
-							src="https://4menshop.com/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-662637088a7df.jpg"
-							alt="anh3">
-					</div>
-					<div class="item" data-hash="four" style="width: 100%">
-						<img
-							src="https://4menshop.com/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-662637089d224.jpg"
-							alt="anh4">
-					</div>
-					<div class="item" data-hash="five" style="width: 100%">
-						<img
-							src="https://4menshop.com/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-66263708ab706.jpg"
-							alt="anh5">
-					</div>
+							src="${image.image}"
+							alt="anh san pham">
+						</div>
+                	</c:forEach>
 				</div>
 			</div>
 			<div class="col-7">
 				<section class="border-bottom p-0 pb-4">
 					<div class="title fs-5 fw-semibold"
-						style="text-transform: uppercase">Áo Sơ Mi Oxford Tay Sau Rã
-						Phối Sọc Form Regular SM145 Màu Trắng Kem</div>
+						style="text-transform: uppercase">${productDetail.product.name}</div>
 					<div class="price mt-3">
-						<u class="" style="text-underline-offset: 3px">Giá bán: </u> <span
-							class="ms-3 fs-4 text-danger fw-semibold">375.000đ</span>
+							<u class="" style="text-underline-offset: 3px">Giá bán: </u> 
+							<span class="ms-3 fs-4 text-danger fw-semibold">
+							    <fmt:formatNumber value="${productDetail.product.price}" type="number" groupingUsed="true" />đ
+							</span>
 					</div>
 					<div class="another-color my-3">MÀU KHÁC*</div>
-					<div class="d-flex flex-wrap gap-2">
-						<a href="#" style="width: 100px"><img
-							src="https://4menshop.com/cache/image/70/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-18440.jpg"
-							class="img-fluid" alt=""></a>
+					<div class="d-flex flex-wrap gap-1">
+						<c:forEach var="productDetailItem" items="${productDetail.product.productDetail}">
+							<a href="products/${typeDetail.typeDetailId}/${productDetailItem.productDetailId}.htm" style="width: 100px"><img
+								src="${productDetailItem.image[0].image}"
+								class="img-fluid" alt=""></a>					
+                		</c:forEach>
 					</div>
 					<div>Mô tả sản phẩm:</div>
-					<div class="desc text-muted">Lorem ipsum dolor sit amet
-						consectetur adipisicing elit. Mollitia, perferendis?</div>
+					<div class="desc text-muted">${productDetail.product.description}</div>
 				</section>
 				<section class="p-4">
 					<form action="">
@@ -75,10 +59,9 @@
 								</div>
 								<select class="form-select form-select-md my-2"
 									aria-label="Large select example">
-									<option selected>S</option>
-									<option value="1">M</option>
-									<option value="2">L</option>
-									<option value="3">XL</option>
+									<c:forEach var="size" items="${listSize}">
+										<option selected>${size.name}</option>									
+                					</c:forEach>
 								</select>
 								<button class="btn btn-danger w-100 mt-2">
 									<i class="bi bi-cart-fill"></i> Đăng ký mua
@@ -109,17 +92,11 @@
 		</div>
 		<div class="row mt-1">
 			<div class="col-5 thumbnails">
-				<a href="#zero"><img
-					src="https://4menshop.com/cache/image/103/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-662637086467e.jpg"
-					alt=""></a> <a href="#one"><img
-					src="https://4menshop.com/cache/image/103/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-6626370871748.jpg"
-					alt=""></a> <a href="#three"><img
-					src="https://4menshop.com/cache/image/103/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-662637088a7df.jpg"
-					alt=""></a> <a href="#four"><img
-					src="https://4menshop.com/cache/image/103/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-662637089d224.jpg"
-					alt=""></a> <a href="#five"><img
-					src="https://4menshop.com/cache/image/103/images/thumbs/2024/04/ao-so-mi-tay-dai-theu-soc-co-tay-sau-ra-phoi-soc-form-regular-sm145-mau-xanh-den-18441-slide-products-66263708ab706.jpg"
-					alt=""></a>
+				<c:forEach var="image" items="${productDetail.image}">
+					<a href="#zero"><img
+					src="${image.image}"
+					alt=""></a> 
+                </c:forEach>
 			</div>
 		</div>
 	</div>

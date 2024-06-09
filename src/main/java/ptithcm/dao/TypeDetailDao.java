@@ -6,4 +6,5 @@ import ptithcm.entity.TypeDetail;
 
 public interface TypeDetailDao {
 	public List<TypeDetail> getAllTypeDetail();
+	public TypeDetail getTypeDetail(String typeDetailId);
 }
