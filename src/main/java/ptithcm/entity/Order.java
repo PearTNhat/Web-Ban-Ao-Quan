@@ -6,16 +6,19 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
-public class Orders {
+public class Order {
 	@Id
-	@Column(name = "orderId")
+	@Column(name = "orderId",insertable = false,updatable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String orderId;
-	
-	@Column(name = "idAccount")
-	private String idAccount;
 	
 	@Column(name = "purchaseTime")
 	private Date pruchaseTime;
@@ -26,9 +29,10 @@ public class Orders {
 	@Column(name = "addressId")
 	private int addressId;
 	
-	@Column(name = "statusId")
-	private String statusId;
-
+	@ManyToOne
+	@JoinColumn(name = "addressId",insertable = false, updatable = false)
+	private Address address;
+	
 	public String getOrderId() {
 		return orderId;
 	}
@@ -37,13 +41,7 @@ public class Orders {
 		this.orderId = orderId;
 	}
 
-	public String getIdAccount() {
-		return idAccount;
-	}
-
-	public void setIdAccount(String idAccount) {
-		this.idAccount = idAccount;
-	}
+	
 
 	public Date getPruchaseTime() {
 		return pruchaseTime;
@@ -69,12 +67,5 @@ public class Orders {
 		this.addressId = addressId;
 	}
 
-	public String getStatusId() {
-		return statusId;
-	}
-
-	public void setStatusId(String statusId) {
-		this.statusId = statusId;
-	}
 
 }

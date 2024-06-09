@@ -42,15 +42,6 @@ public class HomeController {
 		model.addAttribute("userLogin", user);
 		return "page/home";
 	}
-	@RequestMapping("/cart-checkout")
-	public String cartCheckout(HttpServletRequest request, ModelMap model) {
-		Account user = (Account) request.getAttribute("user");
-		if (user != null) {
-			model.addAttribute("user", user);
-		}
-		model.addAttribute("user", user);
-		return "page/cart-checkout";
-	}
 
 	@RequestMapping("/choose-size")
 	public String chooseSize(HttpServletRequest request, ModelMap model) {

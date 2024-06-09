@@ -24,11 +24,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ptithcm.bean.CartBean;
 import ptithcm.bean.ProductBean;
+import ptithcm.dao.AccountDao;
+import ptithcm.dao.AddressDao;
 import ptithcm.dao.CartDao;
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductDetailDao;
 import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Account;
+import ptithcm.entity.Address;
 import ptithcm.entity.CartDetail;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductColor;
@@ -53,6 +56,12 @@ public class ProductController {
 
 	@Autowired
 	CartDao cartDao;
+	
+	@Autowired
+	private AddressDao addressDao;
+	
+	@Autowired
+	private AccountDao accountDao;
 
 	@RequestMapping("/cart/detete/{cartDetailId}")
 	public String addToCart(RedirectAttributes redirectAttributes, ModelMap model, HttpServletRequest request,@PathVariable("cartDetailId") Integer cartDetailId) {
@@ -166,6 +175,20 @@ public class ProductController {
 		model.addAttribute("typeDetailId", typeDetailId);
 		model.addAttribute("listSize", listSize);
 		return "page/product/product-detail";
+	}
+	
+	@RequestMapping("/products/cart-checkout")
+	public String cartCheckout(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		
+		List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
+		model.addAttribute("user", user);
+		model.addAttribute("userAddress", userAddress);
+		
+		Set<CartDetail> cartDetails = user.getCartDetail();
+		model.addAttribute("cartDetails", cartDetails);
+		
+		return "page/cart-checkout";
 	}
 
 }
