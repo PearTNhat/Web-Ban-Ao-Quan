@@ -141,4 +141,5 @@ public class Product {
 	public void setSoldQuantity(Integer soldQuantity) {
 		this.soldQuantity = soldQuantity;
 	}
+	
 }

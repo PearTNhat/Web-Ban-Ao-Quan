@@ -41,8 +41,9 @@
 					<div class="another-color my-3">MÀU KHÁC*</div>
 					<div class="d-flex flex-wrap gap-1">
 						<c:forEach var="productColorItem" items="${productColor.product.productDetail}">
+							
 							<a href="products/${typeDetail.typeDetailId}/${productColorItem.productColorId}.htm" style="width: 100px"><img
-							src="${productColorItem.image[0].image}"
+							src="${productColorItem.image.get(0).image}"
 							class="img-fluid" alt=""></a>			
                 		</c:forEach>
 					</div>

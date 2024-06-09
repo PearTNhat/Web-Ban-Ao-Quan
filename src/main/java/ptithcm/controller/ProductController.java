@@ -1,7 +1,9 @@
 package ptithcm.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductDetail;
+import ptithcm.entity.ProductImage;
 import ptithcm.entity.Size;
 import ptithcm.entity.TypeDetail;
 
@@ -47,11 +50,11 @@ public class ProductController {
 		ProductColor productColor = productDetailDao.findProductColorById(productColorId);
 	    TypeDetail typeDetail = typeDetailDao.getTypeDetail(typeDetailId);
 	    
-	    List<Size> listSize = new ArrayList<>();
+	    Set<Size> listSize = new HashSet<>();
 		for (ProductDetail productDetail : productColor.getProductDetail()) {
 			listSize.add(productDetail.getSize());
 		}
-		 
+		
 	    model.addAttribute("productColor", productColor);
 	    model.addAttribute("typeDetail", typeDetail);
 	    model.addAttribute("listSize", listSize);
