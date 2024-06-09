@@ -24,7 +24,7 @@ public class ProductImage {
 	@JoinColumn(name = "productColorId", insertable = false, updatable = false)
 	private ProductColor productImage;
 
-	public ProductImage() {
+	public ProductImage() {	
 	}
 
 	public ProductImage(String image, int pcId, int priority) {
@@ -57,4 +57,19 @@ public class ProductImage {
 		this.priority = priority;
 	}
 
+	public int getPcId() {
+		return pcId;
+	}
+
+	public void setPcId(int pcId) {
+		this.pcId = pcId;
+	}
+
+	public ProductColor getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(ProductColor productImage) {
+		this.productImage = productImage;
+	}
 }

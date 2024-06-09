@@ -10,8 +10,8 @@
 	<div class="page-info bg-light">
 		<div class="container-xl text-muted py-3">
 			<a href=".htm" class="text-decoration-none text-secondary">4MEN</a> <span>
-				/ </span> <a href="products/${typeDetail.typeDetailId}.htm" class="text-decoration-none text-secondary">${typeDetail.name}</a> <span> / </span> <a href="products/${typeDetailId}/${productDetail.productDetailId}.htm"
-				class="text-decoration-none text-secondary">${productDetail.product.name}</a>
+				/ </span> <a href="products/${typeDetail.typeDetailId}.htm" class="text-decoration-none text-secondary">${typeDetail.name}</a> <span> / </span> <a href="products/${typeDetailId}/${productColor.productColorId}.htm"
+				class="text-decoration-none text-secondary">${productColor.product.name}</a>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 		<div class="row">
 			<div class="col-5">
 				<div id="owl-product" class="owl-carousel owl-theme">
-					<c:forEach var="image" items="${productDetail.image}">
+					<c:forEach var="image" items="${productColor.image}">
                 		<div class="item" data-hash="zero" style="width: 100%">
 						<img
 							src="${image.image}"
@@ -31,23 +31,23 @@
 			<div class="col-7">
 				<section class="border-bottom p-0 pb-4">
 					<div class="title fs-5 fw-semibold"
-						style="text-transform: uppercase">${productDetail.product.name}</div>
+						style="text-transform: uppercase">${productColor.product.name}</div>
 					<div class="price mt-3">
 							<u class="" style="text-underline-offset: 3px">Giá bán: </u> 
 							<span class="ms-3 fs-4 text-danger fw-semibold">
-							    <fmt:formatNumber value="${productDetail.product.price}" type="number" groupingUsed="true" />đ
+							    <fmt:formatNumber value="${productColor.product.price}" type="number" groupingUsed="true" />đ
 							</span>
 					</div>
 					<div class="another-color my-3">MÀU KHÁC*</div>
 					<div class="d-flex flex-wrap gap-1">
-						<c:forEach var="productDetailItem" items="${productDetail.product.productDetail}">
-							<a href="products/${typeDetail.typeDetailId}/${productDetailItem.productDetailId}.htm" style="width: 100px"><img
-								src="${productDetailItem.image[0].image}"
-								class="img-fluid" alt=""></a>					
+						<c:forEach var="productColorItem" items="${productColor.product.productDetail}">
+							<a href="products/${typeDetail.typeDetailId}/${productColorItem.productColorId}.htm" style="width: 100px"><img
+							src="${productColorItem.image[0].image}"
+							class="img-fluid" alt=""></a>			
                 		</c:forEach>
 					</div>
 					<div>Mô tả sản phẩm:</div>
-					<div class="desc text-muted">${productDetail.product.description}</div>
+					<div class="desc text-muted">${productColor.product.description}</div>
 				</section>
 				<section class="p-4">
 					<form action="">

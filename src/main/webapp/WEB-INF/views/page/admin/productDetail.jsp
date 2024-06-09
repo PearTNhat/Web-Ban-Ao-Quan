@@ -76,7 +76,7 @@
                                     <td>${p.soldQuantity}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="products/edit-product-detail/${p.productDetailId}.htm" class="edit"><i
+                                            <a href="admin/products/edit-product-detail/${p.productColor.productColorId}.htm" class="edit"><i
                                                 class="material-icons" title="Edit">&#xE254;</i></a> <a href="">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                     height="16" fill="currentColor" class="bi bi-three-dots"

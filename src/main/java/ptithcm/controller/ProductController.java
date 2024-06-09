@@ -14,6 +14,7 @@ import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductDetailDao;
 import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Product;
+import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductDetail;
 import ptithcm.entity.Size;
 import ptithcm.entity.TypeDetail;
@@ -39,18 +40,19 @@ public class ProductController {
 		return "page/listProduct";	
 	}
 	
-	@RequestMapping("/products/{typeDetailId}/{productDetailId}")
+	@RequestMapping("/products/{typeDetailId}/{productColorId}")
 	public String getProductDetail(@PathVariable("typeDetailId") String typeDetailId, 
-	                               @PathVariable("productDetailId") Integer productDetailId, 
+	                               @PathVariable("productColorId") Integer productColorId, 
 	                               ModelMap model) {
-//	    ProductDetail productDetail = productDetailDao.getProductDetail(productDetailId);
+		ProductColor productColor = productDetailDao.findProductColorById(productColorId);
 	    TypeDetail typeDetail = typeDetailDao.getTypeDetail(typeDetailId);
+	    
 	    List<Size> listSize = new ArrayList<>();
-		/*
-		 * for (ProductDetail p : productDetail.getProduct().getProductDetail()) { if
-		 * (p.getProductDetailId().equals(productDetailId)) listSize.add(p.getSize()); }
-		 */
-//	    model.addAttribute("productDetail", productDetail);
+		for (ProductDetail productDetail : productColor.getProductDetail()) {
+			listSize.add(productDetail.getSize());
+		}
+		 
+	    model.addAttribute("productColor", productColor);
 	    model.addAttribute("typeDetail", typeDetail);
 	    model.addAttribute("listSize", listSize);
 	    return "page/product/product-detail";
