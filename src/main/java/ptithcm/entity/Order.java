@@ -66,6 +66,4 @@ public class Order {
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
-
-
 }

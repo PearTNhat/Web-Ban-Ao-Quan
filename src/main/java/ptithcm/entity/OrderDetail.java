@@ -99,5 +99,4 @@ public class OrderDetail {
 		this.productColor = productColor;
 	}
 	
-
 }

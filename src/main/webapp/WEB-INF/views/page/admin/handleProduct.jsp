@@ -69,27 +69,33 @@ if ("update".equals(event)) {
 	<div class=" p-container">
 		<h3 class="title">Thêm sản phẩm mới</h3>
 		<form:form method="post" action="<%=actionUrl%>" modelAttribute="p">
+			<div class="mb-3">
+				<div class="mb-3 d-flex align-items-center">
+					<form:label for="name" class="form-label" path="name">Tên</form:label>
+					<form:input type="text"
+						class="form-control ${nameErr ? 'is-invalid' : '' }" id="name"
+						aria-describedby="emailHelp" path="name" />
+				</div>
+				<form:errors path="name" cssClass="invalid-feedback d-block text-center" />
+			</div>
+			<div class="mb-3">
+				<div class="mb-3 d-flex align-items-center">
+					<form:label for="price" class="form-label" path="price">Giá</form:label>
+					<form:input type="text"
+						class="form-control  ${priceErr ? 'is-invalid' : '' }" id="price"
+						path="price" />
+				</div>
 
-			<div class="mb-3 d-flex align-items-center">
-				<form:label for="name" class="form-label" path="name">Tên</form:label>
-				<form:input type="text"
-					class="form-control ${nameErr ? 'is-invalid' : '' }" id="name"
-					aria-describedby="emailHelp" path="name" />
-				<form:errors path="name" cssClass="invalid-feedback d-block" />
+				<form:errors path="price" cssClass="invalid-feedback d-block text-center" />
 			</div>
-			<div class="mb-3 d-flex align-items-center">
-				<form:label for="price" class="form-label" path="price">Giá</form:label>
-				<form:input type="text"
-					class="form-control  ${priceErr ? 'is-invalid' : '' }" id="price"
-					path="price" />
-				<form:errors path="price" cssClass="invalid-feedback d-block" />
-			</div>
-			<div class="mb-3 d-flex align-items-center">
-				<form:label for="discount" class="form-label" path="discount">Giảm giá</form:label>
-				<form:input type="text"
-					class="form-control  ${discountErr ? 'is-invalid' : '' }"
-					id="discount" path="discount" />
-				<form:errors path="discount" cssClass="invalid-feedback d-block" />
+			<div class="mb-3">
+				<div class="mb-3 d-flex align-items-center">
+					<form:label for="discount" class="form-label" path="discount">Giảm giá</form:label>
+					<form:input type="text"
+						class="form-control  ${discountErr ? 'is-invalid' : '' }"
+						id="discount" path="discount" />
+				</div>
+				<form:errors path="discount" cssClass="invalid-feedback d-block text-center" />
 			</div>
 			<!-- Loai sản phẩm -->
 			<div class="mb-3 d-flex align-items-center">
@@ -101,13 +107,13 @@ if ("update".equals(event)) {
 					</c:forEach>
 				</form:select>
 			</div>
-			<div class="mb-3 d-flex align-items-center">
+			<div class="mb-2 d-flex align-items-center">
 				<form:label class="form-label" for="editor" path="description">Mô tả</form:label>
-				 <form:textarea id="editor" path="description"></form:textarea>
-				<form:errors path="description" cssClass="invalid-feedback d-block" />
+				<form:textarea id="editor" path="description"></form:textarea>
 			</div>
+			<form:errors path="description" cssClass="invalid-feedback d-block text-center" />
 			<button type="submit" class="btn btn-primary rounded-1"
-				style="width: 195px; margin: auto;"> ${event == 'update' ? 'Cập nhật' : 'Lưu'}</button>
+				style="width: 195px; margin: auto;">${event == 'update' ? 'Cập nhật' : 'Lưu'}</button>
 		</form:form>
 	</div>
 </div>
