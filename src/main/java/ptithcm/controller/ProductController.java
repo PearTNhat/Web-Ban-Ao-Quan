@@ -20,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ptithcm.bean.CartBean;
@@ -27,12 +28,16 @@ import ptithcm.bean.ProductBean;
 import ptithcm.dao.AccountDao;
 import ptithcm.dao.AddressDao;
 import ptithcm.dao.CartDao;
+import ptithcm.dao.OrderDao;
+import ptithcm.dao.OrderDetailDao;
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductDetailDao;
 import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Account;
 import ptithcm.entity.Address;
 import ptithcm.entity.CartDetail;
+import ptithcm.entity.Order;
+import ptithcm.entity.OrderDetail;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductDetail;
@@ -62,6 +67,12 @@ public class ProductController {
 	
 	@Autowired
 	private AccountDao accountDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 
 	@RequestMapping("/cart/detete/{cartDetailId}")
 	public String addToCart(RedirectAttributes redirectAttributes, ModelMap model, HttpServletRequest request,@PathVariable("cartDetailId") Integer cartDetailId) {
@@ -126,7 +137,7 @@ public class ProductController {
 		Account user = (Account) request.getAttribute("user");
 		
 		List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
-		model.addAttribute("user", user);
+		model.addAttribute("userLogin", user);
 		model.addAttribute("userAddress", userAddress);
 		
 		Set<CartDetail> cartDetails = user.getCartDetail();
@@ -190,5 +201,47 @@ public class ProductController {
 		model.addAttribute("typeDetailId", typeDetailId);
 		model.addAttribute("listSize", listSize);
 		return "page/product/product-detail";
+	}
+	
+	@RequestMapping("/products/cart-submit.htm")
+	public String submitCart(@RequestParam("address") Integer addressId, Model model, HttpServletRequest request) {
+		Account user = (Account) request.getAttribute("user");
+		model.addAttribute("userLogin", user);
+		Set<CartDetail> cartDetail = user.getCartDetail();
+		Address address = addressDao.getAddress(addressId);
+		
+	    int totalPayment = 0;
+
+	    for (CartDetail cartDetailItem : cartDetail) {
+	        int price = cartDetailItem.getProductDetail().getProductColor().getProduct().getPrice();
+	        float discount = cartDetailItem.getProductDetail().getProductColor().getProduct().getDiscount();
+	        int quantity = cartDetailItem.getQuantity();
+
+	        int discountedPrice = (int) (price - (price * discount));
+
+	        totalPayment += discountedPrice * quantity;
+	    }
+		
+	    Order newOrder = new Order(totalPayment, addressId);
+	    Order createdOrder = orderDao.addOrder(newOrder);
+	    if (createdOrder != null) {
+	    	System.out.println("Add order successfully");
+	    	for (CartDetail cartDetailItem : cartDetail) {
+	    		OrderDetail orderDetail = new OrderDetail(createdOrder.getOrderId(), cartDetailItem.getProductDetailId(), cartDetailItem.getQuantity());
+	    		if (orderDetailDao.addOrderDetail(orderDetail)) {
+	    			System.out.println("Add order detail successfully");
+	    		} else {
+	    			model.addAttribute("errorOrderDetail", true);
+	    			return "page/cart-checkout";
+	    		}
+	    	}
+	    } else {
+	    	model.addAttribute("errorOrder", true);
+	    	return "page/cart-checkout";
+	    }
+	    for (CartDetail cartDetailItem : cartDetail) {	    	
+	    	cartDao.deleteCartDetailById(cartDetailItem.getCartDetailId());
+	    }
+		return "page/home";
 	}
 }

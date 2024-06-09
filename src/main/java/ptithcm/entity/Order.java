@@ -16,15 +16,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "[Order]")
 public class Order {
 	@Id
 	@Column(name = "orderId",insertable = false,updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String orderId;
+	private int orderId;
 	
-	@Column(name = "purchaseTime")
+	@Column(name = "purchaseTime", insertable = false, updatable = false)
 	private Date pruchaseTime;
 	
 	@Column(name = "totalPrice")
@@ -39,11 +41,18 @@ public class Order {
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<OrderDetail> orderDetail =new HashSet<OrderDetail>();
-	public String getOrderId() {
+	public int getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+
+	public Order(int totalPrice, int addressId) {
+		super();
+		this.totalPrice = totalPrice;
+		this.addressId = addressId;
+	}
+
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 

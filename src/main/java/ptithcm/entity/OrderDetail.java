@@ -26,14 +26,11 @@ public class OrderDetail {
 	@Column(name = "orderId")
 	private int orderId;
 
-	@Column(name = "productDetaiId")
-	private int productDetaiId;
+	@Column(name = "productDetailId")
+	private int productDetailId;
 
 	@Column(name = "quantityBought")
-	private Integer quantityBought;
-	
-	@Column(name = "price")
-	private Integer price;
+	private int quantityBought;
 
 	@ManyToOne
 	@JoinColumn(name = "orderId", insertable = false, updatable = false)
@@ -42,6 +39,13 @@ public class OrderDetail {
 	@ManyToOne
 	@JoinColumn(name = "productColorId", insertable = false, updatable = false)
 	private Order productColor;
+	
+	public OrderDetail(int orderId, int productDetailId, int quantityBought) {
+		super();
+		this.orderId = orderId;
+		this.productDetailId = productDetailId;
+		this.quantityBought = quantityBought;
+	}
 
 	public String getOrderDetailId() {
 		return orderDetailId;
@@ -60,12 +64,12 @@ public class OrderDetail {
 	}
 
 	
-	public int getProductDetaiId() {
-		return productDetaiId;
+	public int getProductDetailId() {
+		return productDetailId;
 	}
 
 	public void setProductDetaiId(int productDetaiId) {
-		this.productDetaiId = productDetaiId;
+		this.productDetailId = productDetaiId;
 	}
 
 	public Integer getQuantityBought() {
@@ -75,15 +79,7 @@ public class OrderDetail {
 	public void setQuantityBought(Integer quantityBought) {
 		this.quantityBought = quantityBought;
 	}
-
-	public Integer getPrice() {
-		return price;
-	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-
+	
 	public Order getOrder() {
 		return order;
 	}
