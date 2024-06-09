@@ -206,10 +206,12 @@ public class AdminProductsController {
 	public String productDetailForm(@PathVariable Integer productId, Model model) {
 		List<Color> colors = colorDao.getAllColors();
 		List<Size> sizes = sizeDao.getAllSizes();
+		Product product = productDao.findProductById(productId);
 		model.addAttribute("colors", colors);
 		model.addAttribute("sizes", sizes);
 		model.addAttribute("pd", new ProductDetailBean());
 		model.addAttribute("productId", Integer.toString(productId));
+		model.addAttribute("productName", product.getName());
 		return "page/admin/handleProductDetail";
 	}
 
@@ -219,6 +221,7 @@ public class AdminProductsController {
 			BindingResult errors) {
 		List<Color> colors = colorDao.getAllColors();
 		List<Size> sizes = sizeDao.getAllSizes();
+		Product product = productDao.findProductById(productId);
 		try {
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
@@ -228,17 +231,17 @@ public class AdminProductsController {
 				model.addAttribute("pd", pd);
 				model.addAttribute("tempImage", pd.getTemplImg());
 				model.addAttribute("productId", Integer.toString(productId));
+				model.addAttribute("productName", product.getName());
 				return "page/admin/handleProductDetail";
 			}
 			List<MultipartFile> files = pd.getFiles();
-			if (files.get(0).isEmpty()) {
-				model.addAttribute("colors", colors);
-				model.addAttribute("sizes", sizes);
-				model.addAttribute("pd", pd);
-				model.addAttribute("productId", Integer.toString(productId));
-				model.addAttribute("error", "Ảnh không được rỗng");
-				return "page/admin/handleProductDetail";
-			}
+			/*
+			 * if (files.get(0).isEmpty()) { model.addAttribute("colors", colors);
+			 * model.addAttribute("sizes", sizes); model.addAttribute("pd", pd);
+			 * model.addAttribute("productId", Integer.toString(productId));
+			 * model.addAttribute("error", "Ảnh không được rỗng"); return
+			 * "page/admin/handleProductDetail"; }
+			 */
 			ProductColor newPC = new ProductColor();
 			// Tim color
 			Color color = colorDao.getColorByName(pd.getColor());
@@ -267,6 +270,7 @@ public class AdminProductsController {
 				model.addAttribute("pd", pd);
 				model.addAttribute("productId", Integer.toString(productId));
 				model.addAttribute("error", "Size đã tồn tại");
+				model.addAttribute("productName", product.getName());
 				return "page/admin/handleProductDetail";
 			}
 			// thêm ảnh
@@ -357,7 +361,6 @@ public class AdminProductsController {
 			}
 			Boolean errImg = imgToDelete.size() == pi.size() && isFileEmpty;
 			if (errImg) {
-
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
