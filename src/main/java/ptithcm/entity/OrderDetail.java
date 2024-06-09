@@ -26,8 +26,8 @@ public class OrderDetail {
 	@Column(name = "orderId")
 	private int orderId;
 
-	@Column(name = "productColorId")
-	private int productColorId;
+	@Column(name = "productDetaiId")
+	private int productDetaiId;
 
 	@Column(name = "quantityBought")
 	private Integer quantityBought;
@@ -59,12 +59,13 @@ public class OrderDetail {
 		this.orderId = orderId;
 	}
 
-	public int getProductColorId() {
-		return productColorId;
+	
+	public int getProductDetaiId() {
+		return productDetaiId;
 	}
 
-	public void setProductColorId(int productColorId) {
-		this.productColorId = productColorId;
+	public void setProductDetaiId(int productDetaiId) {
+		this.productDetaiId = productDetaiId;
 	}
 
 	public Integer getQuantityBought() {

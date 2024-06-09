@@ -2,7 +2,11 @@ package ptithcm.entity;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +37,8 @@ public class Order {
 	@JoinColumn(name = "addressId",insertable = false, updatable = false)
 	private Address address;
 	
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private Set<OrderDetail> orderDetail =new HashSet<OrderDetail>();
 	public String getOrderId() {
 		return orderId;
 	}
@@ -41,7 +47,6 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	
 
 	public Date getPruchaseTime() {
 		return pruchaseTime;
@@ -66,4 +71,21 @@ public class Order {
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Set<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(Set<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
+	}
+	
 }

@@ -119,7 +119,22 @@ public class ProductController {
 		}
 
 	}
-
+	
+	
+	@RequestMapping("/products/cart-checkout")
+	public String cartCheckout(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		
+		List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
+		model.addAttribute("user", user);
+		model.addAttribute("userAddress", userAddress);
+		
+		Set<CartDetail> cartDetails = user.getCartDetail();
+		model.addAttribute("cartDetails", cartDetails);
+		
+		return "page/cart-checkout";
+	
+	}
 	@RequestMapping("/products/{typeId}")
 	public String getProduct(@PathVariable("typeId") String typeId, ModelMap model, HttpServletRequest request) {
 //		pst : products type
@@ -176,19 +191,4 @@ public class ProductController {
 		model.addAttribute("listSize", listSize);
 		return "page/product/product-detail";
 	}
-	
-	@RequestMapping("/products/cart-checkout")
-	public String cartCheckout(HttpServletRequest request, ModelMap model) {
-		Account user = (Account) request.getAttribute("user");
-		
-		List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
-		model.addAttribute("user", user);
-		model.addAttribute("userAddress", userAddress);
-		
-		Set<CartDetail> cartDetails = user.getCartDetail();
-		model.addAttribute("cartDetails", cartDetails);
-		
-		return "page/cart-checkout";
-	}
-
 }
