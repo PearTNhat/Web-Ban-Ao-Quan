@@ -66,6 +66,7 @@
 				<div class="table-responsive my-4">
 					<table class="table">
 						<thead class="table-success">
+
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Ngày mua</th>
@@ -75,42 +76,45 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row"><i class="bi bi-info-circle"></i></th>
-								<td>03-06-2023 12:02</td>
-								<td>
-									<ul class="">
-										<li class="">Áo sơ-mi nam phong cách</li>
-										<li class="">Áo sơ-mi nam phong cách</li>
-										<li class="">Áo sơ-mi nam phong cách</li>
-									</ul>
-								</td>
-								<td>985.000đ</td>
-								<td>
-									<button class="btn btn-sm btn-success fw-bold">Đã giao</button>
-								</td>
-							</tr>
-							<nav class="d-flex justify-content-center border-top py-4"
-								aria-label="Page navigation">
-								<ul class="pagination">
-									<li class="page-item"><a
-										class="page-link ${page eq 1 ? 'disabled' : ''}"
-										href="products/${typeId}.htm?page=${page-1}"
-										aria-label="Previous"> <span> &laquo; </span>
-									</a></li>
-									<c:forEach begin="1" end="${pages}" varStatus="s">
-										<li class="page-item"><a
-											class="page-link ${s.index == page ? 'page-active' : ''}"
-											href="products/${typeId}.htm?page=${s.index}">${s.index}</a></li>
-									</c:forEach>
-									<li class="page-item"><a
-										class="page-link ${page eq pages ? 'disabled' : ''}"
-										href="products/${typeId}.htm?page=${page+1}" aria-label="Next">
-											&raquo; </a></li>
-								</ul>
-							</nav>
+							<c:forEach var="p" items="${pst}" varStatus="status">
+								<tr>
+									<th scope="row"><i class="bi bi-info-circle"></i></th>
+									<td>03-06-2023 12:02</td>
+									<td>
+										<ul class="">
+											<li class="">Áo sơ-mi nam phong cách</li>
+											<li class="">Áo sơ-mi nam phong cách</li>
+											<li class="">Áo sơ-mi nam phong cách</li>
+										</ul>
+									</td>
+									<td>985.000đ</td>
+									<td>
+										<button class="btn btn-sm btn-success fw-bold">Đã
+											giao</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
+					<nav class="d-flex justify-content-center border-top py-4"
+						aria-label="Page navigation">
+						<ul class="pagination">
+							<li class="page-item"><a
+								class="page-link ${page eq 1 ? 'disabled' : ''}"
+								href="products/${typeId}.htm?page=${page-1}"
+								aria-label="Previous"> <span> &laquo; </span>
+							</a></li>
+							<c:forEach begin="1" end="${pages}" varStatus="s">
+								<li class="page-item"><a
+									class="page-link ${s.index == page ? 'page-active' : ''}"
+									href="products/${typeId}.htm?page=${s.index}">${s.index}</a></li>
+							</c:forEach>
+							<li class="page-item"><a
+								class="page-link ${page eq pages ? 'disabled' : ''}"
+								href="products/${typeId}.htm?page=${page+1}" aria-label="Next">
+									&raquo; </a></li>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
