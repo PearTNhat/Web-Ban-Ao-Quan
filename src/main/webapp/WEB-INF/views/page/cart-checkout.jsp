@@ -7,9 +7,9 @@
 <%@ include file="../component/topbar.jsp" %>
 <%@ include file="../component/navbar.jsp" %>
 <body>
-<form action="#" method="post" class="container-xl my-4">
+<div class="container-xl my-4">
         <div class="row">
-            <div class="col-12 order-2 col-md-6 order-md-1 border-end">
+            <form action="products/cart-submit.htm" class="col-12 order-2 col-md-6 order-md-1 border-end">
                 <h6 class="border-bottom py-1 fw-semibold">Thông tin liên hệ giao hàng</h6>
               	<c:forEach var="address" items="${userAddress}" varStatus="status">
 				    <div class="row my-3 d-flex justify-content-end">
@@ -71,8 +71,8 @@
                         <button type="submit" class="btn btn-danger">THANH TOÁN</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 order-1 col-md-6 order-md-2">
+            </form>
+            <form class="col-12 order-1 col-md-6 order-md-2">
                 <h6 class=" border-bottom py-1 fw-semibold">Giỏ hàng của bạn</h6>
                 <table class="table cart-table">
                     <thead>
@@ -132,7 +132,7 @@
                 <div class="row justify-content-between py-1">
                     <div class="col">Chi tiết giảm giá:</div>
                     <div class="col text-end">
-                        <fmt:formatNumber value="${tongGiamGia}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
+                        - <fmt:formatNumber value="${tongGiamGia}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
                     </div>
                 </div>
                 <div class="row justify-content-between border-top py-1 my-3">
@@ -141,10 +141,10 @@
                         <fmt:formatNumber value="${tongTienHang - tongGiamGia}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
                     </div>
                 </div>
-            </div>
+            </form>
             </div>
         </div>
-    </form>
+    </div>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
