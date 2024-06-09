@@ -1,6 +1,7 @@
 package ptithcm.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.hibernate.Query;
@@ -44,6 +46,7 @@ import ptithcm.entity.Product;
 import ptithcm.utils.UploadImage;
 
 @Controller
+@Transactional
 @RequestMapping("/profile")
 public class ProfileController {
 	@Autowired
@@ -134,16 +137,6 @@ public class ProfileController {
 		System.out.println(formUser.getEmail());
 		model.addAttribute("success", "Thanh cong");
 		return "page/profile/info";
-	}
-
-	// session
-	@RequestMapping("/order")
-	public String profileOrder(HttpServletRequest request, ModelMap model) {
-		Account user = (Account) request.getAttribute("user");
-		if (user != null) {
-			model.addAttribute("user", user);
-		}
-		return "page/profile/order";
 	}
 
 	@RequestMapping("/address")
@@ -270,7 +263,7 @@ public class ProfileController {
 		return "page/profile/changepw";
 	}
 
-	@RequestMapping(value = "/profile/order", method = RequestMethod.GET)
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String getOrder(ModelMap model, HttpServletRequest request) {
 		HttpSession session1 = request.getSession();
 		Account user = (Account) session1.getAttribute("user");
@@ -280,21 +273,22 @@ public class ProfileController {
 		Integer page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		Session session = factory.getCurrentSession();
 		List<Address> listAddress = addressDao.getAllAddress(user.getAccountId());
-
+		List<Integer> address = new ArrayList<Integer>();
+		for (Address i : listAddress) {
+			address.add(i.getAddressId());
+		}
+		System.out.println(address);
 		// total pages
-		String hqlTotal = "SELECT count(*) FROM Order o INNER JOIN Address a ON o.addressId = a.addressId WHERE o.addressId IN (:addressId)";
+		String hqlTotal = "SELECT count(*) FROM Order o INNER JOIN Address a ON o.addressId = a.addressId ";
 		Query queryTotal = session.createQuery(hqlTotal);
-		System.out.println("list "+listAddress.stream().map(Address::getAddressId).collect(Collectors.toList()));
-		queryTotal.setParameter("addressIds",
-				listAddress.stream().map(Address::getAddressId).collect(Collectors.toList()));
+		/* queryTotal.setParameter("addressIds", address); */
 		Long total = (Long) queryTotal.uniqueResult();
 		int pages = (int) Math.ceil((float) total / limit);
 		int skip = (page - 1) * limit;
 		// lấy ra kết quả cuối cùng sau khi tính toán phân trang
 		String hql = "FROM Order o INNER JOIN Address a ON o.addressId = a.addressId WHERE o.addressId IN (:addressId)";
 		Query query = session.createQuery(hql);
-		queryTotal.setParameter("addressIds",
-				listAddress.stream().map(Address::getAddressId).collect(Collectors.toList()));
+		queryTotal.setParameter("addressIds", address);
 		query.setFirstResult(skip);
 		query.setMaxResults(limit); // Fetch the next 5 rows after skipping
 		//

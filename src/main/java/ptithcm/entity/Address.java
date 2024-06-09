@@ -1,12 +1,17 @@
 package ptithcm.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Address {
@@ -14,25 +19,27 @@ public class Address {
 	@Column(name = "addressId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer addressId;
-	
+
 	@Column(name = "addressName")
 	private String addressName;
-	
+
 	@Column(name = "recipientName")
 	private String recipientName;
-	
+
 	@Column(name = "phoneNumber")
 	private String phoneNumber;
 
 	@ManyToOne
 	@JoinColumn(name = "accountId")
 	private Account account;
-	
+
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Order> order;
+
 	public Address() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public Address(String addressName, String recipientname, String phoneNumber, Account account) {
 		super();
@@ -51,11 +58,25 @@ public class Address {
 		this.account = account;
 	}
 
+	public List<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(List<Order> order) {
+		this.order = order;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+
+	public void setRecipientName(String recipientName) {
+		this.recipientName = recipientName;
+	}
 
 	public Integer getAddressId() {
 		return addressId;
 	}
-
 
 	public void setAddressid(Integer addressId) {
 		this.addressId = addressId;

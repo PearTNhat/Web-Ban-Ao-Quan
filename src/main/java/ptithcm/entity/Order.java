@@ -16,13 +16,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 public class Order {
 	@Id
 	@Column(name = "orderId",insertable = false,updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String orderId;
+	private Integer orderId;
 	
 	@Column(name = "purchaseTime")
 	private Date pruchaseTime;
