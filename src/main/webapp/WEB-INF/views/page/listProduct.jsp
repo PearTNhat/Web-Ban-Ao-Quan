@@ -82,16 +82,18 @@
 						<nav class="d-flex justify-content-center border-top py-4"
 							aria-label="Page navigation">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link"
+								<li class="page-item"><a class="page-link ${page eq 1 ? 'disabled' : ''}"
+									
 									href="products/${typeId}.htm?page=${page-1}"
 									aria-label="Previous"> <span> &laquo; </span>
 								</a></li>
 								<c:forEach begin="1" end="${pages}" varStatus="s">
 									<li class="page-item"><a
+									
 										class="page-link ${s.index == page ? 'page-active' : ''}"
 										href="products/${typeId}.htm?page=${s.index}">${s.index}</a></li>
 								</c:forEach>
-								<li class="page-item"><a class="page-link"
+								<li class="page-item"><a class="page-link ${page eq pages ? 'disabled' : ''}"
 									href="products/${typeId}.htm?page=${page+1}" aria-label="Next">
 										&raquo; </a></li>
 							</ul>

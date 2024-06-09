@@ -91,7 +91,6 @@ if ("update".equals(event)) {
 					id="discount" path="discount" />
 				<form:errors path="discount" cssClass="invalid-feedback d-block" />
 			</div>
-
 			<!-- Loai sản phẩm -->
 			<div class="mb-3 d-flex align-items-center">
 				<label class="form-label">Chọn loại sản phẩm</label>

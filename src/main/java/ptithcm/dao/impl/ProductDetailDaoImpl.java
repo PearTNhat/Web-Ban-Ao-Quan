@@ -164,5 +164,17 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 		List<ProductDetail> productList = query.list();
 		return productList;
 	}
+	
+	@Override
+	@Transactional
+	public ProductDetail findProductDetailBySizePC(Integer sizeId, Integer productColorId) {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM ProductDetail WHERE sizeId=:sizeId and productColorId=:productColorId";
+		Query query = session.createQuery(hql);
+		query.setParameter("sizeId", sizeId);
+		query.setParameter("productColorId", productColorId);
+		ProductDetail productD = (ProductDetail)query.uniqueResult();
+		return productD;
+	}
 
 }

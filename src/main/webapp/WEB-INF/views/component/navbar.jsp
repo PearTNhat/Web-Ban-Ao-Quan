@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <nav
 	class="navbar sticky-top navbar-expand-lg navbar-light container-fluid bg-white">
 	<div class="container-xl ">
@@ -9,84 +9,62 @@
 			src="https://4menshop.com/logo.png?v=1" alt="Logo" width="90"
 			height="60" class="d-inline-block align-text-top">
 		</a>
-		<c:if test="${not empty sessionScope.user && sessionScope.user.isAdmin == false}">
+		<c:if test="${not empty userLogin && userLogin.isAdmin == false}">
+			<c:set var="user" value="${user}" />
 			<div class="cart-avar d-flex align-items-center gap-4 order-lg-3"
 				style="margin-left: auto;">
-				<!--                 cart -->
+				<!--    cart -->
 				<div class="cart navbar-shopping d-md-block position-relative">
 					<i class="fas fa-shopping-cart cart-icon"></i>
-
 					<div class="cart-container ">
-						<small class=""> Có <strong> 2 </strong> sản phẩm trong
-							giỏ hàng
-						</small>
-						<ul class="cart-items">
-							<li class="cart-item">
-								<div class=" side-pic">
-									<img
-										src="https://4menshop.com/cache/image/70/images/thumbs/2023/04/ao-khoac-regular-technical-ak036-mau-den-17947.JPG"
-										alt="">
-								</div>
-								<div class="cart-detail">
-									<p>Áo thun nam cổ tròn màu đen</p>
-									<span> <span>1</span>x 150.000
-									</span>
-									<div class="" style="margin-top: 15px;">
-										<i class="bi bi-trash-fill"></i>
-									</div>
-								</div>
-							</li>
-							<li class="cart-item">
-								<div class=" side-pic">
-									<img
-										src="https://4menshop.com/cache/image/70/images/thumbs/2023/04/ao-khoac-regular-technical-ak036-mau-den-17947.JPG"
-										alt="">
-								</div>
-								<div class="cart-detail">
-									<p>Áo thun nam cổ tròn màu đen</p>
-									<span> <span>1</span>x 150.000
-									</span>
-									<div class="" style="margin-top: 15px;">
-										<i class="bi bi-trash-fill"></i>
-									</div>
-								</div>
-							</li>
-							<li class="cart-item">
-								<div class=" side-pic">
-									<img
-										src="https://4menshop.com/cache/image/70/images/thumbs/2023/04/ao-khoac-regular-technical-ak036-mau-den-17947.JPG"
-										alt="">
-								</div>
-								<div class="cart-detail">
-									<p>Áo thun nam cổ tròn màu đen</p>
-									<span> <span>1</span>x 150.000
-									</span>
-									<div class="" style="margin-top: 15px;">
-										<i class="bi bi-trash-fill"></i>
-									</div>
-								</div>
-							</li>
-							<li class="cart-item">
-								<div class=" side-pic">
-									<img
-										src="https://4menshop.com/cache/image/70/images/thumbs/2023/04/ao-khoac-regular-technical-ak036-mau-den-17947.JPG"
-										alt="">
-								</div>
-								<div class="cart-detail">
-									<p>Áo thun nam cổ tròn màu đen</p>
-									<span> <span>1</span>x 150.000
-									</span>
-									<div class="" style="margin-top: 15px;">
-										<i class="bi bi-trash-fill"></i>
-									</div>
-								</div>
-							</li>
-							<span>Tổng cộng:</span>
-							<span>300.000</span>
-							<button>Gủi đơn hàng</button>
-						</ul>
+						<c:if test="${not empty user.cartDetail}">
+							<small class=""> Có <strong>${user.cartDetail.size()}</strong>
+								sản phẩm trong giỏ hàng
+							</small>
+							<ul class="cart-items">
+								<c:set var="total" value="0" />
+								<c:forEach var="cart" items="${user.cartDetail}" varStatus="s">
+									<li class="cart-item">
+										<div class=" side-pic" style="width: 24%;">
+											<img src="${cart.productDetail.productColor.image[0].image}"
+												alt="" style="width: 100%;">
+										</div>
+										<div class="cart-detail">
+											<c:set var="p"
+												value="${cart.productDetail.productColor.product}" />
+											<c:set var="pPrice" value="${p.price/1000.0}" />
+											<p>${p.name}(${  cart.productDetail.productColor.color.name}
+												- ${ cart.productDetail.size.name})</p>
+											<span> <span>${cart.quantity }</span>x <fmt:formatNumber
+													value="${pPrice-(pPrice * p.discount)}" type="number"
+													pattern="#,##0.000" />
+											</span>
+											<c:set var="itemTotal"
+												value="${(pPrice - (pPrice * p.discount)) * cart.quantity}" />
+											<c:set var="total" value="${total + itemTotal}" />
+											<div class="" style="margin-top: 15px;">
+												<a href="cart/detete/${cart.cartDetailId}.htm"> <i
+													class="bi bi-trash-fill"></i>
+												</a>
+											</div>
+										</div>
+									</li>
+								</c:forEach>
+								<span>Tổng cộng:</span>
+								<span><fmt:formatNumber value="${total }" type="number"
+										pattern="#,##0.000" /></span>
+								<button>Gủi đơn hàng</button>
+							</ul>
+						</c:if>
+						<c:if test="${ empty user.cartDetail}">
+							<small class=""> Có <strong>0</strong> sản phẩm trong giỏ
+								hàng
+							</small>
+						</c:if>
 					</div>
+
 				</div>
+
 				<!-- user -->
 				<div class="user">
 					<c:choose>
@@ -128,9 +106,11 @@
 				<li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN
 						CHẠY</a></li>
 				<c:forEach var="pt" items="${sessionScope.pts}">
-					<li class="nav-item"><label for="click-type${pt.typeId}" style="display:block;"> <span
+					<li class="nav-item"><label for="click-type${pt.typeId}"
+						style="display: block;"> <span
 							class="nav-link text-uppercase p-type">${pt.name} </span>
-					</label> <input type="checkbox" id="click-type${pt.typeId}" style="width:0;height:0;display:none" />
+					</label> <input type="checkbox" id="click-type${pt.typeId}"
+						style="width: 0; height: 0; display: none" />
 						<ul class="dd-type dd-type-none">
 							<c:forEach var="typeDetail" items="${pt.types}">
 								<li><a href="products/${typeDetail.typeDetailId}.htm"
@@ -151,7 +131,9 @@
 				<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>
 			</c:if>
 			<c:if test="${not empty sessionScope.user && user.isAdmin == true}">
-				<a href="admin/dashboard.htm" class="btn btn-outline btn-outline-secondary">Admin <i class="bi bi-arrow-bar-right fw-bold"></i></a>
+				<a href="admin/dashboard.htm"
+					class="btn btn-outline btn-outline-secondary">Admin <i
+					class="bi bi-arrow-bar-right fw-bold"></i></a>
 			</c:if>
 		</div>
 	</div>

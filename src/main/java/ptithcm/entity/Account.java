@@ -1,10 +1,15 @@
 package ptithcm.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -33,6 +38,8 @@ public class Account {
 	
 	@Column(name = "avatar")
 	private String avatar;
+	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+	private Set<CartDetail> cartDetail = new HashSet<>();
 
 	public Account() {
 		super();
@@ -120,6 +127,14 @@ public class Account {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public Set<CartDetail> getCartDetail() {
+		return cartDetail;
+	}
+
+	public void setCartDetail(Set<CartDetail> cartDetail) {
+		this.cartDetail = cartDetail;
 	}
 
 	@Override

@@ -131,6 +131,7 @@ public class AdminProductsController {
 			newP.setDiscount(p.getDiscount());
 			newP.setTypeDetailId(p.getTypeDetailId());
 			newP.setDescription(p.getDescription());
+			newP.setSoldQuantity(0);
 			Boolean res = productDao.addProduct(newP);
 
 			if (!res) {
