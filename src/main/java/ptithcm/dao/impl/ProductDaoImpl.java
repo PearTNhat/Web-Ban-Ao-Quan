@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ptithcm.bean.ProductDetailBean;
 import ptithcm.dao.ProductDao;
+import ptithcm.entity.Account;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductDetail;
 
@@ -137,5 +138,23 @@ public class ProductDaoImpl implements ProductDao {
 		query.setMaxResults(6);
 		List<Product> productList =query.list();
 		return productList;
+	}
+
+	@Override
+	public Boolean deleteProduct(Product product) {
+		Session session = sessionFactory.openSession();
+		Transaction t = session.beginTransaction();
+
+		try {
+			session.delete(product);
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+			System.out.println("Error delete " + e.getMessage());
+			return false;
+		} finally {
+			session.close();
+		}
+		return true;
 	}
 }

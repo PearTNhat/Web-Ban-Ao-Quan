@@ -40,6 +40,29 @@
 			<div class="table-wrapper position-md-relative">
 				<div class="table-title">
 					<div class="row">
+						 <c:choose>
+					        <c:when test="${deleteSuccess}">
+					            <div class="alert alert-success alert-dismissible fade show" role="alert">
+					                Xóa sản phẩm thành công!
+					                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					                
+					            </div>
+					        </c:when>
+					        <c:when test="${deleteError}">
+					            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+					                Xóa sản phẩm thất bại, vui lòng kiểm tra lại sản phẩm!
+					                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					                
+					            </div>
+					        </c:when>
+					        <c:when test="${cannotDelete}">
+					            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+					                Không thể xóa sản phẩm đã có chi tiết!
+					                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					                
+					            </div>
+					        </c:when>
+					    </c:choose>
 						<div class="col-5">
 							<h2 class="text-left">Quản lí sản phẩm</h2>
 						</div>
@@ -82,9 +105,17 @@
 							<c:forEach var="p" items="${products }" varStatus="s">
 								<tr>
 									<td>${(page-1)*limit + s.index+1}</td>
-									<td><a href="admin/products/${p.productId}.htm"><img
-											src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
-											class="avatar" alt="Avatar">${p.name}</a></td>
+									<td><a href="admin/products/${p.productId}.htm">
+										 <c:set var="firstImage" value="true" />
+						                <c:forEach var="pd" items="${p.productDetail}">
+						                    <c:forEach var="img" items="${pd.image}">
+						                        <c:if test="${firstImage}">
+						                            <img src="${img.image}" class="avatar" alt="Avatar" />
+						                            <c:set var="firstImage" value="false" />
+						                        </c:if>
+						                    </c:forEach>
+						                </c:forEach>
+									${p.name}</a></td>
 
 									<td><fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" maxFractionDigits="0" minFractionDigits="0" />đ</td>
 									<td><fmt:formatNumber value="${p.discount}"
@@ -100,7 +131,7 @@
                     <path
 														d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
                   </svg>
-											</a> <a href="#l" class="delete"><i class="material-icons"
+											</a> <a href="admin/products/delete/${p.productId}.htm" class="delete"><i class="material-icons"
 												title="Delete">&#xE872;</i></a>
 
 										</div>

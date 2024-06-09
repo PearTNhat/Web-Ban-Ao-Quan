@@ -87,7 +87,20 @@ public class AdminProductsController {
 		return "page/admin/productDetail";
 	}
 
-	// product
+	@RequestMapping(value="/products/delete/{productId}")
+	public String deleteProduct(RedirectAttributes redirectAttributes, @PathVariable Integer productId, ModelMap model) {
+		Product deleteProduct = productDao.findProductById(productId);
+		if (deleteProduct.getProductDetail() != null) {
+			redirectAttributes.addFlashAttribute("cannotDelete", true);
+		}
+		
+		if (productDao.deleteProduct(deleteProduct)) {
+			redirectAttributes.addFlashAttribute("deleteSuccess", true);
+		} else {
+			redirectAttributes.addFlashAttribute("deleteError", true);
+		}
+		return "redirect:/admin/products.htm";
+	}
 
 	@RequestMapping(value = "/products/add-product", method = RequestMethod.GET)
 	public String productForm(Model model) {
@@ -113,6 +126,7 @@ public class AdminProductsController {
 			}
 			Product newP = new Product();
 			newP.setName(p.getName());
+			newP.setSoldQuantity(0);
 			newP.setPrice(p.getPrice());
 			newP.setDiscount(p.getDiscount());
 			newP.setTypeDetailId(p.getTypeDetailId());

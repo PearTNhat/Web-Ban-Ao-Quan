@@ -52,7 +52,7 @@
             </div>
             <c:choose>
                 <c:when test="${productDetails.size() == 0}">
-                    <div class="not-found">Không tồn tại chi tiết sản phẩm nào</div>
+                    <div class="not-found">Chưa thêm chi tiết sản phẩm nào</div>
                 </c:when>
                 <c:otherwise>
                     <table class="table table-striped table-hover">

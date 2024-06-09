@@ -8,50 +8,35 @@
         <div class="row">
             <div class="col-12 order-2 col-md-6 order-md-1 border-end">
                 <h6 class="border-bottom py-1 fw-semibold">Thông tin liên hệ giao hàng</h6>
-                <div class="row mb-2">
-                    <label for="name" class="col-12 col-md-4 col-form-label text-md-end">Họ và tên *</label>
-                    <div class="col-12 col-md-8">
-                        <input type="text" name="name" class="form-control" id="name" required>
-                    </div>
+                <div class="row my-3 d-flex justify-content-end">
+                	<div class="col-12 col-md-7">
+	                	<input type="radio" name="address" class="btn-check" id="address1" autocomplete="off" checked>
+						<label class="btn btn-outline-success" for="address1">
+							<div class="info-user" style="font-size: large;font-weight: bold;">
+	                             <span class="name">Đỗ Nguyên Phương</span> |
+	                             <span class="tel-phone">0944735903</span>
+	                        </div>
+	                        <div class="address-user">
+	                             46 Trần Hưng Đạo
+	                        </div>
+						</label>
+                	</div>
                 </div>
-                <div class="row mb-2 justify-content-end">
-                    <label for="email" class="col-12 col-md-4 col-form-label text-md-end">Email</label>
-                    <div class="col-12 col-md-8">
-                        <input type="email" name="email" class="form-control" id="email" required>
-                    </div>
+                <div class="row my-3 d-flex justify-content-end">
+	                <div class="col-12 col-md-7">
+	                	<input type="radio" name="address" class="btn-check" id="address2" autocomplete="off">
+						<label class="btn btn-outline-success " for="address2">
+							<div class="info-user" style="font-size: large;font-weight: bold;">
+	                             <span class="name">Đỗ Nguyên Phương</span> |
+	                             <span class="tel-phone">0944735903</span>
+	                        </div>
+	                        <div class="address-user">
+	                             46 Trần Hưng Đạo
+	                        </div>
+						</label>
+                	</div>
                 </div>
-                <div class="row mb-2 justify-content-end">
-                    <label for="tel" class="col-12 col-md-4 col-form-label text-md-end">Số điện thoại *</label>
-                    <div class="col-12 col-md-8">
-                        <input type="tel" name="tel" class="form-control" id="tel" required>
-                    </div>
-                </div>
-
-                <h6 class="border-bottom py-1 fw-semibold">Địa chỉ giao hàng</h6>
-                <div class="row mb-2 justify-content-end">
-                    <label for="tinhthanh" class="col-12 col-md-4 col-form-label text-md-end">Tỉnh thành *</label>
-                    <div class="col-12 col-md-8">
-                        <input type="text" name="tinhthanh" class="form-control" id="tinhthanh" required>
-                    </div>
-                </div>
-                <div class="row mb-2 justify-content-end">
-                    <label for="quanhuyen" class="col-12 col-md-4 col-form-label text-md-end">Quận/huyện*</label>
-                    <div class="col-12 col-md-8">
-                        <input type="text" name="quanhuyen" class="form-control" id="quanhuyen" required>
-                    </div>
-                </div>
-                <div class="row mb-2 justify-content-end">
-                    <label for="address" class="col-12 col-md-4 col-form-label text-md-end">Địa chỉ nhà *</label>
-                    <div class="col-12 col-md-8">
-                        <input type="text" name="address" class="form-control" id="address" required>
-                    </div>
-                </div>
-                <div class="row mb-2 justify-content-end">
-                    <label for="note" class="col-12 col-md-4 col-form-label text-md-end">Ghi chú</label>
-                    <div class="col-12 col-md-8">
-                        <textarea name="note" name="note" id="note" cols="30" rows="3" class="form-control"></textarea>
-                    </div>
-                </div>
+					
 
                 <h6 class="border-bottom py-1 fw-semibold">Hình thức thanh toán</h6>
                 <div class="row justify-content-end">
@@ -67,7 +52,7 @@
                                     <div class="row">
                                         <div class="col-12 fw-bold">COD</div>
                                         <div class="col-12 text-muted fs-sm">Thanh toán khi nhận hàng</div>
-                                    </div>
+                                    </div>	
                                 </div>
                             </div>
 
@@ -201,6 +186,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <button class="btn btn-secondary mb-2"><i class="bi bi-arrow-clockwise"></i> Cập nhật giỏ hàng</button>
                 <h6 class="border-bottom py-1 fw-medium">Tổng: </h6>
                 <div class="row justify-content-between border-bottom py-1">
                     <div class="col">Số tiền mua sản phẩm:</div>
