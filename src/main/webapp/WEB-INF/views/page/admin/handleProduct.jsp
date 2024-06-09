@@ -42,12 +42,12 @@ form {
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <%
 String event = (String) request.getAttribute("event");
-String producId = (String) request.getAttribute("productId");
 String actionUrl;
 if (event == null) {
 	event = request.getParameter("event");
 }
 if ("update".equals(event)) {
+	String producId = (String) request.getAttribute("productId");
 	actionUrl = "admin/products/edit-product/" + producId + ".htm";
 } else {
 	actionUrl = "admin/products/add-product.htm";

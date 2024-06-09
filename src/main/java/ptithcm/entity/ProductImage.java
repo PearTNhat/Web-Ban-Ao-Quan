@@ -15,7 +15,7 @@ public class ProductImage {
 	private String image;
 
 	@Column(name = "productColorId")
-	private int pdId;
+	private int pcId;
 
 	@Column(name = "priority")
 	private int priority;
@@ -27,18 +27,18 @@ public class ProductImage {
 	public ProductImage() {
 	}
 
-	public ProductImage(String image, int pdId, int priority) {
+	public ProductImage(String image, int pcId, int priority) {
 		this.image = image;
-		this.pdId = pdId;
+		this.pcId = pcId;
 		this.priority = priority;
 	}
 
 	public int getPdId() {
-		return pdId;
+		return pcId;
 	}
 
 	public void setPdId(int pdId) {
-		this.pdId = pdId;
+		this.pcId = pdId;
 	}
 
 	public String getImage() {

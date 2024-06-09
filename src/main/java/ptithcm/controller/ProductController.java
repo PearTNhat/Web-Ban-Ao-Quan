@@ -43,14 +43,14 @@ public class ProductController {
 	public String getProductDetail(@PathVariable("typeDetailId") String typeDetailId, 
 	                               @PathVariable("productDetailId") Integer productDetailId, 
 	                               ModelMap model) {
-	    ProductDetail productDetail = productDetailDao.getProductDetail(productDetailId);
+//	    ProductDetail productDetail = productDetailDao.getProductDetail(productDetailId);
 	    TypeDetail typeDetail = typeDetailDao.getTypeDetail(typeDetailId);
 	    List<Size> listSize = new ArrayList<>();
 		/*
 		 * for (ProductDetail p : productDetail.getProduct().getProductDetail()) { if
 		 * (p.getProductDetailId().equals(productDetailId)) listSize.add(p.getSize()); }
 		 */
-	    model.addAttribute("productDetail", productDetail);
+//	    model.addAttribute("productDetail", productDetail);
 	    model.addAttribute("typeDetail", typeDetail);
 	    model.addAttribute("listSize", listSize);
 	    return "page/product/product-detail";

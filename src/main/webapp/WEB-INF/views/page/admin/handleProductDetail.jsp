@@ -60,8 +60,7 @@ if ("update".equals(event)) {
 											style="background-image: url(${url});"></div>
 										<label class="btn btn-primary"> <i
 											class="bi bi-upload"></i> <input type="file"
-											class="uploadFile img"
-											value="${pd.files[status.index]}"
+											class="uploadFile img" value="${pd.files[status.index]}"
 											style="width: 0px; height: 0px; overflow: hidden;"
 											name="files" />
 										</label> <input type="hidden" value="${pd.templImg[status.index]}"
@@ -105,17 +104,18 @@ if ("update".equals(event)) {
 					</div>
 
 				</div>
-				<div class="mb-3  d-flex gap-4 justify-content-center">
-					<div>
-						<form:label for="quantity" class="form-label" path="quantity">Số lượng</form:label>
-						<form:input type="number"
-							class="form-control  ${quantityErr ? 'is-invalid' : '' }"
-							id="quantity" path="quantity" />
-						<form:errors path="quantity" cssClass="invalid-feedback d-block" />
+				<c:if test="${event != 'update'}">
+					<div class="mb-3  d-flex gap-4 justify-content-center">
+						<div>
+							<form:label for="quantity" class="form-label" path="quantity">Số lượng</form:label>
+							<form:input type="number"
+								class="form-control  ${quantityErr ? 'is-invalid' : '' }"
+								id="quantity" path="quantity" />
+							<form:errors path="quantity" cssClass="invalid-feedback d-block" />
+						</div>
 					</div>
-				</div>
+				</c:if>
 				<div class="mb-3 ">
-
 					<form:label for="color" class="form-label" path="color">Màu sắc</form:label>
 					<form:input class="form-control ${colorErr ? 'is-invalid' : '' }"
 						list="listColor" id="color" path="color"
@@ -128,18 +128,40 @@ if ("update".equals(event)) {
 					<form:errors path="color" cssClass="invalid-feedback d-block" />
 				</div>
 				<div class="mb-3">
-					<label class=" form-label">Chọn size</label>
-					<div class="d-flex gap-4 flex-wrap">
-						<c:forEach var="s" items="${sizes}" varStatus="status">
-							<div class="form-check form-switch">
-								<form:checkbox class="form-check-input" role="switch"
-									path="sizeId" value="${s.sizeId }"  id="${s.sizeId}"
-									checked="${status.index == 0 ? 'checked' : ''}" />
-								<form:label class="form-check-label" for="${s.sizeId }"
-									path="sizeId">${s.name}</form:label>
-							</div>
-						</c:forEach>
-					</div>
+					<c:if test="${event != 'update'}">
+						<label class=" form-label">Chọn size</label>
+						<div class="d-flex gap-4 flex-wrap">
+							<c:forEach var="s" items="${sizes}" varStatus="status">
+								<div class="form-check form-switch">
+									<form:radiobutton class="form-check-input" role="switch"
+										path="sizeId" value="${s.sizeId }" id="${s.sizeId}"
+										checked="${status.index == 0 ? 'checked' : ''}" />
+									<form:label class="form-check-label" for="${s.sizeId }"
+										path="sizeId">${s.name}</form:label>
+								</div>
+							</c:forEach>
+						</div>
+					</c:if>
+					<label class=" form-label">Size của sản phẩm</label>
+					<c:forEach var="p" items="${pd.listPd}" varStatus="status">
+						<div class="mb-3 ">
+							<form:label for="quantity_${status.index}" class="form-label"
+								path="listPd[${status.index}].quantity">
+				            ${p.size.name}
+				        	</form:label>
+							<form:input type="number" class="form-control "
+								id="quantity_${status.index}"
+								path="listPd[${status.index}].quantity" />
+							<form:input type="hidden" class="form-control "
+								path="listPd[${status.index}].sizeId" />
+							<form:input type="hidden" class="form-control "
+								path="listPd[${status.index}].soldQuantity" />
+							<form:input type="hidden" class="form-control "
+								path="listPd[${status.index}].productDetailId" />
+							<form:input type="hidden" class="form-control "
+								path="listPd[${status.index}].productColorId" />
+						</div>
+					</c:forEach>
 				</div>
 				<button type="submit" class="btn btn-primary rounded-1"
 					style="width: 195px; margin: auto;">Lưu</button>
