@@ -7,4 +7,5 @@ public interface AccountDao {
 	public Integer deleteAccount(Account account);
 	public Account createAccount(Account account);
 	public Account findAccountByEmail(String email);
+	public Boolean updateAccount(Account user);
 }

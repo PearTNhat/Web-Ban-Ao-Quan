@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 public class Account {
 	@Id
@@ -14,6 +16,7 @@ public class Account {
 	private Integer accountId;
 	
 	@Column(name = "firstName")
+	@NotBlank(message = "Không được để trống!")
 	private String firstName;
 	
 	@Column(name = "lastName")
@@ -38,6 +41,19 @@ public class Account {
 
 	public Account(String firstName, String lastName, boolean isAdmin, String email, String password, String avatar) {
 		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.isAdmin = isAdmin;
+		this.email = email;
+		this.password = password;
+		this.avatar = avatar;
+	}
+	
+
+	public Account(Integer accountId, String firstName, String lastName, boolean isAdmin, String email, String password,
+			String avatar) {
+		super();
+		this.accountId = accountId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.isAdmin = isAdmin;
