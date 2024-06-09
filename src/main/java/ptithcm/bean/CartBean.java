@@ -1,16 +1,31 @@
 package ptithcm.bean;
 
+import java.util.List;
+
+import ptithcm.entity.CartDetail;
+
 public class CartBean {
 	private Integer quantity;
 	private Integer accountId;
 	private Integer productDetailId;
 	private Integer sizeId;
 	private String typeDetailId;
+	private List<CartDetail> listCartD;
 	public CartBean() {
 	
 	}
 	
 	
+	public List<CartDetail> getListCartD() {
+		return listCartD;
+	}
+
+
+	public void setListCartD(List<CartDetail> listCartD) {
+		this.listCartD = listCartD;
+	}
+
+
 	public String getTypeDetailId() {
 		return typeDetailId;
 	}

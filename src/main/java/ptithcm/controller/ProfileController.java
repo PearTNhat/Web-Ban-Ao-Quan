@@ -3,11 +3,16 @@ package ptithcm.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 
 import ptithcm.bean.AddressBean;
 import ptithcm.bean.ChangePwBean;
@@ -34,11 +40,14 @@ import ptithcm.dao.AddressDao;
 import ptithcm.dao.impl.AccountDaoImpl;
 import ptithcm.entity.Account;
 import ptithcm.entity.Address;
+import ptithcm.entity.Product;
 import ptithcm.utils.UploadImage;
 
 @Controller
 @RequestMapping("/profile")
 public class ProfileController {
+	@Autowired
+	SessionFactory factory;
 	@Autowired
 	private Cloudinary cloudinary;
 	@Autowired
@@ -47,7 +56,7 @@ public class ProfileController {
 	private AccountDao accountDao;
 
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public String userInfo(HttpServletRequest request, ModelMap model,BindingResult errors) {
+	public String userInfo(HttpServletRequest request, ModelMap model, BindingResult errors) {
 		Account user = (Account) request.getAttribute("user");
 		System.out.println("da chay vao up info");
 		if (user != null) {
@@ -59,8 +68,8 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/info/update", method = RequestMethod.POST)
-	public String updateUser(RedirectAttributes redirectAttributes,@Validated @ModelAttribute("user") User formUser, BindingResult errors,
-			HttpServletRequest request, ModelMap model) throws IOException {
+	public String updateUser(RedirectAttributes redirectAttributes, @Validated @ModelAttribute("user") User formUser,
+			BindingResult errors, HttpServletRequest request, ModelMap model) throws IOException {
 		Account user = (Account) request.getAttribute("user");
 		String imageUrl = null;
 		model.addAttribute("fnameError", false);
@@ -68,20 +77,21 @@ public class ProfileController {
 		model.addAttribute("emailError", false);
 		model.addAttribute("updateSuccess", false);
 		System.out.println(user.getAvatar());
-		
+
 		if (user != null) {
 
 			if (!formUser.getAvatar().isEmpty()) {
-			
+
 				try {
 					@SuppressWarnings("unchecked")
 					Map<String, String> m = cloudinary.uploader().upload(formUser.getAvatar().getBytes(),
-							ObjectUtils.asMap("resource_type", "auto", "folder", "WebAoQuan/Users","public_id", formUser.getAvatar().getOriginalFilename()+user.getAccountId()));
+							ObjectUtils.asMap("resource_type", "auto", "folder", "WebAoQuan/Users", "public_id",
+									formUser.getAvatar().getOriginalFilename() + user.getAccountId()));
 					imageUrl = (String) m.get("secure_url");
 				} catch (Exception e) {
 					System.out.println("Error upload image " + e.getMessage());
 				}
-				
+
 				System.out.println(imageUrl);
 				/*
 				 * if (imageUrl == null) { model.addAttribute("user", user);
@@ -108,7 +118,7 @@ public class ProfileController {
 				System.out.println(formUser.getFirstName());
 				System.out.println(formUser.getLastName());
 				System.out.println(formUser.getEmail());
-				
+
 				return "page/profile/info";
 			}
 			System.out.println(imageUrl);
@@ -198,6 +208,7 @@ public class ProfileController {
 		model.addAttribute("deleteError", true);
 		return "page/profile/address";
 	}
+
 	@RequestMapping(value = "/changepw", method = RequestMethod.GET)
 	public String changPw(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
@@ -208,14 +219,15 @@ public class ProfileController {
 		}
 		return "page/profile/changepw";
 	}
-	
+
 	@RequestMapping(value = "/changepw/update", method = RequestMethod.POST)
 	public String updatePwSuccess(@Validated @ModelAttribute("userPw") ChangePwBean formUser, BindingResult errors,
 			HttpServletRequest request, ModelMap model) throws IOException {
 		Account user = (Account) request.getAttribute("user");
-		
+
 		if (user != null) {
-			if (formUser.getOldPassword().isEmpty() || formUser.getNewPassword().isEmpty() || formUser.getConfirmPw().isEmpty()) {
+			if (formUser.getOldPassword().isEmpty() || formUser.getNewPassword().isEmpty()
+					|| formUser.getConfirmPw().isEmpty()) {
 				model.addAttribute("error", "không được để trống mật khẩu!");
 				model.addAttribute("user", user);
 				model.addAttribute("userPw", formUser);
@@ -228,7 +240,7 @@ public class ProfileController {
 				model.addAttribute("userPw", formUser);
 				return "page/profile/changepw";
 			}
-			if (!BCrypt.checkpw(formUser.getOldPassword(),user.getPassword() )) {
+			if (!BCrypt.checkpw(formUser.getOldPassword(), user.getPassword())) {
 				System.out.println("123");
 				model.addAttribute("error", "Sai mật khẩu");
 				model.addAttribute("userPw", formUser);
@@ -246,7 +258,8 @@ public class ProfileController {
 			System.out.println(formUser.getConfirmPw());
 			System.out.println(BCrypt.hashpw(formUser.getConfirmPw(), BCrypt.gensalt()));
 			Account account = new Account(user.getAccountId(), user.getFirstName(), user.getLastName(),
-					user.getIsAdmin(), user.getEmail(), BCrypt.hashpw(formUser.getConfirmPw(), BCrypt.gensalt()), user.getAvatar());
+					user.getIsAdmin(), user.getEmail(), BCrypt.hashpw(formUser.getConfirmPw(), BCrypt.gensalt()),
+					user.getAvatar());
 			accountDao.updateAccount(account);
 			ChangePwBean changePw = new ChangePwBean();
 			model.addAttribute("userPw", changePw);
@@ -255,5 +268,42 @@ public class ProfileController {
 		}
 		model.addAttribute("success", "Thanh cong");
 		return "page/profile/changepw";
+	}
+
+	@RequestMapping(value = "/profile/order", method = RequestMethod.GET)
+	public String getOrder(ModelMap model, HttpServletRequest request) {
+		HttpSession session1 = request.getSession();
+		Account user = (Account) session1.getAttribute("user");
+		System.out.println("SSSSSSSSSSS");
+		//
+		int limit = 4;
+		Integer page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
+		Session session = factory.getCurrentSession();
+		List<Address> listAddress = addressDao.getAllAddress(user.getAccountId());
+
+		// total pages
+		String hqlTotal = "SELECT count(*) FROM Order o INNER JOIN Address a ON o.addressId = a.addressId WHERE o.addressId IN (:addressId)";
+		Query queryTotal = session.createQuery(hqlTotal);
+		System.out.println("list "+listAddress.stream().map(Address::getAddressId).collect(Collectors.toList()));
+		queryTotal.setParameter("addressIds",
+				listAddress.stream().map(Address::getAddressId).collect(Collectors.toList()));
+		Long total = (Long) queryTotal.uniqueResult();
+		int pages = (int) Math.ceil((float) total / limit);
+		int skip = (page - 1) * limit;
+		// lấy ra kết quả cuối cùng sau khi tính toán phân trang
+		String hql = "FROM Order o INNER JOIN Address a ON o.addressId = a.addressId WHERE o.addressId IN (:addressId)";
+		Query query = session.createQuery(hql);
+		queryTotal.setParameter("addressIds",
+				listAddress.stream().map(Address::getAddressId).collect(Collectors.toList()));
+		query.setFirstResult(skip);
+		query.setMaxResults(limit); // Fetch the next 5 rows after skipping
+		//
+		List<Order> listOrder = query.list();
+		model.addAttribute("orders", listOrder);
+		model.addAttribute("pages", pages);
+		model.addAttribute("page", page);
+		model.addAttribute("userLogin", user);
+		model.addAttribute("limit", limit);
+		return "page/profile/order";
 	}
 }
