@@ -8,6 +8,7 @@ import javax.naming.Binding;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,8 +25,10 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 
 import ptithcm.bean.AddressBean;
+import ptithcm.bean.ChangePwBean;
 import ptithcm.bean.Image;
 import ptithcm.bean.User;
+import ptithcm.bean.UserBean;
 import ptithcm.dao.AccountDao;
 import ptithcm.dao.AddressDao;
 import ptithcm.dao.impl.AccountDaoImpl;
@@ -194,5 +197,63 @@ public class ProfileController {
 		}
 		model.addAttribute("deleteError", true);
 		return "page/profile/address";
+	}
+	@RequestMapping(value = "/changepw", method = RequestMethod.GET)
+	public String changPw(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		ChangePwBean changePw = new ChangePwBean();
+		if (user != null) {
+			model.addAttribute("user", user);
+			model.addAttribute("userPw", changePw);
+		}
+		return "page/profile/changepw";
+	}
+	
+	@RequestMapping(value = "/changepw/update", method = RequestMethod.POST)
+	public String updatePwSuccess(@Validated @ModelAttribute("userPw") ChangePwBean formUser, BindingResult errors,
+			HttpServletRequest request, ModelMap model) throws IOException {
+		Account user = (Account) request.getAttribute("user");
+		
+		if (user != null) {
+			if (formUser.getOldPassword().isEmpty() || formUser.getNewPassword().isEmpty() || formUser.getConfirmPw().isEmpty()) {
+				model.addAttribute("error", "không được để trống mật khẩu!");
+				model.addAttribute("user", user);
+				model.addAttribute("userPw", formUser);
+				return "page/profile/changepw";
+			}
+			if (errors.hasErrors()) {
+
+				model.addAttribute("error", "Sai định dạng mật khẩu!");
+				model.addAttribute("user", user);
+				model.addAttribute("userPw", formUser);
+				return "page/profile/changepw";
+			}
+			if (!BCrypt.checkpw(formUser.getOldPassword(),user.getPassword() )) {
+				System.out.println("123");
+				model.addAttribute("error", "Sai mật khẩu");
+				model.addAttribute("userPw", formUser);
+				model.addAttribute("user", user);
+				return "page/profile/changepw";
+			}
+			if (!formUser.getNewPassword().equals(formUser.getConfirmPw())) {
+				model.addAttribute("error", "Xác nhận mật khẩu không đúng");
+				model.addAttribute("user", user);
+				model.addAttribute("userPw", formUser);
+				return "page/profile/changepw";
+			}
+			System.out.println(formUser.getOldPassword());
+			System.out.println(formUser.getNewPassword());
+			System.out.println(formUser.getConfirmPw());
+			System.out.println(BCrypt.hashpw(formUser.getConfirmPw(), BCrypt.gensalt()));
+			Account account = new Account(user.getAccountId(), user.getFirstName(), user.getLastName(),
+					user.getIsAdmin(), user.getEmail(), BCrypt.hashpw(formUser.getConfirmPw(), BCrypt.gensalt()), user.getAvatar());
+			accountDao.updateAccount(account);
+			ChangePwBean changePw = new ChangePwBean();
+			model.addAttribute("userPw", changePw);
+			model.addAttribute("user", account);
+			model.addAttribute("updateSuccess", true);
+		}
+		model.addAttribute("success", "Thanh cong");
+		return "page/profile/changepw";
 	}
 }

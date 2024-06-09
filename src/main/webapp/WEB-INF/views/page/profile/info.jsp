@@ -24,13 +24,13 @@
 	margin: auto;
 	width: 100px;
 	height: 100px;
-	background-image:
-		url("https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg");
 	border: 1px solid #ccc;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	border-radius: 50%;
+	background-image:
+		url('https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg');
 }
 
 .btn-upload {
@@ -39,6 +39,7 @@
 	height: 100%;
 	border-radius: 50%;
 }
+
 .toast-success {
 	background-color: #08CE08; /* Green background */
 	border-color: #28a745; /* Green border color */
@@ -48,7 +49,7 @@
 
 .toast-error {
 	background-color: rgb(254, 8, 10);
-	opacity: 1 !important; 
+	opacity: 1 !important;
 }
 </style>
 
@@ -108,7 +109,7 @@
 							</c:if>
 						</div>
 
-<%-- 						<c:if test="${updateSuccess}">
+						<%-- 						<c:if test="${updateSuccess}">
 							<p style="color: rgb(55, 255, 131); font-size: 13px;">Cập
 								nhật thông tin thành công!</p>
 						</c:if> --%>
@@ -117,7 +118,17 @@
 					</div>
 					<div class="order-1 col-md-5 order-md-2">
 						<div class="img-wrapper">
-							<div class="imagePreview">
+							<div class="imagePreview"
+								style="
+									background-image: url(
+									<c:if test="${user.avatar != null}">
+   										${user.avatar}
+    								</c:if>
+    								<c:if test="${user.avatar == null}">
+    									https://t4.ftcdn.net/jpg/05/65/22/41/240_F_565224180_QNRiRQkf9Fw0dKRoZGwUknmmfk51SuSS.jpg
+    								</c:if>
+									);
+								">
 								<label class="btn-upload"> <form:input path="avatar" type="file"
 									name="avatar" class="uploadFile img" value="Upload Photo"
 									style="width: 0px; height: 0px; overflow: hidden;" />
@@ -135,7 +146,7 @@
 	<script src="resources/js/uploadImage.js"></script>
 	<script>
 		const imgPreview = document.querySelector('.imagePreview');
-		if (user.avatar != null){
+		if (user.avatar != null) {
 			imgPreview.backgroundImage = `url('${user.avatar}')`;
 		}
 		//xoa preview anh
