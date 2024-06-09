@@ -2,7 +2,9 @@ package ptithcm.entity;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.validator.util.privilegedactions.NewInstance;
 
 @Entity
 public class Product {
@@ -51,7 +55,7 @@ public class Product {
 	private TypeDetail type;
 
 	@OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-	private List<ProductColor> productDetail;
+	private Set<ProductColor> productDetail = new HashSet<>();
 
 	public Product () {};
 	
@@ -80,13 +84,17 @@ public class Product {
 		return soldQuantity;
 	}
 
-
-	public List<ProductColor> getProductDetail() {
+	public Set<ProductColor> getProductDetail() {
 		return productDetail;
 	}
 
-	public void setProductDetail(List<ProductColor> productDetail) {
+	public void setProductDetail(Set<ProductColor> productDetail) {
 		this.productDetail = productDetail;
+	}
+
+
+	public void setSoldQuantity(Integer soldQuantity) {
+		this.soldQuantity = soldQuantity;
 	}
 
 
@@ -137,5 +145,6 @@ public class Product {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
 
 }

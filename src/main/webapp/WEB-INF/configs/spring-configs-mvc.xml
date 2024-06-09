@@ -90,7 +90,9 @@
 	<bean id="typeDetailDao" class="ptithcm.dao.impl.TypeDetailDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
+	<bean id="cartDao" class="ptithcm.dao.impl.CartDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<!-- Cloundinary -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

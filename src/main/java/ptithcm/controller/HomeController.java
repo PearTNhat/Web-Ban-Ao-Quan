@@ -3,6 +3,7 @@ package ptithcm.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductTypeDao;
 import ptithcm.entity.Account;
 import ptithcm.entity.Product;
+import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductType;
 
 @Controller
+@Transactional
 public class HomeController {
 //https://localhost:8080/DemoSpingMVC/
 
@@ -31,35 +34,21 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		List<ProductType> productTypes = productTypeDao.getAllProductType();
-		List<Product> hotProdcut = productDao.getBestSaleProduct();
+		 List<Product> hotProduct = productDao.getBestSaleProduct(); 
 		List<Product> newProduct = productDao.getNewProduct();
 		model.addAttribute("pts", productTypes);
-		model.addAttribute("hotProduct",hotProdcut);
+		model.addAttribute("hotProduct",hotProduct);
 		model.addAttribute("newProduct",newProduct);
+		model.addAttribute("userLogin", user);
 		return "page/home";
 	}
-
-	@RequestMapping("/admin-account")
-	public String accountAdmin() {
-		return "page/admin/adminAccount";
-	}
-
-	@RequestMapping("/listProduct")
-	public String Footer() {
-		return "page/listProduct";
-	}
-
-	@RequestMapping("/forgot-password")
-	public String forgotPassword() {
-		return "page/forgotPassword/sentMail";
-	}
-
 	@RequestMapping("/cart-checkout")
 	public String cartCheckout(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
 			model.addAttribute("user", user);
 		}
+		model.addAttribute("user", user);
 		return "page/cart-checkout";
 	}
 

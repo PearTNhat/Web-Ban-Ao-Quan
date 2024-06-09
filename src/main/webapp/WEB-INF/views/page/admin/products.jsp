@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="resources/css/admin/mangageProducts.css">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="main">
@@ -71,10 +72,10 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Name</th>
-								<th>Quantity</th>
-								<th>Price</th>
+								<th>Tên sản phẩm</th>
+								<th>Giá</th>
 								<th>Giảm giá</th>
+								<th>Số lượng đã bán</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -86,13 +87,13 @@
 											src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
 											class="avatar" alt="Avatar">${p.name}</a></td>
 
-									<td>123</td>
-									<td><fmt:formatNumber value="999" type="currency" /></td>
-<td><fmt:formatNumber value="${ p.discount}"
+									<td><fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" maxFractionDigits="0" minFractionDigits="0" />đ</td>
+									<td><fmt:formatNumber value="${p.discount}"
 											type="percent" /></td>
+									<td>${p.soldQuantity}</td>
 									<td>
 										<div class="d-flex">
-											<a href="./addProduct/addProduct.html" class="edit"><i
+											<a href="admin/products/edit-product/${p.productId }.htm" class="edit"><i
 												class="material-icons" title="Edit">&#xE254;</i></a> <a href="">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16"
 													height="16" fill="currentColor" class="bi bi-three-dots"
