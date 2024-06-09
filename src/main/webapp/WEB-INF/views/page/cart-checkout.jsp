@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ include file="../common/header.jsp" %>
 <%@ include file="../component/topbar.jsp" %>
 <%@ include file="../component/navbar.jsp" %>
@@ -8,35 +11,22 @@
         <div class="row">
             <div class="col-12 order-2 col-md-6 order-md-1 border-end">
                 <h6 class="border-bottom py-1 fw-semibold">Thông tin liên hệ giao hàng</h6>
-                <div class="row my-3 d-flex justify-content-end">
-                	<div class="col-12 col-md-7">
-	                	<input type="radio" name="address" class="btn-check" id="address1" autocomplete="off" checked>
-						<label class="btn btn-outline-success" for="address1">
-							<div class="info-user" style="font-size: large;font-weight: bold;">
-	                             <span class="name">Đỗ Nguyên Phương</span> |
-	                             <span class="tel-phone">0944735903</span>
-	                        </div>
-	                        <div class="address-user">
-	                             46 Trần Hưng Đạo
-	                        </div>
-						</label>
-                	</div>
-                </div>
-                <div class="row my-3 d-flex justify-content-end">
-	                <div class="col-12 col-md-7">
-	                	<input type="radio" name="address" class="btn-check" id="address2" autocomplete="off">
-						<label class="btn btn-outline-success " for="address2">
-							<div class="info-user" style="font-size: large;font-weight: bold;">
-	                             <span class="name">Đỗ Nguyên Phương</span> |
-	                             <span class="tel-phone">0944735903</span>
-	                        </div>
-	                        <div class="address-user">
-	                             46 Trần Hưng Đạo
-	                        </div>
-						</label>
-                	</div>
-                </div>
-					
+              	<c:forEach var="address" items="${userAddress}" varStatus="status">
+				    <div class="row my-3 d-flex justify-content-end">
+				        <div class="col-12 col-md-7">
+				            <input type="radio" name="address" value="${address.addressId}" class="btn-check" id="address${status.index}" autocomplete="off" ${status.first ? 'checked' : ''}>
+				            <label class="btn btn-outline-success" for="address${status.index}">
+				                <div class="info-user" style="font-size: large;font-weight: bold;">
+				                    <span class="name">${address.recipientName}</span> |
+				                    <span class="tel-phone">${address.phoneNumber}</span>
+				                </div>
+				                <div class="address-user">
+				                    ${address.addressName}
+				                </div>
+				            </label>
+				        </div>
+				    </div>
+				</c:forEach>
 
                 <h6 class="border-bottom py-1 fw-semibold">Hình thức thanh toán</h6>
                 <div class="row justify-content-end">
@@ -96,113 +86,66 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td rowspan="2"> <img
-                                    src="https://4menshop.com/images/thumbs/2024/03/that-lung-khoa-tu-dong-tl152-18420.jpg"
-                                    width="48"> </td>
-                            <td> <strong><a
-                                        href="https://4menshop.com/that-lung-nam/that-lung-khoa-tu-dong-tl154-18420.html"
-                                        target="_blank" class="cart-link">Thắt lưng khóa tự động TL154</a></strong>
-                            </td>
-                            <td align="right"> <span>4</span> </td>
-                            <td align="right"> 315.000 </td>
-                            <td align="right"> 1.260.000 </td>
-                            <td align="center"> </td>
-                        </tr>
-                        <tr>
-                            <td align="right"> Size: Free </td>
-                            <td align="" colspan="3"> <input class="form-control" option="1"
-                                    style="width:60px; text-align:center;padding-right:0px; " value="4" type="number"
-                                    min="1" max="10">
-                            </td>
-                            <td align="center"> <input type="button" class="btn btn-outline-secondary" cart="373618"
-                                    option="1" rel="364056" value="Xóa"> </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"> <img
-                                    src="https://4menshop.com/images/thumbs/2024/03/that-lung-khoa-tu-dong-tl152-18420.jpg"
-                                    width="48"> </td>
-                            <td> <strong><a
-                                        href="https://4menshop.com/that-lung-nam/that-lung-khoa-tu-dong-tl154-18420.html"
-                                        target="_blank" class="cart-link">Thắt lưng khóa tự động TL154</a></strong>
-                            </td>
-                            <td align="right"> <span>4</span> </td>
-                            <td align="right"> 315.000 </td>
-                            <td align="right"> 1.260.000 </td>
-                            <td align="center"> </td>
-                        </tr>
-                        <tr>
-                            <td align="right"> Size: Free </td>
-                            <td align="" colspan="3"> <input class="form-control" option="1"
-                                    style="width:60px; text-align:center;padding-right:0px; " value="4" type="number"
-                                    min="1" max="10">
-                            </td>
-                            <td align="center"> <input type="button" class="btn btn-outline-secondary" cart="373618"
-                                    option="1" rel="364056" value="Xóa"> </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"> <img
-                                    src="https://4menshop.com/images/thumbs/2024/03/that-lung-khoa-tu-dong-tl152-18420.jpg"
-                                    width="48"> </td>
-                            <td> <strong><a
-                                        href="https://4menshop.com/that-lung-nam/that-lung-khoa-tu-dong-tl154-18420.html"
-                                        target="_blank" class="cart-link">Thắt lưng khóa tự động TL154</a></strong>
-                            </td>
-                            <td align="right"> <span>4</span> </td>
-                            <td align="right"> 315.000 </td>
-                            <td align="right"> 1.260.000 </td>
-                            <td align="center"> </td>
-                        </tr>
-                        <tr>
-                            <td align="right"> Size: Free </td>
-                            <td align="" colspan="3"> <input class="form-control" option="1"
-                                    style="width:60px; text-align:center;padding-right:0px; " value="4" type="number"
-                                    min="1" max="10">
-                            </td>
-                            <td align="center"> <input type="button" class="btn btn-outline-secondary" cart="373618"
-                                    option="1" rel="364056" value="Xóa"> </td>
-                        </tr>
-                        <tr>
-                            <td rowspan="2"> <img
-                                    src="https://4menshop.com/images/thumbs/2024/03/that-lung-khoa-tu-dong-tl152-18420.jpg"
-                                    width="48"> </td>
-                            <td> <strong><a
-                                        href="https://4menshop.com/that-lung-nam/that-lung-khoa-tu-dong-tl154-18420.html"
-                                        target="_blank" class="cart-link">Thắt lưng khóa tự động TL154</a></strong>
-                            </td>
-                            <td align="right"> <span>4</span> </td>
-                            <td align="right"> 315.000 </td>
-                            <td align="right"> 1.260.000 </td>
-                            <td align="center"> </td>
-                        </tr>
-                        <tr>
-                            <td align="right"> Size: Free </td>
-                            <td align="" colspan="3"> <input class="form-control" option="1"
-                                    style="width:60px; text-align:center;padding-right:0px; " value="4" type="number"
-                                    min="1" max="10">
-                            </td>
-                            <td align="center"> <input type="button" class="btn btn-outline-secondary" cart="373618"
-                                    option="1" rel="364056" value="Xóa"> </td>
-                        </tr>
+                    	<c:forEach var="cartDetailItem" items="${cartDetails}" varStatus="status">
+                    		<tr>
+	                            <td rowspan="2"> <img
+	                                    src="${cartDetailItem.productDetail.productColor.image[0].image}"
+	                                    width="48"> </td>
+	                            <td> <strong><a
+	                                        href="https://4menshop.com/that-lung-nam/that-lung-khoa-tu-dong-tl154-18420.html"
+	                                        target="_blank" class="cart-link">${cartDetailItem.productDetail.productColor.product.name}</a></strong>
+	                            </td>
+	                            <td align="right"> <input class="form-control" option="1"
+	                                    style="width:60px; text-align:center;padding-right:0px;" value="${cartDetailItem.quantity}" type="number"
+	                                    min="1" max="10"> </td>
+	                            <td align="right">
+				                    <fmt:formatNumber value="${cartDetailItem.productDetail.productColor.product.price - (cartDetailItem.productDetail.productColor.product.price * cartDetailItem.productDetail.productColor.product.discount)}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
+				                </td>
+				                <td align="right">
+				                    <fmt:formatNumber value="${cartDetailItem.quantity * (cartDetailItem.productDetail.productColor.product.price - (cartDetailItem.productDetail.productColor.product.price * cartDetailItem.productDetail.productColor.product.discount))}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
+				                </td>
+	                            <td align="center"><a href="#"><i class="bi bi-trash3"></i></a></td>
+	                        </tr>
+	                        <tr>
+	                            <td align="right"> Size: ${cartDetailItem.productDetail.size.name}</td>
+	                        </tr>
+                		</c:forEach>
                     </tbody>
                 </table>
-                <button class="btn btn-secondary mb-2"><i class="bi bi-arrow-clockwise"></i> Cập nhật giỏ hàng</button>
+                <button name="update-cart" class="btn btn-secondary mb-2"><i class="bi bi-arrow-clockwise"></i> Cập nhật giỏ hàng</button>
+                <c:set var="tongTienHang" value="0"/>
+                <c:set var="tongGiamGia" value="0"/>
+                <c:forEach var="cartDetailItem" items="${cartDetails}">
+                    <c:set var="price" value="${cartDetailItem.productDetail.productColor.product.price}"/>
+                    <c:set var="totalPrice" value="${price * cartDetailItem.quantity}"/>
+                    <c:set var="discount" value="${cartDetailItem.productDetail.productColor.product.price * cartDetailItem.productDetail.productColor.product.discount * cartDetailItem.quantity}"/>
+                    <c:set var="tongTienHang" value="${tongTienHang + totalPrice}"/>
+                    <c:set var="tongGiamGia" value="${tongGiamGia + discount}"/>
+                </c:forEach>
                 <h6 class="border-bottom py-1 fw-medium">Tổng: </h6>
                 <div class="row justify-content-between border-bottom py-1">
-                    <div class="col">Số tiền mua sản phẩm:</div>
-                    <div class="col text-end">4,100,000</div>
+                    <div class="col">Tổng tiền hàng:</div>
+                    <div class="col text-end">
+                        <fmt:formatNumber value="${tongTienHang}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
+                    </div>
                 </div>
                 <div class="row justify-content-between py-1">
                     <div class="col">Chi tiết giảm giá:</div>
-                    <div class="col text-end"></div>
+                    <div class="col text-end">
+                        <fmt:formatNumber value="${tongGiamGia}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
+                    </div>
                 </div>
                 <div class="row justify-content-between border-top py-1 my-3">
                     <div class="col fw-bold">Tổng tiền thanh toán:</div>
-                    <div class="col text-end fw-bold" style="color: #b31f2a">4,100,000</div>
+                    <div class="col text-end fw-bold" style="color: #b31f2a">
+                        <fmt:formatNumber value="${tongTienHang - tongGiamGia}" type="number" minFractionDigits="0" maxFractionDigits="0"/>đ
+                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </form>
-        <%@ include file="../common/footer.jsp" %>
- </body>
- </html>
+<%@ include file="../common/footer.jsp" %>
+</body>
+</html>
+            

@@ -1,4 +1,3 @@
-
 package ptithcm.entity;
 
 import java.util.Collection;
@@ -100,5 +99,4 @@ public class OrderDetail {
 		this.productColor = productColor;
 	}
 	
-
 }

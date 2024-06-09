@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
 @Entity
 public class Order {
 	@Id
@@ -65,6 +66,4 @@ public class Order {
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
 	}
-
-
 }
