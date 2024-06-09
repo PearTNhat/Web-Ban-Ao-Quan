@@ -367,9 +367,8 @@ public class AdminProductsController {
 			// uploadImage
 			for (int i = 0; i < files.size(); i++) {
 				MultipartFile file = files.get(i);
-				Integer index = lastImage.getPriority() + i + 1;
+				Integer index = lastImage == null ? 0 :lastImage.getPriority() + i + 1;
 				if (!file.isEmpty()) {
-					System.out.println("zo");
 					String url = this.addToProduct(file, index);
 					ProductImage newPi = new ProductImage(url, pcId, index);
 					if (!productImage.addProductImage(newPi)) {
