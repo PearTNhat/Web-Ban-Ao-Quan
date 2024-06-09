@@ -20,19 +20,26 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ptithcm.bean.CartBean;
 import ptithcm.bean.ProductBean;
+import ptithcm.bean.ProductDetailBean;
 import ptithcm.dao.AccountDao;
 import ptithcm.dao.AddressDao;
 import ptithcm.dao.CartDao;
+import ptithcm.dao.OrderDao;
+import ptithcm.dao.OrderDetailDao;
 import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductDetailDao;
 import ptithcm.dao.TypeDetailDao;
 import ptithcm.entity.Account;
 import ptithcm.entity.Address;
 import ptithcm.entity.CartDetail;
+import ptithcm.entity.Order;
+import ptithcm.entity.OrderDetail;
 import ptithcm.entity.Product;
 import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductDetail;
@@ -56,15 +63,22 @@ public class ProductController {
 
 	@Autowired
 	CartDao cartDao;
-	
+
 	@Autowired
 	private AddressDao addressDao;
-	
+
 	@Autowired
 	private AccountDao accountDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private OrderDetailDao orderDetailDao;
 
 	@RequestMapping("/cart/detete/{cartDetailId}")
-	public String addToCart(RedirectAttributes redirectAttributes, ModelMap model, HttpServletRequest request,@PathVariable("cartDetailId") Integer cartDetailId) {
+	public String addToCart(RedirectAttributes redirectAttributes, ModelMap model, HttpServletRequest request,
+			@PathVariable("cartDetailId") Integer cartDetailId) {
 		try {
 			HttpSession session = request.getSession();
 			Account user = (Account) session.getAttribute("user");
@@ -72,11 +86,11 @@ public class ProductController {
 				redirectAttributes.addFlashAttribute("error", "Bạn cần đăng nhập");
 				return "redirect:/user/login.htm";
 			}
-			if(!cartDao.deleteCartDetailById(cartDetailId)) {
+			if (!cartDao.deleteCartDetailById(cartDetailId)) {
 				redirectAttributes.addFlashAttribute("error", "Xoá thất bại");
 				return "redirect:/.htm";
 			}
-			
+
 			redirectAttributes.addFlashAttribute("success", "Xoá thành công");
 			return "redirect:/.htm";
 		} catch (Exception e) {
@@ -120,6 +134,38 @@ public class ProductController {
 
 	}
 
+	@RequestMapping("/products/cart-checkout")
+	public String cartCheckout(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+
+		List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
+		model.addAttribute("userLogin", user);
+		model.addAttribute("userAddress", userAddress);
+
+		List<CartDetail> cartDetails = cartDao.findCardDetailByAccountId(user.getAccountId());
+		CartBean cartB = new CartBean();
+		cartB.setListCartD(cartDetails);
+		model.addAttribute("cartB", cartB);
+		return "page/cart-checkout";
+	}
+
+	@RequestMapping(value = "/cart/update", method = RequestMethod.POST)
+	public String cartCheckout(HttpServletRequest request, RedirectAttributes redirectAttributes, ModelMap model,
+			@ModelAttribute("cartB") CartBean cartB) {
+		try {
+			for (CartDetail cartDetail : cartB.getListCartD()) {
+				System.out.println(cartDetail.getQuantity());
+			}
+			cartDao.updateCartDetail(cartB.getListCartD());
+			redirectAttributes.addFlashAttribute("success", "Cập số lượng thành công");
+			return "redirect:/products/cart-checkout.htm";
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("success", "Cập số lượng thất bại");
+			return "redirect:/products/cart-checkout.htm";
+		}
+	}
+
 	@RequestMapping("/products/{typeId}")
 	public String getProduct(@PathVariable("typeId") String typeId, ModelMap model, HttpServletRequest request) {
 //		pst : products type
@@ -127,7 +173,7 @@ public class ProductController {
 		Account user = (Account) session1.getAttribute("user");
 		//
 		List<Product> hotProduct = productDao.getBestSaleProduct();
-		int limit = 4;
+		int limit = 12;
 		Integer page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		Session session = factory.getCurrentSession();
 		// total pages
@@ -177,18 +223,45 @@ public class ProductController {
 		return "page/product/product-detail";
 	}
 	
-	@RequestMapping("/products/cart-checkout")
-	public String cartCheckout(HttpServletRequest request, ModelMap model) {
+	@RequestMapping("/products/cart-submit.htm")
+	public String submitCart(@RequestParam("address") Integer addressId, Model model, HttpServletRequest request) {
 		Account user = (Account) request.getAttribute("user");
+		model.addAttribute("userLogin", user);
+		Set<CartDetail> cartDetail = user.getCartDetail();
+		Address address = addressDao.getAddress(addressId);
 		
-		List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
-		model.addAttribute("user", user);
-		model.addAttribute("userAddress", userAddress);
-		
-		Set<CartDetail> cartDetails = user.getCartDetail();
-		model.addAttribute("cartDetails", cartDetails);
-		
-		return "page/cart-checkout";
-	}
+	    int totalPayment = 0;
 
+	    for (CartDetail cartDetailItem : cartDetail) {
+	        int price = cartDetailItem.getProductDetail().getProductColor().getProduct().getPrice();
+	        float discount = cartDetailItem.getProductDetail().getProductColor().getProduct().getDiscount();
+	        int quantity = cartDetailItem.getQuantity();
+
+	        int discountedPrice = (int) (price - (price * discount));
+
+	        totalPayment += discountedPrice * quantity;
+	    }
+		
+	    Order newOrder = new Order(totalPayment, addressId);
+	    Order createdOrder = orderDao.addOrder(newOrder);
+	    if (createdOrder != null) {
+	    	System.out.println("Add order successfully");
+	    	for (CartDetail cartDetailItem : cartDetail) {
+	    		OrderDetail orderDetail = new OrderDetail(createdOrder.getOrderId(), cartDetailItem.getProductDetailId(), cartDetailItem.getQuantity());
+	    		if (orderDetailDao.addOrderDetail(orderDetail)) {
+	    			System.out.println("Add order detail successfully");
+	    		} else {
+	    			model.addAttribute("errorOrderDetail", true);
+	    			return "page/cart-checkout";
+	    		}
+	    	}
+	    } else {
+	    	model.addAttribute("errorOrder", true);
+	    	return "page/cart-checkout";
+	    }
+	    for (CartDetail cartDetailItem : cartDetail) {	    	
+	    	cartDao.deleteCartDetailById(cartDetailItem.getCartDetailId());
+	    }
+		return "page/home";
+	}
 }

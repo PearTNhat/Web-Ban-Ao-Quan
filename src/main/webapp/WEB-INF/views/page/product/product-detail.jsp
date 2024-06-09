@@ -59,7 +59,8 @@
 								href="products/${typeDetail.typeDetailId}/${productColorItem.productColorId}.htm"
 								style="width: 100px"><img
 								src="${productColorItem.image.get(0).image}" class="img-fluid"
-								alt=""></a>
+								alt="">
+							</a>
 						</c:forEach>
 					</div>
 					<div>Mô tả sản phẩm:</div>
