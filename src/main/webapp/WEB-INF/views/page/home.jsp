@@ -19,8 +19,8 @@
 			<div class="row">
 				<c:forEach var="p" items="${hotProduct}" varStatus="status">
 					<c:if test="${not empty p.productDetail}">
+						<c:set var="pds" value="${p.productDetail}" />
 						<div class="col-lg-3 col-md-4 col-6 ">
-							<c:set var="pds" value="${p.productDetail}" />
 							<a href="products/${typeId}/${pds[0].productColorId}.htm"
 								class="text-decoration-none">
 								<div class="main-image">
@@ -32,12 +32,9 @@
 								</div>
 								<div class="d-flex justify-content-center">
 									<c:forEach var="pd" items="${pds}" varStatus="i">
-										<c:if
-											test="${pds[i.index].productColorId != pds[i.index +1 ].productColorId}">
-											<div class="sub-image">
-												<img src="${pd.image[0].image}" alt="" />
-											</div>
-										</c:if>
+										<div class="sub-image">
+											<img src="${pd.image[0].image}" alt="" />
+										</div>
 									</c:forEach>
 								</div>
 							</a>
@@ -112,12 +109,12 @@
 								</div>
 								<div class="d-flex justify-content-center">
 									<c:forEach var="pd" items="${pds}" varStatus="i">
-										<c:if
-											test="${pds[i.index].productColorId != pds[i.index +1 ].productColorId}">
-											<div class="sub-image">
-												<img src="${pd.image[0].image}" alt="" />
-											</div>
-										</c:if>
+										<%-- <c:if
+											test="${pds[i.index].productColorId != pds[i.index +1 ].productColorId}"> --%>
+										<div class="sub-image">
+											<img src="${pd.image[0].image}" alt="" />
+										</div>
+										<%-- 	</c:if> --%>
 									</c:forEach>
 								</div>
 							</a>

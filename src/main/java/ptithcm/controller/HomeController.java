@@ -3,6 +3,7 @@ package ptithcm.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,11 @@ import ptithcm.dao.ProductDao;
 import ptithcm.dao.ProductTypeDao;
 import ptithcm.entity.Account;
 import ptithcm.entity.Product;
+import ptithcm.entity.ProductColor;
 import ptithcm.entity.ProductType;
 
 @Controller
+@Transactional
 public class HomeController {
 //https://localhost:8080/DemoSpingMVC/
 
@@ -31,14 +34,22 @@ public class HomeController {
 			model.addAttribute("user", user);
 		}
 		List<ProductType> productTypes = productTypeDao.getAllProductType();
-		List<Product> hotProductt = productDao.getBestSaleProduct();
+		 List<Product> hotProduct = productDao.getBestSaleProduct(); 
 		List<Product> newProduct = productDao.getNewProduct();
 		model.addAttribute("pts", productTypes);
-		model.addAttribute("hotProduct",hotProductt);
+		model.addAttribute("hotProduct",hotProduct);
 		model.addAttribute("newProduct",newProduct);
 		return "page/home";
 	}
 
+	/*
+	 * public List<Product> getHotProducts() { List<Product> hotProducts =
+	 * productDao.getBestSaleProduct(); for (Product product : hotProducts) {
+	 * System.out.println("size " +product.getProductDetail().size()); for
+	 * (ProductColor productColor : product.getProductDetail()) {
+	 * productColor.getImage().size(); // Force initialization } } return
+	 * hotProducts; }
+	 */
 	@RequestMapping("/admin-account")
 	public String accountAdmin() {
 		return "page/admin/adminAccount";
