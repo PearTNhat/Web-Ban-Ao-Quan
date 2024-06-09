@@ -3,7 +3,18 @@
 <%@ include file="../common/header.jsp"%>
 <link rel="stylesheet" href="resources/css/home/home.css">
 <link rel="stylesheet" href="resources/css/imge-cart.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Toastr CSS -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+	rel="stylesheet">
+<!-- Toastr JS -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link rel="stylesheet" href="resources/css/toast.css">
 </head>
 
 <body>
@@ -22,7 +33,7 @@
 								<div class="col-lg-3 col-md-4 col-6">
 									<c:set var="pds" value="${p.productDetail}" />
 									<a
-										href="products/${typeId}/${pds.iterator().next().productColorId}.htm"
+										href="products/${p.typeDetailId}/${pds.iterator().next().productColorId}.htm"
 										class="text-decoration-none">
 										<div class="main-image">
 											<i class="fas fa-shopping-cart cart-product"></i> <img
@@ -101,7 +112,7 @@
 								<div class="col-lg-3 col-md-4 col-6 ">
 									<c:set var="pds" value="${p.productDetail}" />
 									<a
-										href="products/${typeId}/${pds.iterator().next().productColorId}.htm"
+										href="products/${p.typeDetailId}/${pds.iterator().next().productColorId}.htm"
 										class="text-decoration-none">
 										<div class="main-image">
 											<i class="fas fa-shopping-cart cart-product"></i> <img
@@ -142,6 +153,7 @@
 	</section>
 
 	<%@ include file="../common/footer.jsp"%>
+	<%@ include file="../utils/toast.jsp"%>
 	<script>
 		let mybutton = document.getElementById("btn-back-to-top");
 

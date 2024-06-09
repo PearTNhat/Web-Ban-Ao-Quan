@@ -15,4 +15,5 @@ public interface ProductDetailDao {
 	public Integer addProductDetail(ProductDetail pd);
 	public Integer findProductColor(Integer productId, Integer colorId);
 	public List<ProductDetail> findProductDetailByPCId(Integer productDetailId);
+	public ProductDetail findProductDetailBySizePC(Integer sizeId, Integer productColorId);
 }

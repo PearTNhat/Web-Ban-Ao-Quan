@@ -98,7 +98,7 @@ public class userController {
 		}
 		
 		Account loginUser = accountDao.findAccountByEmail(user.getEmail());
-		
+
 		if (loginUser != null && BCrypt.checkpw(user.getPassword(), loginUser.getPassword())) {
 			// remember account using cookies
 			if (user.getRememberMe()) {
@@ -200,7 +200,7 @@ public class userController {
 									  user.getLastName(), 
 									  false,
 									  user.getEmail(),
-									  BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()),
+									  BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()) ,
 									  imageUrl);
 		
 		Account createdAccount = accountDao.createAccount(account);

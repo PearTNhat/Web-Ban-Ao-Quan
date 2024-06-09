@@ -39,38 +39,16 @@ public class HomeController {
 		model.addAttribute("pts", productTypes);
 		model.addAttribute("hotProduct",hotProduct);
 		model.addAttribute("newProduct",newProduct);
+		model.addAttribute("userLogin", user);
 		return "page/home";
 	}
-
-	/*
-	 * public List<Product> getHotProducts() { List<Product> hotProducts =
-	 * productDao.getBestSaleProduct(); for (Product product : hotProducts) {
-	 * System.out.println("size " +product.getProductDetail().size()); for
-	 * (ProductColor productColor : product.getProductDetail()) {
-	 * productColor.getImage().size(); // Force initialization } } return
-	 * hotProducts; }
-	 */
-	@RequestMapping("/admin-account")
-	public String accountAdmin() {
-		return "page/admin/adminAccount";
-	}
-
-	@RequestMapping("/listProduct")
-	public String Footer() {
-		return "page/listProduct";
-	}
-
-	@RequestMapping("/forgot-password")
-	public String forgotPassword() {
-		return "page/forgotPassword/sentMail";
-	}
-
 	@RequestMapping("/cart-checkout")
 	public String cartCheckout(HttpServletRequest request, ModelMap model) {
 		Account user = (Account) request.getAttribute("user");
 		if (user != null) {
 			model.addAttribute("user", user);
 		}
+		model.addAttribute("user", user);
 		return "page/cart-checkout";
 	}
 

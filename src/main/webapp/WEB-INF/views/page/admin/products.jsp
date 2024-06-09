@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="resources/css/admin/mangageProducts.css">
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt"%>
+
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="main">
@@ -92,7 +93,7 @@
 									<td>${p.soldQuantity}</td>
 									<td>
 										<div class="d-flex">
-											<a href="./addProduct/addProduct.html" class="edit"><i
+											<a href="admin/products/edit-product/${p.productId }.htm" class="edit"><i
 												class="material-icons" title="Edit">&#xE254;</i></a> <a href="">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16"
 													height="16" fill="currentColor" class="bi bi-three-dots"
