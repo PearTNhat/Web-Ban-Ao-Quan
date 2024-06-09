@@ -142,8 +142,8 @@ if ("update".equals(event)) {
 							</c:forEach>
 						</div>
 					</c:if>
-					<label class=" form-label">Size của sản phẩm</label>
 					<c:forEach var="p" items="${pd.listPd}" varStatus="status">
+					<label class=" form-label">Size của sản phẩm</label>
 						<div class="mb-3 ">
 							<form:label for="quantity_${status.index}" class="form-label"
 								path="listPd[${status.index}].quantity">

@@ -30,7 +30,7 @@
 					class="bi bi-geo-alt-fill"></i> Địa chỉ hiện tại</li>
 			</a>
 
-			<a href="" class="link-underline link-underline-opacity-0">
+			<a href="profile/changepw.htm" class="link-underline link-underline-opacity-0">
 				<li class="list-group-item border-0"><i
 					class="bi bi-key-fill"></i> Đổi mật khẩu</li>
 			</a>

@@ -23,4 +23,6 @@ public interface ProductDao {
 	public List<Product> getBestSaleProduct();
 	
 	public List<Product> getNewProduct();
+	
+	public Boolean deleteProduct(Product product);
 }

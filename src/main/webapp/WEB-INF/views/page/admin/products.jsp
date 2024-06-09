@@ -41,6 +41,35 @@
 			<div class="table-wrapper position-md-relative">
 				<div class="table-title">
 					<div class="row">
+						<c:choose>
+							<c:when test="${deleteSuccess}">
+								<div class="alert alert-success alert-dismissible fade show"
+									role="alert">
+									Xóa sản phẩm thành công!
+									<button type="button" class="btn-close" data-bs-dismiss="alert"
+										aria-label="Close"></button>
+
+								</div>
+							</c:when>
+							<c:when test="${deleteError}">
+								<div class="alert alert-danger alert-dismissible fade show"
+									role="alert">
+									Xóa sản phẩm thất bại, vui lòng kiểm tra lại sản phẩm!
+									<button type="button" class="btn-close" data-bs-dismiss="alert"
+										aria-label="Close"></button>
+
+								</div>
+							</c:when>
+							<c:when test="${cannotDelete}">
+								<div class="alert alert-warning alert-dismissible fade show"
+									role="alert">
+									Không thể xóa sản phẩm đã có chi tiết!
+									<button type="button" class="btn-close" data-bs-dismiss="alert"
+										aria-label="Close"></button>
+
+								</div>
+							</c:when>
+						</c:choose>
 						<div class="col-5">
 							<h2 class="text-left">Quản lí sản phẩm</h2>
 						</div>
@@ -83,9 +112,17 @@
 							<c:forEach var="p" items="${products }" varStatus="s">
 								<tr>
 									<td>${(page-1)*limit + s.index+1}</td>
-									<td><a href="admin/products/${p.productId}.htm"><img
-											src="https://4menshop.com/cache/image/300x400/images/thumbs/2024/03/tui-canvas-den-phoi-trang-tx017-18422.jpg"
-											class="avatar" alt="Avatar">${p.name}</a></td>
+									<td><a href="admin/products/${p.productId}.htm"> <c:set
+												var="firstImage" value="true" /> <c:forEach var="pd"
+												items="${p.productDetail}">
+												<c:forEach var="img" items="${pd.image}">
+													<c:if test="${firstImage}">
+														<img src="${img.image}" class="avatar" alt="Avatar" />
+														<c:set var="firstImage" value="false" />
+													</c:if>
+												</c:forEach>
+											</c:forEach> ${p.name}
+									</a></td>
 
 									<td><fmt:formatNumber value="${p.price}" type="number"
 											groupingUsed="true" maxFractionDigits="0"
@@ -98,16 +135,12 @@
 												class="edit"><i class="material-icons" title="Edit">&#xE254;</i></a>
 											<a
 												href="admin/products/add-product-detail/${p.productId }.htm">
-
-												<svg xmlns="http://www.w3.org/2000/svg" width="16"
-													height="16" fill="currentColor" class="bi bi-plus-circle"
-													viewBox="0 0 16 16">
-  <path
-														d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-  <path
-														d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-</svg>
-											</a> <a href="#l" class="delete"><i class="material-icons"
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+											  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+											  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+											</svg>
+																							
+											</a> <a href="admin/products/delete/${p.productId}.htm" class="delete"><i class="material-icons"
 												title="Delete">&#xE872;</i></a>
 
 										</div>
