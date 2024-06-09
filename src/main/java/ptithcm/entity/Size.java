@@ -1,10 +1,14 @@
 package ptithcm.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
 public class Size {
@@ -16,8 +20,8 @@ public class Size {
 	@Column(name="name")
 	private String name;
 	
-    @OneToOne(mappedBy = "size")
-    private ProductDetail productDetail;
+	@OneToMany(mappedBy = "size", fetch = FetchType.LAZY)
+    private List<ProductDetail> productDetail;
     
 	public Integer getSizeId() {
 		return sizeId;

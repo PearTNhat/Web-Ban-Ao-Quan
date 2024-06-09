@@ -43,17 +43,19 @@ public class ProfileController {
 	@Autowired
 	private AccountDao accountDao;
 
-	@RequestMapping("/info")
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String userInfo(HttpServletRequest request, ModelMap model,BindingResult errors) {
 		Account user = (Account) request.getAttribute("user");
+		System.out.println("da chay vao up info");
 		if (user != null) {
+			System.out.println("up info");
 			System.out.println(user.getAvatar());
 			model.addAttribute("user", user);
 		}
 		return "page/profile/info";
 	}
 
-	@RequestMapping(value = "/info", method = RequestMethod.POST)
+	@RequestMapping(value = "/info/update", method = RequestMethod.POST)
 	public String updateUser(RedirectAttributes redirectAttributes,@Validated @ModelAttribute("user") User formUser, BindingResult errors,
 			HttpServletRequest request, ModelMap model) throws IOException {
 		Account user = (Account) request.getAttribute("user");
@@ -62,14 +64,16 @@ public class ProfileController {
 		model.addAttribute("flastError", false);
 		model.addAttribute("emailError", false);
 		model.addAttribute("updateSuccess", false);
+		System.out.println(user.getAvatar());
+		
 		if (user != null) {
 
-			if (!formUser.getFile().isEmpty()) {
+			if (!formUser.getAvatar().isEmpty()) {
 			
 				try {
 					@SuppressWarnings("unchecked")
-					Map<String, String> m = cloudinary.uploader().upload(formUser.getFile().getBytes(),
-							ObjectUtils.asMap("resource_type", "auto", "folder", "WebAoQuan/Users","public_id", formUser.getFile().getOriginalFilename()+user.getAccountId()));
+					Map<String, String> m = cloudinary.uploader().upload(formUser.getAvatar().getBytes(),
+							ObjectUtils.asMap("resource_type", "auto", "folder", "WebAoQuan/Users","public_id", formUser.getAvatar().getOriginalFilename()+user.getAccountId()));
 					imageUrl = (String) m.get("secure_url");
 				} catch (Exception e) {
 					System.out.println("Error upload image " + e.getMessage());
@@ -84,14 +88,15 @@ public class ProfileController {
 			Account account = new Account(user.getAccountId(), formUser.getFirstName(), formUser.getLastName(),
 					user.getIsAdmin(), formUser.getEmail(), user.getPassword(), user.getAvatar());
 			if (errors.hasErrors()) {
-				if (account.getFirstName() == "") {
+				System.out.println(account.getFirstName().isEmpty());
+				if (account.getFirstName().isEmpty()) {
 					System.out.println("k vào");
 					model.addAttribute("fnameError", true);
 				}
-				if (account.getLastName() == "") {
+				if (account.getLastName().isEmpty()) {
 					model.addAttribute("flastError", true);
 				}
-				if (account.getEmail() == "") {
+				if (account.getEmail().isEmpty()) {
 					model.addAttribute("emailError", true);
 				}
 				model.addAttribute("message", "");
@@ -103,7 +108,9 @@ public class ProfileController {
 				
 				return "page/profile/info";
 			}
-			account.setAvatar(imageUrl);
+			System.out.println(imageUrl);
+			if (imageUrl != null)
+				account.setAvatar(imageUrl);
 			accountDao.updateAccount(account);
 			model.addAttribute("user", account);
 			model.addAttribute("updateSuccess", true);

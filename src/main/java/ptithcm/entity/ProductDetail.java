@@ -11,10 +11,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "ProductColor", uniqueConstraints = @UniqueConstraint(columnNames = { "productId", "colorId" }))
+@Table(name = "ProductDetail", uniqueConstraints = @UniqueConstraint(columnNames = { "productColorId", "sizeId" }))
 public class ProductDetail {
 	@Id
-	@Column(name = "productDetailId")
+	@Column(name = "productDetailId",insertable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productDetailId;
 	
@@ -24,6 +24,12 @@ public class ProductDetail {
 	@Column(name="sizeId")
 	private Integer sizeId;
 	
+	@Column(name="quantity")
+	private Integer quantity;
+	
+	@Column(name="soldQuantity")
+	private Integer soldQuantity;
+	
 	@ManyToOne
 	@JoinColumn(name = "productColorId", insertable = false, updatable = false)
 	private ProductColor productColor;
@@ -31,6 +37,25 @@ public class ProductDetail {
 	@ManyToOne
 	@JoinColumn(name = "sizeId", insertable = false, updatable = false)
 	private Size size;
+	
+	public ProductDetail() {
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Integer getSoldQuantity() {
+		return soldQuantity;
+	}
+
+	public void setSoldQuantity(Integer soldQuantity) {
+		this.soldQuantity = soldQuantity;
+	}
 
 	public Integer getProductDetailId() {
 		return productDetailId;

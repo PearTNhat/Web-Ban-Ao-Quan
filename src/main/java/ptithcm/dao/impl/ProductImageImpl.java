@@ -54,11 +54,11 @@ public class ProductImageImpl implements ProductImageDao {
 
 	@Override
 	@Transactional
-	public List<ProductImage> findImageByPD(Integer productDetailId) {
+	public List<ProductImage> findImageByPC(Integer productColorId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "FROM ProductImage a WHERE productDetailId=:productDetailId";
+		String hql = "FROM ProductImage a WHERE productColorId=:productColorId";
 		Query query = session.createQuery(hql);
-		query.setParameter("productDetailId", productDetailId);
+		query.setParameter("productColorId", productColorId);
 		return query.list();
 	}
 
@@ -68,8 +68,8 @@ public class ProductImageImpl implements ProductImageDao {
 		Session session = sessionFactory.getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		try {
-			String hql = "DELETE FROM ProductImage pi WHERE pi.pdId = :productDetailId";
-			session.createQuery(hql).setParameter("productDetailId", pId).executeUpdate();
+			String hql = "DELETE FROM ProductImage pi WHERE pi.pcId = :productColorId";
+			session.createQuery(hql).setParameter("productColorId", pId).executeUpdate();
 			transaction.commit();
 			return true;
 		} catch (RuntimeException e) {
@@ -82,11 +82,11 @@ public class ProductImageImpl implements ProductImageDao {
 
 	@Override
 	@Transactional
-	public ProductImage getLastProductImageByProductDetailId(Integer productDetailId) {
+	public ProductImage getLastProductImageByProductDetailId(Integer productColorId) {
 		Session session = sessionFactory.getCurrentSession();
-		String hql = "FROM ProductImage pi WHERE pi.pdId = :productDetailId ORDER BY pi.priority DESC";
+		String hql = "FROM ProductImage pi WHERE pi.pcId = :productColorId ORDER BY pi.priority DESC";
 		Query query = session.createQuery(hql);
-		query.setParameter("productDetailId", productDetailId);
+		query.setParameter("productColorId", productColorId);
 		query.setMaxResults(1); // Limit the results to 1 to get the last element
 		return (ProductImage) query.uniqueResult();
 

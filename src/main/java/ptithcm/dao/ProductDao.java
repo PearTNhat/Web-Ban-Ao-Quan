@@ -12,7 +12,7 @@ public interface ProductDao {
 
 	public Long countProducts(String search);
 
-	public Product findProductById(String productId);
+	public Product findProductById(Integer productId);
 
 	public List<Product> getProductByType(String typeId);
 	

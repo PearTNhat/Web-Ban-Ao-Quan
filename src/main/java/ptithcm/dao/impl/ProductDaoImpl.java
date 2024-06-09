@@ -91,7 +91,7 @@ public class ProductDaoImpl implements ProductDao {
 	}	
 	@Override
 	@Transactional
-	public Product findProductById(String productId) {
+	public Product findProductById(Integer productId) {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "FROM Product WHERE productId=:productId";
 		Query query = session.createQuery(hql);

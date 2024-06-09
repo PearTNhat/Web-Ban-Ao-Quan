@@ -15,7 +15,7 @@ public class User {
 	private String email;
 	
 	private String image;
-	private MultipartFile file;
+	private MultipartFile avatar;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -33,7 +33,7 @@ public class User {
 		this.lastName = lastName;
 		this.email = email;
 		this.image = image;
-		this.file = mult;
+		this.avatar = mult;
 	}
 	
 	public User(String firstName, String lastName, String email) {
@@ -42,14 +42,15 @@ public class User {
 		this.email = email;
 	}
 	
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
-	}
+
 	public String getFirstName() {
 		return firstName;
+	}
+	public MultipartFile getAvatar() {
+		return avatar;
+	}
+	public void setAvatar(MultipartFile avatar) {
+		this.avatar = avatar;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
