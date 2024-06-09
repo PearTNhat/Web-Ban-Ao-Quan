@@ -54,12 +54,13 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 	@Transactional
 	public List<ProductDetail> getProductDetails(int productId, int page, int pageSize) {
 		 Session session = sessionFactory.getCurrentSession();
-		    String hql = "SELECT pd "
-		               + "FROM ProductDetail pd "
-		               + "JOIN FETCH pd.color c "
-		               + "JOIN FETCH pd.size s "
-		               + "WHERE pd.productId = :productId "
-		               + "ORDER BY s.name";
+			 String hql = "SELECT pd " +
+	                 "FROM ProductDetail pd " +
+	                 "JOIN FETCH pd.productColor pc " +
+	                 "JOIN FETCH pc.color c " +
+	                 "JOIN FETCH pd.size s " +
+	                 "WHERE pc.product.productId = :productId " +
+	                 "ORDER BY s.name";
 		    Query query = session.createQuery(hql);
 		    query.setParameter("productId", productId)
 		         .setFirstResult((page - 1) * pageSize)

@@ -50,7 +50,6 @@ public class ProductController {
 		 * for (ProductDetail p : productDetail.getProduct().getProductDetail()) { if
 		 * (p.getProductDetailId().equals(productDetailId)) listSize.add(p.getSize()); }
 		 */
-	    
 	    model.addAttribute("productDetail", productDetail);
 	    model.addAttribute("typeDetail", typeDetail);
 	    model.addAttribute("listSize", listSize);

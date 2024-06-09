@@ -138,4 +138,7 @@ public class Product {
 		this.createdAt = createdAt;
 	}
 
+	public void setSoldQuantity(Integer soldQuantity) {
+		this.soldQuantity = soldQuantity;
+	}
 }

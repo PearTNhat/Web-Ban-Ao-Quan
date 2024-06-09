@@ -14,14 +14,14 @@ public class ProductImage {
 	@Column(name = "image")
 	private String image;
 
-	@Column(name = "productDetailId")
+	@Column(name = "productColorId")
 	private int pdId;
 
 	@Column(name = "priority")
 	private int priority;
 
 	@ManyToOne
-	@JoinColumn(name = "productDetailId", insertable = false, updatable = false)
+	@JoinColumn(name = "productColorId", insertable = false, updatable = false)
 	private ProductColor productImage;
 
 	public ProductImage() {
