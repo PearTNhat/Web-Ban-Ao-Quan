@@ -225,7 +225,7 @@ public class AdminProductsController {
 		try {
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
-			if (errors.hasErrors()) {
+			if (errors.hasFieldErrors("color") || errors.hasFieldErrors("quantity")) {
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);

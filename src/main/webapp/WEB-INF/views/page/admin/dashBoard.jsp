@@ -31,7 +31,7 @@
 					</div>
 					<div class=" col-8 d-flex flex-column py-3">
 						<div class="title">Số đơn đặt hàng</div>
-						<div class="counters">${totalBought }</div>
+						<div class="counters">${totalBought}</div>
 					</div>
 				</div>
 			</div>
