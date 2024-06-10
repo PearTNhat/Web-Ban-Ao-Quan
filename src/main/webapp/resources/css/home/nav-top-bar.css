@@ -295,6 +295,10 @@ ul.user-feature {
 	color: #b31f2a;
 	background-color: #eeeeee;
 }
+.btn-submit{
+	padding:4px;
+	color:white;
+}
 
 @media ( min-width : 995px) {
 	.dd-type {

@@ -53,7 +53,10 @@
 								<span>Tổng cộng:</span>
 								<span><fmt:formatNumber value="${total }" type="number"
 										pattern="#,##0.000" /></span>
-								<a href="products/cart-checkout.htm" class="btn">Gủi đơn hàng</a>
+										<button class="btn-submit">
+									<a href="products/cart-checkout.htm" class="btn">Gủi đơn
+										hàng</a>
+								</button>
 							</ul>
 						</c:if>
 						<c:if test="${ empty user.cartDetail}">

@@ -19,29 +19,33 @@ import javax.persistence.UniqueConstraint;
 public class OrderDetail {
 
 	@Id
-	@Column(name = "orderDetailId",insertable = false,updatable = false)
+	@Column(name = "orderDetailId", insertable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String orderDetailId;
 
 	@Column(name = "orderId")
 	private int orderId;
 
-	@Column(name = "productDetaiId")
-	private int productDetaiId;
+	@Column(name = "productDetailId")
+	private int productDetailId;
 
 	@Column(name = "quantityBought")
-	private Integer quantityBought;
-	
-	@Column(name = "price")
-	private Integer price;
+	private int quantityBought;
 
 	@ManyToOne
 	@JoinColumn(name = "orderId", insertable = false, updatable = false)
 	private Order order;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "productColorId", insertable = false, updatable = false)
-	private Order productColor;
+	private ProductColor productColor;
+
+	public OrderDetail(int orderId, int productDetailId, int quantityBought) {
+		super();
+		this.orderId = orderId;
+		this.productDetailId = productDetailId;
+		this.quantityBought = quantityBought;
+	}
 
 	public String getOrderDetailId() {
 		return orderDetailId;
@@ -59,13 +63,12 @@ public class OrderDetail {
 		this.orderId = orderId;
 	}
 
-	
-	public int getProductDetaiId() {
-		return productDetaiId;
+	public int getProductDetailId() {
+		return productDetailId;
 	}
 
 	public void setProductDetaiId(int productDetaiId) {
-		this.productDetaiId = productDetaiId;
+		this.productDetailId = productDetaiId;
 	}
 
 	public Integer getQuantityBought() {
@@ -76,14 +79,6 @@ public class OrderDetail {
 		this.quantityBought = quantityBought;
 	}
 
-	public Integer getPrice() {
-		return price;
-	}
-
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-
 	public Order getOrder() {
 		return order;
 	}
@@ -92,12 +87,20 @@ public class OrderDetail {
 		this.order = order;
 	}
 
-	public Order getProductColor() {
+	public ProductColor getProductColor() {
 		return productColor;
 	}
 
-	public void setProductColor(Order productColor) {
+	public void setProductColor(ProductColor productColor) {
 		this.productColor = productColor;
 	}
-	
+
+	public void setProductDetailId(int productDetailId) {
+		this.productDetailId = productDetailId;
+	}
+
+	public void setQuantityBought(int quantityBought) {
+		this.quantityBought = quantityBought;
+	}
+
 }

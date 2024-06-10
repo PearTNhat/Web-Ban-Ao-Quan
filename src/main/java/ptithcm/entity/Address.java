@@ -33,8 +33,10 @@ public class Address {
 	@JoinColumn(name = "accountId")
 	private Account account;
 
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Order> order;
+	/*
+	 * @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch =
+	 * FetchType.EAGER) private List<Order> order;
+	 */
 
 	public Address() {
 		super();
@@ -58,13 +60,11 @@ public class Address {
 		this.account = account;
 	}
 
-	public List<Order> getOrder() {
-		return order;
-	}
-
-	public void setOrder(List<Order> order) {
-		this.order = order;
-	}
+	/*
+	 * public List<Order> getOrder() { return order; }
+	 * 
+	 * public void setOrder(List<Order> order) { this.order = order; }
+	 */
 
 	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;

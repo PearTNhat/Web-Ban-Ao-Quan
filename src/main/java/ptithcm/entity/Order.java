@@ -19,42 +19,56 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "[Order]")
 public class Order {
 	@Id
-	@Column(name = "orderId",insertable = false,updatable = false)
+	@Column(name = "orderId", insertable = false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer orderId;
-	
-	@Column(name = "purchaseTime")
-	private Date pruchaseTime;
-	
+
+	@Column(name = "purcharseTime", insertable = false, updatable = false)
+	private Date purcharseTime;
+
 	@Column(name = "totalPrice")
 	private int totalPrice;
-	
+
 	@Column(name = "addressId")
 	private int addressId;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "addressId",insertable = false, updatable = false)
+	@JoinColumn(name = "addressId", insertable = false, updatable = false)
 	private Address address;
-	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private Set<OrderDetail> orderDetail =new HashSet<OrderDetail>();
-	public String getOrderId() {
+
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<OrderDetail> orderDetail = new HashSet<OrderDetail>();
+
+	public int getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(String orderId) {
+	public Order() {
+	}
+
+	public Order(int totalPrice, int addressId) {
+		super();
+		this.totalPrice = totalPrice;
+		this.addressId = addressId;
+	}
+
+	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}
 
-
-	public Date getPruchaseTime() {
-		return pruchaseTime;
+	public Date getPurcharseTime() {
+		return purcharseTime;
 	}
 
-	public void setPruchaseTime(Date pruchaseTime) {
-		this.pruchaseTime = pruchaseTime;
+	public void setPurcharseTime(Date purcharseTime) {
+		this.purcharseTime = purcharseTime;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 
 	public int getTotalPrice() {
@@ -88,5 +102,5 @@ public class Order {
 	public void setOrderDetail(Set<OrderDetail> orderDetail) {
 		this.orderDetail = orderDetail;
 	}
-	
+
 }

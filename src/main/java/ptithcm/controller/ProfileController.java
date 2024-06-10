@@ -265,39 +265,32 @@ public class ProfileController {
 
 	@RequestMapping(value = "/order", method = RequestMethod.GET)
 	public String getOrder(ModelMap model, HttpServletRequest request) {
-		HttpSession session1 = request.getSession();
-		Account user = (Account) session1.getAttribute("user");
-		System.out.println("SSSSSSSSSSS");
-		//
-		int limit = 4;
-		Integer page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
-		Session session = factory.getCurrentSession();
-		List<Address> listAddress = addressDao.getAllAddress(user.getAccountId());
-		List<Integer> address = new ArrayList<Integer>();
-		for (Address i : listAddress) {
-			address.add(i.getAddressId());
-		}
-		System.out.println(address);
-		// total pages
-		String hqlTotal = "SELECT count(*) FROM Order o INNER JOIN Address a ON o.addressId = a.addressId ";
-		Query queryTotal = session.createQuery(hqlTotal);
-		/* queryTotal.setParameter("addressIds", address); */
-		Long total = (Long) queryTotal.uniqueResult();
-		int pages = (int) Math.ceil((float) total / limit);
-		int skip = (page - 1) * limit;
-		// lấy ra kết quả cuối cùng sau khi tính toán phân trang
-		String hql = "FROM Order o INNER JOIN Address a ON o.addressId = a.addressId WHERE o.addressId IN (:addressId)";
-		Query query = session.createQuery(hql);
-		queryTotal.setParameter("addressIds", address);
-		query.setFirstResult(skip);
-		query.setMaxResults(limit); // Fetch the next 5 rows after skipping
-		//
-		List<Order> listOrder = query.list();
-		model.addAttribute("orders", listOrder);
-		model.addAttribute("pages", pages);
-		model.addAttribute("page", page);
-		model.addAttribute("userLogin", user);
-		model.addAttribute("limit", limit);
+		/*
+		 * HttpSession session1 = request.getSession(); Account user = (Account)
+		 * session1.getAttribute("user"); // int limit = 4; Integer page =
+		 * request.getParameter("page") == null ? 1 :
+		 * Integer.parseInt(request.getParameter("page")); Session session =
+		 * factory.getCurrentSession(); System.out.println("-----1"); List<Address>
+		 * listAddress = addressDao.getAllAddress(user.getAccountId());
+		 * System.out.println("-----2"); List<Integer> address = new
+		 * ArrayList<Integer>(); for (Address i : listAddress) {
+		 * address.add(i.getAddressId()); } // total pages String hqlTotal =
+		 * "SELECT count(*) FROM Order  "; Query queryTotal =
+		 * session.createQuery(hqlTotal); queryTotal.setParameterList("address",
+		 * address);
+		 * 
+		 * Long total = (Long) queryTotal.uniqueResult(); int pages = (int)
+		 * Math.ceil((float) total / limit); int skip = (page - 1) * limit; // lấy ra
+		 * kết quả cuối cùng sau khi tính toán phân trang String hql =
+		 * "FROM Order o INNER JOIN Address a ON o.addressId = a.addressId WHERE o.addressId IN (:addressId)"
+		 * ; Query query = session.createQuery(hql);
+		 * queryTotal.setParameter("addressIds", address); query.setFirstResult(skip);
+		 * query.setMaxResults(limit); // Fetch the next 5 rows after skipping //
+		 * List<Order> listOrder = query.list(); model.addAttribute("orders",
+		 * listOrder); model.addAttribute("pages", pages); model.addAttribute("page",
+		 * page); model.addAttribute("userLogin", user); model.addAttribute("limit",
+		 * limit);
+		 */
 		return "page/profile/order";
 	}
 }
