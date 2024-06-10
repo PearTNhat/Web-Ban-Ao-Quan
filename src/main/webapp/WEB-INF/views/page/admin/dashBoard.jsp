@@ -31,7 +31,7 @@
 					</div>
 					<div class=" col-8 d-flex flex-column py-3">
 						<div class="title">Số đơn đặt hàng</div>
-						<div class="counters">307.144</div>
+						<div class="counters">${totalBought }</div>
 					</div>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 					</div>
 					<div class="col-8 d-flex flex-column py-3">
 						<div class="title">Tổng doanh thu</div>
-						<div class="counters">307.144</div>
+						<div class="counters">${totalMoney}</div>
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 					</div>
 					<div class="col-8 d-flex flex-column py-3">
 						<div class="title">Số khách hàng</div>
-						<div class="counters">307.144</div>
+						<div class="counters">${quantity_user}</div>
 					</div>
 				</div>
 			</div>
