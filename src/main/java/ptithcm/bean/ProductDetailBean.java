@@ -20,13 +20,16 @@ public class ProductDetailBean {
 	private Integer sizeId;
 
 	private String size;
+	private Integer colorId;
+	
 	@NotBlank(message = "Vui lòng thêm màu sắc")
 	private String color;
 	
-	private Integer colorId;
+	
 	@Min(value = 1, message = "Số lượng phải lớn hơn 0")
 	@NotNull(message = "Vui lòng nhập số lượng")
 	private Integer quantity=0;
+	
 	private List<String> templImg;
 	private List<String> imgInDb;
 	private List<MultipartFile> files;

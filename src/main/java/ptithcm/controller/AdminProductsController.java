@@ -225,7 +225,8 @@ public class AdminProductsController {
 		try {
 			model.addAttribute("colorErr", errors.hasFieldErrors("color"));
 			model.addAttribute("quantityErr", errors.hasFieldErrors("quantity"));
-			if (errors.hasErrors()) {
+		
+			if (errors.hasFieldErrors("color") || errors.hasFieldErrors("quantity")) {
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
@@ -234,14 +235,9 @@ public class AdminProductsController {
 				model.addAttribute("productName", product.getName());
 				return "page/admin/handleProductDetail";
 			}
+			System.out.println("2");
 			List<MultipartFile> files = pd.getFiles();
-			/*
-			 * if (files.get(0).isEmpty()) { model.addAttribute("colors", colors);
-			 * model.addAttribute("sizes", sizes); model.addAttribute("pd", pd);
-			 * model.addAttribute("productId", Integer.toString(productId));
-			 * model.addAttribute("error", "Ảnh không được rỗng"); return
-			 * "page/admin/handleProductDetail"; }
-			 */
+			System.out.println("zo");
 			ProductColor newPC = new ProductColor();
 			// Tim color
 			Color color = colorDao.getColorByName(pd.getColor());
@@ -250,6 +246,7 @@ public class AdminProductsController {
 				color = new Color(pd.getColor());
 				pd.setColorId(colorDao.insertColor(color));
 			}
+			System.out.println("3");
 			pd.setColorId(color.getColorId());
 			newPC.setProductId(productId);
 			newPC.setColorId(pd.getColorId());
@@ -265,6 +262,7 @@ public class AdminProductsController {
 			newPd.setProductColorId(pcId);
 			Integer res = productDetailDao.addProductDetail(newPd);
 			if (res == -1) {
+				System.out.println("zo -----");
 				model.addAttribute("colors", colors);
 				model.addAttribute("sizes", sizes);
 				model.addAttribute("pd", pd);
