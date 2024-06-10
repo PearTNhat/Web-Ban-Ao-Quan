@@ -33,7 +33,7 @@
 		<div class="row">
 			<div class="col-5">
 				<div id="owl-product" class="owl-carousel owl-theme">
-					<c:forEach var="image" items="${productColor.image}">
+					<c:forEach var="image" items="${setImage}">
 						<div class="item" data-hash="zero" style="width: 100%">
 							<img src="${image.image}" alt="anh san pham">
 						</div>
@@ -45,23 +45,32 @@
 					<div class="title fs-5 fw-semibold"
 						style="text-transform: uppercase">${productColor.product.name}</div>
 					<div class="price mt-3">
-						<u class="" style="text-underline-offset: 3px">Giá bán: </u> <span
-							class="ms-3 fs-4 text-danger fw-semibold"> <fmt:formatNumber
-								value="${productColor.product.price}" type="number"
-								groupingUsed="true" />
+						<u class="" style="text-underline-offset: 3px">Giá bán: </u> 
+						<span class="ms-3 fs-4 text-danger fw-semibold">
+						    <fmt:formatNumber value="${Math.round(productColor.product.price - (productColor.product.price * productColor.product.discount))}" type="number" groupingUsed="true" />đ
+						</span>
+						<span class="ms-1 fs-6 text-decoration-line-through">
+						    <fmt:formatNumber value="${productColor.product.price}" type="number" groupingUsed="true" />đ
 						</span>
 					</div>
 					<div class="another-color my-3">MÀU KHÁC*</div>
 					<div class="d-flex flex-wrap gap-1">
-						<c:forEach var="productColorItem"
+						<c:forEach var="productColorItem" items="${productColor.product.productDetail}">
+						    <c:if test="${not empty productColorItem.image}">
+						        <a href="products/${typeDetail.typeDetailId}/${productColorItem.productColorId}.htm" style="width: 100px">
+						            <img src="${productColorItem.image.iterator().next().image}" class="img-fluid" alt="">
+						        </a>
+						    </c:if>
+						</c:forEach>
+						<%-- <c:forEach var="productColorItem"
 							items="${productColor.product.productDetail}">
 							<a
 								href="products/${typeDetail.typeDetailId}/${productColorItem.productColorId}.htm"
 								style="width: 100px"><img
-								src="${productColorItem.image.get(0).image}" class="img-fluid"
+								src="${productColorItem.image[0].image}" class="img-fluid"
 								alt="">
 							</a>
-						</c:forEach>
+						</c:forEach> --%>
 					</div>
 					<div>Mô tả sản phẩm:</div>
 					<div class="desc text-muted">${productColor.product.description}</div>
@@ -114,8 +123,8 @@
 		</div>
 		<div class="row mt-1">
 			<div class="col-5 thumbnails">
-				<c:forEach var="image" items="${productDetail.image}">
-					<a href="#zero"><img src="${image.image}" alt=""></a>
+				<c:forEach var="image" items="${setImage}">
+					<a href=""><img src="${image.image}" alt=""></a>
 				</c:forEach>
 			</div>
 		</div>

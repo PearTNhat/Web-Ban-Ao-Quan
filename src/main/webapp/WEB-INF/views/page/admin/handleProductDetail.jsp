@@ -97,7 +97,7 @@ if ("update".equals(event)) {
 					<div>
 						<span>ID: </span> <span>${productId }</span>
 
-						<form:input type="hidden" path="productId" value="${productId }" />
+						<form:input type="hidden" path="productId" value="${productName }" />
 					</div>
 					<div>
 						<span>Tên: </span> <span>${productName}</span>
