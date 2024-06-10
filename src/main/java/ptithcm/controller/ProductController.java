@@ -213,6 +213,11 @@ public class ProductController {
 		for (ProductDetail productDetail : productColor.getProductDetail()) {
 			listSize.add(productDetail.getSize());
 		}
+		Set<ProductImage> setImage = new HashSet<>();
+		for (ProductImage image : productColor.getImage()) {
+			setImage.add(image);
+		}
+		model.addAttribute("setImage", setImage);
 		model.addAttribute("cartB", new CartBean());
 		model.addAttribute("productColor", productColor);
 		model.addAttribute("productColorId", productColorId);
