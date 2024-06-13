@@ -60,8 +60,8 @@ public class ProductDaoImpl implements ProductDao {
 		List<Product> productList = query.list();
 		return productList;
 	}
-	
-    @Override
+
+	@Override
 	public Boolean addProduct(Product product) {
 		Session session = sessionFactory.openSession();
 		Transaction t = session.beginTransaction();
@@ -82,14 +82,15 @@ public class ProductDaoImpl implements ProductDao {
 	@Transactional
 	public Product getProductById(int productId) {
 		Session session = sessionFactory.getCurrentSession();
-	    String hql = "From Product WHERE productId= :productId";
-	    Query query = session.createQuery(hql);
-	    query.setParameter("productId", productId);
-	    
-	    Product product = (Product) query.uniqueResult();
-	    
-	    return product;
-	}	
+		String hql = "From Product WHERE productId= :productId";
+		Query query = session.createQuery(hql);
+		query.setParameter("productId", productId);
+
+		Product product = (Product) query.uniqueResult();
+
+		return product;
+	}
+
 	@Override
 	@Transactional
 	public Product findProductById(Integer productId) {
@@ -97,9 +98,10 @@ public class ProductDaoImpl implements ProductDao {
 		String hql = "FROM Product WHERE productId=:productId";
 		Query query = session.createQuery(hql);
 		query.setParameter("productId", productId);
-		Product productList =(Product) query.uniqueResult();
+		Product productList = (Product) query.uniqueResult();
 		return productList;
 	}
+
 	@Override
 	@Transactional
 	public Boolean updateProduct(Product product) {
@@ -126,17 +128,18 @@ public class ProductDaoImpl implements ProductDao {
 		String hql = "FROM Product p ORDER BY p.soldQuantity DESC";
 		Query query = session.createQuery(hql);
 		query.setMaxResults(6);
-		List<Product> productList =query.list();
+		List<Product> productList = query.list();
 		return productList;
 	}
+
 	@Override
 	@Transactional
-	public List<Product> getNewProduct(){
+	public List<Product> getNewProduct() {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "FROM Product p ORDER BY p.createdAt DESC";
 		Query query = session.createQuery(hql);
 		query.setMaxResults(6);
-		List<Product> productList =query.list();
+		List<Product> productList = query.list();
 		return productList;
 	}
 
@@ -156,5 +159,15 @@ public class ProductDaoImpl implements ProductDao {
 			session.close();
 		}
 		return true;
+	}
+
+	@Override
+	@Transactional
+	public List<Product> getAllProducts() {
+		Session session = sessionFactory.getCurrentSession();
+		String hql = "FROM Product";
+		Query query = session.createQuery(hql);
+		List<Product> productList = query.list();
+		return productList;
 	}
 }

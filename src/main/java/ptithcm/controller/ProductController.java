@@ -99,7 +99,40 @@ public class ProductController {
 			return "redirect:/.htm";
 		}
 	}
+	@RequestMapping(value = "/products/add-to-cart", params = "addToCheckOut")
+	public String addToCheckOut(RedirectAttributes redirectAttributes, ModelMap model, HttpServletRequest request,
+			@ModelAttribute("cartB") CartBean cartB) {
+		try {
+			HttpSession session = request.getSession();
+			Account user = (Account) session.getAttribute("user");
+			if (user == null) {
+				redirectAttributes.addFlashAttribute("error", "Bạn cần đăng nhập");
+				return "redirect:/.htm";
+			}
+			ProductDetail pd = productDetailDao.findProductDetailBySizePC(cartB.getSizeId(), cartB.getProductColorId());
+			if (pd.getQuantity() < cartB.getQuantity()) {
+				redirectAttributes.addFlashAttribute("error", "Số lượng sản phẩm phải <=" + pd.getQuantity());
+				return "redirect:/products/" + cartB.getTypeDetailId() + "/" + cartB.getProductColorId() + ".htm";
+			}
+			CartDetail cart = new CartDetail();
+			cart.setAccountId(user.getAccountId());
+			cart.setProductDetailId(pd.getProductDetailId());
+			cart.setQuantity(cartB.getQuantity());
+			Boolean res = cartDao.addCartDetail(cart);
+			if (!res) {
+				redirectAttributes.addFlashAttribute("error", "Sản phẩm dã có trong giỏ hàng");
+				return "redirect:/products/" + cartB.getTypeDetailId() + "/" + cartB.getProductColorId() + ".htm";
+			}
+			redirectAttributes.addFlashAttribute("success", "Thêm sản phẩm vào giỏ hàng thành công");
+			return "redirect:/products/cart-checkout.htm";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", "Xảy ra lỗi k xác định");
+			return "redirect:/products/" + cartB.getTypeDetailId() + "/" + cartB.getProductColorId() + ".htm";
+		}
 
+	}
 	@RequestMapping(value = "/products/add-to-cart", params = "addToCart")
 	public String addToCart(RedirectAttributes redirectAttributes, ModelMap model, HttpServletRequest request,
 			@ModelAttribute("cartB") CartBean cartB) {
@@ -173,7 +206,7 @@ public class ProductController {
 		Account user = (Account) session1.getAttribute("user");
 		//
 		List<Product> hotProduct = productDao.getBestSaleProduct();
-		int limit = 12;
+		int limit = 3;
 		Integer page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
 		Session session = factory.getCurrentSession();
 		// total pages
@@ -229,7 +262,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/products/cart-submit.htm")
-	public String submitCart(@RequestParam("address") Integer addressId, Model model, HttpServletRequest request) {
+	public String submitCart(RedirectAttributes redirectAttributes, @RequestParam("address") Integer addressId, Model model, HttpServletRequest request) {
 		Account user = (Account) request.getAttribute("user");
 		model.addAttribute("userLogin", user);
 		Set<CartDetail> cartDetail = user.getCartDetail();
@@ -254,19 +287,22 @@ public class ProductController {
 	    	for (CartDetail cartDetailItem : cartDetail) {
 	    		OrderDetail orderDetail = new OrderDetail(createdOrder.getOrderId(), cartDetailItem.getProductDetailId(), cartDetailItem.getQuantity());
 	    		if (orderDetailDao.addOrderDetail(orderDetail)) {
-	    			System.out.println("Add order detail successfully");
+	    				
 	    		} else {
 	    			model.addAttribute("errorOrderDetail", true);
-	    			return "page/cart-checkout";
+	    			redirectAttributes.addFlashAttribute("error", "Thêm chi tiết order thất bại, vui lòng đặt lại đơn hàng");
+	    			return "redirect:/products/cart-checkout.htm";
 	    		}
 	    	}
 	    } else {
 	    	model.addAttribute("errorOrder", true);
-	    	return "page/cart-checkout";
+	    	redirectAttributes.addFlashAttribute("error", "Thêm order thất bại, vui lòng đặt lại đơn hàng");
+	    	return "redirect:/products/cart-checkout.htm";
 	    }
 	    for (CartDetail cartDetailItem : cartDetail) {	    	
 	    	cartDao.deleteCartDetailById(cartDetailItem.getCartDetailId());
 	    }
-		return "page/home";
+	    redirectAttributes.addFlashAttribute("success", "Đặt hàng thành công, xin cám ơn");
+		return "redirect:/.htm";
 	}
 }

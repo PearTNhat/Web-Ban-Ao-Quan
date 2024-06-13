@@ -1,6 +1,8 @@
 package ptithcm.dao.impl;
 
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
@@ -95,5 +97,12 @@ public class AccountDaoImpl implements AccountDao {
 		}
 		return false;
 	}
-	
+	@Transactional
+    public List<Account> findNonAdminAccounts() {
+        Session session = factory.getCurrentSession();
+        String hql = "FROM Account WHERE isAdmin = false";
+        Query query = session.createQuery(hql);
+        List<Account> nonAdminAccounts = query.list();
+        return nonAdminAccounts;
+    }
 }

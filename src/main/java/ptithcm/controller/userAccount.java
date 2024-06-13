@@ -1,6 +1,8 @@
 package ptithcm.controller;
 
 import ptithcm.bean.User;
+import ptithcm.entity.Account;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,11 @@ import ptithcm.bean.User;
 @RequestMapping("/profile/")
 public class userAccount {
 	@RequestMapping(value="info",method=RequestMethod.GET)
-	public String showForm() {
+	public String showForm(HttpServletRequest request, ModelMap model) {
+		Account user = (Account) request.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("userLogin", user);
+		}
 		return "page/profile/info";
 	}
 	

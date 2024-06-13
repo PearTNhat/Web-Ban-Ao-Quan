@@ -117,7 +117,7 @@
 								<div class="row g-0 mb-2">
 									<c:set var="pds" value="${p.productDetail}" />
 									<div class="col-4 side-pic">
-										<a href="#" class=""> <img class="w-100"
+										<a href="products/${typeId}/${pds.iterator().next().productColorId}.htm" class=""> <img class="w-100"
 											src="${pds.iterator().next().image[0].image}" alt="${p.name}" />
 										</a>
 									</div>

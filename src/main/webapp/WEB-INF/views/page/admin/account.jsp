@@ -236,7 +236,7 @@ table.table .avatar {
 			<div class="table-title">
 				<div class="row">
 					<div class="col-5">
-						<h2>Quản lí tài khoản admin</h2>
+						<h2>Danh sách tài khoản</h2>
 					</div>
 					<div class="col-7">
 						<div class="d-flex align-items-center justify-content-end">

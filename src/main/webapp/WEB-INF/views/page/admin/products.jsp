@@ -76,7 +76,7 @@
 						<div class="col-7">
 							<div class="d-flex align-items-center justify-content-end ">
 
-								<form action="admin/products.htm">
+								<form action="admin/products.htm" style="display: flex;">
 									<div class="search-box d-flex align-items-center">
 										<i class="material-icons">&#xE8B6;</i> <input name="search"
 											value="${search}" type="text" class="form-control"

@@ -61,10 +61,11 @@ public class ProfileController {
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String userInfo(HttpServletRequest request, ModelMap model, BindingResult errors) {
 		Account user = (Account) request.getAttribute("user");
-		System.out.println("da chay vao up info");
+		System.out.println("da chay vao up info");																								
 		if (user != null) {
 			System.out.println("up info");
 			System.out.println(user.getAvatar());
+			model.addAttribute("userLogin", user);
 			model.addAttribute("user", user);
 		}
 		return "page/profile/info";
@@ -117,6 +118,7 @@ public class ProfileController {
 				}
 				model.addAttribute("message", "");
 				model.addAttribute("user", account);
+				model.addAttribute("userLogin", account);
 				System.out.println("123");
 				System.out.println(formUser.getFirstName());
 				System.out.println(formUser.getLastName());
@@ -145,6 +147,7 @@ public class ProfileController {
 		if (user != null) {
 			List<Address> userAddress = addressDao.getAllAddress(user.getAccountId());
 			model.addAttribute("user", user);
+			model.addAttribute("userLogin", user);
 			model.addAttribute("userAddress", userAddress);
 		}
 		return "page/profile/address";
@@ -208,6 +211,7 @@ public class ProfileController {
 		ChangePwBean changePw = new ChangePwBean();
 		if (user != null) {
 			model.addAttribute("user", user);
+			model.addAttribute("userLogin", user);
 			model.addAttribute("userPw", changePw);
 		}
 		return "page/profile/changepw";

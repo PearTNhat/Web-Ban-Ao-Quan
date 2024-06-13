@@ -106,8 +106,7 @@
 		<div class="collapse navbar-collapse justify-content-end order-lg-2"
 			id="navbarNav">
 			<ul class="navbar-nav me-2">
-				<li class="nav-item"><a class="nav-link" href="#">HÀNG BÁN
-						CHẠY</a></li>
+				
 				<c:forEach var="pt" items="${sessionScope.pts}">
 					<li class="nav-item"><label for="click-type${pt.typeId}"
 						style="display: block;"> <span
@@ -122,13 +121,7 @@
 						</ul></li>
 				</c:forEach>
 			</ul>
-			<form class="d-flex my-2 me-5" role="search">
-				<input class="form-control search me-2 shadow-none border"
-					type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-secondary" type="submit">
-					<i class="bi bi-search"></i>
-				</button>
-			</form>
+			
 			<c:if test="${empty sessionScope.user}">
 				<a class="mx-2" href="user/login.htm">Đăng nhập</a>
 				<a class="btn btn-danger" href="user/signup.htm">Đăng ký</a>

@@ -62,15 +62,6 @@
 						        </a>
 						    </c:if>
 						</c:forEach>
-						<%-- <c:forEach var="productColorItem"
-							items="${productColor.product.productDetail}">
-							<a
-								href="products/${typeDetail.typeDetailId}/${productColorItem.productColorId}.htm"
-								style="width: 100px"><img
-								src="${productColorItem.image[0].image}" class="img-fluid"
-								alt="">
-							</a>
-						</c:forEach> --%>
 					</div>
 					<div>Mô tả sản phẩm:</div>
 					<div class="desc text-muted">${productColor.product.description}</div>
@@ -94,8 +85,10 @@
 										<option selected value="${size.sizeId }">${size.name}</option>
 									</c:forEach>
 								</form:select>
-								<button class="btn btn-danger w-100 mt-2">
+								<button class="btn btn-danger w-100 mt-2" name="addToCheckOut">
+								
 									<i class="bi bi-cart-fill"></i> Đăng ký mua
+								
 								</button>
 							</div>
 							<div class="col col-6">

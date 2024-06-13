@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="../../common/admin/adminHeader.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 <%@ include file="../../common/admin/adminSideBar.jsp"%>
 <div class="main">
@@ -20,8 +21,7 @@
 	  </div>
 	</nav>
 	<div class="dashboard p-3">
-		<div class="lead fw-bold text-success my-2 ms-3 fs-6 border-bottom pb-2">Doanh thu tháng
-			hiện tại</div>
+		<div class="lead fw-bold text-success my-2 ms-3 fs-6 border-bottom pb-2"> Thống kê doanh thu </div>
 		<div class="row justify-content-center gap-4 my-5">
 			<div class="col-sm-12 col-md-3 border rounded p-2">
 				<div class="row">
@@ -31,7 +31,7 @@
 					</div>
 					<div class=" col-8 d-flex flex-column py-3">
 						<div class="title">Số đơn đặt hàng</div>
-						<div class="counters">${totalBought }</div>
+						<div class="counters">${totalBought}</div>
 					</div>
 				</div>
 			</div>
@@ -43,7 +43,8 @@
 					</div>
 					<div class="col-8 d-flex flex-column py-3">
 						<div class="title">Tổng doanh thu</div>
-						<div class="counters">${totalMoney}</div>
+						<div class="counters"><fmt:formatNumber value="${totalMoney}"
+												type="number" pattern="#,##0" />đ</div>
 					</div>
 				</div>
 			</div>
